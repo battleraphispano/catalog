@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Batallas de Tetra | Rap Battle Database</title>
+  <title>Catálogo de batallas de Tetra | Rap Battle Database</title>
   <style>
     :root {
       --primary-yellow: #ffff00;
@@ -50,15 +50,14 @@
     .cover-art {
       width: 150px;
       height: 150px;
-      background-color: var(--card-dark);
       border-radius: 6px;
       box-shadow: 0 10px 25px rgba(255, 255, 0, 0.12);
       flex-shrink: 0;
       overflow: hidden;
-      border: 2px solid var(--primary-yellow);
+      border: 1px solid var(--border-color);
     }
 
-    .cover-img {
+    .cover-art img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -66,7 +65,7 @@
     }
 
     .meta-info h1 {
-      font-size: 2.4rem;
+      font-size: 2.2rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: -0.5px;
@@ -125,68 +124,71 @@
       border-radius: 12px;
     }
 
+    /* Year Group Title */
+    .year-group-title {
+      color: var(--primary-yellow);
+      font-size: 1.3rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin: 1.5rem 0 0.5rem 0;
+    }
+
+    .year-group-title:first-of-type {
+      margin-top: 0;
+    }
+
     /* Catalog List */
     .catalog-list {
       display: flex;
       flex-direction: column;
-      gap: 0.85rem;
+      gap: 0.4rem;
     }
 
-    .rapper-card {
+    .battle-card {
       background-color: var(--card-dark);
       border: 1px solid var(--border-color);
       border-radius: 6px;
-      padding: 1.1rem 1.25rem;
+      padding: 0.6rem 0.8rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       transition: all 0.2s ease;
       text-decoration: none;
       color: inherit;
-      cursor: pointer;
     }
 
-    .rapper-card:hover {
+    .battle-card:hover {
       border-color: var(--primary-yellow);
       background-color: var(--card-hover);
       transform: translateX(4px);
     }
 
-    .rapper-info {
+    .battle-info {
       display: flex;
-      align-items: center;
-      gap: 1rem;
+      flex-direction: column;
     }
 
-    .rapper-initial {
-      width: 38px;
-      height: 38px;
-      border-radius: 4px;
-      background: var(--accent-gray);
-      color: var(--primary-yellow);
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      border: 1px solid rgba(255, 255, 0, 0.2);
-    }
-
-    .rapper-name {
+    .battle-title {
       font-weight: 700;
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: var(--text-light);
       display: block;
       transition: color 0.2s;
     }
 
-    .rapper-card:hover .rapper-name {
+    .battle-card:hover .battle-title {
       color: var(--primary-yellow);
     }
 
-    .rapper-subtext {
-      font-size: 0.8rem;
+    .battle-date {
+      font-size: 0.85rem;
       color: var(--text-muted);
+    }
+
+    .badge-container {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
     }
 
     .badge {
@@ -194,11 +196,52 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      padding: 0.25rem 0.6rem;
+      padding: 0.15rem 0.5rem;
       border-radius: 4px;
       background-color: #222;
       color: var(--text-muted);
       border: 1px solid var(--border-color);
+    }
+
+    /* Etiqueta "Batalla virtual" */
+    .badge-virtual {
+      font-size: 0.45rem;
+      padding: 0.02rem 0.15rem;
+      border: 0.5px solid var(--primary-yellow);
+      color: var(--primary-yellow);
+      font-weight: 600;
+      border-radius: 2px;
+    }
+
+    /* Sidebar posicionado alineado */
+    aside {
+      margin-top: 10rem;
+    }
+
+    /* Navigation Button */
+    .back-nav {
+      margin-top: 1.5rem;
+    }
+
+    .back-btn {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      padding: 0.6rem 1rem;
+      background: var(--card-dark);
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .back-btn:hover {
+      background: var(--primary-yellow);
+      color: var(--bg-dark);
+      border-color: var(--primary-yellow);
     }
 
     /* Sidebar / Annotations */
@@ -212,7 +255,7 @@
       border-radius: 0 6px 6px 0;
       font-size: 0.9rem;
       color: #cccccc;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
     }
 
     .annotation-box h3 {
@@ -227,52 +270,6 @@
       line-height: 1.5;
     }
 
-    .alphabet-nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 1.5rem;
-      background: var(--card-dark);
-      padding: 1rem;
-      border-radius: 6px;
-      border: 1px solid var(--border-color);
-    }
-
-    .letter-btn {
-      width: 28px;
-      height: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      font-weight: 700;
-      border-radius: 3px;
-      background: #1a1a1a;
-      color: var(--text-muted);
-      text-decoration: none;
-    }
-
-    .letter-btn.active {
-      background: var(--primary-yellow);
-      color: var(--bg-dark);
-    }
-
-    .back-link {
-      display: inline-block;
-      margin-bottom: 1.5rem;
-      color: var(--primary-yellow);
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      transition: opacity 0.2s;
-    }
-
-    .back-link:hover {
-      opacity: 0.8;
-    }
-
     /* Responsive */
     @media (max-width: 768px) {
       .header-content {
@@ -282,11 +279,11 @@
       .main-layout {
         grid-template-columns: 1fr;
       }
+      aside {
+        margin-top: 1rem;
+      }
       .stats-bar {
         margin: 0 auto;
-      }
-      .rapper-info {
-        gap: 0.75rem;
       }
     }
   </style>
@@ -298,13 +295,13 @@
     <div class="container">
       <div class="header-content">
         <div class="cover-art">
-          <img src="tetra.jpg" alt="Tetra" class="cover-img">
+          <img src="tetra.jpg" alt="Tetra">
         </div>
         <div class="meta-info">
-          <h1>Batallas de <span>Tetra</span></h1>
+          <h1>Catálogo de batallas de <span>Tetra</span></h1>
           <div class="stats-bar">
-            <span><strong>26</strong> Batallas</span>
-            <span><strong>2021 - 2026</strong> Cronológico</span>
+            <span><strong>32</strong> Batallas</span>
+            <span><strong>2021 - 2026</strong> Trayectoria</span>
           </div>
         </div>
       </div>
@@ -316,306 +313,381 @@
     
     <!-- Left Column: Catalog -->
     <section>
-      <a href="index.html" class="back-link">← Volver al catálogo principal</a>
-
       <div class="section-title">
-        <span>Historial de Enfrentamientos</span>
-        <span class="count">26 Batallas</span>
+        <span>Historial de enfrentamientos:</span>
+        <span class="count">32 Batallas</span>
       </div>
 
       <div class="catalog-list">
         
         <!-- 2021 -->
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#1</div>
-            <div>
-              <span class="rapper-name">Tetra vs Norbak</span>
-              <span class="rapper-subtext">03/11/2021* Batalla virtual</span>
-            </div>
-          </div>
-          <span class="badge">2021</span>
-        </div>
+        <h2 class="year-group-title">2021</h2>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#2</div>
-            <div>
-              <span class="rapper-name">Tetra vs Pagano</span>
-              <span class="rapper-subtext">24/11/2021* Batalla virtual</span>
-            </div>
+        <!-- #1 -->
+        <a href="https://www.facebook.com/share/v/1Au3tFGePQ/" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#1. Tetra vs. Norbak</span>
+            <span class="battle-date">03/11/2021*</span>
           </div>
-          <span class="badge">2021</span>
-        </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en Facebook</span>
+          </div>
+        </a>
+
+        <!-- #2 -->
+        <a href="https://www.facebook.com/share/v/1BAYtBKRwv/" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#2. Tetra vs. Pagano</span>
+            <span class="battle-date">24/11/2021*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en Facebook</span>
+          </div>
+        </a>
 
         <!-- 2022 -->
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#3</div>
-            <div>
-              <span class="rapper-name">Tetra vs Freshkilla</span>
-              <span class="rapper-subtext">18/06/2022</span>
-            </div>
+        <h2 class="year-group-title">2022</h2>
+
+        <!-- #3 -->
+        <a href="https://www.facebook.com/share/v/1DyJqYwbcG/" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#3. Tetra vs. Freshkilla</span>
+            <span class="battle-date">18/06/2022</span>
           </div>
-          <span class="badge">2022</span>
-        </div>
+          <span class="badge">Ver en Facebook</span>
+        </a>
 
         <!-- 2023 -->
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#4</div>
-            <div>
-              <span class="rapper-name">Tetra vs Phasma</span>
-              <span class="rapper-subtext">03/06/2023</span>
-            </div>
+        <h2 class="year-group-title">2023</h2>
+
+        <!-- #4 -->
+        <a href="https://www.facebook.com/share/v/1CGSdsNmah/" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#4. Tetra vs. Phasma</span>
+            <span class="battle-date">03/06/2023</span>
           </div>
-          <span class="badge">2023</span>
-        </div>
+          <span class="badge">Ver en Facebook</span>
+        </a>
 
         <!-- 2024 -->
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#5</div>
-            <div>
-              <span class="rapper-name">Tetra vs Tatami</span>
-              <span class="rapper-subtext">05/02/2024* Batalla virtual</span>
-            </div>
-          </div>
-          <span class="badge">2024</span>
-        </div>
+        <h2 class="year-group-title">2024</h2>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#6</div>
-            <div>
-              <span class="rapper-name">Tetra vs Geeka</span>
-              <span class="rapper-subtext">27/04/2024</span>
-            </div>
+        <!-- #5 -->
+        <a href="https://www.instagram.com/reel/C2_LJe3OH4p/?utm_source=ig_web_copy_link" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#5. Tetra vs. Tatami</span>
+            <span class="battle-date">05/02/2024*</span>
           </div>
-          <span class="badge">2024</span>
-        </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en Instagram</span>
+          </div>
+        </a>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#7</div>
-            <div>
-              <span class="rapper-name">Tetra vs Butcher</span>
-              <span class="rapper-subtext">20/06/2024* Batalla virtual</span>
-            </div>
+        <!-- #6 -->
+        <a href="https://youtu.be/SL4KOLJpH8k?si=igeMG6t8mj1I4PdU" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#6. Tetra vs. Geeka</span>
+            <span class="battle-date">27/04/2024</span>
           </div>
-          <span class="badge">2024</span>
-        </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#8</div>
-            <div>
-              <span class="rapper-name">Tetra vs Palomortm</span>
-              <span class="rapper-subtext">20/07/2024</span>
-            </div>
+        <!-- #7 -->
+        <a href="https://www.instagram.com/reel/C8cYtC3OEnQ/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#7. Tetra vs. Butcher</span>
+            <span class="battle-date">20/06/2024*</span>
           </div>
-          <span class="badge">2024</span>
-        </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en Instagram</span>
+          </div>
+        </a>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#9</div>
-            <div>
-              <span class="rapper-name">Tetra vs León Negro</span>
-              <span class="rapper-subtext">31/08/2024</span>
-            </div>
+        <!-- #8 -->
+        <a href="#" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#8. Tetra vs. Palomortm</span>
+            <span class="battle-date">20/07/2024</span>
           </div>
-          <span class="badge">2024</span>
-        </div>
+          <span class="badge">Sin video</span>
+        </a>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#10</div>
-            <div>
-              <span class="rapper-name">Tetra vs Yisus</span>
-              <span class="rapper-subtext">16/10/2024* Batalla virtual</span>
-            </div>
+        <!-- #9 -->
+        <a href="https://youtu.be/PsZV4IRmFFg?si=11spnbgXWfVQqsDh" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#9. Tetra vs. León Negro</span>
+            <span class="battle-date">32/08/2024</span>
           </div>
-          <span class="badge">2024</span>
-        </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#11</div>
-            <div>
-              <span class="rapper-name">Tetra vs Javi</span>
-              <span class="rapper-subtext">04/11/2024* Batalla virtual</span>
-            </div>
+        <!-- #10 -->
+        <a href="https://www.instagram.com/reel/DBL-5aZuzAV/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#10. Tetra vs. Yisus</span>
+            <span class="battle-date">16/10/2024*</span>
           </div>
-          <span class="badge">2024</span>
-        </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en Instagram</span>
+          </div>
+        </a>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#12</div>
-            <div>
-              <span class="rapper-name">Tetra vs León Negro</span>
-              <span class="rapper-subtext">26/11/2024* Batalla virtual</span>
-            </div>
+        <!-- #11 -->
+        <a href="https://www.instagram.com/reel/DB87JX6u7ue/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#11. Tetra vs. Javi</span>
+            <span class="battle-date">04/11/2024*</span>
           </div>
-          <span class="badge">2024</span>
-        </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en Instagram</span>
+          </div>
+        </a>
+
+        <!-- #12 -->
+        <a href="https://www.instagram.com/reel/DC1-4ozpwED/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#12. Tetra vs. León Negro</span>
+            <span class="battle-date">26/11/2024*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en Instagram</span>
+          </div>
+        </a>
 
         <!-- 2025 -->
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#13</div>
-            <div>
-              <span class="rapper-name">Tetra vs Mario Espino</span>
-              <span class="rapper-subtext">03/05/2025</span>
-            </div>
-          </div>
-          <span class="badge">2025</span>
-        </div>
+        <h2 class="year-group-title">2025</h2>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#14</div>
-            <div>
-              <span class="rapper-name">Tetra vs Tulpa</span>
-              <span class="rapper-subtext">27/05/2025* Batalla virtual</span>
-            </div>
+        <!-- #13 -->
+        <a href="https://www.youtube.com/watch?v=hZJvX9wmFMM" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#13. Tetra vs. Mario Espino</span>
+            <span class="battle-date">03/05/2025</span>
           </div>
-          <span class="badge">2025</span>
-        </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#15</div>
-            <div>
-              <span class="rapper-name">Tetra vs Kowe</span>
-              <span class="rapper-subtext">11/06/2025* Batalla virtual</span>
-            </div>
+        <!-- #14 -->
+        <a href="https://www.youtube.com/watch?v=c95QER_vSmw" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#14. Tetra vs. Tulpa</span>
+            <span class="battle-date">27/05/2025*</span>
           </div>
-          <span class="badge">2025</span>
-        </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
+          </div>
+        </a>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#16</div>
-            <div>
-              <span class="rapper-name">Tetra vs Arjhe</span>
-              <span class="rapper-subtext">25/06/2025* Batalla virtual</span>
-            </div>
+        <!-- #15 -->
+        <a href="https://www.youtube.com/watch?v=vi5h8C54MEo" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#15. Tetra vs. Kowe</span>
+            <span class="battle-date">11/06/2025*</span>
           </div>
-          <span class="badge">2025</span>
-        </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
+          </div>
+        </a>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#17</div>
-            <div>
-              <span class="rapper-name">Tetra vs Román Rap</span>
-              <span class="rapper-subtext">31/07/2025* Batalla virtual</span>
-            </div>
+        <!-- #16 -->
+        <a href="https://www.youtube.com/watch?v=PJRaCw98hn8" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#16. Tetra vs. Arjhe</span>
+            <span class="battle-date">25/06/2025*</span>
           </div>
-          <span class="badge">2025</span>
-        </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
+          </div>
+        </a>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#18</div>
-            <div>
-              <span class="rapper-name">Tetra vs RoB</span>
-              <span class="rapper-subtext">16/08/2025</span>
-            </div>
+        <!-- #17 -->
+        <a href="https://www.instagram.com/reel/DMy6HMOOq-t/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#17. Tetra vs. Román Rap</span>
+            <span class="battle-date">31/07/2025*</span>
           </div>
-          <span class="badge">2025</span>
-        </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en Instagram</span>
+          </div>
+        </a>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#19</div>
-            <div>
-              <span class="rapper-name">Tetra vs Zeref</span>
-              <span class="rapper-subtext">17/10/2025* Batalla virtual</span>
-            </div>
+        <!-- #18 -->
+        <a href="https://www.youtube.com/watch?v=Cso94PIpjHc&t=458s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#18. Tetra vs. RoB</span>
+            <span class="battle-date">16/08/2025</span>
           </div>
-          <span class="badge">2025</span>
-        </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#20</div>
-            <div>
-              <span class="rapper-name">Tetra vs David Índigo</span>
-              <span class="rapper-subtext">27/10/2025* Batalla virtual</span>
-            </div>
+        <!-- #19 -->
+        <a href="https://www.instagram.com/reel/DP6wQ-tDcJ4/?utm_source=ig_web_copy_link" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#19. Tetra vs. Zeref</span>
+            <span class="battle-date">17/10/2025*</span>
           </div>
-          <span class="badge">2025</span>
-        </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en Instagram</span>
+          </div>
+        </a>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#21</div>
-            <div>
-              <span class="rapper-name">Tetra vs Flecha</span>
-              <span class="rapper-subtext">10/11/2025* Batalla virtual</span>
-            </div>
+        <!-- #20 -->
+        <a href="https://www.instagram.com/reel/DQUgU0KkXEE/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#20. Tetra vs. David Índigo</span>
+            <span class="battle-date">27/10/2025*</span>
           </div>
-          <span class="badge">2025</span>
-        </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en Instagram</span>
+          </div>
+        </a>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#22</div>
-            <div>
-              <span class="rapper-name">Tetra vs Polirritmia</span>
-              <span class="rapper-subtext">21/11/2025* Batalla virtual</span>
-            </div>
+        <!-- #21 -->
+        <a href="https://www.instagram.com/reel/DQ4jAuNEdR_/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#21. Tetra vs. Flecha</span>
+            <span class="battle-date">10/11/2025*</span>
           </div>
-          <span class="badge">2025</span>
-        </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en Instagram</span>
+          </div>
+        </a>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#23</div>
-            <div>
-              <span class="rapper-name">Tetra vs Lenin</span>
-              <span class="rapper-subtext">25/11/2025* Batalla virtual</span>
-            </div>
+        <!-- #22 -->
+        <a href="https://www.instagram.com/reel/DRVVWziEYKw/?utm_source=ig_web_copy_link" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#22. Tetra vs. Polirritmia</span>
+            <span class="battle-date">21/11/2025*</span>
           </div>
-          <span class="badge">2025</span>
-        </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en Instagram</span>
+          </div>
+        </a>
 
-        <a href="https://www.youtube.com/watch?v=n43qTxJG6q4&t=552s" target="_blank" class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#24</div>
-            <div>
-              <span class="rapper-name">Tetra vs Skorcia</span>
-              <span class="rapper-subtext">20/12/2025*</span>
-            </div>
+        <!-- #23 -->
+        <a href="https://www.instagram.com/reel/DRgF3ySDul8/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#23. Tetra vs. Lenin</span>
+            <span class="battle-date">25/11/2025*</span>
           </div>
-          <span class="badge">2025</span>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en Instagram</span>
+          </div>
+        </a>
+
+        <!-- #24 -->
+        <a href="https://www.youtube.com/watch?v=n43qTxJG6q4&t=552s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#24. Tetra vs. Skorcia</span>
+            <span class="battle-date">20/12/2025*</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
         </a>
 
         <!-- 2026 -->
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#25</div>
-            <div>
-              <span class="rapper-name">Tetra vs Gab</span>
-              <span class="rapper-subtext">21/02/2026</span>
-            </div>
-          </div>
-          <span class="badge">2026</span>
-        </div>
+        <h2 class="year-group-title">2026</h2>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#26</div>
-            <div>
-              <span class="rapper-name">Tetra vs Maiki</span>
-              <span class="rapper-subtext">26/04/2026* Batalla virtual</span>
-            </div>
+        <!-- #25 -->
+        <a href="https://www.youtube.com/watch?v=CoLSGvghRZw" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#25. Tetra vs. Gab</span>
+            <span class="battle-date">21/02/2026</span>
           </div>
-          <span class="badge">2026</span>
-        </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #26 -->
+        <a href="https://www.youtube.com/watch?v=t0UJQeqnPy8&t=1s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#26. Tetra vs. Koda</span>
+            <span class="battle-date">09/04/2026*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
+          </div>
+        </a>
+
+        <!-- #27 -->
+        <a href="https://www.instagram.com/reel/DXvA64xN3Lo/?igsh=MWl0NnZ6ZmV5ajNyYw==" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#27. Tetra vs. Maiki</span>
+            <span class="battle-date">29/04/2026</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en Instagram</span>
+          </div>
+        </a>
+
+        <!-- #28 -->
+        <a href="https://youtu.be/KhD-70GqKiM?si=3GamsNAde0dakDI6" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#28. Tetra vs. Emesh</span>
+            <span class="battle-date">02/06/2026*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
+          </div>
+        </a>
+
+        <!-- #29 -->
+        <a href="https://youtu.be/27VUtmowPfM?si=-4IwGYwq6d90vPtD" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#29. Tetra vs. Sempiterno</span>
+            <span class="battle-date">09/06/2026*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
+          </div>
+        </a>
+
+        <!-- #30 -->
+        <a href="https://youtu.be/FgWNalP_iq0?si=bMcDv85coq4tgkdV" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#30. Tetra vs. NyD</span>
+            <span class="battle-date">16/06/2026*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
+          </div>
+        </a>
+
+        <!-- #31 -->
+        <a href="https://www.youtube.com/watch?v=LmBMxxf_6Wo" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#31. Tetra vs. Tinta Prieta</span>
+            <span class="battle-date">20/06/2026</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #32 -->
+        <a href="#" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#32. Tetra vs. KB</span>
+            <span class="battle-date">29/06/2026</span>
+          </div>
+          <span class="badge">Sin video</span>
+        </a>
 
       </div>
     </section>
@@ -623,24 +695,16 @@
     <!-- Right Column: Sidebar & Annotations -->
     <aside>
       <div class="section-title">
-        <span>Navegación</span>
-      </div>
-
-      <div class="alphabet-nav">
-        <a href="index.html" class="letter-btn active">B</a>
-        <a href="index.html" class="letter-btn active">N</a>
-        <a href="index.html" class="letter-btn active">P</a>
-        <a href="index.html" class="letter-btn active">S</a>
-        <a href="index.html" class="letter-btn active">T</a>
-      </div>
-
-      <div class="section-title">
         <span>Anotaciones</span>
       </div>
 
       <div class="annotation-box">
-        <h3>Fecha con Asterisco (*)</h3>
-        <p>Indica que no se tiene la fecha oficial de la batalla, razón por la que se toma en cuenta la fecha de su lanzamiento en YouTube.</p>
+        <h3>Fecha de lanzamiento</h3>
+        <p>El asterisco (<strong>*</strong>) indica enfrentamientos donde no se cuenta con la fecha oficial del evento, por lo que se toma la fecha de publicación en YouTube/redes sociales.</p>
+      </div>
+
+      <div class="back-nav">
+        <a href="index.html" class="back-btn">← Volver al índice</a>
       </div>
     </aside>
 
