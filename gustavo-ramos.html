@@ -180,7 +180,6 @@
       color: var(--primary-yellow);
     }
 
-    /* Fecha con letra más grande */
     .battle-date {
       font-size: 0.85rem;
       color: var(--text-muted);
@@ -204,12 +203,18 @@
       border: 1px solid var(--border-color);
     }
 
-    /* Etiqueta "Batalla virtual" más chica con texto al tamaño previo de la fecha */
+    /* Etiqueta "Batalla virtual" muy reducida */
     .badge-virtual {
-      font-size: 0.85rem;
-      padding: 0.05rem 0.3rem;
+      font-size: 0.65rem;
+      padding: 0.05rem 0.25rem;
       border-color: var(--primary-yellow);
       color: var(--primary-yellow);
+      font-weight: 600;
+    }
+
+    /* Sidebar posicionado más abajo */
+    aside {
+      margin-top: 5rem;
     }
 
     /* Navigation Button */
@@ -274,6 +279,9 @@
       .main-layout {
         grid-template-columns: 1fr;
       }
+      aside {
+        margin-top: 1rem;
+      }
       .stats-bar {
         margin: 0 auto;
       }
@@ -287,7 +295,7 @@
     <div class="container">
       <div class="header-content">
         <div class="cover-art">
-          <img src="gustavo-ramos.webp" alt="Gustavo Ramos">
+          <img src="gustavo-ramos.jpg" alt="Gustavo Ramos">
         </div>
         <div class="meta-info">
           <h1>Catálogo de <span>Gustavo Ramos</span></h1>
