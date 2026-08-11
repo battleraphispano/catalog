@@ -133,6 +133,21 @@
       border-radius: 12px;
     }
 
+    /* Group Header for Alphabetical Divider */
+    .letter-group-title {
+      color: var(--primary-yellow);
+      font-size: 1.3rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin: 1.5rem 0 0.6rem 0;
+      padding-bottom: 0.3rem;
+      border-bottom: 1px dashed var(--border-color);
+    }
+
+    .letter-group-title:first-of-type {
+      margin-top: 0;
+    }
+
     /* Catalog List */
     .catalog-list {
       display: flex;
@@ -163,20 +178,6 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-    }
-
-    .rapper-initial {
-      width: 38px;
-      height: 38px;
-      border-radius: 4px;
-      background: var(--accent-gray);
-      color: var(--primary-yellow);
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      border: 1px solid rgba(255, 255, 0, 0.2);
     }
 
     .rapper-name {
@@ -315,10 +316,12 @@
 
       <div class="catalog-list">
         
+        <!-- B -->
+        <h2 id="letter-B" class="letter-group-title">B</h2>
+
         <!-- Biopsz -->
         <a href="Biopsz.html" class="rapper-card">
           <div class="rapper-info">
-            <div class="rapper-initial">B</div>
             <div>
               <span class="rapper-name">Biopsz</span>
               <span class="rapper-subtext">Batallas en orden cronológico</span>
@@ -330,7 +333,6 @@
         <!-- Blue One -->
         <a href="blue-one.html" class="rapper-card">
           <div class="rapper-info">
-            <div class="rapper-initial">B</div>
             <div>
               <span class="rapper-name">Blue One</span>
               <span class="rapper-subtext">Batallas en orden cronológico</span>
@@ -339,10 +341,12 @@
           <span class="badge">Ver Catálogo</span>
         </a>
 
+        <!-- N -->
+        <h2 id="letter-N" class="letter-group-title">N</h2>
+
         <!-- NyD -->
         <a href="nyd.html" class="rapper-card">
           <div class="rapper-info">
-            <div class="rapper-initial">N</div>
             <div>
               <span class="rapper-name">NyD</span>
               <span class="rapper-subtext">Batallas en orden cronológico</span>
@@ -351,10 +355,12 @@
           <span class="badge">Ver Catálogo</span>
         </a>
 
+        <!-- P -->
+        <h2 id="letter-P" class="letter-group-title">P</h2>
+
         <!-- Pantera -->
         <a href="pantera.html" class="rapper-card">
           <div class="rapper-info">
-            <div class="rapper-initial">P</div>
             <div>
               <span class="rapper-name">Pantera</span>
               <span class="rapper-subtext">Batallas en orden cronológico</span>
@@ -366,7 +372,6 @@
         <!-- Pensil1 -->
         <a href="pensil1.html" class="rapper-card">
           <div class="rapper-info">
-            <div class="rapper-initial">P</div>
             <div>
               <span class="rapper-name">Pensil1</span>
               <span class="rapper-subtext">Batallas en orden cronológico</span>
@@ -375,10 +380,12 @@
           <span class="badge">Ver Catálogo</span>
         </a>
 
+        <!-- S -->
+        <h2 id="letter-S" class="letter-group-title">S</h2>
+
         <!-- Sempiterno -->
         <a href="sempiterno.html" class="rapper-card">
           <div class="rapper-info">
-            <div class="rapper-initial">S</div>
             <div>
               <span class="rapper-name">Sempiterno</span>
               <span class="rapper-subtext">Batallas en orden cronológico</span>
@@ -387,10 +394,12 @@
           <span class="badge">Ver Catálogo</span>
         </a>
 
+        <!-- T -->
+        <h2 id="letter-T" class="letter-group-title">T</h2>
+
         <!-- Tetra -->
         <a href="tetra.html" class="rapper-card">
           <div class="rapper-info">
-            <div class="rapper-initial">T</div>
             <div>
               <span class="rapper-name">Tetra</span>
               <span class="rapper-subtext">Batallas en orden cronológico</span>
@@ -409,11 +418,11 @@
       </div>
 
       <div class="alphabet-nav">
-        <span class="letter-btn active">B</span>
-        <span class="letter-btn active">N</span>
-        <span class="letter-btn active">P</span>
-        <span class="letter-btn active">S</span>
-        <span class="letter-btn active">T</span>
+        <a href="#letter-B" class="letter-btn active">B</a>
+        <a href="#letter-N" class="letter-btn active">N</a>
+        <a href="#letter-P" class="letter-btn active">P</a>
+        <a href="#letter-S" class="letter-btn active">S</a>
+        <a href="#letter-T" class="letter-btn active">T</a>
       </div>
 
       <div class="section-title">
