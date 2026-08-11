@@ -139,9 +139,9 @@
       font-size: 1.3rem;
       font-weight: 800;
       text-transform: uppercase;
-      margin: 1.5rem 0 0.6rem 0;
-      padding-bottom: 0.3rem;
-      border-bottom: 1px dashed var(--border-color);
+      margin: 1.2rem 0 0.2rem 0; /* Margen inferior reducido */
+      padding-bottom: 0;
+      border-bottom: none; /* Se elimina el guion/línea */
     }
 
     .letter-group-title:first-of-type {
@@ -152,14 +152,14 @@
     .catalog-list {
       display: flex;
       flex-direction: column;
-      gap: 0.85rem;
+      gap: 0.5rem; /* Espaciado entre elementos más estrecho */
     }
 
     .rapper-card {
       background-color: var(--card-dark);
       border: 1px solid var(--border-color);
       border-radius: 6px;
-      padding: 1.1rem 1.25rem;
+      padding: 0.6rem 0.9rem; /* Tarjetas más compactas */
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -182,7 +182,7 @@
 
     .rapper-name {
       font-weight: 700;
-      font-size: 1.1rem;
+      font-size: 1.1rem; /* Mismo tamaño de letra */
       color: var(--text-light);
       display: block;
       transition: color 0.2s;
@@ -193,16 +193,16 @@
     }
 
     .rapper-subtext {
-      font-size: 0.8rem;
+      font-size: 0.8rem; /* Mismo tamaño de letra */
       color: var(--text-muted);
     }
 
     .badge {
-      font-size: 0.75rem;
+      font-size: 0.75rem; /* Mismo tamaño de letra */
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      padding: 0.25rem 0.6rem;
+      padding: 0.2rem 0.5rem;
       border-radius: 4px;
       background-color: #222;
       color: var(--text-muted);
