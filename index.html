@@ -138,7 +138,6 @@
       display: flex;
       flex-direction: column;
       gap: 0.85rem;
-      margin-bottom: 3rem;
     }
 
     .rapper-card {
@@ -207,47 +206,6 @@
       background-color: #222;
       color: var(--text-muted);
       border: 1px solid var(--border-color);
-    }
-
-    /* Section for Battles List */
-    .battles-section {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    .battler-history-card {
-      background: var(--card-dark);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      padding: 1.5rem;
-      scroll-margin-top: 2rem;
-    }
-
-    .battler-history-card h3 {
-      color: var(--primary-yellow);
-      font-size: 1.3rem;
-      margin-bottom: 1rem;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 0.5rem;
-    }
-
-    .battle-list {
-      list-style: decimal inside;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .battle-list li {
-      color: var(--text-light);
-      font-size: 0.95rem;
-    }
-
-    .battle-date {
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      margin-right: 0.5rem;
     }
 
     /* Sidebar / Annotations */
@@ -348,7 +306,7 @@
   <!-- Main Section -->
   <main class="container main-layout">
     
-    <!-- Left Column: Catalog & Battles -->
+    <!-- Left Column: Catalog -->
     <section>
       <div class="section-title">
         <span>Battlers registrados:</span>
@@ -358,7 +316,7 @@
       <div class="catalog-list">
         
         <!-- Biopsz -->
-       <a href="biopsz.html" class="rapper-card">
+    <a href="biopsz.html" class="rapper-card">
   <div class="rapper-info">
     <div class="rapper-initial">B</div>
     <div>
@@ -370,19 +328,19 @@
 </a>
 
         <!-- Blue One -->
-    <a href="blue-one.html" class="rapper-card">
-  <div class="rapper-info">
-    <div class="rapper-initial">B</div>
-    <div>
-      <span class="rapper-name">Blue One</span>
-      <span class="rapper-subtext">Batallas en orden cronológico</span>
-    </div>
-  </div>
-  <span class="badge">Ver Catálogo</span>
-</a>
+        <a href="#" class="rapper-card">
+          <div class="rapper-info">
+            <div class="rapper-initial">B</div>
+            <div>
+              <span class="rapper-name">Blue One</span>
+              <span class="rapper-subtext">Batallas en orden cronológico</span>
+            </div>
+          </div>
+          <span class="badge">Ver Catálogo</span>
+        </a>
 
         <!-- NyD -->
-        <a href="#batallas-nyd" class="rapper-card">
+        <a href="#" class="rapper-card">
           <div class="rapper-info">
             <div class="rapper-initial">N</div>
             <div>
@@ -394,7 +352,7 @@
         </a>
 
         <!-- Pantera -->
-        <a href="#batallas-pantera" class="rapper-card">
+        <a href="#" class="rapper-card">
           <div class="rapper-info">
             <div class="rapper-initial">P</div>
             <div>
@@ -406,7 +364,7 @@
         </a>
 
         <!-- Pensil1 -->
-        <a href="#batallas-pensil1" class="rapper-card">
+        <a href="#" class="rapper-card">
           <div class="rapper-info">
             <div class="rapper-initial">P</div>
             <div>
@@ -418,7 +376,7 @@
         </a>
 
         <!-- Sempiterno -->
-        <a href="#batallas-sempiterno" class="rapper-card">
+        <a href="#" class="rapper-card">
           <div class="rapper-info">
             <div class="rapper-initial">S</div>
             <div>
@@ -430,7 +388,7 @@
         </a>
 
         <!-- Tetra -->
-        <a href="#batallas-tetra" class="rapper-card">
+        <a href="#" class="rapper-card">
           <div class="rapper-info">
             <div class="rapper-initial">T</div>
             <div>
@@ -440,75 +398,6 @@
           </div>
           <span class="badge">Ver Catálogo</span>
         </a>
-
-      </div>
-
-      <!-- Historical Battle Lists -->
-      <div class="section-title">
-        <span>Historial de Batallas (Cronológico)</span>
-      </div>
-
-      <div class="battles-section">
-        
-        <article id="batallas-biopsz" class="battler-history-card">
-          <h3>Biopsz</h3>
-          <ol class="battle-list">
-            <li><span class="battle-date">[2022-03-10]</span> vs. Rival A - Torneo Inicial</li>
-            <li><span class="battle-date">[2023-01-15]</span> vs. Rival B - Liga Regional</li>
-            <li><span class="battle-date">[2023-11-20]</span> vs. Rival C - Exhibición</li>
-          </ol>
-        </article>
-
-        <article id="batallas-blueone" class="battler-history-card">
-          <h3>Blue One</h3>
-          <ol class="battle-list">
-            <li><span class="battle-date">[2021-08-05]</span> vs. Rival D - Fecha 1</li>
-            <li><span class="battle-date">[2022-06-18]</span> vs. Rival E - Cuartos de Final</li>
-            <li><span class="battle-date">[2024-02-12]</span> vs. Rival F - Final Nacional</li>
-          </ol>
-        </article>
-
-        <article id="batallas-nyd" class="battler-history-card">
-          <h3>NyD</h3>
-          <ol class="battle-list">
-            <li><span class="battle-date">[2022-11-01]</span> vs. Rival G - Underground League</li>
-            <li><span class="battle-date">[2023-05-14]</span> vs. Rival H - Written Battle</li>
-          </ol>
-        </article>
-
-        <article id="batallas-pantera" class="battler-history-card">
-          <h3>Pantera</h3>
-          <ol class="battle-list">
-            <li><span class="battle-date">[2020-04-19]</span> vs. Rival I - Debut</li>
-            <li><span class="battle-date">[2022-09-30]</span> vs. Rival J - Semifinal</li>
-            <li><span class="battle-date">[2023-12-05]</span> vs. Rival K - Main Event</li>
-          </ol>
-        </article>
-
-        <article id="batallas-pensil1" class="battler-history-card">
-          <h3>Pensil1</h3>
-          <ol class="battle-list">
-            <li><span class="battle-date">[2023-02-11]</span> vs. Rival L - Preclasificatorio</li>
-            <li><span class="battle-date">[2023-08-22]</span> vs. Rival M - Liga Escritas</li>
-          </ol>
-        </article>
-
-        <article id="batallas-sempiterno" class="battler-history-card">
-          <h3>Sempiterno</h3>
-          <ol class="battle-list">
-            <li><span class="battle-date">[2021-12-03]</span> vs. Rival N - Fecha Internacional</li>
-            <li><span class="battle-date">[2023-04-17]</span> vs. Rival O - Desafío de Barras</li>
-            <li><span class="battle-date">[2024-01-29]</span> vs. Rival P - Superliga</li>
-          </ol>
-        </article>
-
-        <article id="batallas-tetra" class="battler-history-card">
-          <h3>Tetra</h3>
-          <ol class="battle-list">
-            <li><span class="battle-date">[2022-07-08]</span> vs. Rival Q - Torneo Regional</li>
-            <li><span class="battle-date">[2023-10-11]</span> vs. Rival R - Escritas Gold</li>
-          </ol>
-        </article>
 
       </div>
     </section>
