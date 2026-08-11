@@ -185,6 +185,12 @@
       color: var(--text-muted);
     }
 
+    .badge-container {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+    }
+
     .badge {
       font-size: 0.75rem;
       font-weight: 700;
@@ -195,6 +201,11 @@
       background-color: #222;
       color: var(--text-muted);
       border: 1px solid var(--border-color);
+    }
+
+    .badge-virtual {
+      border-color: var(--primary-yellow);
+      color: var(--primary-yellow);
     }
 
     /* Sidebar / Annotations */
@@ -269,7 +280,7 @@
     <div class="container">
       <div class="header-content">
         <div class="cover-art">
-          <img src="gustavo-ramos.webp" alt="Gustavo Ramos">
+          <img src="gustavo-ramos.jpg" alt="Gustavo Ramos">
         </div>
         <div class="meta-info">
           <h1>Catálogo de <span>Gustavo Ramos</span></h1>
@@ -300,10 +311,13 @@
         <!-- #1 -->
         <a href="https://www.youtube.com/watch?v=jleyHxErDxo&t=300s" target="_blank" rel="noopener noreferrer" class="battle-card">
           <div class="battle-info">
-            <span class="battle-title">#1. Gustavo Ramos vs. M-Par</span>
+            <span class="battle-title">#1. Gustavo Ramos vs. M-Par °</span>
             <span class="battle-date">24/02/2023*</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Virtual</span>
+            <span class="badge">Ver en YouTube</span>
+          </div>
         </a>
 
         <!-- #2 -->
@@ -407,6 +421,11 @@
 
       <div class="section-title">
         <span>Anotaciones</span>
+      </div>
+
+      <div class="annotation-box">
+        <h3>Formato Virtual (°)</h3>
+        <p>El símbolo de grado (<strong>°</strong>) o la etiqueta <strong>Virtual</strong> indican enfrentamientos realizados en formato a distancia u online.</p>
       </div>
 
       <div class="annotation-box">
