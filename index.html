@@ -50,27 +50,18 @@
     .cover-art {
       width: 150px;
       height: 150px;
-      background-color: var(--primary-yellow);
-      color: var(--bg-dark);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 2.2rem;
       border-radius: 6px;
       box-shadow: 0 10px 25px rgba(255, 255, 0, 0.12);
       flex-shrink: 0;
-      letter-spacing: -1px;
-      line-height: 1;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
     }
 
-    .cover-art span {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      margin-top: 4px;
-      text-transform: uppercase;
+    .cover-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .meta-info h1 {
@@ -159,7 +150,7 @@
       background-color: var(--card-dark);
       border: 1px solid var(--border-color);
       border-radius: 6px;
-      padding: 0.4rem 0.8rem; /* Padding reducido para tarjetas ultra compactas */
+      padding: 0.4rem 0.8rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -281,8 +272,7 @@
     <div class="container">
       <div class="header-content">
         <div class="cover-art">
-          BRH
-          <span>Catalog</span>
+          <img src="battleraphispano.jpg" alt="Battle Rap Hispano">
         </div>
         <div class="meta-info">
           <h1>Catálogo de <span>Battle Rap Hispano</span></h1>
