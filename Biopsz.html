@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Batallas de Biopsz | Rap Battle Database</title>
+  <style>
+    :root {
+      --primary-yellow: #ffff00;
+      --bg-dark: #0a0a0a;
+      --card-dark: #141414;
+      --card-hover: #1e1e1e;
+      --text-light: #ffffff;
+      --text-muted: #a0a0a0;
+      --border-color: #262626;
+      --accent-gray: #333333;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Programme', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* Header / Hero Section */
+    .hero-banner {
+      background: linear-gradient(180deg, #181818 0%, var(--bg-dark) 100%);
+      border-bottom: 2px solid var(--primary-yellow);
+      padding: 3.5rem 1.5rem 2.5rem 1.5rem;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .header-content {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .cover-art {
+      width: 150px;
+      height: 150px;
+      background-color: var(--primary-yellow);
+      color: var(--bg-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 2.2rem;
+      border-radius: 6px;
+      box-shadow: 0 10px 25px rgba(255, 255, 0, 0.12);
+      flex-shrink: 0;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+
+    .cover-art span {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-top: 4px;
+      text-transform: uppercase;
+    }
+
+    .meta-info h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.8rem;
+      line-height: 1.1;
+    }
+
+    .meta-info h1 span {
+      color: var(--primary-yellow);
+    }
+
+    .stats-bar {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.6rem 1rem;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+      width: fit-content;
+    }
+
+    .stats-bar strong {
+      color: var(--text-light);
+    }
+
+    /* Main Layout */
+    .main-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2.5rem;
+      padding: 2.5rem 1.5rem 4rem 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.6rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .section-title .count {
+      font-size: 0.85rem;
+      color: var(--primary-yellow);
+      background: rgba(255, 255, 0, 0.1);
+      padding: 2px 8px;
+      border-radius: 12px;
+    }
+
+    /* Battles Section */
+    .battles-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .year-card {
+      background: var(--card-dark);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 1.5rem;
+    }
+
+    .year-card h3 {
+      color: var(--primary-yellow);
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+
+    .battle-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .battle-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--text-light);
+      font-size: 0.95rem;
+    }
+
+    .battle-num {
+      color: var(--primary-yellow);
+      font-weight: 700;
+      min-width: 28px;
+    }
+
+    .battle-date {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    .badge-virtual {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+      background-color: rgba(255, 255, 0, 0.15);
+      color: var(--primary-yellow);
+      border: 1px solid rgba(255, 255, 0, 0.3);
+    }
+
+    /* Sidebar / Annotations */
+    .annotation-box {
+      background: var(--card-dark);
+      border-left: 4px solid var(--primary-yellow);
+      border-top: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.25rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+      color: #cccccc;
+      margin-bottom: 1.5rem;
+    }
+
+    .annotation-box h3 {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .annotation-box p {
+      line-height: 1.5;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      .main-layout {
+        grid-template-columns: 1fr;
+      }
+      .stats-bar {
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Banner -->
+  <header class="hero-banner">
+    <div class="container">
+      <div class="header-content">
+        <div class="cover-art">
+          BIO
+          <span>Battles</span>
+        </div>
+        <div class="meta-info">
+          <h1>Historial de <span>Biopsz</span></h1>
+          <div class="stats-bar">
+            <span><strong>11</strong> Batallas</span>
+            <span><strong>2022 - 2025</strong> Cronológico</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Section -->
+  <main class="container main-layout">
+    
+    <!-- Left Column: Battles List -->
+    <section>
+      <div class="section-title">
+        <span>Batallas Registradas:</span>
+        <span class="count">11 Batallas</span>
+      </div>
+
+      <div class="battles-section">
+        
+        <!-- 2022 -->
+        <article class="year-card">
+          <h3>2022</h3>
+          <ul class="battle-list">
+            <li class="battle-item">
+              <span class="battle-num">#1</span>
+              <span>Biopsz vs Psicotic</span>
+              <span class="battle-date">(13/11/2022)</span>
+              <span class="badge-virtual">Virtual</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- 2023 -->
+        <article class="year-card">
+          <h3>2023</h3>
+          <ul class="battle-list">
+            <li class="battle-item">
+              <span class="battle-num">#2</span>
+              <span>Biopsz vs Lil Jaly</span>
+              <span class="battle-date">(-/04/2023)</span>
+              <span class="badge-virtual">Virtual</span>
+            </li>
+            <li class="battle-item">
+              <span class="battle-num">#3</span>
+              <span>Biopsz & Lil Jaly vs Jackeistas & Punch de Rapder</span>
+              <span class="battle-date">(30/05/2023*)</span>
+              <span class="badge-virtual">Virtual</span>
+            </li>
+            <li class="battle-item">
+              <span class="battle-num">#4</span>
+              <span>Biopsz vs Saturno</span>
+              <span class="battle-date">(04/08/2023*)</span>
+              <span class="badge-virtual">Virtual</span>
+            </li>
+            <li class="battle-item">
+              <span class="battle-num">#5</span>
+              <span>Biopsz vs Javi Argentino</span>
+              <span class="battle-date">(11/10/2023*)</span>
+              <span class="badge-virtual">Virtual</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- 2024 -->
+        <article class="year-card">
+          <h3>2024</h3>
+          <ul class="battle-list">
+            <li class="battle-item">
+              <span class="battle-num">#6</span>
+              <span>Biopsz vs Bohemio que los Rapsodia</span>
+              <span class="battle-date">(8/02/2024*)</span>
+              <span class="badge-virtual">Virtual</span>
+            </li>
+            <li class="battle-item">
+              <span class="battle-num">#7</span>
+              <span>Biopsz vs Armagedon</span>
+              <span class="battle-date">(04/05/2024)</span>
+            </li>
+            <li class="battle-item">
+              <span class="battle-num">#8</span>
+              <span>Biopsz vs Riverdash</span>
+              <span class="battle-date">(29/06/2024)</span>
+            </li>
+            <li class="battle-item">
+              <span class="battle-num">#9</span>
+              <span>Biopsz vs Esebarber</span>
+              <span class="battle-date">(22/09/2024)</span>
+            </li>
+            <li class="battle-item">
+              <span class="battle-num">#10</span>
+              <span>Biopsz vs Koler</span>
+              <span class="battle-date">(07/12/2024)</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- 2025 -->
+        <article class="year-card">
+          <h3>2025</h3>
+          <ul class="battle-list">
+            <li class="battle-item">
+              <span class="battle-num">#11</span>
+              <span>Biopsz vs NyD</span>
+              <span class="battle-date">(31/05/2025)</span>
+            </li>
+          </ul>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Right Column: Sidebar & Notes -->
+    <aside>
+      <div class="section-title">
+        <span>Notas del Registro</span>
+      </div>
+
+      <div class="annotation-box">
+        <h3>Asterisco (*)</h3>
+        <p>Indica que no se tiene la fecha oficial de la batalla, razón por la que se toma en cuenta la fecha de su lanzamiento en YouTube.</p>
+      </div>
+
+      <div class="annotation-box">
+        <h3>Batalla Virtual</h3>
+        <p>Identificada dentro del listado para señalar los enfrentamientos realizados en modalidad remota o digital.</p>
+      </div>
+    </aside>
+
+  </main>
+
+</body>
+</html>
