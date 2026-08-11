@@ -204,8 +204,35 @@
     }
 
     .badge-virtual {
+      font-size: 0.65rem;
+      padding: 0.1rem 0.4rem;
       border-color: var(--primary-yellow);
       color: var(--primary-yellow);
+    }
+
+    /* Bottom Navigation Button */
+    .back-nav-bottom {
+      margin-top: 2rem;
+    }
+
+    .back-btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: var(--card-dark);
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+
+    .back-btn:hover {
+      background: var(--primary-yellow);
+      color: var(--bg-dark);
+      border-color: var(--primary-yellow);
     }
 
     /* Sidebar / Annotations */
@@ -234,30 +261,6 @@
       line-height: 1.5;
     }
 
-    .back-nav {
-      margin-bottom: 1.5rem;
-    }
-
-    .back-btn {
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      background: var(--card-dark);
-      color: var(--text-light);
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.85rem;
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      transition: all 0.2s;
-      text-transform: uppercase;
-    }
-
-    .back-btn:hover {
-      background: var(--primary-yellow);
-      color: var(--bg-dark);
-      border-color: var(--primary-yellow);
-    }
-
     /* Responsive */
     @media (max-width: 768px) {
       .header-content {
@@ -280,7 +283,7 @@
     <div class="container">
       <div class="header-content">
         <div class="cover-art">
-          <img src="gustavo-ramos.jpg" alt="Gustavo Ramos">
+          <img src="gustavo-ramos.webp" alt="Gustavo Ramos">
         </div>
         <div class="meta-info">
           <h1>Catálogo de <span>Gustavo Ramos</span></h1>
@@ -315,7 +318,7 @@
             <span class="battle-date">24/02/2023*</span>
           </div>
           <div class="badge-container">
-            <span class="badge badge-virtual">Virtual</span>
+            <span class="badge badge-virtual">Batalla virtual</span>
             <span class="badge">Ver en YouTube</span>
           </div>
         </a>
@@ -411,21 +414,17 @@
         </div>
 
       </div>
+
+      <!-- Botón inferior para volver al índice -->
+      <div class="back-nav-bottom">
+        <a href="index.html" class="back-btn">← Volver al Índice</a>
+      </div>
     </section>
 
     <!-- Right Column: Sidebar & Annotations -->
     <aside>
-      <div class="back-nav">
-        <a href="index.html" class="back-btn">← Volver al Índice</a>
-      </div>
-
       <div class="section-title">
         <span>Anotaciones</span>
-      </div>
-
-      <div class="annotation-box">
-        <h3>Formato Virtual (°)</h3>
-        <p>El símbolo de grado (<strong>°</strong>) o la etiqueta <strong>Virtual</strong> indican enfrentamientos realizados en formato a distancia u online.</p>
       </div>
 
       <div class="annotation-box">
