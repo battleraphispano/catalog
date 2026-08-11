@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Batallas de Biopsz | Rap Battle Database</title>
+  <title>Catálogo de batallas de Biopsz | Rap Battle Database</title>
   <style>
     :root {
       --primary-yellow: #ffff00;
@@ -50,15 +50,14 @@
     .cover-art {
       width: 150px;
       height: 150px;
-      background-color: var(--card-dark);
       border-radius: 6px;
       box-shadow: 0 10px 25px rgba(255, 255, 0, 0.12);
       flex-shrink: 0;
       overflow: hidden;
-      border: 2px solid var(--primary-yellow);
+      border: 1px solid var(--border-color);
     }
 
-    .cover-img {
+    .cover-art img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -66,7 +65,7 @@
     }
 
     .meta-info h1 {
-      font-size: 2.4rem;
+      font-size: 2.2rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: -0.5px;
@@ -125,18 +124,31 @@
       border-radius: 12px;
     }
 
+    /* Year Group Title */
+    .year-group-title {
+      color: var(--primary-yellow);
+      font-size: 1.3rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin: 1.5rem 0 0.5rem 0;
+    }
+
+    .year-group-title:first-of-type {
+      margin-top: 0;
+    }
+
     /* Catalog List */
     .catalog-list {
       display: flex;
       flex-direction: column;
-      gap: 0.85rem;
+      gap: 0.4rem;
     }
 
-    .rapper-card {
+    .battle-card {
       background-color: var(--card-dark);
       border: 1px solid var(--border-color);
       border-radius: 6px;
-      padding: 1.1rem 1.25rem;
+      padding: 0.6rem 0.8rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -145,47 +157,38 @@
       color: inherit;
     }
 
-    .rapper-card:hover {
+    .battle-card:hover {
       border-color: var(--primary-yellow);
       background-color: var(--card-hover);
       transform: translateX(4px);
     }
 
-    .rapper-info {
+    .battle-info {
       display: flex;
-      align-items: center;
-      gap: 1rem;
+      flex-direction: column;
     }
 
-    .rapper-initial {
-      width: 38px;
-      height: 38px;
-      border-radius: 4px;
-      background: var(--accent-gray);
-      color: var(--primary-yellow);
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      border: 1px solid rgba(255, 255, 0, 0.2);
-    }
-
-    .rapper-name {
+    .battle-title {
       font-weight: 700;
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: var(--text-light);
       display: block;
       transition: color 0.2s;
     }
 
-    .rapper-card:hover .rapper-name {
+    .battle-card:hover .battle-title {
       color: var(--primary-yellow);
     }
 
-    .rapper-subtext {
-      font-size: 0.8rem;
+    .battle-date {
+      font-size: 0.85rem;
       color: var(--text-muted);
+    }
+
+    .badge-container {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
     }
 
     .badge {
@@ -193,11 +196,52 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      padding: 0.25rem 0.6rem;
+      padding: 0.15rem 0.5rem;
       border-radius: 4px;
       background-color: #222;
       color: var(--text-muted);
       border: 1px solid var(--border-color);
+    }
+
+    /* Etiqueta "Batalla virtual" */
+    .badge-virtual {
+      font-size: 0.45rem;
+      padding: 0.02rem 0.15rem;
+      border: 0.5px solid var(--primary-yellow);
+      color: var(--primary-yellow);
+      font-weight: 600;
+      border-radius: 2px;
+    }
+
+    /* Sidebar posicionado alineado */
+    aside {
+      margin-top: 10rem;
+    }
+
+    /* Navigation Button */
+    .back-nav {
+      margin-top: 1.5rem;
+    }
+
+    .back-btn {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      padding: 0.6rem 1rem;
+      background: var(--card-dark);
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .back-btn:hover {
+      background: var(--primary-yellow);
+      color: var(--bg-dark);
+      border-color: var(--primary-yellow);
     }
 
     /* Sidebar / Annotations */
@@ -211,7 +255,7 @@
       border-radius: 0 6px 6px 0;
       font-size: 0.9rem;
       color: #cccccc;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
     }
 
     .annotation-box h3 {
@@ -226,52 +270,6 @@
       line-height: 1.5;
     }
 
-    .alphabet-nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 1.5rem;
-      background: var(--card-dark);
-      padding: 1rem;
-      border-radius: 6px;
-      border: 1px solid var(--border-color);
-    }
-
-    .letter-btn {
-      width: 28px;
-      height: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      font-weight: 700;
-      border-radius: 3px;
-      background: #1a1a1a;
-      color: var(--text-muted);
-      text-decoration: none;
-    }
-
-    .letter-btn.active {
-      background: var(--primary-yellow);
-      color: var(--bg-dark);
-    }
-
-    .back-link {
-      display: inline-block;
-      margin-bottom: 1.5rem;
-      color: var(--primary-yellow);
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      transition: opacity 0.2s;
-    }
-
-    .back-link:hover {
-      opacity: 0.8;
-    }
-
     /* Responsive */
     @media (max-width: 768px) {
       .header-content {
@@ -281,11 +279,11 @@
       .main-layout {
         grid-template-columns: 1fr;
       }
+      aside {
+        margin-top: 1rem;
+      }
       .stats-bar {
         margin: 0 auto;
-      }
-      .rapper-info {
-        gap: 0.75rem;
       }
     }
   </style>
@@ -297,13 +295,13 @@
     <div class="container">
       <div class="header-content">
         <div class="cover-art">
-          <img src="biopsz.jpg" alt="Biopsz" class="cover-img">
+          <img src="biopsz.jpg" alt="Biopsz">
         </div>
         <div class="meta-info">
-          <h1>Batallas de <span>Biopsz</span></h1>
+          <h1>Catálogo de batallas de <span>Biopsz</span></h1>
           <div class="stats-bar">
-            <span><strong>11</strong> Batallas</span>
-            <span><strong>2022 - 2025</strong> Cronológico</span>
+            <span><strong>17</strong> Batallas</span>
+            <span><strong>2022 - 2026</strong> Trayectoria</span>
           </div>
         </div>
       </div>
@@ -315,139 +313,204 @@
     
     <!-- Left Column: Catalog -->
     <section>
-      <a href="index.html" class="back-link">← Volver al catálogo principal</a>
-
       <div class="section-title">
-        <span>Historial de Enfrentamientos</span>
-        <span class="count">11 Batallas</span>
+        <span>Historial de enfrentamientos:</span>
+        <span class="count">17 Batallas</span>
       </div>
 
       <div class="catalog-list">
         
         <!-- 2022 -->
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#1</div>
-            <div>
-              <span class="rapper-name">Biopsz vs Psicotic</span>
-              <span class="rapper-subtext">13/11/2022 Batalla virtual</span>
-            </div>
+        <h2 class="year-group-title">2022</h2>
+
+        <!-- #1 -->
+        <a href="#" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#1. Biopsz vs. Psicotic</span>
+            <span class="battle-date">13/11/2022</span>
           </div>
-          <span class="badge">2022</span>
-        </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Sin video</span>
+          </div>
+        </a>
 
         <!-- 2023 -->
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#2</div>
-            <div>
-              <span class="rapper-name">Biopsz vs Lil Jaly</span>
-              <span class="rapper-subtext">-/04/2023 Batalla virtual</span>
-            </div>
-          </div>
-          <span class="badge">2023</span>
-        </div>
+        <h2 class="year-group-title">2023</h2>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#3</div>
-            <div>
-              <span class="rapper-name">Biopsz & Lil Jaly vs Jackeistas & Punch de Rapder</span>
-              <span class="rapper-subtext">30/05/2023* Batalla virtual</span>
-            </div>
+        <!-- #2 -->
+        <a href="#" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#2. Biopsz vs. Lil Jaly</span>
+            <span class="battle-date">--/04/2023</span>
           </div>
-          <span class="badge">2023</span>
-        </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Sin video</span>
+          </div>
+        </a>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#4</div>
-            <div>
-              <span class="rapper-name">Biopsz vs Saturno</span>
-              <span class="rapper-subtext">04/08/2023* Batalla virtual</span>
-            </div>
+        <!-- #3 -->
+        <a href="#" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#3. Biopsz & Lil Jaly vs. Jackeistas & Punch de Rapder</span>
+            <span class="battle-date">30/05/2023*</span>
           </div>
-          <span class="badge">2023</span>
-        </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Sin video</span>
+          </div>
+        </a>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#5</div>
-            <div>
-              <span class="rapper-name">Biopsz vs Javi Argentino</span>
-              <span class="rapper-subtext">11/10/2023* Batalla virtual</span>
-            </div>
+        <!-- #4 -->
+        <a href="https://www.youtube.com/watch?v=F_3o9zSDOOI&t=1s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#4. Biopsz vs. Saturno</span>
+            <span class="battle-date">04/08/2023*</span>
           </div>
-          <span class="badge">2023</span>
-        </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
+          </div>
+        </a>
+
+        <!-- #5 -->
+        <a href="#" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#5. Biopsz vs. Javi Argentino</span>
+            <span class="battle-date">11/10/2023*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Sin video</span>
+          </div>
+        </a>
 
         <!-- 2024 -->
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#6</div>
-            <div>
-              <span class="rapper-name">Biopsz vs Bohemio que los Rapsodia</span>
-              <span class="rapper-subtext">8/02/2024* Batalla virtual</span>
-            </div>
-          </div>
-          <span class="badge">2024</span>
-        </div>
+        <h2 class="year-group-title">2024</h2>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#7</div>
-            <div>
-              <span class="rapper-name">Biopsz vs Armagedon</span>
-              <span class="rapper-subtext">04/05/2024</span>
-            </div>
+        <!-- #6 -->
+        <a href="#" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#6. Biopsz vs. Bohemio que los Rapsodia</span>
+            <span class="battle-date">08/02/2024*</span>
           </div>
-          <span class="badge">2024</span>
-        </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Sin video</span>
+          </div>
+        </a>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#8</div>
-            <div>
-              <span class="rapper-name">Biopsz vs Riverdash</span>
-              <span class="rapper-subtext">29/06/2024</span>
-            </div>
+        <!-- #7 -->
+        <a href="https://www.youtube.com/watch?v=XTl4WeUlC-Y" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#7. Biopsz vs. Armagedon</span>
+            <span class="battle-date">04/05/2024</span>
           </div>
-          <span class="badge">2024</span>
-        </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#9</div>
-            <div>
-              <span class="rapper-name">Biopsz vs Esebarber</span>
-              <span class="rapper-subtext">22/09/2024</span>
-            </div>
+        <!-- #8 -->
+        <a href="https://www.youtube.com/watch?v=oH13KD_3Xi0&t=850s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#8. Biopsz vs. Riverdash</span>
+            <span class="battle-date">29/06/2024</span>
           </div>
-          <span class="badge">2024</span>
-        </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#10</div>
-            <div>
-              <span class="rapper-name">Biopsz vs Koler</span>
-              <span class="rapper-subtext">07/12/2024</span>
-            </div>
+        <!-- #9 -->
+        <a href="https://www.youtube.com/watch?v=i6scI7O-DNc&t=11s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#9. Biopsz vs. Esebarber</span>
+            <span class="battle-date">22/09/2024</span>
           </div>
-          <span class="badge">2024</span>
-        </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #10 -->
+        <a href="https://www.youtube.com/watch?v=cCepZ23S3zM" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#10. Biopsz vs. Koler</span>
+            <span class="battle-date">07/12/2024</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
 
         <!-- 2025 -->
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#11</div>
-            <div>
-              <span class="rapper-name">Biopsz vs NyD</span>
-              <span class="rapper-subtext">31/05/2025</span>
-            </div>
+        <h2 class="year-group-title">2025</h2>
+
+        <!-- #11 -->
+        <a href="https://www.youtube.com/watch?v=lzoof3-wVUY" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#11. Biopsz vs. NyD</span>
+            <span class="battle-date">31/05/2025</span>
           </div>
-          <span class="badge">2025</span>
-        </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #12 -->
+        <a href="https://www.youtube.com/watch?v=Q0ptASCargQ" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#12. Biopsz vs. Jaderino</span>
+            <span class="battle-date">07/12/2025</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #13 -->
+        <a href="#" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#13. Biopsz vs. XLMen</span>
+            <span class="battle-date">--/--/2025</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Sin video</span>
+          </div>
+        </a>
+
+        <!-- 2026 -->
+        <h2 class="year-group-title">2026</h2>
+
+        <!-- #14 -->
+        <a href="https://www.youtube.com/watch?v=IAFXKfqcuPk&t=5s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#14. Biopsz vs. Dominio</span>
+            <span class="battle-date">17/01/2026</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #15 -->
+        <a href="https://www.youtube.com/watch?v=S7vsCPUqwIY&t=49s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#15. Biopsz vs. Temple</span>
+            <span class="battle-date">15/03/2026*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
+          </div>
+        </a>
+
+        <!-- #16 -->
+        <a href="https://www.youtube.com/watch?v=5fyWaMa-dYE" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#16. Biopsz vs. Pichi</span>
+            <span class="battle-date">26/07/2026</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #17 -->
+        <a href="https://www.youtube.com/watch?v=ySHE1T001Ds&t=570s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#17. Biopsz vs. Lengua</span>
+            <span class="battle-date">09/08/2026</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
 
       </div>
     </section>
@@ -455,26 +518,17 @@
     <!-- Right Column: Sidebar & Annotations -->
     <aside>
       <div class="section-title">
-        <span>Navegación</span>
-      </div>
-
-      <div class="alphabet-nav">
-        <a href="index.html" class="letter-btn active">B</a>
-        <a href="index.html" class="letter-btn active">N</a>
-        <a href="index.html" class="letter-btn active">P</a>
-        <a href="index.html" class="letter-btn active">S</a>
-        <a href="index.html" class="letter-btn active">T</a>
-      </div>
-
-      <div class="section-title">
         <span>Anotaciones</span>
       </div>
 
       <div class="annotation-box">
-        <h3>Fecha con Asterisco (*)</h3>
-        <p>Indica que no se tiene la fecha oficial de la batalla, razón por la que se toma en cuenta la fecha de su lanzamiento en YouTube.</p>
+        <h3>Fecha de lanzamiento</h3>
+        <p>El asterisco (<strong>*</strong>) indica enfrentamientos donde no se cuenta con la fecha oficial del evento, por lo que se toma la fecha de publicación en YouTube.</p>
       </div>
 
+      <div class="back-nav">
+        <a href="index.html" class="back-btn">← Volver al índice</a>
+      </div>
     </aside>
 
   </main>
