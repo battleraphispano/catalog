@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Batallas de NyD | Rap Battle Database</title>
+  <title>Catálogo de batallas de NyD | Rap Battle Database</title>
   <style>
     :root {
       --primary-yellow: #ffff00;
@@ -50,15 +50,14 @@
     .cover-art {
       width: 150px;
       height: 150px;
-      background-color: var(--card-dark);
       border-radius: 6px;
       box-shadow: 0 10px 25px rgba(255, 255, 0, 0.12);
       flex-shrink: 0;
       overflow: hidden;
-      border: 2px solid var(--primary-yellow);
+      border: 1px solid var(--border-color);
     }
 
-    .cover-img {
+    .cover-art img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -66,7 +65,7 @@
     }
 
     .meta-info h1 {
-      font-size: 2.4rem;
+      font-size: 2.2rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: -0.5px;
@@ -125,18 +124,31 @@
       border-radius: 12px;
     }
 
+    /* Year Group Title */
+    .year-group-title {
+      color: var(--primary-yellow);
+      font-size: 1.3rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin: 1.5rem 0 0.5rem 0;
+    }
+
+    .year-group-title:first-of-type {
+      margin-top: 0;
+    }
+
     /* Catalog List */
     .catalog-list {
       display: flex;
       flex-direction: column;
-      gap: 0.85rem;
+      gap: 0.4rem;
     }
 
-    .rapper-card {
+    .battle-card {
       background-color: var(--card-dark);
       border: 1px solid var(--border-color);
       border-radius: 6px;
-      padding: 1.1rem 1.25rem;
+      padding: 0.6rem 0.8rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -145,47 +157,38 @@
       color: inherit;
     }
 
-    .rapper-card:hover {
+    .battle-card:hover {
       border-color: var(--primary-yellow);
       background-color: var(--card-hover);
       transform: translateX(4px);
     }
 
-    .rapper-info {
+    .battle-info {
       display: flex;
-      align-items: center;
-      gap: 1rem;
+      flex-direction: column;
     }
 
-    .rapper-initial {
-      width: 38px;
-      height: 38px;
-      border-radius: 4px;
-      background: var(--accent-gray);
-      color: var(--primary-yellow);
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      border: 1px solid rgba(255, 255, 0, 0.2);
-    }
-
-    .rapper-name {
+    .battle-title {
       font-weight: 700;
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: var(--text-light);
       display: block;
       transition: color 0.2s;
     }
 
-    .rapper-card:hover .rapper-name {
+    .battle-card:hover .battle-title {
       color: var(--primary-yellow);
     }
 
-    .rapper-subtext {
-      font-size: 0.8rem;
+    .battle-date {
+      font-size: 0.85rem;
       color: var(--text-muted);
+    }
+
+    .badge-container {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
     }
 
     .badge {
@@ -193,11 +196,52 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      padding: 0.25rem 0.6rem;
+      padding: 0.15rem 0.5rem;
       border-radius: 4px;
       background-color: #222;
       color: var(--text-muted);
       border: 1px solid var(--border-color);
+    }
+
+    /* Etiqueta "Batalla virtual" */
+    .badge-virtual {
+      font-size: 0.45rem;
+      padding: 0.02rem 0.15rem;
+      border: 0.5px solid var(--primary-yellow);
+      color: var(--primary-yellow);
+      font-weight: 600;
+      border-radius: 2px;
+    }
+
+    /* Sidebar posicionado alineado */
+    aside {
+      margin-top: 10rem;
+    }
+
+    /* Navigation Button */
+    .back-nav {
+      margin-top: 1.5rem;
+    }
+
+    .back-btn {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      padding: 0.6rem 1rem;
+      background: var(--card-dark);
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .back-btn:hover {
+      background: var(--primary-yellow);
+      color: var(--bg-dark);
+      border-color: var(--primary-yellow);
     }
 
     /* Sidebar / Annotations */
@@ -211,7 +255,7 @@
       border-radius: 0 6px 6px 0;
       font-size: 0.9rem;
       color: #cccccc;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
     }
 
     .annotation-box h3 {
@@ -226,52 +270,6 @@
       line-height: 1.5;
     }
 
-    .alphabet-nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 1.5rem;
-      background: var(--card-dark);
-      padding: 1rem;
-      border-radius: 6px;
-      border: 1px solid var(--border-color);
-    }
-
-    .letter-btn {
-      width: 28px;
-      height: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      font-weight: 700;
-      border-radius: 3px;
-      background: #1a1a1a;
-      color: var(--text-muted);
-      text-decoration: none;
-    }
-
-    .letter-btn.active {
-      background: var(--primary-yellow);
-      color: var(--bg-dark);
-    }
-
-    .back-link {
-      display: inline-block;
-      margin-bottom: 1.5rem;
-      color: var(--primary-yellow);
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      transition: opacity 0.2s;
-    }
-
-    .back-link:hover {
-      opacity: 0.8;
-    }
-
     /* Responsive */
     @media (max-width: 768px) {
       .header-content {
@@ -281,11 +279,11 @@
       .main-layout {
         grid-template-columns: 1fr;
       }
+      aside {
+        margin-top: 1rem;
+      }
       .stats-bar {
         margin: 0 auto;
-      }
-      .rapper-info {
-        gap: 0.75rem;
       }
     }
   </style>
@@ -297,13 +295,13 @@
     <div class="container">
       <div class="header-content">
         <div class="cover-art">
-          <img src="nyd.webp" alt="NyD" class="cover-img">
+          <img src="nyd.webp" alt="NyD">
         </div>
         <div class="meta-info">
-          <h1>Batallas de <span>NyD</span></h1>
+          <h1>Catálogo de batallas de <span>NyD</span></h1>
           <div class="stats-bar">
-            <span><strong>9</strong> Batallas</span>
-            <span><strong>2022 - 2025</strong> Cronológico</span>
+            <span><strong>19</strong> Batallas</span>
+            <span><strong>2022 - 2026</strong> Trayectoria</span>
           </div>
         </div>
       </div>
@@ -315,117 +313,216 @@
     
     <!-- Left Column: Catalog -->
     <section>
-      <a href="index.html" class="back-link">← Volver al catálogo principal</a>
-
       <div class="section-title">
-        <span>Historial de Enfrentamientos</span>
-        <span class="count">9 Batallas</span>
+        <span>Historial de enfrentamientos:</span>
+        <span class="count">19 Batallas</span>
       </div>
 
       <div class="catalog-list">
         
         <!-- 2022 -->
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#1</div>
-            <div>
-              <span class="rapper-name">NyD vs Deniro</span>
-              <span class="rapper-subtext">09/07/2022</span>
-            </div>
-          </div>
-          <span class="badge">2022</span>
-        </div>
+        <h2 class="year-group-title">2022</h2>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#2</div>
-            <div>
-              <span class="rapper-name">NyD vs Antón</span>
-              <span class="rapper-subtext">01/10/2022</span>
-            </div>
+        <!-- #1 -->
+        <a href="#" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#1. NyD vs. Deniro</span>
+            <span class="battle-date">09/07/2022</span>
           </div>
-          <span class="badge">2022</span>
-        </div>
+          <span class="badge">Sin Enlace</span>
+        </a>
+
+        <!-- #2 -->
+        <a href="#" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#2. NyD vs. Antón</span>
+            <span class="battle-date">01/10/2022</span>
+          </div>
+          <span class="badge">Sin Enlace</span>
+        </a>
 
         <!-- 2023 -->
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#3</div>
-            <div>
-              <span class="rapper-name">NyD vs Hassan Emecé</span>
-              <span class="rapper-subtext">-/01/2023</span>
-            </div>
-          </div>
-          <span class="badge">2023</span>
-        </div>
+        <h2 class="year-group-title">2023</h2>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#4</div>
-            <div>
-              <span class="rapper-name">NyD vs Hiram ADK</span>
-              <span class="rapper-subtext">20/03/2023</span>
-            </div>
+        <!-- #3 -->
+        <a href="#" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#3. NyD vs. Hassan Emecé</span>
+            <span class="battle-date">--/01/2023</span>
           </div>
-          <span class="badge">2023</span>
-        </div>
+          <span class="badge">Sin Enlace</span>
+        </a>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#5</div>
-            <div>
-              <span class="rapper-name">NyD vs René KDA</span>
-              <span class="rapper-subtext">19/08/2023</span>
-            </div>
+        <!-- #4 -->
+        <a href="#" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#4. NyD vs. Hiram ADK</span>
+            <span class="battle-date">20/03/2023</span>
           </div>
-          <span class="badge">2023</span>
-        </div>
+          <span class="badge">Sin Enlace</span>
+        </a>
+
+        <!-- #5 -->
+        <a href="https://www.youtube.com/watch?v=ikPfUs0_XKY&t=702s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#5. NyD vs. René KDA</span>
+            <span class="battle-date">19/08/2023</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
 
         <!-- 2024 -->
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#6</div>
-            <div>
-              <span class="rapper-name">NyD vs Carnage NSC</span>
-              <span class="rapper-subtext">03/02/2024</span>
-            </div>
-          </div>
-          <span class="badge">2024</span>
-        </div>
+        <h2 class="year-group-title">2024</h2>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#7</div>
-            <div>
-              <span class="rapper-name">NyD vs Lengua</span>
-              <span class="rapper-subtext">28/11/2024* Batalla virtual</span>
-            </div>
+        <!-- #6 -->
+        <a href="#" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#6. NyD vs. Carnage NSC</span>
+            <span class="battle-date">03/02/2024</span>
           </div>
-          <span class="badge">2024</span>
-        </div>
+          <span class="badge">Sin Enlace</span>
+        </a>
+
+        <!-- #7 -->
+        <a href="https://www.youtube.com/watch?v=quY78uPsddA&t=333s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#7. NyD vs. Lengua</span>
+            <span class="battle-date">28/11/2024*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
+          </div>
+        </a>
 
         <!-- 2025 -->
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#8</div>
-            <div>
-              <span class="rapper-name">NyD vs Prro negro</span>
-              <span class="rapper-subtext">06/04/2025*</span>
-            </div>
-          </div>
-          <span class="badge">2025</span>
-        </div>
+        <h2 class="year-group-title">2025</h2>
 
-        <div class="rapper-card">
-          <div class="rapper-info">
-            <div class="rapper-initial">#9</div>
-            <div>
-              <span class="rapper-name">NyD vs Biopsz</span>
-              <span class="rapper-subtext">31/05/2025</span>
-            </div>
+        <!-- #8 -->
+        <a href="#" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#8. NyD vs. Prro negro</span>
+            <span class="battle-date">06/04/2025*</span>
           </div>
-          <span class="badge">2025</span>
-        </div>
+          <span class="badge">Sin Enlace</span>
+        </a>
+
+        <!-- #9 -->
+        <a href="https://www.youtube.com/watch?v=lzoof3-wVUY" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#9. NyD vs. Biopsz</span>
+            <span class="battle-date">31/05/2025</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #10 -->
+        <a href="https://www.youtube.com/watch?v=OZZEfbJq9Gk" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#10. NyD vs. Pancho León</span>
+            <span class="battle-date">12/07/2025</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #11 -->
+        <a href="https://www.youtube.com/watch?v=_zflKxU3D8Y&t=332s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#11. NyD vs. Su Fire</span>
+            <span class="battle-date">02/08/2025</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #12 -->
+        <a href="https://www.youtube.com/watch?v=0zY9cXhR8WU" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#12. NyD vs. Pensil1</span>
+            <span class="battle-date">20/11/2025*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
+          </div>
+        </a>
+
+        <!-- 2026 -->
+        <h2 class="year-group-title">2026</h2>
+
+        <!-- #13 -->
+        <a href="https://www.youtube.com/watch?v=HVFonG-00Vg" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#13. NyD vs. Dein Sane</span>
+            <span class="battle-date">17/01/2026</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #14 -->
+        <a href="https://www.youtube.com/watch?v=QePKFVV6-fw" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#14. NyD vs. Rayar</span>
+            <span class="battle-date">07/03/2026</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #15 -->
+        <a href="https://www.youtube.com/watch?v=YDIGEQkWnj0" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#15. NyD vs. Odalarte</span>
+            <span class="battle-date">02/06/2026*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
+          </div>
+        </a>
+
+        <!-- #16 -->
+        <a href="https://www.youtube.com/watch?v=kmZjoTO9-lw" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#16. NyD vs. Keyblade</span>
+            <span class="battle-date">09/06/2026*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
+          </div>
+        </a>
+
+        <!-- #17 -->
+        <a href="https://www.youtube.com/watch?v=FgWNalP_iq0" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#17. NyD vs. Tetra</span>
+            <span class="battle-date">16/06/2026*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
+          </div>
+        </a>
+
+        <!-- #18 -->
+        <a href="https://www.youtube.com/watch?v=xgNU0aFqbV8" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#18. NyD vs. Pablito ABR</span>
+            <span class="battle-date">23/06/2026*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
+          </div>
+        </a>
+
+        <!-- #19 -->
+        <a href="#" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#19. NyD vs. Hander</span>
+            <span class="battle-date">26/09/2026</span>
+          </div>
+          <span class="badge">Sin Enlace</span>
+        </a>
 
       </div>
     </section>
@@ -433,27 +530,17 @@
     <!-- Right Column: Sidebar & Annotations -->
     <aside>
       <div class="section-title">
-        <span>Navegación</span>
-      </div>
-
-      <div class="alphabet-nav">
-        <a href="index.html" class="letter-btn active">B</a>
-        <a href="index.html" class="letter-btn active">N</a>
-        <a href="index.html" class="letter-btn active">P</a>
-        <a href="index.html" class="letter-btn active">S</a>
-        <a href="index.html" class="letter-btn active">T</a>
-      </div>
-
-      <div class="section-title">
         <span>Anotaciones</span>
       </div>
 
       <div class="annotation-box">
-        <h3>Fecha con Asterisco (*)</h3>
-        <p>Indica que no se tiene la fecha oficial de la batalla, razón por la que se toma en cuenta la fecha de su lanzamiento en YouTube.</p>
+        <h3>Fecha de lanzamiento</h3>
+        <p>El asterisco (<strong>*</strong>) indica enfrentamientos donde no se cuenta con la fecha oficial del evento, por lo que se toma la fecha de publicación en YouTube.</p>
       </div>
 
-  
+      <div class="back-nav">
+        <a href="index.html" class="back-btn">← Volver al índice</a>
+      </div>
     </aside>
 
   </main>
