@@ -180,8 +180,9 @@
       color: var(--primary-yellow);
     }
 
+    /* Fecha con letra más grande */
     .battle-date {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
     }
 
@@ -203,21 +204,24 @@
       border: 1px solid var(--border-color);
     }
 
+    /* Etiqueta "Batalla virtual" más chica con texto al tamaño previo de la fecha */
     .badge-virtual {
-      font-size: 0.65rem;
-      padding: 0.1rem 0.4rem;
+      font-size: 0.85rem;
+      padding: 0.05rem 0.3rem;
       border-color: var(--primary-yellow);
       color: var(--primary-yellow);
     }
 
-    /* Bottom Navigation Button */
-    .back-nav-bottom {
-      margin-top: 2rem;
+    /* Navigation Button */
+    .back-nav {
+      margin-top: 1.5rem;
     }
 
     .back-btn {
       display: inline-block;
-      padding: 0.5rem 1rem;
+      width: 100%;
+      text-align: center;
+      padding: 0.6rem 1rem;
       background: var(--card-dark);
       color: var(--text-light);
       text-decoration: none;
@@ -246,7 +250,7 @@
       border-radius: 0 6px 6px 0;
       font-size: 0.9rem;
       color: #cccccc;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
     }
 
     .annotation-box h3 {
@@ -414,11 +418,6 @@
         </div>
 
       </div>
-
-      <!-- Botón inferior para volver al índice -->
-      <div class="back-nav-bottom">
-        <a href="index.html" class="back-btn">← Volver al Índice</a>
-      </div>
     </section>
 
     <!-- Right Column: Sidebar & Annotations -->
@@ -428,8 +427,12 @@
       </div>
 
       <div class="annotation-box">
-        <h3>Fechas de Lanzamiento (*)</h3>
+        <h3>Fecha de lanzamiento</h3>
         <p>El asterisco (<strong>*</strong>) indica enfrentamientos donde no se cuenta con la fecha oficial del evento, por lo que se toma la fecha de publicación en YouTube.</p>
+      </div>
+
+      <div class="back-nav">
+        <a href="index.html" class="back-btn">← Volver al Índice</a>
       </div>
     </aside>
 
