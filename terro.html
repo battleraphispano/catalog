@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de batallas de Terro | Rap Battle Database</title>
+  <style>
+    :root {
+      --primary-yellow: #ffff00;
+      --bg-dark: #0a0a0a;
+      --card-dark: #141414;
+      --card-hover: #1e1e1e;
+      --text-light: #ffffff;
+      --text-muted: #a0a0a0;
+      --border-color: #262626;
+      --accent-gray: #333333;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Programme', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* Header / Hero Section */
+    .hero-banner {
+      background: linear-gradient(180deg, #181818 0%, var(--bg-dark) 100%);
+      border-bottom: 2px solid var(--primary-yellow);
+      padding: 3.5rem 1.5rem 2.5rem 1.5rem;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .header-content {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .cover-art {
+      width: 150px;
+      height: 150px;
+      border-radius: 6px;
+      box-shadow: 0 10px 25px rgba(255, 255, 0, 0.12);
+      flex-shrink: 0;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .cover-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .meta-info h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.8rem;
+      line-height: 1.1;
+    }
+
+    .meta-info h1 span {
+      color: var(--primary-yellow);
+    }
+
+    .stats-bar {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.6rem 1rem;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+      width: fit-content;
+    }
+
+    .stats-bar strong {
+      color: var(--text-light);
+    }
+
+    /* Main Layout */
+    .main-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2.5rem;
+      padding: 2.5rem 1.5rem 4rem 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.6rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .section-title .count {
+      font-size: 0.85rem;
+      color: var(--primary-yellow);
+      background: rgba(255, 255, 0, 0.1);
+      padding: 2px 8px;
+      border-radius: 12px;
+    }
+
+    /* Year Group Title */
+    .year-group-title {
+      color: var(--primary-yellow);
+      font-size: 1.3rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin: 1.5rem 0 0.5rem 0;
+    }
+
+    .year-group-title:first-of-type {
+      margin-top: 0;
+    }
+
+    /* Catalog List */
+    .catalog-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .battle-card {
+      background-color: var(--card-dark);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 0.6rem 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .battle-card:hover {
+      border-color: var(--primary-yellow);
+      background-color: var(--card-hover);
+      transform: translateX(4px);
+    }
+
+    .battle-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .battle-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text-light);
+      display: block;
+      transition: color 0.2s;
+    }
+
+    .battle-card:hover .battle-title {
+      color: var(--primary-yellow);
+    }
+
+    .battle-date {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .badge-container {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background-color: #222;
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+    }
+
+    /* Etiqueta "Batalla virtual" */
+    .badge-virtual {
+      font-size: 0.45rem;
+      padding: 0.02rem 0.15rem;
+      border: 0.5px solid var(--primary-yellow);
+      color: var(--primary-yellow);
+      font-weight: 600;
+      border-radius: 2px;
+    }
+
+    /* Sidebar posicionado alineado */
+    aside {
+      margin-top: 10rem;
+    }
+
+    /* Navigation Button */
+    .back-nav {
+      margin-top: 1.5rem;
+    }
+
+    .back-btn {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      padding: 0.6rem 1rem;
+      background: var(--card-dark);
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .back-btn:hover {
+      background: var(--primary-yellow);
+      color: var(--bg-dark);
+      border-color: var(--primary-yellow);
+    }
+
+    /* Sidebar / Annotations */
+    .annotation-box {
+      background: var(--card-dark);
+      border-left: 4px solid var(--primary-yellow);
+      border-top: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.25rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+      color: #cccccc;
+      margin-bottom: 1rem;
+    }
+
+    .annotation-box h3 {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .annotation-box p {
+      line-height: 1.5;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      .main-layout {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        margin-top: 1rem;
+      }
+      .stats-bar {
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Banner -->
+  <header class="hero-banner">
+    <div class="container">
+      <div class="header-content">
+        <div class="cover-art">
+          <img src="terro.jpg" alt="Terro">
+        </div>
+        <div class="meta-info">
+          <h1>Catálogo de batallas de <span>Terro</span></h1>
+          <div class="stats-bar">
+            <span><strong>22</strong> Batallas</span>
+            <span><strong>2015 - 2025</strong> Trayectoria</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Section -->
+  <main class="container main-layout">
+    
+    <!-- Left Column: Catalog -->
+    <section>
+      <div class="section-title">
+        <span>Historial de enfrentamientos:</span>
+        <span class="count">22 Batallas</span>
+      </div>
+
+      <div class="catalog-list">
+        
+        <!-- 2015 -->
+        <h2 class="year-group-title">2015</h2>
+
+        <!-- #1 -->
+        <a href="https://www.youtube.com/watch?v=O2oYomd53vs" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#1. Terro vs. Luciano</span>
+            <span class="battle-date">20/03/2015</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
+          </div>
+        </a>
+
+        <!-- #2 -->
+        <a href="https://www.youtube.com/watch?v=-vKnbORpxu4&t=376s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#2. Terro vs. Narra</span>
+            <span class="battle-date">11/04/2015*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
+          </div>
+        </a>
+
+        <!-- #3 -->
+        <a href="https://www.youtube.com/watch?v=FPrcYfRQl-Q&t=133s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#3. Terro vs. Controversia</span>
+            <span class="battle-date">02/05/2015*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
+          </div>
+        </a>
+
+        <!-- #4 -->
+        <a href="https://www.youtube.com/watch?v=QBmjeK-SKeI&t=71s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#4. Terro vs. Leftie</span>
+            <span class="battle-date">03/05/2015</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #5 -->
+        <a href="https://www.youtube.com/watch?v=0rmniPGKFTY&t=41s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#5. Terro vs. El Alquimista</span>
+            <span class="battle-date">15/05/2015*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
+          </div>
+        </a>
+
+        <!-- #6 -->
+        <a href="https://www.youtube.com/watch?v=Vqo6_h77ags&t=354s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#6. Terro vs. King HushHush</span>
+            <span class="battle-date">24/07/2015*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
+          </div>
+        </a>
+
+        <!-- #7 -->
+        <a href="https://www.youtube.com/watch?v=TO-e8gacLSs" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#7. Terro vs. Likyco Dioz</span>
+            <span class="battle-date">03/10/2015</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #8 -->
+        <a href="https://www.youtube.com/watch?v=Yz-sOBZ1l8I" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#8. Terro vs. Syfer 1</span>
+            <span class="battle-date">06/11/2015</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2016 -->
+        <h2 class="year-group-title">2016</h2>
+
+        <!-- #9 -->
+        <a href="https://www.youtube.com/watch?v=xdcI5aESAOI&t=493s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#9. Terro vs. Grave</span>
+            <span class="battle-date">06/02/2016</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #10 -->
+        <a href="https://www.youtube.com/watch?v=K7a9Os1uCwE" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#10. Terro vs. Sipo</span>
+            <span class="battle-date">29/10/2016</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2017 -->
+        <h2 class="year-group-title">2017</h2>
+
+        <!-- #11 -->
+        <a href="https://www.youtube.com/watch?v=2OP1aQWDOKo&t=267s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#11. Terro vs. Kooper Kaiser</span>
+            <span class="battle-date">01/04/2017</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #12 -->
+        <a href="https://www.youtube.com/watch?v=5854GGpocsM" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#12. Terro vs. Dasket</span>
+            <span class="battle-date">09/12/2017</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2018 -->
+        <h2 class="year-group-title">2018</h2>
+
+        <!-- #13 -->
+        <a href="https://www.youtube.com/watch?v=7wpof3JVNwk" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#13. Terro vs. Faruz Feet</span>
+            <span class="battle-date">24/04/2018</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #14 -->
+        <a href="https://www.youtube.com/watch?v=lDFIrjwnMWY" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#14. Terro vs. Rayar</span>
+            <span class="battle-date">22/09/2018</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2020 -->
+        <h2 class="year-group-title">2020</h2>
+
+        <!-- #15 -->
+        <a href="https://www.youtube.com/watch?v=YVWpHgSBJQU&t=2s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#15. Terro vs. Bizor</span>
+            <span class="battle-date">14/03/2020</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #16 -->
+        <a href="https://www.youtube.com/watch?v=ujdhoIqEObI" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#16. Terro vs. Sharlie Mac</span>
+            <span class="battle-date">28/11/2020</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2023 -->
+        <h2 class="year-group-title">2023</h2>
+
+        <!-- #17 -->
+        <a href="https://www.youtube.com/watch?v=b3uDjQ6MOiQ&t=5s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#17. Terro vs. Denter</span>
+            <span class="battle-date">04/03/2023</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #18 -->
+        <a href="https://www.youtube.com/watch?v=_pU5qBEgRW4&t=857s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#18. Terro vs. Mad Mike</span>
+            <span class="battle-date">02/12/2023</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2024 -->
+        <h2 class="year-group-title">2024</h2>
+
+        <!-- #19 -->
+        <a href="https://www.youtube.com/watch?v=ygCXtWMwOqI&t=1902s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#19. Terro vs. Prodemm</span>
+            <span class="battle-date">17/08/2024</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #20 -->
+        <a href="https://www.youtube.com/watch?v=-i7vOjdlxf8" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#20. Terro vs. Blue One</span>
+            <span class="battle-date">09/11/2024</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2025 -->
+        <h2 class="year-group-title">2025</h2>
+
+        <!-- #21 -->
+        <a href="https://www.youtube.com/watch?v=WvY9ByI0sAQ&t=2066s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#21. Terro & Juan Zárate vs. Big Soul & Markitos</span>
+            <span class="battle-date">19/05/2025</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #22 -->
+        <a href="https://www.youtube.com/watch?v=JSjEdKt_7ZM&t=1223s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#22. Terro vs. Dante</span>
+            <span class="battle-date">04/07/2025</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Right Column: Sidebar & Annotations -->
+    <aside>
+      <div class="section-title">
+        <span>Anotaciones</span>
+      </div>
+
+      <div class="annotation-box">
+        <h3>Fecha de lanzamiento</h3>
+        <p>El asterisco (<strong>*</strong>) indica enfrentamientos donde no se cuenta con la fecha oficial del evento, por lo que se toma la fecha de publicación en YouTube.</p>
+      </div>
+
+      <div class="back-nav">
+        <a href="index.html" class="back-btn">← Volver al índice</a>
+      </div>
+    </aside>
+
+  </main>
+
+</body>
+</html>
