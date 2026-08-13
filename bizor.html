@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de batallas de Bizor | Rap Battle Database</title>
+  <style>
+    :root {
+      --primary-yellow: #ffff00;
+      --bg-dark: #0a0a0a;
+      --card-dark: #141414;
+      --card-hover: #1e1e1e;
+      --text-light: #ffffff;
+      --text-muted: #a0a0a0;
+      --border-color: #262626;
+      --accent-gray: #333333;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Programme', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* Header / Hero Section */
+    .hero-banner {
+      background: linear-gradient(180deg, #181818 0%, var(--bg-dark) 100%);
+      border-bottom: 2px solid var(--primary-yellow);
+      padding: 3.5rem 1.5rem 2.5rem 1.5rem;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .header-content {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .cover-art {
+      width: 150px;
+      height: 150px;
+      border-radius: 6px;
+      box-shadow: 0 10px 25px rgba(255, 255, 0, 0.12);
+      flex-shrink: 0;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .cover-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .meta-info h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.8rem;
+      line-height: 1.1;
+    }
+
+    .meta-info h1 span {
+      color: var(--primary-yellow);
+    }
+
+    .stats-bar {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.6rem 1rem;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+      width: fit-content;
+    }
+
+    .stats-bar strong {
+      color: var(--text-light);
+    }
+
+    /* Main Layout */
+    .main-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2.5rem;
+      padding: 2.5rem 1.5rem 4rem 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.6rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .section-title .count {
+      font-size: 0.85rem;
+      color: var(--primary-yellow);
+      background: rgba(255, 255, 0, 0.1);
+      padding: 2px 8px;
+      border-radius: 12px;
+    }
+
+    /* Year Group Title */
+    .year-group-title {
+      color: var(--primary-yellow);
+      font-size: 1.3rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin: 1.5rem 0 0.5rem 0;
+    }
+
+    .year-group-title:first-of-type {
+      margin-top: 0;
+    }
+
+    /* Catalog List */
+    .catalog-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .battle-card {
+      background-color: var(--card-dark);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 0.6rem 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .battle-card:hover {
+      border-color: var(--primary-yellow);
+      background-color: var(--card-hover);
+      transform: translateX(4px);
+    }
+
+    .battle-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .battle-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text-light);
+      display: block;
+      transition: color 0.2s;
+    }
+
+    .battle-card:hover .battle-title {
+      color: var(--primary-yellow);
+    }
+
+    .battle-date {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .badge-container {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background-color: #222;
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+    }
+
+    /* Etiqueta "Batalla virtual" */
+    .badge-virtual {
+      font-size: 0.45rem;
+      padding: 0.02rem 0.15rem;
+      border: 0.5px solid var(--primary-yellow);
+      color: var(--primary-yellow);
+      font-weight: 600;
+      border-radius: 2px;
+    }
+
+    /* Sidebar posicionado alineado */
+    aside {
+      margin-top: 10rem;
+    }
+
+    /* Navigation Button */
+    .back-nav {
+      margin-top: 1.5rem;
+    }
+
+    .back-btn {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      padding: 0.6rem 1rem;
+      background: var(--card-dark);
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .back-btn:hover {
+      background: var(--primary-yellow);
+      color: var(--bg-dark);
+      border-color: var(--primary-yellow);
+    }
+
+    /* Sidebar / Annotations */
+    .annotation-box {
+      background: var(--card-dark);
+      border-left: 4px solid var(--primary-yellow);
+      border-top: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.25rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+      color: #cccccc;
+      margin-bottom: 1rem;
+    }
+
+    .annotation-box h3 {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .annotation-box p {
+      line-height: 1.5;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      .main-layout {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        margin-top: 1rem;
+      }
+      .stats-bar {
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Banner -->
+  <header class="hero-banner">
+    <div class="container">
+      <div class="header-content">
+        <div class="cover-art">
+          <img src="bizor.JPG" alt="Bizor">
+        </div>
+        <div class="meta-info">
+          <h1>Catálogo de batallas de <span>Bizor</span></h1>
+          <div class="stats-bar">
+            <span><strong>35</strong> Batallas</span>
+            <span><strong>2013 - 2026</strong> Trayectoria</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Section -->
+  <main class="container main-layout">
+    
+    <!-- Left Column: Catalog -->
+    <section>
+      <div class="section-title">
+        <span>Historial de enfrentamientos:</span>
+        <span class="count">35 Batallas</span>
+      </div>
+
+      <div class="catalog-list">
+        
+        <!-- 2013 -->
+        <h2 class="year-group-title">2013</h2>
+
+        <!-- #1 -->
+        <a href="https://www.youtube.com/watch?v=MKnCy9MTWiQ&t=21s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#1. Bizor vs. Alejandro Carranza</span>
+            <span class="battle-date">02/02/2013</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2014 -->
+        <h2 class="year-group-title">2014</h2>
+
+        <!-- #2 -->
+        <a href="https://www.youtube.com/watch?v=COWgbw2Dl-o&t=52s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#2. Bizor vs. Caronte</span>
+            <span class="battle-date">19/12/2014*</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2015 -->
+        <h2 class="year-group-title">2015</h2>
+
+        <!-- #3 -->
+        <a href="https://www.youtube.com/watch?v=0SI2Hw-swbY&t=1s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#3. Bizor vs. Verso Abstracto</span>
+            <span class="battle-date">01/03/2015</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #4 -->
+        <a href="https://www.youtube.com/watch?v=-NgAPM2GyYo&t=199s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#4. Bizor vs. Gilberto Rodríguez</span>
+            <span class="battle-date">12/06/2015*</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #5 -->
+        <a href="https://www.youtube.com/watch?v=Cgt0b0I9s_Y&t=3s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#5. Bizor vs. Syfer 1</span>
+            <span class="battle-date">01/08/2015</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #6 -->
+        <a href="https://www.youtube.com/watch?v=n6pUXr6isms" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#6. Bizor vs. Menuda Coincidencia</span>
+            <span class="battle-date">13/12/2015</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2016 -->
+        <h2 class="year-group-title">2016</h2>
+
+        <!-- #7 -->
+        <a href="https://www.youtube.com/watch?v=usJPoER1sfM&t=253s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#7. Bizor &amp; Kosmer vs. Bower &amp; J. Ontiveros</span>
+            <span class="battle-date">03/04/2016</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2017 -->
+        <h2 class="year-group-title">2017</h2>
+
+        <!-- #8 -->
+        <a href="https://www.youtube.com/watch?v=Xexjh0g-shg" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#8. Bizor vs. Faruz Feet</span>
+            <span class="battle-date">15/02/2017</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #9 -->
+        <a href="https://www.youtube.com/watch?v=-o5Io_JCRmY&t=13s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#9. Bizor vs. Juan Zárate</span>
+            <span class="battle-date">01/04/2017</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #10 -->
+        <a href="https://www.youtube.com/watch?v=xjB4OsL8Jh4" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#10. Bizor vs. Ese O</span>
+            <span class="battle-date">19/08/2017</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #11 -->
+        <a href="https://www.youtube.com/watch?v=tLiY5prU2qM&t=219s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#11. Bizor vs. Xrhonx</span>
+            <span class="battle-date">17/10/2017*</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #12 -->
+        <a href="https://www.youtube.com/watch?v=I-6XaKr1Re8&t=7s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#12. Bizor vs. Denter</span>
+            <span class="battle-date">09/12/2017</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2018 -->
+        <h2 class="year-group-title">2018</h2>
+
+        <!-- #13 -->
+        <a href="https://www.youtube.com/watch?v=1yqi75LV9vc&t=1s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#13. Bizor vs. Sipo</span>
+            <span class="battle-date">21/04/2018</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #14 -->
+        <a href="https://www.youtube.com/watch?v=KinAToklVWA&t=1099s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#14. Bizor vs. G. García</span>
+            <span class="battle-date">07/08/2018*</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #15 -->
+        <a href="https://www.youtube.com/watch?v=vqNHchs7bps&t=732s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#15. Bizor vs. Big Killa</span>
+            <span class="battle-date">27/10/2018</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2019 -->
+        <h2 class="year-group-title">2019</h2>
+
+        <!-- #16 -->
+        <a href="https://www.youtube.com/watch?v=XMwN6XNllg4&t=18s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#16. Bizor vs. Blue One</span>
+            <span class="battle-date">18/05/2019</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #17 -->
+        <a href="https://www.youtube.com/watch?v=Trrs2l1zf9I&t=896s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#17. Bizor vs. Juan Crudo</span>
+            <span class="battle-date">31/08/2019</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2020 -->
+        <h2 class="year-group-title">2020</h2>
+
+        <!-- #18 -->
+        <a href="https://www.youtube.com/watch?v=FL55yvykq50&t=298s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#18. Bizor vs. Driock AK</span>
+            <span class="battle-date">15/02/2020</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #19 -->
+        <a href="https://www.youtube.com/watch?v=YVWpHgSBJQU&t=2s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#19. Bizor vs. Terro</span>
+            <span class="battle-date">14/03/2020</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #20 -->
+        <a href="https://www.youtube.com/watch?v=EWvd7oKucVg" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#20. Bizor vs. Cevladé</span>
+            <span class="battle-date">30/07/2020*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
+          </div>
+        </a>
+
+        <!-- #21 -->
+        <a href="https://www.youtube.com/watch?v=8qemqIpi9tE&t=3s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#21. Bizor vs. Kosmer</span>
+            <span class="battle-date">29/11/2020*</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2021 -->
+        <h2 class="year-group-title">2021</h2>
+
+        <!-- #22 -->
+        <a href="https://www.youtube.com/watch?v=GGh-E9dtMCI&t=7s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#22. Bizor vs. Santiuve</span>
+            <span class="battle-date">20/02/2021*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
+          </div>
+        </a>
+
+        <!-- 2022 -->
+        <h2 class="year-group-title">2022</h2>
+
+        <!-- #23 -->
+        <a href="https://www.youtube.com/watch?v=3zA07F7wQ0A" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#23. Bizor vs. Gino</span>
+            <span class="battle-date">19/02/2022</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #24 -->
+        <a href="https://www.youtube.com/watch?v=8i_wQZXy9Is" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#24. Bizor vs. Potencia</span>
+            <span class="battle-date">24/07/2022</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #25 -->
+        <a href="https://www.youtube.com/watch?v=xDrEUyl-3dI&t=588s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#25. Bizor vs. Lokoko</span>
+            <span class="battle-date">12/11/2022</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2023 -->
+        <h2 class="year-group-title">2023</h2>
+
+        <!-- #26 -->
+        <a href="https://www.youtube.com/watch?v=KwB61w_htEY&t=138s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#26. Bizor vs. Quezada</span>
+            <span class="battle-date">11/02/2023</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2024 -->
+        <h2 class="year-group-title">2024</h2>
+
+        <!-- #27 -->
+        <a href="https://www.youtube.com/watch?v=RoPSgxraYZw&t=1156s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#27. Bizor vs. Dante</span>
+            <span class="battle-date">20/04/2024</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #28 -->
+        <a href="https://www.youtube.com/watch?v=aQfIHGCMQ5g" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#28. Bizor vs. Garza</span>
+            <span class="battle-date">02/11/2024</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #29 -->
+        <a href="https://www.youtube.com/watch?v=bp9gXT7AvV0&t=2s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#29. Bizor vs. El Aviador</span>
+            <span class="battle-date">30/11/2024</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #30 -->
+        <a href="https://www.youtube.com/watch?v=KihsZf-QF9U" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#30. Bizor vs. Fresco Feo</span>
+            <span class="battle-date">14/12/2024</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2025 -->
+        <h2 class="year-group-title">2025</h2>
+
+        <!-- #31 -->
+        <a href="https://www.youtube.com/watch?v=pAQccXKQZxw" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#31. Bizor vs. Klan</span>
+            <span class="battle-date">03/05/2025</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #32 -->
+        <a href="https://www.youtube.com/watch?v=P0NrBay6Qz8&t=1s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#32. Bizor vs. Sipo (Rematch)</span>
+            <span class="battle-date">04/07/2025</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #33 -->
+        <a href="https://www.youtube.com/watch?v=EkmGONLzcQQ&t=3s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#33. Bizor vs. Kooper Kaiser</span>
+            <span class="battle-date">01/11/2025</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2026 -->
+        <h2 class="year-group-title">2026</h2>
+
+        <!-- #34 -->
+        <a href="https://www.youtube.com/watch?v=dPphhgdK3rY&t=1s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#34. Bizor vs. Kasik One</span>
+            <span class="battle-date">07/02/2026</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #35 -->
+        <a href="#" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#35. Bizor &amp; Eptos Uno vs. T Killa &amp; Sipo One</span>
+            <span class="battle-date">13/09/2026</span>
+          </div>
+          <span class="badge">Sin video</span>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Right Column: Sidebar & Annotations -->
+    <aside>
+      <div class="section-title">
+        <span>Anotaciones</span>
+      </div>
+
+      <div class="annotation-box">
+        <h3>Fecha de lanzamiento</h3>
+        <p>El asterisco (<strong>*</strong>) indica enfrentamientos donde no se cuenta con la fecha oficial del evento, por lo que se toma la fecha de publicación en YouTube.</p>
+      </div>
+
+      <div class="back-nav">
+        <a href="index.html" class="back-btn">← Volver al índice</a>
+      </div>
+    </aside>
+
+  </main>
+
+</body>
+</html>
