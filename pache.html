@@ -71,9 +71,6 @@
       letter-spacing: -0.5px;
       margin-bottom: 0.8rem;
       line-height: 1.1;
-    }
-
-    .meta-info h1 span {
       color: var(--primary-yellow);
     }
 
@@ -89,9 +86,24 @@
       border-radius: 4px;
       border: 1px solid var(--border-color);
       width: fit-content;
+      margin-bottom: 0.6rem;
     }
 
     .stats-bar strong {
+      color: var(--text-light);
+    }
+
+    .origin-location {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .origin-location strong {
       color: var(--text-light);
     }
 
@@ -203,6 +215,19 @@
       border: 1px solid var(--border-color);
     }
 
+    /* Etiqueta "Sin video" */
+    .badge-no-video {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background-color: #222;
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+    }
+
     /* Etiqueta "Batalla virtual" */
     .badge-virtual {
       font-size: 0.45rem;
@@ -285,6 +310,9 @@
       .stats-bar {
         margin: 0 auto;
       }
+      .origin-location {
+        justify-content: center;
+      }
     }
   </style>
 </head>
@@ -295,13 +323,16 @@
     <div class="container">
       <div class="header-content">
         <div class="cover-art">
-          <img src="pache.JPG" alt="Pache">
+          <img src="pache.jpg" alt="Pache">
         </div>
         <div class="meta-info">
-          <h1>Catálogo de batallas de <span>Pache</span></h1>
+          <h1>Pache</h1>
           <div class="stats-bar">
             <span><strong>8</strong> Batallas</span>
             <span><strong>2024 - 2026</strong> Trayectoria</span>
+          </div>
+          <div class="origin-location">
+            <img src="https://flagcdn.com/w20/mx.png" alt="México" style="width: 18px; height: auto; border-radius: 2px; display: inline-block; vertical-align: middle;"> <strong>Torreón, Coahuila</strong>
           </div>
         </div>
       </div>
@@ -324,7 +355,7 @@
         <h2 class="year-group-title">2024</h2>
 
         <!-- #1 -->
-        <a href="https://www.youtube.com/watch?v=LHdDNyvNSAw" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <a href="https://www.youtube.com/watch?v=LHdDNyvNSAw&t=4s" target="_blank" rel="noopener noreferrer" class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#1. Pache vs. Lindo</span>
             <span class="battle-date">13/12/2024</span>
@@ -354,7 +385,7 @@
         </a>
 
         <!-- #4 -->
-        <a href="https://www.youtube.com/watch?v=zNhwkF3yBgY" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <a href="https://www.youtube.com/watch?v=zNhwkF3yBgY&t=4s" target="_blank" rel="noopener noreferrer" class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#4. Pache vs. Feik</span>
             <span class="battle-date">27/09/2025</span>
@@ -363,7 +394,7 @@
         </a>
 
         <!-- #5 -->
-        <a href="https://www.youtube.com/watch?v=wcK59zfDv84&t=11s" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <a href="https://www.youtube.com/watch?v=wcK59zfDv84&t=25s" target="_blank" rel="noopener noreferrer" class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#5. Pache vs. Bull Romero</span>
             <span class="battle-date">07/12/2025</span>
@@ -375,7 +406,7 @@
         <h2 class="year-group-title">2026</h2>
 
         <!-- #6 -->
-        <a href="https://www.youtube.com/watch?v=F9UtAxRmQpM" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <a href="https://www.youtube.com/watch?v=F9UtAxRmQpM&t=1s" target="_blank" rel="noopener noreferrer" class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#6. Pache vs. Su Fire</span>
             <span class="battle-date">17/01/2026</span>
@@ -384,7 +415,7 @@
         </a>
 
         <!-- #7 -->
-        <a href="https://www.youtube.com/watch?v=MB66JTZBrVQ" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <a href="https://www.youtube.com/watch?v=MB66JTZBrVQ&t=3197s" target="_blank" rel="noopener noreferrer" class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#7. Pache vs. Junior TLD</span>
             <span class="battle-date">13/02/2026</span>
@@ -395,7 +426,7 @@
         <!-- #8 -->
         <a href="https://www.youtube.com/watch?v=Y0RJ3I9XhzA" target="_blank" rel="noopener noreferrer" class="battle-card">
           <div class="battle-info">
-            <span class="battle-title">#8. Pache vs. Cerkowski</span>
+            <span class="battle-title">#8. Pache vs. Cerkowki</span>
             <span class="battle-date">30/05/2026</span>
           </div>
           <span class="badge">Ver en YouTube</span>
