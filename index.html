@@ -128,17 +128,6 @@
       padding-bottom: 0.6rem;
       margin-bottom: 1.5rem;
       letter-spacing: 1px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .section-title .count {
-      font-size: 0.85rem;
-      color: var(--primary-yellow);
-      background: rgba(255, 255, 0, 0.1);
-      padding: 2px 8px;
-      border-radius: 12px;
     }
 
     /* Letter Group Dividers */
@@ -201,13 +190,9 @@
     }
 
     .fighter-info {
-      padding: 1rem;
+      padding: 1.1rem 1rem;
       background-color: var(--card-dark);
       border-top: 1px solid var(--border-color);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      flex-grow: 1;
     }
 
     .fighter-name {
@@ -216,18 +201,11 @@
       text-transform: uppercase;
       color: var(--text-light);
       letter-spacing: 0.5px;
-      margin-bottom: 0.4rem;
+      display: block;
     }
 
     .fighter-card:hover .fighter-name {
       color: var(--primary-yellow);
-    }
-
-    .fighter-location {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
     }
 
     /* Sidebar / Navigation */
@@ -325,7 +303,7 @@
           <h1>Catálogo de <span>Battle Rap Hispano</span></h1>
           <div class="header-bottom-bar">
             <div class="stats-bar">
-              <span><strong>28</strong> Perfiles</span>
+              <span><strong>33</strong> Perfiles</span>
               <span><strong>A - Z</strong> Alfabético</span>
             </div>
             <span class="author-tag">Por: Isma Rodríguez</span>
@@ -341,8 +319,7 @@
     <!-- Left Column: Catalog Grid -->
     <section>
       <div class="section-title">
-        <span>Battlers registrados:</span>
-        <span class="count">28 Battlers</span>
+        <span>Battlers:</span>
       </div>
 
       <!-- GRUPO A -->
@@ -351,20 +328,18 @@
         <div class="fighters-grid">
           <a href="aka-ele.html" class="fighter-card">
             <div class="fighter-img-container">
-          <img src="aka-ele.JPG" alt="Aka Ele">
+             <img src="aka-ele.JPG" alt="Aka Ele">
             </div>
             <div class="fighter-info">
               <span class="fighter-name">Aka Ele</span>
-              <span class="fighter-location">Hispano</span>
             </div>
           </a>
           <a href="aveldomain.html" class="fighter-card">
             <div class="fighter-img-container">
-              <img src="images/aveldomain.jpg" alt="Aveldomain">
+              <img src="aveldomain.JPG" alt="Aveldomain">
             </div>
             <div class="fighter-info">
               <span class="fighter-name">Aveldomain</span>
-              <span class="fighter-location">Hispano</span>
             </div>
           </a>
         </div>
@@ -376,11 +351,10 @@
         <div class="fighters-grid">
           <a href="big-killa.html" class="fighter-card">
             <div class="fighter-img-container">
-              <img src="images/big-killa.jpg" alt="Big Killa">
+              <img src="big-killa.JPG" alt="Big Killa">
             </div>
             <div class="fighter-info">
               <span class="fighter-name">Big Killa</span>
-              <span class="fighter-location">Hispano</span>
             </div>
           </a>
           <a href="biopsz.html" class="fighter-card">
@@ -389,34 +363,30 @@
             </div>
             <div class="fighter-info">
               <span class="fighter-name">Biopsz</span>
-              <span class="fighter-location">Hispano</span>
             </div>
           </a>
           <a href="bizor.html" class="fighter-card">
             <div class="fighter-img-container">
-              <img src="images/bizor.jpg" alt="Bizor">
+              <img src="biopsz.jpg" alt="Bizor">
             </div>
             <div class="fighter-info">
               <span class="fighter-name">Bizor</span>
-              <span class="fighter-location">Hispano</span>
             </div>
           </a>
           <a href="blue-one.html" class="fighter-card">
             <div class="fighter-img-container">
-              <img src="images/blue-one.jpg" alt="Blue One">
+              <img src="blue-one.jpg" alt="Blue One">
             </div>
             <div class="fighter-info">
               <span class="fighter-name">Blue One</span>
-              <span class="fighter-location">Hispano</span>
             </div>
           </a>
           <a href="bull-romero.html" class="fighter-card">
             <div class="fighter-img-container">
-              <img src="images/bull-romero.jpg" alt="Bull Romero">
+              <img src="bull-romero.JPG" alt="Bull Romero">
             </div>
             <div class="fighter-info">
               <span class="fighter-name">Bull Romero</span>
-              <span class="fighter-location">Hispano</span>
             </div>
           </a>
         </div>
@@ -432,7 +402,6 @@
             </div>
             <div class="fighter-info">
               <span class="fighter-name">D Glocks</span>
-              <span class="fighter-location">Hispano</span>
             </div>
           </a>
           <a href="denter.html" class="fighter-card">
@@ -441,7 +410,6 @@
             </div>
             <div class="fighter-info">
               <span class="fighter-name">Denter</span>
-              <span class="fighter-location">Hispano</span>
             </div>
           </a>
           <a href="doble-n.html" class="fighter-card">
@@ -450,7 +418,6 @@
             </div>
             <div class="fighter-info">
               <span class="fighter-name">Doble N</span>
-              <span class="fighter-location">Hispano</span>
             </div>
           </a>
           <a href="driock-ak.html" class="fighter-card">
@@ -459,7 +426,6 @@
             </div>
             <div class="fighter-info">
               <span class="fighter-name">Driock AK</span>
-              <span class="fighter-location">Hispano</span>
             </div>
           </a>
         </div>
@@ -475,7 +441,6 @@
             </div>
             <div class="fighter-info">
               <span class="fighter-name">Eptos Uno</span>
-              <span class="fighter-location">Hispano</span>
             </div>
           </a>
         </div>
@@ -491,7 +456,6 @@
             </div>
             <div class="fighter-info">
               <span class="fighter-name">Grave</span>
-              <span class="fighter-location">Hispano</span>
             </div>
           </a>
           <a href="gustavo-ramos.html" class="fighter-card">
@@ -500,7 +464,6 @@
             </div>
             <div class="fighter-info">
               <span class="fighter-name">Gustavo Ramos</span>
-              <span class="fighter-location">Hispano</span>
             </div>
           </a>
         </div>
@@ -516,7 +479,6 @@
             </div>
             <div class="fighter-info">
               <span class="fighter-name">Ill Mascaras</span>
-              <span class="fighter-location">Hispano</span>
             </div>
           </a>
         </div>
@@ -532,7 +494,6 @@
             </div>
             <div class="fighter-info">
               <span class="fighter-name">Juan Zárate</span>
-              <span class="fighter-location">Hispano</span>
             </div>
           </a>
         </div>
@@ -548,7 +509,6 @@
             </div>
             <div class="fighter-info">
               <span class="fighter-name">Kidd M</span>
-              <span class="fighter-location">Hispano</span>
             </div>
           </a>
           <a href="kooper-kaiser.html" class="fighter-card">
@@ -557,7 +517,6 @@
             </div>
             <div class="fighter-info">
               <span class="fighter-name">Kooper Kaiser</span>
-              <span class="fighter-location">Hispano</span>
             </div>
           </a>
         </div>
@@ -573,7 +532,6 @@
             </div>
             <div class="fighter-info">
               <span class="fighter-name">Majia</span>
-              <span class="fighter-location">Hispano</span>
             </div>
           </a>
           <a href="mega-one.html" class="fighter-card">
@@ -582,7 +540,6 @@
             </div>
             <div class="fighter-info">
               <span class="fighter-name">Mega One</span>
-              <span class="fighter-location">Hispano</span>
             </div>
           </a>
         </div>
@@ -598,7 +555,6 @@
             </div>
             <div class="fighter-info">
               <span class="fighter-name">Narra MC</span>
-              <span class="fighter-location">Hispano</span>
             </div>
           </a>
           <a href="nyd.html" class="fighter-card">
@@ -607,7 +563,6 @@
             </div>
             <div class="fighter-info">
               <span class="fighter-name">NyD</span>
-              <span class="fighter-location">Hispano</span>
             </div>
           </a>
         </div>
@@ -623,7 +578,6 @@
             </div>
             <div class="fighter-info">
               <span class="fighter-name">Pache</span>
-              <span class="fighter-location">Hispano</span>
             </div>
           </a>
           <a href="pantera.html" class="fighter-card">
@@ -632,7 +586,6 @@
             </div>
             <div class="fighter-info">
               <span class="fighter-name">Pantera</span>
-              <span class="fighter-location">Hispano</span>
             </div>
           </a>
           <a href="pensil1.html" class="fighter-card">
@@ -641,7 +594,6 @@
             </div>
             <div class="fighter-info">
               <span class="fighter-name">Pensil1</span>
-              <span class="fighter-location">Hispano</span>
             </div>
           </a>
           <a href="prodemm.html" class="fighter-card">
@@ -650,144 +602,10 @@
             </div>
             <div class="fighter-info">
               <span class="fighter-name">Prodemm</span>
-              <span class="fighter-location">Hispano</span>
             </div>
           </a>
         </div>
       </div>
 
       <!-- GRUPO R -->
-      <div class="letter-group-container" id="letter-R">
-        <h2 class="letter-group-title">R</h2>
-        <div class="fighters-grid">
-          <a href="rayar.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/rayar.jpg" alt="Rayar">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Rayar</span>
-              <span class="fighter-location">Hispano</span>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <!-- GRUPO S -->
-      <div class="letter-group-container" id="letter-S">
-        <h2 class="letter-group-title">S</h2>
-        <div class="fighters-grid">
-          <a href="sempiterno.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/sempiterno.jpg" alt="Sempiterno">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Sempiterno</span>
-              <span class="fighter-location">Hispano</span>
-            </div>
-          </a>
-          <a href="sonck.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/sonck.jpg" alt="Sonck">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Sonck</span>
-              <span class="fighter-location">Hispano</span>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <!-- GRUPO T -->
-      <div class="letter-group-container" id="letter-T">
-        <h2 class="letter-group-title">T</h2>
-        <div class="fighters-grid">
-          <a href="terro.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/terro.jpg" alt="Terro">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Terro</span>
-              <span class="fighter-location">Hispano</span>
-            </div>
-          </a>
-          <a href="tetra.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/tetra.jpg" alt="Tetra">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Tetra</span>
-              <span class="fighter-location">Hispano</span>
-            </div>
-          </a>
-          <a href="tommy-hhb.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/tommy-hhb.jpg" alt="Tommy HHB">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Tommy HHB</span>
-              <span class="fighter-location">Hispano</span>
-            </div>
-          </a>
-          <a href="toro.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/toro.jpg" alt="Toro">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Toro</span>
-              <span class="fighter-location">Hispano</span>
-            </div>
-          </a>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- Right Column: Sidebar & Navigation -->
-    <aside>
-      <div class="section-title">
-        <span>Navegación</span>
-      </div>
-
-      <div class="alphabet-nav">
-        <a href="#letter-A" class="letter-btn active">A</a>
-        <a href="#letter-B" class="letter-btn active">B</a>
-        <a href="#letter-C" class="letter-btn disabled">C</a>
-        <a href="#letter-D" class="letter-btn active">D</a>
-        <a href="#letter-E" class="letter-btn active">E</a>
-        <a href="#letter-F" class="letter-btn disabled">F</a>
-        <a href="#letter-G" class="letter-btn active">G</a>
-        <a href="#letter-H" class="letter-btn disabled">H</a>
-        <a href="#letter-I" class="letter-btn active">I</a>
-        <a href="#letter-J" class="letter-btn active">J</a>
-        <a href="#letter-K" class="letter-btn active">K</a>
-        <a href="#letter-L" class="letter-btn disabled">L</a>
-        <a href="#letter-M" class="letter-btn active">M</a>
-        <a href="#letter-N" class="letter-btn active">N</a>
-        <a href="#letter-O" class="letter-btn disabled">O</a>
-        <a href="#letter-P" class="letter-btn active">P</a>
-        <a href="#letter-Q" class="letter-btn disabled">Q</a>
-        <a href="#letter-R" class="letter-btn active">R</a>
-        <a href="#letter-S" class="letter-btn active">S</a>
-        <a href="#letter-T" class="letter-btn active">T</a>
-        <a href="#letter-U" class="letter-btn disabled">U</a>
-        <a href="#letter-V" class="letter-btn disabled">V</a>
-        <a href="#letter-W" class="letter-btn disabled">W</a>
-        <a href="#letter-X" class="letter-btn disabled">X</a>
-        <a href="#letter-Y" class="letter-btn disabled">Y</a>
-        <a href="#letter-Z" class="letter-btn disabled">Z</a>
-      </div>
-
-      <div class="section-title">
-        <span>Anotaciones</span>
-      </div>
-
-      <div class="annotation-box">
-        <h3>Índice Alfabético</h3>
-        <p>Este catálogo reúne los perfiles de battlers hispanohablantes ordenados alfabéticamente de la <strong>A</strong> a la <strong>Z</strong> en formato de cuadrícula visual.</p>
-      </div>
-    </aside>
-
-  </main>
-
-</body>
-</html>
+      <div class="letter-group-container"
