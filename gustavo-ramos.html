@@ -71,9 +71,6 @@
       letter-spacing: -0.5px;
       margin-bottom: 0.8rem;
       line-height: 1.1;
-    }
-
-    .meta-info h1 span {
       color: var(--primary-yellow);
     }
 
@@ -89,9 +86,24 @@
       border-radius: 4px;
       border: 1px solid var(--border-color);
       width: fit-content;
+      margin-bottom: 0.6rem;
     }
 
     .stats-bar strong {
+      color: var(--text-light);
+    }
+
+    .origin-location {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .origin-location strong {
       color: var(--text-light);
     }
 
@@ -203,6 +215,19 @@
       border: 1px solid var(--border-color);
     }
 
+    /* Etiqueta "Sin video" */
+    .badge-no-video {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background-color: #222;
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+    }
+
     /* Etiqueta "Batalla virtual" reducida a la mitad */
     .badge-virtual {
       font-size: 0.45rem;
@@ -285,6 +310,9 @@
       .stats-bar {
         margin: 0 auto;
       }
+      .origin-location {
+        justify-content: center;
+      }
     }
   </style>
 </head>
@@ -298,10 +326,13 @@
           <img src="gustavo-ramos.webp" alt="Gustavo Ramos">
         </div>
         <div class="meta-info">
-          <h1>Catálogo de batallas de <span>Gustavo Ramos</span></h1>
+          <h1>Gustavo Ramos</h1>
           <div class="stats-bar">
             <span><strong>10</strong> Batallas</span>
             <span><strong>2023 - 2026</strong> Trayectoria</span>
+          </div>
+          <div class="origin-location">
+            <img src="https://flagcdn.com/w20/ar.png" alt="Argentina" style="width: 18px; height: auto; border-radius: 2px; display: inline-block; vertical-align: middle;"> <strong>Santa Fe, Argentina</strong>
           </div>
         </div>
       </div>
@@ -422,7 +453,7 @@
             <span class="battle-title">#10. Gustavo Ramos vs. Cill</span>
             <span class="battle-date">25/10/2026</span>
           </div>
-          <span class="badge">Sin Video</span>
+          <span class="badge badge-no-video">Sin Video</span>
         </div>
 
       </div>
