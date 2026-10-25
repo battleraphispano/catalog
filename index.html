@@ -32,6 +32,14 @@
       line-height: 1.5;
     }
 
+    /* Contenedor Sticky para fijar el encabezado y el navegador al scrollear */
+    .sticky-header-container {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: var(--bg-dark);
+    }
+
     /* Header / Hero Section */
     .hero-banner {
       background: linear-gradient(180deg, #181818 0%, var(--bg-dark) 100%);
@@ -114,9 +122,10 @@
 
     /* Sub-header Navigation (Debajo de la línea amarilla, alineado a la derecha, muy compacto) */
     .subhead-nav-bar {
-      padding: 0.8rem 1.5rem 0 1.5rem;
+      padding: 0.8rem 1.5rem 0.8rem 1.5rem;
       display: flex;
       justify-content: flex-end;
+      border-bottom: 1px solid var(--border-color);
     }
 
     .alphabet-nav-compact {
@@ -266,56 +275,59 @@
 </head>
 <body>
 
-  <!-- Header Banner -->
-  <header class="hero-banner">
-    <div class="container">
-      <div class="header-content">
-        <div class="cover-art">
-          <img src="battleraphispano.jfif" alt="Battle Rap Hispano">
-        </div>
-        <div class="meta-info">
-          <h1>Catálogo de <span>Battle Rap Hispano</span></h1>
-          <div class="header-bottom-bar">
-            <div class="stats-bar">
-              <span><strong>28</strong> Perfiles</span>
-              <span><strong>A - Z</strong> Alfabético</span>
+  <!-- Contenedor Sticky para fijar Header y Navegación al hacer scroll -->
+  <div class="sticky-header-container">
+    <!-- Header Banner -->
+    <header class="hero-banner">
+      <div class="container">
+        <div class="header-content">
+          <div class="cover-art">
+            <img src="battleraphispano.jfif" alt="Battle Rap Hispano">
+          </div>
+          <div class="meta-info">
+            <h1>Catálogo de <span>Battle Rap Hispano</span></h1>
+            <div class="header-bottom-bar">
+              <div class="stats-bar">
+                <span><strong>28</strong> Perfiles</span>
+                <span><strong>A - Z</strong> Alfabético</span>
+              </div>
+              <span class="author-tag">Por: Isma Rodríguez</span>
             </div>
-            <span class="author-tag">Por: Isma Rodríguez</span>
           </div>
         </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <!-- Navegación debajo de la línea amarilla (derecha, súper compacta, 7 letras por fila) -->
-  <div class="container subhead-nav-bar">
-    <div class="alphabet-nav-compact">
-      <a href="#letter-A" class="letter-btn active">A</a>
-      <a href="#letter-B" class="letter-btn active">B</a>
-      <a href="#letter-C" class="letter-btn disabled">C</a>
-      <a href="#letter-D" class="letter-btn active">D</a>
-      <a href="#letter-E" class="letter-btn active">E</a>
-      <a href="#letter-F" class="letter-btn disabled">F</a>
-      <a href="#letter-G" class="letter-btn active">G</a>
-      <a href="#letter-H" class="letter-btn disabled">H</a>
-      <a href="#letter-I" class="letter-btn active">I</a>
-      <a href="#letter-J" class="letter-btn active">J</a>
-      <a href="#letter-K" class="letter-btn active">K</a>
-      <a href="#letter-L" class="letter-btn disabled">L</a>
-      <a href="#letter-M" class="letter-btn active">M</a>
-      <a href="#letter-N" class="letter-btn active">N</a>
-      <a href="#letter-O" class="letter-btn disabled">O</a>
-      <a href="#letter-P" class="letter-btn active">P</a>
-      <a href="#letter-Q" class="letter-btn disabled">Q</a>
-      <a href="#letter-R" class="letter-btn active">R</a>
-      <a href="#letter-S" class="letter-btn active">S</a>
-      <a href="#letter-T" class="letter-btn active">T</a>
-      <a href="#letter-U" class="letter-btn disabled">U</a>
-      <a href="#letter-V" class="letter-btn disabled">V</a>
-      <a href="#letter-W" class="letter-btn disabled">W</a>
-      <a href="#letter-X" class="letter-btn disabled">X</a>
-      <a href="#letter-Y" class="letter-btn disabled">Y</a>
-      <a href="#letter-Z" class="letter-btn disabled">Z</a>
+    <!-- Navegación debajo de la línea amarilla (derecha, súper compacta, 7 letras por fila) -->
+    <div class="container subhead-nav-bar">
+      <div class="alphabet-nav-compact">
+        <a href="#letter-A" class="letter-btn active">A</a>
+        <a href="#letter-B" class="letter-btn active">B</a>
+        <a href="#letter-C" class="letter-btn disabled">C</a>
+        <a href="#letter-D" class="letter-btn active">D</a>
+        <a href="#letter-E" class="letter-btn active">E</a>
+        <a href="#letter-F" class="letter-btn disabled">F</a>
+        <a href="#letter-G" class="letter-btn active">G</a>
+        <a href="#letter-H" class="letter-btn disabled">H</a>
+        <a href="#letter-I" class="letter-btn active">I</a>
+        <a href="#letter-J" class="letter-btn active">J</a>
+        <a href="#letter-K" class="letter-btn active">K</a>
+        <a href="#letter-L" class="letter-btn disabled">L</a>
+        <a href="#letter-M" class="letter-btn active">M</a>
+        <a href="#letter-N" class="letter-btn active">N</a>
+        <a href="#letter-O" class="letter-btn disabled">O</a>
+        <a href="#letter-P" class="letter-btn active">P</a>
+        <a href="#letter-Q" class="letter-btn disabled">Q</a>
+        <a href="#letter-R" class="letter-btn active">R</a>
+        <a href="#letter-S" class="letter-btn active">S</a>
+        <a href="#letter-T" class="letter-btn active">T</a>
+        <a href="#letter-U" class="letter-btn disabled">U</a>
+        <a href="#letter-V" class="letter-btn disabled">V</a>
+        <a href="#letter-W" class="letter-btn disabled">W</a>
+        <a href="#letter-X" class="letter-btn disabled">X</a>
+        <a href="#letter-Y" class="letter-btn disabled">Y</a>
+        <a href="#letter-Z" class="letter-btn disabled">Z</a>
+      </div>
     </div>
   </div>
 
@@ -577,7 +589,7 @@
       <div class="letter-group-container" id="letter-P">
         <h2 class="letter-group-title">P</h2>
         <div class="fighters-grid">
-          <a href="pache.JPG" class="fighter-card">
+          <a href="pache.html" class="fighter-card">
             <div class="fighter-img-container">
               <img src="pache.JPG" alt="Pache">
             </div>
