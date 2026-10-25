@@ -40,8 +40,9 @@
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1240px;
       margin: 0 auto;
+      padding: 0 1.5rem;
     }
 
     .header-content {
@@ -112,12 +113,54 @@
       color: var(--text-light);
     }
 
-    /* Main Layout */
-    .main-layout {
-      display: grid;
-      grid-template-columns: 1fr 280px;
-      gap: 2.5rem;
-      padding: 2.5rem 1.5rem 4rem 1.5rem;
+    /* Top Navigation Section */
+    .top-nav-bar {
+      background-color: #0e0e0e;
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 0;
+    }
+
+    .alphabet-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.35rem;
+    }
+
+    .letter-btn {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border-radius: 4px;
+      background: #1a1a1a;
+      color: #555;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .letter-btn:hover {
+      border-color: var(--primary-yellow);
+    }
+
+    .letter-btn.active {
+      background: var(--primary-yellow);
+      color: var(--bg-dark);
+    }
+
+    .letter-btn.disabled {
+      opacity: 0.2;
+      pointer-events: none;
+    }
+
+    /* Main Section */
+    main {
+      padding-top: 2.5rem;
+      padding-bottom: 4rem;
     }
 
     .section-title {
@@ -126,13 +169,13 @@
       text-transform: uppercase;
       border-bottom: 1px solid var(--border-color);
       padding-bottom: 0.6rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
       letter-spacing: 1px;
     }
 
     /* Letter Group Dividers */
     .letter-group-container {
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
 
     .letter-group-title {
@@ -145,11 +188,11 @@
       padding-bottom: 0.3rem;
     }
 
-    /* Grid de Tarjetas con el tamaño original restaurado */
+    /* Grid de Tarjetas ampliada para 4 por fila */
     .fighters-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-      gap: 1.25rem;
+      gap: 1.5rem;
     }
 
     .fighter-card {
@@ -208,77 +251,8 @@
       color: var(--primary-yellow);
     }
 
-    /* Sidebar / Navigation */
-    aside {
-      position: sticky;
-      top: 2rem;
-      height: fit-content;
-    }
-
-    .alphabet-nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 1.5rem;
-      background: var(--card-dark);
-      padding: 1rem;
-      border-radius: 6px;
-      border: 1px solid var(--border-color);
-    }
-
-    .letter-btn {
-      width: 30px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      font-weight: 700;
-      border-radius: 4px;
-      background: #1a1a1a;
-      color: #555;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-
-    .letter-btn.active {
-      background: var(--primary-yellow);
-      color: var(--bg-dark);
-    }
-
-    .letter-btn.disabled {
-      opacity: 0.2;
-      pointer-events: none;
-    }
-
-    .annotation-box {
-      background: var(--card-dark);
-      border-left: 4px solid var(--primary-yellow);
-      border: 1px solid var(--border-color);
-      border-left-width: 4px;
-      padding: 1.25rem;
-      border-radius: 0 6px 6px 0;
-      font-size: 0.9rem;
-      color: #cccccc;
-      margin-bottom: 1.5rem;
-    }
-
-    .annotation-box h3 {
-      color: var(--text-light);
-      font-size: 0.95rem;
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
     /* Responsive */
-    @media (max-width: 900px) {
-      .main-layout {
-        grid-template-columns: 1fr;
-      }
-      aside {
-        position: static;
-      }
+    @media (max-width: 768px) {
       .header-content {
         flex-direction: column;
         text-align: center;
@@ -313,385 +287,9 @@
     </div>
   </header>
 
-  <!-- Main Section -->
-  <main class="container main-layout">
-    
-    <!-- Left Column: Catalog Grid -->
-    <section>
-      <div class="section-title">
-        <span>Battlers:</span>
-      </div>
-
-      <!-- GRUPO A -->
-      <div class="letter-group-container" id="letter-A">
-        <h2 class="letter-group-title">A</h2>
-        <div class="fighters-grid">
-          <a href="aka-ele.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/aka-ele.jpg" alt="Aka Ele">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Aka Ele</span>
-            </div>
-          </a>
-          <a href="aveldomain.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/aveldomain.jpg" alt="Aveldomain">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Aveldomain</span>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <!-- GRUPO B -->
-      <div class="letter-group-container" id="letter-B">
-        <h2 class="letter-group-title">B</h2>
-        <div class="fighters-grid">
-          <a href="big-killa.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/big-killa.jpg" alt="Big Killa">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Big Killa</span>
-            </div>
-          </a>
-          <a href="biopsz.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/biopsz.jpg" alt="Biopsz">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Biopsz</span>
-            </div>
-          </a>
-          <a href="bizor.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/bizor.jpg" alt="Bizor">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Bizor</span>
-            </div>
-          </a>
-          <a href="blue-one.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/blue-one.jpg" alt="Blue One">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Blue One</span>
-            </div>
-          </a>
-          <a href="bull-romero.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/bull-romero.jpg" alt="Bull Romero">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Bull Romero</span>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <!-- GRUPO D -->
-      <div class="letter-group-container" id="letter-D">
-        <h2 class="letter-group-title">D</h2>
-        <div class="fighters-grid">
-          <a href="d-glocks.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/d-glocks.jpg" alt="D Glocks">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">D Glocks</span>
-            </div>
-          </a>
-          <a href="denter.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/denter.jpg" alt="Denter">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Denter</span>
-            </div>
-          </a>
-          <a href="doble-n.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/doble-n.jpg" alt="Doble N">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Doble N</span>
-            </div>
-          </a>
-          <a href="driock-ak.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/driock-ak.jpg" alt="Driock AK">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Driock AK</span>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <!-- GRUPO E -->
-      <div class="letter-group-container" id="letter-E">
-        <h2 class="letter-group-title">E</h2>
-        <div class="fighters-grid">
-          <a href="eptos-uno.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/eptos-uno.jpg" alt="Eptos Uno">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Eptos Uno</span>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <!-- GRUPO G -->
-      <div class="letter-group-container" id="letter-G">
-        <h2 class="letter-group-title">G</h2>
-        <div class="fighters-grid">
-          <a href="grave.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/grave.jpg" alt="Grave">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Grave</span>
-            </div>
-          </a>
-          <a href="gustavo-ramos.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/gustavo-ramos.jpg" alt="Gustavo Ramos">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Gustavo Ramos</span>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <!-- GRUPO I -->
-      <div class="letter-group-container" id="letter-I">
-        <h2 class="letter-group-title">I</h2>
-        <div class="fighters-grid">
-          <a href="ill-mascaras.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/ill-mascaras.jpg" alt="Ill Mascaras">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Ill Mascaras</span>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <!-- GRUPO J -->
-      <div class="letter-group-container" id="letter-J">
-        <h2 class="letter-group-title">J</h2>
-        <div class="fighters-grid">
-          <a href="juan-zarate.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/juan-zarate.jpg" alt="Juan Zárate">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Juan Zárate</span>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <!-- GRUPO K -->
-      <div class="letter-group-container" id="letter-K">
-        <h2 class="letter-group-title">K</h2>
-        <div class="fighters-grid">
-          <a href="kidd-m.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/kidd-m.jpg" alt="Kidd M">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Kidd M</span>
-            </div>
-          </a>
-          <a href="kooper-kaiser.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/kooper-kaiser.jpg" alt="Kooper Kaiser">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Kooper Kaiser</span>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <!-- GRUPO M -->
-      <div class="letter-group-container" id="letter-M">
-        <h2 class="letter-group-title">M</h2>
-        <div class="fighters-grid">
-          <a href="majia.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/majia.jpg" alt="Majia">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Majia</span>
-            </div>
-          </a>
-          <a href="mega-one.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/mega-one.jpg" alt="Mega One">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Mega One</span>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <!-- GRUPO N -->
-      <div class="letter-group-container" id="letter-N">
-        <h2 class="letter-group-title">N</h2>
-        <div class="fighters-grid">
-          <a href="narra-mc.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/narra-mc.jpg" alt="Narra MC">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Narra MC</span>
-            </div>
-          </a>
-          <a href="nyd.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/nyd.jpg" alt="NyD">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">NyD</span>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <!-- GRUPO P -->
-      <div class="letter-group-container" id="letter-P">
-        <h2 class="letter-group-title">P</h2>
-        <div class="fighters-grid">
-          <a href="pache.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/pache.jpg" alt="Pache">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Pache</span>
-            </div>
-          </a>
-          <a href="pantera.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/pantera.jpg" alt="Pantera">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Pantera</span>
-            </div>
-          </a>
-          <a href="pensil1.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/pensil1.jpg" alt="Pensil1">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Pensil1</span>
-            </div>
-          </a>
-          <a href="prodemm.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/prodemm.jpg" alt="Prodemm">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Prodemm</span>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <!-- GRUPO R -->
-      <div class="letter-group-container" id="letter-R">
-        <h2 class="letter-group-title">R</h2>
-        <div class="fighters-grid">
-          <a href="rayar.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/rayar.jpg" alt="Rayar">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Rayar</span>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <!-- GRUPO S -->
-      <div class="letter-group-container" id="letter-S">
-        <h2 class="letter-group-title">S</h2>
-        <div class="fighters-grid">
-          <a href="sempiterno.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/sempiterno.jpg" alt="Sempiterno">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Sempiterno</span>
-            </div>
-          </a>
-          <a href="sonck.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/sonck.jpg" alt="Sonck">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Sonck</span>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <!-- GRUPO T -->
-      <div class="letter-group-container" id="letter-T">
-        <h2 class="letter-group-title">T</h2>
-        <div class="fighters-grid">
-          <a href="terro.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/terro.jpg" alt="Terro">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Terro</span>
-            </div>
-          </a>
-          <a href="tetra.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/tetra.jpg" alt="Tetra">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Tetra</span>
-            </div>
-          </a>
-          <a href="tommy-hhb.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/tommy-hhb.jpg" alt="Tommy HHB">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Tommy HHB</span>
-            </div>
-          </a>
-          <a href="toro.html" class="fighter-card">
-            <div class="fighter-img-container">
-              <img src="images/toro.jpg" alt="Toro">
-            </div>
-            <div class="fighter-info">
-              <span class="fighter-name">Toro</span>
-            </div>
-          </a>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- Right Column: Sidebar & Navigation -->
-    <aside>
-      <div class="section-title">
-        <span>Navegación</span>
-      </div>
-
+  <!-- Navigation Bar (Top, bajo la línea amarilla) -->
+  <nav class="top-nav-bar">
+    <div class="container">
       <div class="alphabet-nav">
         <a href="#letter-A" class="letter-btn active">A</a>
         <a href="#letter-B" class="letter-btn active">B</a>
@@ -706,32 +304,4 @@
         <a href="#letter-K" class="letter-btn active">K</a>
         <a href="#letter-L" class="letter-btn disabled">L</a>
         <a href="#letter-M" class="letter-btn active">M</a>
-        <a href="#letter-N" class="letter-btn active">N</a>
-        <a href="#letter-O" class="letter-btn disabled">O</a>
-        <a href="#letter-P" class="letter-btn active">P</a>
-        <a href="#letter-Q" class="letter-btn disabled">Q</a>
-        <a href="#letter-R" class="letter-btn active">R</a>
-        <a href="#letter-S" class="letter-btn active">S</a>
-        <a href="#letter-T" class="letter-btn active">T</a>
-        <a href="#letter-U" class="letter-btn disabled">U</a>
-        <a href="#letter-V" class="letter-btn disabled">V</a>
-        <a href="#letter-W" class="letter-btn disabled">W</a>
-        <a href="#letter-X" class="letter-btn disabled">X</a>
-        <a href="#letter-Y" class="letter-btn disabled">Y</a>
-        <a href="#letter-Z" class="letter-btn disabled">Z</a>
-      </div>
-
-      <div class="section-title">
-        <span>Anotaciones</span>
-      </div>
-
-      <div class="annotation-box">
-        <h3>Índice Alfabético</h3>
-        <p>Este catálogo reúne los perfiles de battlers hispanohablantes ordenados alfabéticamente de la <strong>A</strong> a la <strong>Z</strong> en formato de cuadrícula visual.</p>
-      </div>
-    </aside>
-
-  </main>
-
-</body>
-</html>
+        <a href="#letter-N" class="
