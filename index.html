@@ -95,13 +95,6 @@
       letter-spacing: 0.5px;
     }
 
-    .header-widgets {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
     .stats-bar {
       display: flex;
       gap: 1.5rem;
@@ -119,22 +112,52 @@
       color: var(--text-light);
     }
 
-    .alphabet-nav-top {
+    /* Sub-header Navigation (Debajo de la línea amarilla, alineado a la derecha, muy compacto) */
+    .subhead-nav-bar {
+      padding: 0.8rem 1.5rem 0 1.5rem;
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.25rem;
-      background: rgba(255, 255, 255, 0.03);
-      padding: 0.4rem 0.6rem;
-      border-radius: 4px;
-      border: 1px solid var(--border-color);
+      justify-content: flex-end;
     }
 
-    /* Main Layout */
-    .main-layout {
+    .alphabet-nav-compact {
       display: grid;
-      grid-template-columns: 1fr 280px;
-      gap: 2.5rem;
-      padding: 2.5rem 1.5rem 4rem 1.5rem;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.15rem;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.25rem;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+      width: fit-content;
+    }
+
+    .letter-btn {
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      font-weight: 700;
+      border-radius: 2px;
+      background: #1a1a1a;
+      color: #555;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .letter-btn.active {
+      background: var(--primary-yellow);
+      color: var(--bg-dark);
+    }
+
+    .letter-btn.disabled {
+      opacity: 0.2;
+      pointer-events: none;
+    }
+
+    /* Main Section */
+    .main-layout {
+      padding: 1.5rem 1.5rem 4rem 1.5rem;
     }
 
     .section-title {
@@ -162,7 +185,7 @@
       padding-bottom: 0.3rem;
     }
 
-    /* Grid de Tarjetas con el tamaño original restaurado */
+    /* Grid de Tarjetas */
     .fighters-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
@@ -225,46 +248,8 @@
       color: var(--primary-yellow);
     }
 
-    /* Sidebar / Navigation */
-    aside {
-      position: sticky;
-      top: 2rem;
-      height: fit-content;
-    }
-
-    .letter-btn {
-      width: 22px;
-      height: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      font-weight: 700;
-      border-radius: 3px;
-      background: #1a1a1a;
-      color: #555;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-
-    .letter-btn.active {
-      background: var(--primary-yellow);
-      color: var(--bg-dark);
-    }
-
-    .letter-btn.disabled {
-      opacity: 0.2;
-      pointer-events: none;
-    }
-
     /* Responsive */
     @media (max-width: 900px) {
-      .main-layout {
-        grid-template-columns: 1fr;
-      }
-      aside {
-        position: static;
-      }
       .header-content {
         flex-direction: column;
         text-align: center;
@@ -272,6 +257,9 @@
       .header-bottom-bar {
         flex-direction: column;
         align-items: center;
+      }
+      .subhead-nav-bar {
+        justify-content: center;
       }
     }
   </style>
@@ -288,39 +276,9 @@
         <div class="meta-info">
           <h1>Catálogo de <span>Battle Rap Hispano</span></h1>
           <div class="header-bottom-bar">
-            <div class="header-widgets">
-              <div class="stats-bar">
-                <span><strong>28</strong> Perfiles</span>
-                <span><strong>A - Z</strong> Alfabético</span>
-              </div>
-              <div class="alphabet-nav-top">
-                <a href="#letter-A" class="letter-btn active">A</a>
-                <a href="#letter-B" class="letter-btn active">B</a>
-                <a href="#letter-C" class="letter-btn disabled">C</a>
-                <a href="#letter-D" class="letter-btn active">D</a>
-                <a href="#letter-E" class="letter-btn active">E</a>
-                <a href="#letter-F" class="letter-btn disabled">F</a>
-                <a href="#letter-G" class="letter-btn active">G</a>
-                <a href="#letter-H" class="letter-btn disabled">H</a>
-                <a href="#letter-I" class="letter-btn active">I</a>
-                <a href="#letter-J" class="letter-btn active">J</a>
-                <a href="#letter-K" class="letter-btn active">K</a>
-                <a href="#letter-L" class="letter-btn disabled">L</a>
-                <a href="#letter-M" class="letter-btn active">M</a>
-                <a href="#letter-N" class="letter-btn active">N</a>
-                <a href="#letter-O" class="letter-btn disabled">O</a>
-                <a href="#letter-P" class="letter-btn active">P</a>
-                <a href="#letter-Q" class="letter-btn disabled">Q</a>
-                <a href="#letter-R" class="letter-btn active">R</a>
-                <a href="#letter-S" class="letter-btn active">S</a>
-                <a href="#letter-T" class="letter-btn active">T</a>
-                <a href="#letter-U" class="letter-btn disabled">U</a>
-                <a href="#letter-V" class="letter-btn disabled">V</a>
-                <a href="#letter-W" class="letter-btn disabled">W</a>
-                <a href="#letter-X" class="letter-btn disabled">X</a>
-                <a href="#letter-Y" class="letter-btn disabled">Y</a>
-                <a href="#letter-Z" class="letter-btn disabled">Z</a>
-              </div>
+            <div class="stats-bar">
+              <span><strong>28</strong> Perfiles</span>
+              <span><strong>A - Z</strong> Alfabético</span>
             </div>
             <span class="author-tag">Por: Isma Rodríguez</span>
           </div>
@@ -329,10 +287,41 @@
     </div>
   </header>
 
+  <!-- Navegación debajo de la línea amarilla (derecha, súper compacta, 7 letras por fila) -->
+  <div class="container subhead-nav-bar">
+    <div class="alphabet-nav-compact">
+      <a href="#letter-A" class="letter-btn active">A</a>
+      <a href="#letter-B" class="letter-btn active">B</a>
+      <a href="#letter-C" class="letter-btn disabled">C</a>
+      <a href="#letter-D" class="letter-btn active">D</a>
+      <a href="#letter-E" class="letter-btn active">E</a>
+      <a href="#letter-F" class="letter-btn disabled">F</a>
+      <a href="#letter-G" class="letter-btn active">G</a>
+      <a href="#letter-H" class="letter-btn disabled">H</a>
+      <a href="#letter-I" class="letter-btn active">I</a>
+      <a href="#letter-J" class="letter-btn active">J</a>
+      <a href="#letter-K" class="letter-btn active">K</a>
+      <a href="#letter-L" class="letter-btn disabled">L</a>
+      <a href="#letter-M" class="letter-btn active">M</a>
+      <a href="#letter-N" class="letter-btn active">N</a>
+      <a href="#letter-O" class="letter-btn disabled">O</a>
+      <a href="#letter-P" class="letter-btn active">P</a>
+      <a href="#letter-Q" class="letter-btn disabled">Q</a>
+      <a href="#letter-R" class="letter-btn active">R</a>
+      <a href="#letter-S" class="letter-btn active">S</a>
+      <a href="#letter-T" class="letter-btn active">T</a>
+      <a href="#letter-U" class="letter-btn disabled">U</a>
+      <a href="#letter-V" class="letter-btn disabled">V</a>
+      <a href="#letter-W" class="letter-btn disabled">W</a>
+      <a href="#letter-X" class="letter-btn disabled">X</a>
+      <a href="#letter-Y" class="letter-btn disabled">Y</a>
+      <a href="#letter-Z" class="letter-btn disabled">Z</a>
+    </div>
+  </div>
+
   <!-- Main Section -->
   <main class="container main-layout">
     
-    <!-- Left Column: Catalog Grid -->
     <section>
       <div class="section-title">
         <span>Battlers:</span>
@@ -687,7 +676,7 @@
             </div>
             <div class="fighter-info">
               <span class="fighter-name">Tommy HHB</span>
-          </div>
+            </div>
           </a>
           <a href="toro.html" class="fighter-card">
             <div class="fighter-img-container">
@@ -701,10 +690,6 @@
       </div>
 
     </section>
-
-    <!-- Right Column: Sidebar & Navigation -->
-    <aside>
-    </aside>
 
   </main>
 
