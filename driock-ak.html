@@ -71,9 +71,6 @@
       letter-spacing: -0.5px;
       margin-bottom: 0.8rem;
       line-height: 1.1;
-    }
-
-    .meta-info h1 span {
       color: var(--primary-yellow);
     }
 
@@ -89,9 +86,24 @@
       border-radius: 4px;
       border: 1px solid var(--border-color);
       width: fit-content;
+      margin-bottom: 0.6rem;
     }
 
     .stats-bar strong {
+      color: var(--text-light);
+    }
+
+    .origin-location {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .origin-location strong {
       color: var(--text-light);
     }
 
@@ -203,6 +215,19 @@
       border: 1px solid var(--border-color);
     }
 
+    /* Etiqueta "Sin video" */
+    .badge-no-video {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background-color: #222;
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+    }
+
     /* Sidebar posicionado alineado */
     aside {
       margin-top: 10rem;
@@ -275,6 +300,9 @@
       .stats-bar {
         margin: 0 auto;
       }
+      .origin-location {
+        justify-content: center;
+      }
     }
   </style>
 </head>
@@ -288,10 +316,13 @@
           <img src="driock-ak.jpg" alt="Driock AK">
         </div>
         <div class="meta-info">
-          <h1>Catálogo de batallas de <span>Driock AK</span></h1>
+          <h1>Driock AK</h1>
           <div class="stats-bar">
             <span><strong>22</strong> Batallas</span>
             <span><strong>2014 - 2026</strong> Trayectoria</span>
+          </div>
+          <div class="origin-location">
+            <img src="https://flagcdn.com/w20/mx.png" alt="México" style="width: 18px; height: auto; border-radius: 2px; display: inline-block; vertical-align: middle;"> <strong>Tijuana, Baja California, México</strong>
           </div>
         </div>
       </div>
@@ -314,13 +345,13 @@
         <h2 class="year-group-title">2014</h2>
 
         <!-- #1 -->
-        <div class="battle-card">
+        <a href="#" class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#1. Driock AK vs. Gio UVC</span>
             <span class="battle-date">-/-/2014</span>
           </div>
-          <span class="badge">Sin video</span>
-        </div>
+          <span class="badge badge-no-video">Sin video</span>
+        </a>
 
         <!-- 2015 -->
         <h2 class="year-group-title">2015</h2>
@@ -356,13 +387,13 @@
         </a>
 
         <!-- #5 -->
-        <div class="battle-card">
+        <a href="#" class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#5. Driock AK vs. Maquiavélico</span>
             <span class="battle-date">-/-/2016</span>
           </div>
-          <span class="badge">Sin video</span>
-        </div>
+          <span class="badge badge-no-video">Sin video</span>
+        </a>
 
         <!-- 2017 -->
         <h2 class="year-group-title">2017</h2>
@@ -433,7 +464,7 @@
         <!-- #12 -->
         <a href="https://www.youtube.com/watch?v=49lEzY8QC9s&t=285s" target="_blank" rel="noopener noreferrer" class="battle-card">
           <div class="battle-info">
-            <span class="battle-title">#12. Driock AK & Dein Sane vs. Fresco Feo & Mad Mike</span>
+            <span class="battle-title">#12. Driock AK &amp; Dein Sane vs. Fresco Feo &amp; Mad Mike</span>
             <span class="battle-date">14/03/2020</span>
           </div>
           <span class="badge">Ver en YouTube</span>
@@ -478,7 +509,7 @@
         <!-- 2024 -->
         <h2 class="year-group-title">2024</h2>
 
-        <!-- #18 (09/03/2024) -->
+        <!-- #16 -->
         <a href="https://www.youtube.com/watch?v=Wq7PWKdhIwQ" target="_blank" rel="noopener noreferrer" class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#16. Driock AK vs. Doble Z</span>
@@ -487,7 +518,7 @@
           <span class="badge">Ver en YouTube</span>
         </a>
 
-        <!-- #16 (20/04/2024) -->
+        <!-- #17 -->
         <a href="https://www.youtube.com/watch?v=LTedNgUJnNQ" target="_blank" rel="noopener noreferrer" class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#17. Driock AK vs. Gonzo</span>
@@ -496,7 +527,7 @@
           <span class="badge">Ver en YouTube</span>
         </a>
 
-        <!-- #17 (17/08/2024) -->
+        <!-- #18 -->
         <a href="https://www.youtube.com/watch?v=p7KlGPwpP24&t=378s" target="_blank" rel="noopener noreferrer" class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#18. Driock AK vs. Accordem</span>
@@ -505,7 +536,7 @@
           <span class="badge">Ver en YouTube</span>
         </a>
 
-        <!-- #19 (01/11/2024) -->
+        <!-- #19 -->
         <a href="https://www.youtube.com/watch?v=lt0RPpWk3QM" target="_blank" rel="noopener noreferrer" class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#19. Driock AK vs. RTS</span>
@@ -514,7 +545,7 @@
           <span class="badge">Ver en YouTube</span>
         </a>
 
-        <!-- #20 (24/12/2024*) -->
+        <!-- #20 -->
         <a href="https://www.youtube.com/watch?v=KVE1z1NWOCw&t=454s" target="_blank" rel="noopener noreferrer" class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#20. Driock AK vs. Seven Geezy</span>
