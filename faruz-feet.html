@@ -177,3 +177,304 @@
     }
 
     .battle-card:hover .battle-title {
+      color: var(--primary-yellow);
+    }
+
+    .battle-date {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .badge-container {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background-color: #222;
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+    }
+
+    /* Etiqueta "Batalla virtual" */
+    .badge-virtual {
+      font-size: 0.45rem;
+      padding: 0.02rem 0.15rem;
+      border: 0.5px solid var(--primary-yellow);
+      color: var(--primary-yellow);
+      font-weight: 600;
+      border-radius: 2px;
+    }
+
+    /* Sidebar posicionado alineado */
+    aside {
+      margin-top: 10rem;
+    }
+
+    /* Navigation Button */
+    .back-nav {
+      margin-top: 1.5rem;
+    }
+
+    .back-btn {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      padding: 0.6rem 1rem;
+      background: var(--card-dark);
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .back-btn:hover {
+      background: var(--primary-yellow);
+      color: var(--bg-dark);
+      border-color: var(--primary-yellow);
+    }
+
+    /* Sidebar / Annotations */
+    .annotation-box {
+      background: var(--card-dark);
+      border-left: 4px solid var(--primary-yellow);
+      border-top: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.25rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+      color: #cccccc;
+      margin-bottom: 1rem;
+    }
+
+    .annotation-box h3 {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .annotation-box p {
+      line-height: 1.5;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      .main-layout {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        margin-top: 1rem;
+      }
+      .stats-bar {
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Banner -->
+  <header class="hero-banner">
+    <div class="container">
+      <div class="header-content">
+        <div class="cover-art">
+          <img src="faruz-feet.jpg" alt="Faruz Feet">
+        </div>
+        <div class="meta-info">
+          <h1>Catálogo de batallas de <span>Faruz Feet</span></h1>
+          <div class="stats-bar">
+            <span><strong>13</strong> Batallas</span>
+            <span><strong>2012 - 2018</strong> Trayectoria</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Section -->
+  <main class="container main-layout">
+    
+    <!-- Left Column: Catalog -->
+    <section>
+      <div class="section-title">
+        <span>Historial de enfrentamientos:</span>
+        <span class="count">13 Batallas</span>
+      </div>
+
+      <div class="catalog-list">
+        
+        <!-- 2012 -->
+        <h2 class="year-group-title">2012</h2>
+
+        <!-- #1 -->
+        <a href="https://www.youtube.com/watch?v=SOUSaquqy7I" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#1. Faruz Feet vs. Aczino</span>
+            <span class="battle-date">23/09/2012</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2014 -->
+        <h2 class="year-group-title">2014</h2>
+
+        <!-- #2 -->
+        <a href="https://www.youtube.com/watch?v=60sETqDmDC4" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#2. Faruz Feet vs. RC</span>
+            <span class="battle-date">15/02/2014</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #3 -->
+        <a href="https://www.youtube.com/watch?v=G_4vsY55zOA" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#3. Faruz Feet vs. Ente Uno</span>
+            <span class="battle-date">22/06/2014</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #4 -->
+        <a href="https://www.youtube.com/watch?v=SHluXXihAjc" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#4. Faruz Feet vs. Budha Vuh</span>
+            <span class="battle-date">07/11/2014</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2015 -->
+        <h2 class="year-group-title">2015</h2>
+
+        <!-- #5 -->
+        <a href="https://www.youtube.com/watch?v=39rL049qIuA" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#5. Faruz Feet vs. Forastero</span>
+            <span class="battle-date">18/04/2015</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2016 -->
+        <h2 class="year-group-title">2016</h2>
+
+        <!-- #6 -->
+        <a href="https://www.youtube.com/watch?v=Ab9px80s6As" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#6. Faruz Feet vs. Titán Tercero</span>
+            <span class="battle-date">04/06/2016</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2017 -->
+        <h2 class="year-group-title">2017</h2>
+
+        <!-- #7 -->
+        <a href="https://www.youtube.com/watch?v=Xexjh0g-shg" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#7. Faruz Feet vs. Bizor</span>
+            <span class="battle-date">15/02/2017</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #8 -->
+        <a href="https://www.youtube.com/watch?v=_UBkqkZlavA" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#8. Faruz Feet vs. Ghetto Fama</span>
+            <span class="battle-date">01/04/2017</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #9 -->
+        <a href="https://www.youtube.com/watch?v=QRt9XLKlvww" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#9. Faruz Feet vs. Kooper Kaiser</span>
+            <span class="battle-date">17/06/2017</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #10 -->
+        <a href="https://www.youtube.com/watch?v=tuZFHRn-OYo" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#10. Faruz Feet vs. Sharlie Mac</span>
+            <span class="battle-date">16/07/2017</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2018 -->
+        <h2 class="year-group-title">2018</h2>
+
+        <!-- #11 -->
+        <a href="https://www.youtube.com/watch?v=7wpof3JVNwk" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#11. Faruz Feet vs. Terro</span>
+            <span class="battle-date">21/04/2018</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #12 -->
+        <a href="https://www.youtube.com/watch?v=PN4As6QLoFg&t=161s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#12. Faruz Feet vs. Narra Mc</span>
+            <span class="battle-date">14/05/2018*</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #13 -->
+        <a href="https://www.youtube.com/watch?v=nGEGHN6y4xo" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#13. Faruz Feet vs. Proof</span>
+            <span class="battle-date">11/08/2018</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Right Column: Sidebar & Annotations -->
+    <aside>
+      <div class="section-title">
+        <span>Anotaciones</span>
+      </div>
+
+      <div class="annotation-box">
+        <h3>Fecha de lanzamiento</h3>
+        <p>El asterisco (<strong>*</strong>) indica enfrentamientos donde no se cuenta con la fecha oficial del evento, por lo que se toma la fecha de publicación en YouTube.</p>
+      </div>
+
+      <div class="back-nav">
+        <a href="index.html" class="back-btn">← Volver al índice</a>
+      </div>
+    </aside>
+
+  </main>
+
+</body>
+</html>
