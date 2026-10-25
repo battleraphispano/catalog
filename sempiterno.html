@@ -89,9 +89,24 @@
       border-radius: 4px;
       border: 1px solid var(--border-color);
       width: fit-content;
+      margin-bottom: 0.6rem;
     }
 
     .stats-bar strong {
+      color: var(--text-light);
+    }
+
+    .origin-location {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .origin-location strong {
       color: var(--text-light);
     }
 
@@ -285,6 +300,9 @@
       .stats-bar {
         margin: 0 auto;
       }
+      .origin-location {
+        justify-content: center;
+      }
     }
   </style>
 </head>
@@ -302,6 +320,9 @@
           <div class="stats-bar">
             <span><strong>13</strong> Batallas</span>
             <span><strong>2024 - 2026</strong> Trayectoria</span>
+          </div>
+          <div class="origin-location">
+            <span>🇨🇱</span> <strong>Temuco, Chile</strong>
           </div>
         </div>
       </div>
