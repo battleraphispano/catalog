@@ -71,9 +71,6 @@
       letter-spacing: -0.5px;
       margin-bottom: 0.8rem;
       line-height: 1.1;
-    }
-
-    .meta-info h1 span {
       color: var(--primary-yellow);
     }
 
@@ -89,9 +86,24 @@
       border-radius: 4px;
       border: 1px solid var(--border-color);
       width: fit-content;
+      margin-bottom: 0.6rem;
     }
 
     .stats-bar strong {
+      color: var(--text-light);
+    }
+
+    .origin-location {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .origin-location strong {
       color: var(--text-light);
     }
 
@@ -285,6 +297,9 @@
       .stats-bar {
         margin: 0 auto;
       }
+      .origin-location {
+        justify-content: center;
+      }
     }
   </style>
 </head>
@@ -298,10 +313,13 @@
           <img src="blue-one.jpg" alt="Blue One">
         </div>
         <div class="meta-info">
-          <h1>Catálogo de batallas de <span>Blue One</span></h1>
+          <h1>Blue One</h1>
           <div class="stats-bar">
-            <span><strong>26</strong> Batallas</span>
+            <span><strong>27</strong> Batallas</span>
             <span><strong>2015 - 2026</strong> Trayectoria</span>
+          </div>
+          <div class="origin-location">
+            <img src="https://flagcdn.com/w20/mx.png" alt="México" style="width: 18px; height: auto; border-radius: 2px; display: inline-block; vertical-align: middle;"> <strong>Baja California, México</strong>
           </div>
         </div>
       </div>
