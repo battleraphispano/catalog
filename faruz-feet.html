@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de batallas de Faruz Feet | Rap Battle Database</title>
+  <style>
+    :root {
+      --primary-yellow: #ffff00;
+      --bg-dark: #0a0a0a;
+      --card-dark: #141414;
+      --card-hover: #1e1e1e;
+      --text-light: #ffffff;
+      --text-muted: #a0a0a0;
+      --border-color: #262626;
+      --accent-gray: #333333;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Programme', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* Header / Hero Section */
+    .hero-banner {
+      background: linear-gradient(180deg, #181818 0%, var(--bg-dark) 100%);
+      border-bottom: 2px solid var(--primary-yellow);
+      padding: 3.5rem 1.5rem 2.5rem 1.5rem;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .header-content {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .cover-art {
+      width: 150px;
+      height: 150px;
+      border-radius: 6px;
+      box-shadow: 0 10px 25px rgba(255, 255, 0, 0.12);
+      flex-shrink: 0;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .cover-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .meta-info h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.8rem;
+      line-height: 1.1;
+    }
+
+    .meta-info h1 span {
+      color: var(--primary-yellow);
+    }
+
+    .stats-bar {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.6rem 1rem;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+      width: fit-content;
+    }
+
+    .stats-bar strong {
+      color: var(--text-light);
+    }
+
+    /* Main Layout */
+    .main-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2.5rem;
+      padding: 2.5rem 1.5rem 4rem 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.6rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .section-title .count {
+      font-size: 0.85rem;
+      color: var(--primary-yellow);
+      background: rgba(255, 255, 0, 0.1);
+      padding: 2px 8px;
+      border-radius: 12px;
+    }
+
+    /* Year Group Title */
+    .year-group-title {
+      color: var(--primary-yellow);
+      font-size: 1.3rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin: 1.5rem 0 0.5rem 0;
+    }
+
+    .year-group-title:first-of-type {
+      margin-top: 0;
+    }
+
+    /* Catalog List */
+    .catalog-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .battle-card {
+      background-color: var(--card-dark);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 0.6rem 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .battle-card:hover {
+      border-color: var(--primary-yellow);
+      background-color: var(--card-hover);
+      transform: translateX(4px);
+    }
+
+    .battle-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .battle-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text-light);
+      display: block;
+      transition: color 0.2s;
+    }
+
+    .battle-card:hover .battle-title {
