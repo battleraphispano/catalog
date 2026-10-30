@@ -280,4 +280,282 @@
     }
 
     .back-btn {
-      display:
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      padding: 0.6rem 1rem;
+      background: var(--card-dark);
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .back-btn:hover {
+      background: var(--primary-yellow);
+      color: var(--bg-dark);
+      border-color: var(--primary-yellow);
+    }
+
+    /* Sidebar / Annotations */
+    .annotation-box {
+      background: var(--card-dark);
+      border-left: 4px solid var(--primary-yellow);
+      border-top: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.25rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+      color: #cccccc;
+      margin-bottom: 1rem;
+    }
+
+    .annotation-box h3 {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .annotation-box p {
+      line-height: 1.5;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      .main-layout {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        margin-top: 1rem;
+      }
+      .stats-bar {
+        margin: 0 auto;
+      }
+      .origin-location {
+        justify-content: center;
+      }
+      .header-sub-row {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Banner -->
+  <header class="hero-banner">
+    <div class="container">
+      <div class="header-content">
+        <div class="cover-art">
+          <img src="aka-ele.JPG" alt="Aka Ele">
+        </div>
+        <div class="meta-info">
+          <h1><span>Aka Ele</span></h1>
+          <div class="stats-bar">
+            <span><strong>12</strong> Batallas</span>
+            <span><strong>2018 - 2025</strong> Trayectoria</span>
+          </div>
+          <div class="header-sub-row">
+            <div>
+              <div class="origin-location">
+                <img src="https://flagcdn.com/w20/co.png" alt="Colombia" style="width: 18px; height: auto; border-radius: 2px; display: inline-block; vertical-align: middle;"> <strong>Medellín, Colombia</strong>
+              </div>
+              <div class="battler-quote">
+                "Raperos tirando barras, papá..."
+              </div>
+            </div>
+            <a href="https://www.instagram.com/akaele.rap/" target="_blank" rel="noopener noreferrer" class="instagram-icon-btn" title="Instagram">
+              <svg style="width: 16px; height: 16px;" viewBox="0 0 24 24">
+                <defs>
+                  <radialGradient id="ig-grad" cx="30%" cy="107%" r="120%" fx="30%" fy="107%">
+                    <stop offset="0%" stop-color="#fdf497" />
+                    <stop offset="5%" stop-color="#fdf497" />
+                    <stop offset="45%" stop-color="#fd5949" />
+                    <stop offset="60%" stop-color="#d6249f" />
+                    <stop offset="90%" stop-color="#285AEB" />
+                  </radialGradient>
+                </defs>
+                <path fill="url(#ig-grad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Section -->
+  <main class="container main-layout">
+    
+    <!-- Left Column: Catalog -->
+    <section>
+      <div class="section-title">
+        <span>Historial de enfrentamientos:</span>
+        <span class="count">12 Batallas</span>
+      </div>
+
+      <div class="catalog-list">
+        
+        <!-- 2018 -->
+        <h2 class="year-group-title">2018</h2>
+
+        <!-- #1 -->
+        <a href="https://www.youtube.com/watch?v=TZazOp6JQP0" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#1. Aka Ele vs. Castillo</span>
+            <span class="battle-date">16/12/2018</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2019 -->
+        <h2 class="year-group-title">2019</h2>
+
+        <!-- #2 -->
+        <a href="https://www.youtube.com/watch?v=uQPYQT_l4o0" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#2. Aka Ele vs. Chang</span>
+            <span class="battle-date">19/05/2019</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #3 -->
+        <a href="https://www.youtube.com/watch?v=Ll3ZoE9_FK8" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#3. Aka Ele vs. Mate Agujas</span>
+            <span class="battle-date">01/11/2019</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #4 -->
+        <a href="https://www.youtube.com/watch?v=B8YrIZWANpY" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#4. Aka Ele vs. Cielin 911</span>
+            <span class="battle-date">07/12/2019</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2021 -->
+        <h2 class="year-group-title">2021</h2>
+
+        <!-- #5 -->
+        <a href="https://www.youtube.com/watch?v=Gtb9q58NTfA" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#5. Aka Ele vs. Fresco Feo</span>
+            <span class="battle-date">20/01/2021*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
+          </div>
+        </a>
+
+        <!-- #6 -->
+        <a href="https://www.youtube.com/watch?v=bM1w56EwzOs" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#6. Aka Ele vs. Quezada</span>
+            <span class="battle-date">18/12/2021</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2023 -->
+        <h2 class="year-group-title">2023</h2>
+
+        <!-- #7 -->
+        <a href="https://www.youtube.com/watch?v=gyXfFw4G1wE" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#7. Aka Ele vs. El Aviador</span>
+            <span class="battle-date">17/06/2023</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #8 -->
+        <a href="https://www.youtube.com/watch?v=rL_vEPN43yI" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#8. Aka Ele vs. Tony Morales</span>
+            <span class="battle-date">02/12/2023</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2024 -->
+        <h2 class="year-group-title">2024</h2>
+
+        <!-- #9 -->
+        <a href="https://www.youtube.com/watch?v=_yGIkTbpfG8" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#9. Aka Ele vs. Fresco Feo [Rematch]</span>
+            <span class="battle-date">09/11/2024</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- 2025 -->
+        <h2 class="year-group-title">2025</h2>
+
+        <!-- #10 -->
+        <a href="https://www.youtube.com/watch?v=UXZcK84_N4w" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#10. Aka Ele vs. Pablito ABR</span>
+            <span class="battle-date">26/04/2025</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #11 -->
+        <a href="https://www.youtube.com/watch?v=ALWayf7Tess" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#11. Aka Ele vs. Mad Mike</span>
+            <span class="battle-date">31/10/2025</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+        <!-- #12 -->
+        <a href="https://www.youtube.com/watch?v=2SYM8uuY5Po" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#12. Aka Ele vs. Martin Cash</span>
+            <span class="battle-date">29/11/2025</span>
+          </div>
+          <span class="badge">Ver en YouTube</span>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Right Column: Sidebar & Annotations -->
+    <aside>
+      <div class="section-title">
+        <span>Anotaciones</span>
+      </div>
+
+      <div class="annotation-box">
+        <h3>Fecha de lanzamiento</h3>
+        <p>El asterisco (<strong>*</strong>) indica enfrentamientos donde no se cuenta con la fecha oficial del evento, por lo que se toma la fecha de publicación en YouTube.</p>
+      </div>
+
+      <div class="back-nav">
+        <a href="index.html" class="back-btn">← Volver al índice</a>
+      </div>
+    </aside>
+
+  </main>
+
+</body>
+</html>
