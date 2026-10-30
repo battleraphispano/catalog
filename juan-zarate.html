@@ -123,13 +123,6 @@
       color: var(--text-light);
     }
 
-    .flags-container {
-      display: inline-flex;
-      gap: 4px;
-      align-items: center;
-      vertical-align: middle;
-    }
-
     .battler-quote {
       font-size: 0.85rem;
       color: var(--text-light);
@@ -266,6 +259,19 @@
       border: 1px solid var(--border-color);
     }
 
+    /* Etiqueta "Sin video" */
+    .badge-no-video {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background-color: #222;
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+    }
+
     /* Etiqueta "Batalla virtual" */
     .badge-virtual {
       font-size: 0.45rem;
@@ -376,11 +382,7 @@
           <div class="header-sub-row">
             <div>
               <div class="origin-location">
-                <span class="flags-container">
-                  <img src="https://flagcdn.com/w20/mx.png" alt="México" style="width: 18px; height: auto; border-radius: 2px; display: block;">
-                  <img src="https://flagcdn.com/w20/us.png" alt="Estados Unidos" style="width: 18px; height: auto; border-radius: 2px; display: block;">
-                </span> 
-                <strong>Chicago, Illinois</strong>
+                <img src="https://flagcdn.com/w20/mx.png" alt="México" style="width: 18px; height: auto; border-radius: 2px; display: inline-block; vertical-align: middle;"> <strong>Tijuana, Baja California, México</strong>
               </div>
               <div class="battler-quote">
                 "Homie yo no me equivoco, i'm the GOAT y la cabra, pochos pero locos..."
@@ -608,13 +610,13 @@
         <h2 class="year-group-title">2026</h2>
 
         <!-- #18 -->
-        <a href="#" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#18. Juan Zárate vs. Big Soul</span>
             <span class="battle-date">26/09/2026</span>
           </div>
-          <span class="badge">Sin video</span>
-        </a>
+          <span class="badge badge-no-video">Sin Video</span>
+        </div>
 
       </div>
     </section>
