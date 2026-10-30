@@ -8,12 +8,11 @@
     :root {
       --primary-yellow: #ffff00;
       --bg-dark: #0a0a0a;
-      --card-dark: #141414;
-      --card-hover: #1e1e1e;
+      --card-dark: #121212;
+      --card-hover: #1a1a1a;
       --text-light: #ffffff;
-      --text-muted: #a0a0a0;
-      --border-color: #262626;
-      --accent-gray: #333333;
+      --text-muted: #888888;
+      --border-color: #222222;
     }
 
     * {
@@ -26,18 +25,21 @@
     body {
       background-color: var(--bg-dark);
       color: var(--text-light);
-      line-height: 1.6;
+      line-height: 1.5;
     }
 
-    /* Header / Hero Section */
+    /* Header / Hero Section con portada */
     .hero-banner {
-      background: linear-gradient(180deg, #181818 0%, var(--bg-dark) 100%);
+      position: relative;
+      background: linear-gradient(rgba(10, 10, 10, 0.80), rgba(10, 10, 10, 0.90)), url('portada.JPG');
+      background-size: cover;
+      background-position: center;
       border-bottom: 2px solid var(--primary-yellow);
       padding: 3.5rem 1.5rem 2.5rem 1.5rem;
     }
 
     .container {
-      max-width: 980px;
+      max-width: 1200px;
       margin: 0 auto;
     }
 
@@ -72,6 +74,7 @@
       margin-bottom: 0.8rem;
       line-height: 1.1;
       color: var(--primary-yellow);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
     }
 
     .stats-bar {
@@ -81,7 +84,7 @@
       text-transform: uppercase;
       letter-spacing: 1px;
       color: var(--text-muted);
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(0, 0, 0, 0.6);
       padding: 0.6rem 1rem;
       border-radius: 4px;
       border: 1px solid var(--border-color);
@@ -110,7 +113,7 @@
     /* Main Layout */
     .main-layout {
       display: grid;
-      grid-template-columns: 2fr 1fr;
+      grid-template-columns: 3fr 1fr;
       gap: 2.5rem;
       padding: 2.5rem 1.5rem 4rem 1.5rem;
     }
@@ -142,137 +145,145 @@
       font-size: 1.3rem;
       font-weight: 800;
       text-transform: uppercase;
-      margin: 1.5rem 0 0.5rem 0;
+      margin: 2rem 0 1rem 0;
+      border-bottom: 1px dashed var(--border-color);
+      padding-bottom: 0.3rem;
     }
 
     .year-group-title:first-of-type {
       margin-top: 0;
     }
 
-    /* Catalog List */
-    .catalog-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
+    /* Grid de Batallas (Estilo Tarjetas URL) */
+    .battles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
     }
 
     .battle-card {
       background-color: var(--card-dark);
       border: 1px solid var(--border-color);
       border-radius: 6px;
-      padding: 0.6rem 0.8rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: all 0.2s ease;
+      overflow: hidden;
       text-decoration: none;
       color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.25s ease;
+      position: relative;
     }
 
     .battle-card:hover {
       border-color: var(--primary-yellow);
-      background-color: var(--card-hover);
-      transform: translateX(4px);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
+
+    .battle-img-container {
+      width: 100%;
+      height: 140px;
+      background-color: #1a1a1a;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .battle-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .battle-card:hover .battle-img-container img {
+      transform: scale(1.05);
     }
 
     .battle-info {
+      padding: 1rem;
+      background-color: var(--card-dark);
+      border-top: 1px solid var(--border-color);
       display: flex;
       flex-direction: column;
+      gap: 0.5rem;
+      flex-grow: 1;
+      justify-content: space-between;
     }
 
     .battle-title {
-      font-weight: 700;
-      font-size: 1rem;
+      font-weight: 800;
+      font-size: 0.95rem;
+      text-transform: uppercase;
       color: var(--text-light);
+      letter-spacing: 0.5px;
       display: block;
-      transition: color 0.2s;
+      line-height: 1.3;
     }
 
     .battle-card:hover .battle-title {
       color: var(--primary-yellow);
     }
 
+    .battle-meta-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.5rem;
+    }
+
     .battle-date {
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
     }
 
     .badge-container {
       display: flex;
-      gap: 0.4rem;
+      gap: 0.3rem;
       align-items: center;
     }
 
     .badge {
-      font-size: 0.75rem;
+      font-size: 0.65rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      padding: 0.15rem 0.5rem;
+      padding: 0.15rem 0.4rem;
       border-radius: 4px;
       background-color: #222;
       color: var(--text-muted);
       border: 1px solid var(--border-color);
     }
 
-    /* Etiqueta "Sin video" */
     .badge-no-video {
-      font-size: 0.75rem;
+      font-size: 0.65rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      padding: 0.15rem 0.5rem;
+      padding: 0.15rem 0.4rem;
       border-radius: 4px;
       background-color: #222;
       color: var(--text-muted);
       border: 1px solid var(--border-color);
     }
 
-    /* Etiqueta "Batalla virtual" */
     .badge-virtual {
-      font-size: 0.75rem;
+      font-size: 0.65rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      padding: 0.15rem 0.5rem;
+      padding: 0.15rem 0.4rem;
       border-radius: 4px;
       background-color: rgba(255, 255, 0, 0.1);
       color: var(--primary-yellow);
       border: 1px solid var(--primary-yellow);
     }
 
-    /* Sidebar posicionado alineado */
-    aside {
-      margin-top: 10rem;
-    }
-
-    /* Navigation Button */
-    .back-nav {
-      margin-top: 1.5rem;
-    }
-
-    .back-btn {
-      display: inline-block;
-      width: 100%;
-      text-align: center;
-      padding: 0.6rem 1rem;
-      background: var(--card-dark);
-      color: var(--text-light);
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.85rem;
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      transition: all 0.2s;
-    }
-
-    .back-btn:hover {
-      background: var(--primary-yellow);
-      color: var(--bg-dark);
-      border-color: var(--primary-yellow);
-    }
-
     /* Sidebar / Annotations */
+    aside {
+      margin-top: 2.5rem;
+    }
+
     .annotation-box {
       background: var(--card-dark);
       border-left: 4px solid var(--primary-yellow);
@@ -298,8 +309,33 @@
       line-height: 1.5;
     }
 
+    .back-nav {
+      margin-top: 1.5rem;
+    }
+
+    .back-btn {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      padding: 0.6rem 1rem;
+      background: var(--card-dark);
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .back-btn:hover {
+      background: var(--primary-yellow);
+      color: var(--bg-dark);
+      border-color: var(--primary-yellow);
+    }
+
     /* Responsive */
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
       .header-content {
         flex-direction: column;
         text-align: center;
@@ -345,367 +381,569 @@
   <!-- Main Section -->
   <main class="container main-layout">
     
-    <!-- Left Column: Catalog -->
+    <!-- Left Column: Catalog (Grid de Miniaturas) -->
     <section>
       <div class="section-title">
         <span>Historial de enfrentamientos:</span>
         <span class="count">35 Batallas</span>
       </div>
 
-      <div class="catalog-list">
+      <!-- 2016 -->
+      <h2 class="year-group-title">2016</h2>
+      <div class="battles-grid">
         
-        <!-- 2016 -->
-        <h2 class="year-group-title">2016</h2>
-
         <!-- #1 -->
         <a href="https://www.youtube.com/watch?v=lZZe0P9z6uw" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-img-container">
+            <img src="https://img.youtube.com/vi/lZZe0P9z6uw/hqdefault.jpg" alt="#1. As One vs. FreeBlack">
+          </div>
           <div class="battle-info">
             <span class="battle-title">#1. As One vs. FreeBlack</span>
-            <span class="battle-date">30/10/2016*</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">30/10/2016*</span>
+              <span class="badge">YouTube</span>
+            </div>
           </div>
-          <span class="badge">Ver en YouTube</span>
         </a>
 
-        <!-- 2017 -->
-        <h2 class="year-group-title">2017</h2>
+      </div>
+
+      <!-- 2017 -->
+      <h2 class="year-group-title">2017</h2>
+      <div class="battles-grid">
 
         <!-- #2 -->
         <a href="https://www.youtube.com/watch?v=Meotd7HSDZg" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-img-container">
+            <img src="https://img.youtube.com/vi/Meotd7HSDZg/hqdefault.jpg" alt="#2. As One vs. SLP">
+          </div>
           <div class="battle-info">
             <span class="battle-title">#2. As One vs. SLP</span>
-            <span class="battle-date">08/01/2017</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">08/01/2017</span>
+              <span class="badge">YouTube</span>
+            </div>
           </div>
-          <span class="badge">Ver en YouTube</span>
         </a>
 
         <!-- #3 -->
-        <div class="battle-card">
+        <div class="battle-card" style="cursor: default;">
+          <div class="battle-img-container" style="display: flex; align-items: center; justify-content: center; background: #161616;">
+            <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Sin miniatura</span>
+          </div>
           <div class="battle-info">
             <span class="battle-title">#3. As One vs. Big Soul</span>
-            <span class="battle-date">&mdash;/&mdash;/2017</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">&mdash;/&mdash;/2017</span>
+              <span class="badge-no-video">Sin Video</span>
+            </div>
           </div>
-          <span class="badge badge-no-video">Sin Video</span>
         </div>
 
         <!-- #4 -->
-        <div class="battle-card">
+        <div class="battle-card" style="cursor: default;">
+          <div class="battle-img-container" style="display: flex; align-items: center; justify-content: center; background: #161616;">
+            <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Sin miniatura</span>
+          </div>
           <div class="battle-info">
             <span class="battle-title">#4. As One vs. Ponta</span>
-            <span class="battle-date">&mdash;/07/2017</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">&mdash;/07/2017</span>
+              <span class="badge-no-video">Sin Video</span>
+            </div>
           </div>
-          <span class="badge badge-no-video">Sin Video</span>
         </div>
 
-        <!-- 2018 -->
-        <h2 class="year-group-title">2018</h2>
+      </div>
+
+      <!-- 2018 -->
+      <h2 class="year-group-title">2018</h2>
+      <div class="battles-grid">
 
         <!-- #5 -->
         <a href="https://www.youtube.com/watch?v=-HzLVE9qj0E" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-img-container">
+            <img src="https://img.youtube.com/vi/-HzLVE9qj0E/hqdefault.jpg" alt="#5. As One vs. Zaico">
+          </div>
           <div class="battle-info">
             <span class="battle-title">#5. As One vs. Zaico</span>
-            <span class="battle-date">30/01/2018</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">30/01/2018</span>
+              <span class="badge">YouTube</span>
+            </div>
           </div>
-          <span class="badge">Ver en YouTube</span>
         </a>
 
         <!-- #6 -->
-        <div class="battle-card">
+        <div class="battle-card" style="cursor: default;">
+          <div class="battle-img-container" style="display: flex; align-items: center; justify-content: center; background: #161616;">
+            <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Sin miniatura</span>
+          </div>
           <div class="battle-info">
             <span class="battle-title">#6. As One vs. Xioc</span>
-            <span class="battle-date">02/02/2018</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">02/02/2018</span>
+              <span class="badge-no-video">Sin Video</span>
+            </div>
           </div>
-          <span class="badge badge-no-video">Sin Video</span>
         </div>
 
         <!-- #7 -->
-        <div class="battle-card">
+        <div class="battle-card" style="cursor: default;">
+          <div class="battle-img-container" style="display: flex; align-items: center; justify-content: center; background: #161616;">
+            <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Sin miniatura</span>
+          </div>
           <div class="battle-info">
             <span class="battle-title">#7. As One vs. FreeBlack [rematch]</span>
-            <span class="battle-date">31/03/2018</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">31/03/2018</span>
+              <span class="badge-no-video">Sin Video</span>
+            </div>
           </div>
-          <span class="badge badge-no-video">Sin Video</span>
         </div>
 
         <!-- #8 -->
-        <div class="battle-card">
+        <div class="battle-card" style="cursor: default;">
+          <div class="battle-img-container" style="display: flex; align-items: center; justify-content: center; background: #161616;">
+            <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Sin miniatura</span>
+          </div>
           <div class="battle-info">
             <span class="battle-title">#8. As One vs. Tante</span>
-            <span class="battle-date">06/04/2018</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">06/04/2018</span>
+              <span class="badge-no-video">Sin Video</span>
+            </div>
           </div>
-          <span class="badge badge-no-video">Sin Video</span>
         </div>
 
         <!-- #9 -->
-        <div class="battle-card">
+        <div class="battle-card" style="cursor: default;">
+          <div class="battle-img-container" style="display: flex; align-items: center; justify-content: center; background: #161616;">
+            <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Sin miniatura</span>
+          </div>
           <div class="battle-info">
             <span class="battle-title">#9. As One vs. Virus</span>
-            <span class="battle-date">29/09/2018</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">29/09/2018</span>
+              <span class="badge-no-video">Sin Video</span>
+            </div>
           </div>
-          <span class="badge badge-no-video">Sin Video</span>
         </div>
 
-        <!-- 2019 -->
-        <h2 class="year-group-title">2019</h2>
+      </div>
+
+      <!-- 2019 -->
+      <h2 class="year-group-title">2019</h2>
+      <div class="battles-grid">
 
         <!-- #10 -->
-        <div class="battle-card">
+        <div class="battle-card" style="cursor: default;">
+          <div class="battle-img-container" style="display: flex; align-items: center; justify-content: center; background: #161616;">
+            <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Sin miniatura</span>
+          </div>
           <div class="battle-info">
             <span class="battle-title">#10. As One vs. Zaico [rematch]</span>
-            <span class="battle-date">27/04/2019</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">27/04/2019</span>
+              <span class="badge-no-video">Sin Video</span>
+            </div>
           </div>
-          <span class="badge badge-no-video">Sin Video</span>
         </div>
 
         <!-- #11 -->
         <a href="https://www.youtube.com/watch?v=HdU0mSBqi1Y" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-img-container">
+            <img src="https://img.youtube.com/vi/HdU0mSBqi1Y/hqdefault.jpg" alt="#11. As One vs. Lion">
+          </div>
           <div class="battle-info">
             <span class="battle-title">#11. As One vs. Lion</span>
-            <span class="battle-date">04/10/2019</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">04/10/2019</span>
+              <span class="badge">YouTube</span>
+            </div>
           </div>
-          <span class="badge">Ver en YouTube</span>
         </a>
 
         <!-- #12 -->
-        <div class="battle-card">
+        <div class="battle-card" style="cursor: default;">
+          <div class="battle-img-container" style="display: flex; align-items: center; justify-content: center; background: #161616;">
+            <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Sin miniatura</span>
+          </div>
           <div class="battle-info">
             <span class="battle-title">#12. As One vs. Skinny</span>
-            <span class="battle-date">23/11/2019</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">23/11/2019</span>
+              <span class="badge-no-video">Sin Video</span>
+            </div>
           </div>
-          <span class="badge badge-no-video">Sin Video</span>
         </div>
 
-        <!-- 2020 -->
-        <h2 class="year-group-title">2020</h2>
+      </div>
+
+      <!-- 2020 -->
+      <h2 class="year-group-title">2020</h2>
+      <div class="battles-grid">
 
         <!-- #13 -->
-        <div class="battle-card">
+        <div class="battle-card" style="cursor: default;">
+          <div class="battle-img-container" style="display: flex; align-items: center; justify-content: center; background: #161616;">
+            <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Sin miniatura</span>
+          </div>
           <div class="battle-info">
             <span class="battle-title">#13. As One vs. KidSus</span>
-            <span class="battle-date">12/08/2020*</span>
-          </div>
-          <div class="badge-container">
-            <span class="badge-virtual">Virtual</span>
-            <span class="badge badge-no-video">Sin Video</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">12/08/2020*</span>
+              <div class="badge-container">
+                <span class="badge-virtual">Virtual</span>
+                <span class="badge-no-video">Sin Video</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- 2022 -->
-        <h2 class="year-group-title">2022</h2>
+      </div>
+
+      <!-- 2022 -->
+      <h2 class="year-group-title">2022</h2>
+      <div class="battles-grid">
 
         <!-- #14 -->
-        <div class="battle-card">
+        <div class="battle-card" style="cursor: default;">
+          <div class="battle-img-container" style="display: flex; align-items: center; justify-content: center; background: #161616;">
+            <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Sin miniatura</span>
+          </div>
           <div class="battle-info">
             <span class="battle-title">#14. As One vs. Read</span>
-            <span class="battle-date">13/02/2022</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">13/02/2022</span>
+              <span class="badge-no-video">Sin Video</span>
+            </div>
           </div>
-          <span class="badge badge-no-video">Sin Video</span>
         </div>
 
         <!-- #15 -->
-        <div class="battle-card">
+        <div class="battle-card" style="cursor: default;">
+          <div class="battle-img-container" style="display: flex; align-items: center; justify-content: center; background: #161616;">
+            <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Sin miniatura</span>
+          </div>
           <div class="battle-info">
             <span class="battle-title">#15. As One vs. Zaico [part III]</span>
-            <span class="battle-date">07/05/2022</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">07/05/2022</span>
+              <span class="badge-no-video">Sin Video</span>
+            </div>
           </div>
-          <span class="badge badge-no-video">Sin Video</span>
         </div>
 
         <!-- #16 -->
-        <div class="battle-card">
+        <div class="battle-card" style="cursor: default;">
+          <div class="battle-img-container" style="display: flex; align-items: center; justify-content: center; background: #161616;">
+            <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Sin miniatura</span>
+          </div>
           <div class="battle-info">
             <span class="battle-title">#16. As One vs. Killer</span>
-            <span class="battle-date">19/06/2022</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">19/06/2022</span>
+              <span class="badge-no-video">Sin Video</span>
+            </div>
           </div>
-          <span class="badge badge-no-video">Sin Video</span>
         </div>
 
         <!-- #17 -->
         <a href="https://www.youtube.com/watch?v=vdG7X-s-JmI" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-img-container">
+            <img src="https://img.youtube.com/vi/vdG7X-s-JmI/hqdefault.jpg" alt="#17. As One vs. Caleb Santos">
+          </div>
           <div class="battle-info">
             <span class="battle-title">#17. As One vs. Caleb Santos</span>
-            <span class="battle-date">28/08/2022</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">28/08/2022</span>
+              <span class="badge">YouTube</span>
+            </div>
           </div>
-          <span class="badge">Ver en YouTube</span>
         </a>
 
         <!-- #18 -->
         <a href="https://www.youtube.com/watch?v=tdg2tzUGbdg" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-img-container">
+            <img src="https://img.youtube.com/vi/tdg2tzUGbdg/hqdefault.jpg" alt="#18. As One vs. Big Soul [rematch]">
+          </div>
           <div class="battle-info">
             <span class="battle-title">#18. As One vs. Big Soul [rematch]</span>
-            <span class="battle-date">06/11/2022</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">06/11/2022</span>
+              <span class="badge">YouTube</span>
+            </div>
           </div>
-          <span class="badge">Ver en YouTube</span>
         </a>
 
-        <!-- 2023 -->
-        <h2 class="year-group-title">2023</h2>
+      </div>
+
+      <!-- 2023 -->
+      <h2 class="year-group-title">2023</h2>
+      <div class="battles-grid">
 
         <!-- #19 -->
         <a href="https://www.youtube.com/watch?v=ATow3h73-hY" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-img-container">
+            <img src="https://img.youtube.com/vi/ATow3h73-hY/hqdefault.jpg" alt="#19. As One vs. Mateii">
+          </div>
           <div class="battle-info">
             <span class="battle-title">#19. As One vs. Mateii</span>
-            <span class="battle-date">17/03/2023</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">17/03/2023</span>
+              <span class="badge">YouTube</span>
+            </div>
           </div>
-          <span class="badge">Ver en YouTube</span>
         </a>
 
         <!-- #20 -->
-        <div class="battle-card">
+        <div class="battle-card" style="cursor: default;">
+          <div class="battle-img-container" style="display: flex; align-items: center; justify-content: center; background: #161616;">
+            <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Sin miniatura</span>
+          </div>
           <div class="battle-info">
             <span class="battle-title">#20. As One vs. JBestia</span>
-            <span class="battle-date">21/05/2023</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">21/05/2023</span>
+              <span class="badge-no-video">Sin Video</span>
+            </div>
           </div>
-          <span class="badge badge-no-video">Sin Video</span>
         </div>
 
         <!-- #21 -->
         <a href="https://www.youtube.com/watch?v=Puj7Ho4MqnU" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-img-container">
+            <img src="https://img.youtube.com/vi/Puj7Ho4MqnU/hqdefault.jpg" alt="#21. As One vs. Divine">
+          </div>
           <div class="battle-info">
             <span class="battle-title">#21. As One vs. Divine</span>
-            <span class="battle-date">19/08/2023</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">19/08/2023</span>
+              <span class="badge">YouTube</span>
+            </div>
           </div>
-          <span class="badge">Ver en YouTube</span>
         </a>
 
         <!-- #22 -->
         <a href="https://www.youtube.com/watch?v=j_outjs3-x0" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-img-container">
+            <img src="https://img.youtube.com/vi/j_outjs3-x0/hqdefault.jpg" alt="#22. As One vs. Nata">
+          </div>
           <div class="battle-info">
             <span class="battle-title">#22. As One vs. Nata</span>
-            <span class="battle-date">10/12/2023</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">10/12/2023</span>
+              <span class="badge">YouTube</span>
+            </div>
           </div>
-          <span class="badge">Ver en YouTube</span>
         </a>
 
-        <!-- 2024 -->
-        <h2 class="year-group-title">2024</h2>
+      </div>
+
+      <!-- 2024 -->
+      <h2 class="year-group-title">2024</h2>
+      <div class="battles-grid">
 
         <!-- #23 -->
         <a href="https://www.youtube.com/watch?v=YHFBEAP4yOg" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-img-container">
+            <img src="https://img.youtube.com/vi/YHFBEAP4yOg/hqdefault.jpg" alt="#23. As One vs. Lauta">
+          </div>
           <div class="battle-info">
             <span class="battle-title">#23. As One vs. Lauta</span>
-            <span class="battle-date">07/04/2024</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">07/04/2024</span>
+              <span class="badge">YouTube</span>
+            </div>
           </div>
-          <span class="badge">Ver en YouTube</span>
         </a>
 
         <!-- #24 -->
-        <div class="battle-card">
+        <div class="battle-card" style="cursor: default;">
+          <div class="battle-img-container" style="display: flex; align-items: center; justify-content: center; background: #161616;">
+            <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Sin miniatura</span>
+          </div>
           <div class="battle-info">
             <span class="battle-title">#24. As One vs. Wizzard</span>
-            <span class="battle-date">16/06/2024</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">16/06/2024</span>
+              <span class="badge-no-video">Sin Video</span>
+            </div>
           </div>
-          <span class="badge badge-no-video">Sin Video</span>
         </div>
 
         <!-- #25 -->
-        <div class="battle-card">
+        <div class="battle-card" style="cursor: default;">
+          <div class="battle-img-container" style="display: flex; align-items: center; justify-content: center; background: #161616;">
+            <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Sin miniatura</span>
+          </div>
           <div class="battle-info">
             <span class="battle-title">#25. As One vs. Yenko</span>
-            <span class="battle-date">01/12/2024</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">01/12/2024</span>
+              <span class="badge-no-video">Sin Video</span>
+            </div>
           </div>
-          <span class="badge badge-no-video">Sin Video</span>
         </div>
 
-        <!-- 2025 -->
-        <h2 class="year-group-title">2025</h2>
+      </div>
+
+      <!-- 2025 -->
+      <h2 class="year-group-title">2025</h2>
+      <div class="battles-grid">
 
         <!-- #26 -->
         <a href="https://www.youtube.com/watch?v=-8fj6Gc2FTE" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-img-container">
+            <img src="https://img.youtube.com/vi/-8fj6Gc2FTE/hqdefault.jpg" alt="#26. As One vs. Maxxi XL">
+          </div>
           <div class="battle-info">
             <span class="battle-title">#26. As One vs. Maxxi XL</span>
-            <span class="battle-date">25/01/2025</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">25/01/2025</span>
+              <span class="badge">YouTube</span>
+            </div>
           </div>
-          <span class="badge">Ver en YouTube</span>
         </a>
 
         <!-- #27 -->
         <a href="https://www.youtube.com/watch?v=Jhz_VEGTRjM" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-img-container">
+            <img src="https://img.youtube.com/vi/Jhz_VEGTRjM/hqdefault.jpg" alt="#27. As One vs. JQ Reyes">
+          </div>
           <div class="battle-info">
             <span class="battle-title">#27. As One vs. JQ Reyes</span>
-            <span class="battle-date">09/02/2025</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">09/02/2025</span>
+              <span class="badge">YouTube</span>
+            </div>
           </div>
-          <span class="badge">Ver en YouTube</span>
         </a>
 
         <!-- #28 -->
         <a href="https://www.youtube.com/watch?v=sUC_UWTDVr8" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-img-container">
+            <img src="https://img.youtube.com/vi/sUC_UWTDVr8/hqdefault.jpg" alt="#28. As One vs. Hampper">
+          </div>
           <div class="battle-info">
             <span class="battle-title">#28. As One vs. Hampper</span>
-            <span class="battle-date">09/03/2025</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">09/03/2025</span>
+              <span class="badge">YouTube</span>
+            </div>
           </div>
-          <span class="badge">Ver en YouTube</span>
         </a>
 
         <!-- #29 -->
         <a href="https://www.youtube.com/watch?v=uFR8UfKVJsw" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-img-container">
+            <img src="https://img.youtube.com/vi/uFR8UfKVJsw/hqdefault.jpg" alt="#29. As One vs. JotaD">
+          </div>
           <div class="battle-info">
             <span class="battle-title">#29. As One vs. JotaD</span>
-            <span class="battle-date">27/04/2025</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">27/04/2025</span>
+              <span class="badge">YouTube</span>
+            </div>
           </div>
-          <span class="badge">Ver en YouTube</span>
         </a>
 
         <!-- #30 -->
         <a href="https://www.youtube.com/watch?v=Nj_x0ed7IOk" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-img-container">
+            <img src="https://img.youtube.com/vi/Nj_x0ed7IOk/hqdefault.jpg" alt="#30. As One vs. Darax">
+          </div>
           <div class="battle-info">
             <span class="battle-title">#30. As One vs. Darax</span>
-            <span class="battle-date">27/07/2025</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">27/07/2025</span>
+              <span class="badge">YouTube</span>
+            </div>
           </div>
-          <span class="badge">Ver en YouTube</span>
         </a>
 
         <!-- #31 -->
         <a href="https://www.youtube.com/watch?v=m3jz7bqDEg0" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-img-container">
+            <img src="https://img.youtube.com/vi/m3jz7bqDEg0/hqdefault.jpg" alt="#31. As One vs. Caleb Santos [rematch]">
+          </div>
           <div class="battle-info">
             <span class="battle-title">#31. As One vs. Caleb Santos [rematch]</span>
-            <span class="battle-date">17/08/2025</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">17/08/2025</span>
+              <span class="badge">YouTube</span>
+            </div>
           </div>
-          <span class="badge">Ver en YouTube</span>
         </a>
 
-        <!-- 2026 -->
-        <h2 class="year-group-title">2026</h2>
+      </div>
+
+      <!-- 2026 -->
+      <h2 class="year-group-title">2026</h2>
+      <div class="battles-grid">
 
         <!-- #32 -->
         <a href="https://www.youtube.com/watch?v=-J0Xp-S3jE4" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-img-container">
+            <img src="https://img.youtube.com/vi/-J0Xp-S3jE4/hqdefault.jpg" alt="#32. As One vs. Polirritmia">
+          </div>
           <div class="battle-info">
             <span class="battle-title">#32. As One vs. Polirritmia</span>
-            <span class="battle-date">30/01/2026*</span>
-          </div>
-          <div class="badge-container">
-            <span class="badge-virtual">Virtual</span>
-            <span class="badge">Ver en YouTube</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">30/01/2026*</span>
+              <div class="badge-container">
+                <span class="badge-virtual">Virtual</span>
+                <span class="badge">YouTube</span>
+              </div>
+            </div>
           </div>
         </a>
 
         <!-- #33 -->
         <a href="https://www.youtube.com/watch?v=jIkGBQiu-l8" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-img-container">
+            <img src="https://img.youtube.com/vi/jIkGBQiu-l8/hqdefault.jpg" alt="#33. As One & Lauta vs. Wasok & Dei G">
+          </div>
           <div class="battle-info">
             <span class="battle-title">#33. As One & Lauta vs. Wasok & Dei G</span>
-            <span class="battle-date">07/03/2026</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">07/03/2026</span>
+              <span class="badge">YouTube</span>
+            </div>
           </div>
-          <span class="badge">Ver en YouTube</span>
         </a>
 
         <!-- #34 -->
         <a href="https://www.youtube.com/watch?v=iHYsVzLHgms" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-img-container">
+            <img src="https://img.youtube.com/vi/iHYsVzLHgms/hqdefault.jpg" alt="#34. As One vs. Sempiterno">
+          </div>
           <div class="battle-info">
             <span class="battle-title">#34. As One vs. Sempiterno</span>
-            <span class="battle-date">06/06/2026</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">06/06/2026</span>
+              <span class="badge">YouTube</span>
+            </div>
           </div>
-          <span class="badge">Ver en YouTube</span>
         </a>
 
         <!-- #35 -->
         <a href="https://www.youtube.com/watch?v=Pi86rrh2DGw&t=8s" target="_blank" rel="noopener noreferrer" class="battle-card">
+          <div class="battle-img-container">
+            <img src="https://img.youtube.com/vi/Pi86rrh2DGw/hqdefault.jpg" alt="#35. As One vs. Toro">
+          </div>
           <div class="battle-info">
             <span class="battle-title">#35. As One vs. Toro</span>
-            <span class="battle-date">25/07/2026</span>
+            <div class="battle-meta-footer">
+              <span class="battle-date">25/07/2026</span>
+              <span class="badge">YouTube</span>
+            </div>
           </div>
-          <span class="badge">Ver en YouTube</span>
         </a>
 
       </div>
+
     </section>
 
     <!-- Right Column: Sidebar & Annotations -->
