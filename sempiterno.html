@@ -8,11 +8,12 @@
     :root {
       --primary-yellow: #ffff00;
       --bg-dark: #0a0a0a;
-      --card-dark: #121212;
-      --card-hover: #1a1a1a;
+      --card-dark: #141414;
+      --card-hover: #1e1e1e;
       --text-light: #ffffff;
-      --text-muted: #888888;
-      --border-color: #222222;
+      --text-muted: #a0a0a0;
+      --border-color: #262626;
+      --accent-gray: #333333;
     }
 
     * {
@@ -25,21 +26,18 @@
     body {
       background-color: var(--bg-dark);
       color: var(--text-light);
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
-    /* Header / Hero Section con portada */
+    /* Header / Hero Section */
     .hero-banner {
-      position: relative;
-      background: linear-gradient(rgba(10, 10, 10, 0.80), rgba(10, 10, 10, 0.90)), url('portada.JPG');
-      background-size: cover;
-      background-position: center;
+      background: linear-gradient(180deg, #181818 0%, var(--bg-dark) 100%);
       border-bottom: 2px solid var(--primary-yellow);
       padding: 3.5rem 1.5rem 2.5rem 1.5rem;
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 980px;
       margin: 0 auto;
     }
 
@@ -73,8 +71,10 @@
       letter-spacing: -0.5px;
       margin-bottom: 0.8rem;
       line-height: 1.1;
+    }
+
+    .meta-info h1 span {
       color: var(--primary-yellow);
-      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
     }
 
     .stats-bar {
@@ -84,7 +84,7 @@
       text-transform: uppercase;
       letter-spacing: 1px;
       color: var(--text-muted);
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(255, 255, 255, 0.03);
       padding: 0.6rem 1rem;
       border-radius: 4px;
       border: 1px solid var(--border-color);
@@ -113,7 +113,7 @@
     /* Main Layout */
     .main-layout {
       display: grid;
-      grid-template-columns: 3fr 1fr;
+      grid-template-columns: 2fr 1fr;
       gap: 2.5rem;
       padding: 2.5rem 1.5rem 4rem 1.5rem;
     }
@@ -145,158 +145,95 @@
       font-size: 1.3rem;
       font-weight: 800;
       text-transform: uppercase;
-      margin: 2rem 0 1rem 0;
-      border-bottom: 1px dashed var(--border-color);
-      padding-bottom: 0.3rem;
+      margin: 1.5rem 0 0.5rem 0;
     }
 
     .year-group-title:first-of-type {
       margin-top: 0;
     }
 
-    /* Grid de Batallas (Estilo Tarjetas URL) */
-    .battles-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 1.25rem;
-      margin-bottom: 2rem;
+    /* Catalog List */
+    .catalog-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
     }
 
     .battle-card {
       background-color: var(--card-dark);
       border: 1px solid var(--border-color);
       border-radius: 6px;
-      overflow: hidden;
+      padding: 0.6rem 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s ease;
       text-decoration: none;
       color: inherit;
-      display: flex;
-      flex-direction: column;
-      transition: all 0.25s ease;
-      position: relative;
     }
 
     .battle-card:hover {
       border-color: var(--primary-yellow);
-      transform: translateY(-4px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-    }
-
-    .battle-img-container {
-      width: 100%;
-      height: 140px;
-      background-color: #1a1a1a;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .battle-img-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    .battle-card:hover .battle-img-container img {
-      transform: scale(1.05);
+      background-color: var(--card-hover);
+      transform: translateX(4px);
     }
 
     .battle-info {
-      padding: 1rem;
-      background-color: var(--card-dark);
-      border-top: 1px solid var(--border-color);
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
-      flex-grow: 1;
-      justify-content: space-between;
     }
 
     .battle-title {
-      font-weight: 800;
-      font-size: 0.95rem;
-      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 1rem;
       color: var(--text-light);
-      letter-spacing: 0.5px;
       display: block;
-      line-height: 1.3;
+      transition: color 0.2s;
     }
 
     .battle-card:hover .battle-title {
       color: var(--primary-yellow);
     }
 
-    .battle-meta-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 0.5rem;
-    }
-
     .battle-date {
-      font-size: 0.75rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
     }
 
     .badge-container {
       display: flex;
-      gap: 0.3rem;
+      gap: 0.4rem;
       align-items: center;
     }
 
     .badge {
-      font-size: 0.65rem;
+      font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      padding: 0.15rem 0.4rem;
+      padding: 0.15rem 0.5rem;
       border-radius: 4px;
       background-color: #222;
       color: var(--text-muted);
       border: 1px solid var(--border-color);
     }
 
+    /* Etiqueta "Batalla virtual" */
     .badge-virtual {
-      font-size: 0.65rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      padding: 0.15rem 0.4rem;
-      border-radius: 4px;
-      background-color: rgba(255, 255, 0, 0.1);
+      font-size: 0.45rem;
+      padding: 0.02rem 0.15rem;
+      border: 0.5px solid var(--primary-yellow);
       color: var(--primary-yellow);
-      border: 1px solid var(--primary-yellow);
+      font-weight: 600;
+      border-radius: 2px;
     }
 
-    /* Sidebar / Annotations */
+    /* Sidebar posicionado alineado */
     aside {
-      margin-top: 2.5rem;
+      margin-top: 10rem;
     }
 
-    .annotation-box {
-      background: var(--card-dark);
-      border-left: 4px solid var(--primary-yellow);
-      border-top: 1px solid var(--border-color);
-      border-right: 1px solid var(--border-color);
-      border-bottom: 1px solid var(--border-color);
-      padding: 1.25rem;
-      border-radius: 0 6px 6px 0;
-      font-size: 0.9rem;
-      color: #cccccc;
-      margin-bottom: 1rem;
-    }
-
-    .annotation-box h3 {
-      color: var(--text-light);
-      font-size: 0.95rem;
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .annotation-box p {
-      line-height: 1.5;
-    }
-
+    /* Navigation Button */
     .back-nav {
       margin-top: 1.5rem;
     }
@@ -322,8 +259,34 @@
       border-color: var(--primary-yellow);
     }
 
+    /* Sidebar / Annotations */
+    .annotation-box {
+      background: var(--card-dark);
+      border-left: 4px solid var(--primary-yellow);
+      border-top: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.25rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+      color: #cccccc;
+      margin-bottom: 1rem;
+    }
+
+    .annotation-box h3 {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .annotation-box p {
+      line-height: 1.5;
+    }
+
     /* Responsive */
-    @media (max-width: 900px) {
+    @media (max-width: 768px) {
       .header-content {
         flex-direction: column;
         text-align: center;
@@ -353,9 +316,9 @@
           <img src="sempiterno.jpg" alt="Sempiterno">
         </div>
         <div class="meta-info">
-          <h1>Sempiterno</h1>
+          <h1><span>Sempiterno</span></h1>
           <div class="stats-bar">
-            <span><strong>14</strong> Batallas</span>
+            <span><strong>13</strong> Batallas</span>
             <span><strong>2024 - 2026</strong> Trayectoria</span>
           </div>
           <div class="origin-location">
@@ -369,245 +332,168 @@
   <!-- Main Section -->
   <main class="container main-layout">
     
-    <!-- Left Column: Catalog (Grid de Miniaturas) -->
+    <!-- Left Column: Catalog -->
     <section>
       <div class="section-title">
         <span>Historial de enfrentamientos:</span>
-        <span class="count">14 Batallas</span>
+        <span class="count">13 Batallas</span>
       </div>
 
-      <!-- 2024 -->
-      <h2 class="year-group-title">2024</h2>
-      <div class="battles-grid">
+      <div class="catalog-list">
         
+        <!-- 2024 -->
+        <h2 class="year-group-title">2024</h2>
+
         <!-- #1 -->
         <a href="https://www.youtube.com/watch?v=X9XwBJh_agI" target="_blank" rel="noopener noreferrer" class="battle-card">
-          <div class="battle-img-container">
-            <img src="https://img.youtube.com/vi/X9XwBJh_agI/hqdefault.jpg" alt="#1. Sempiterno vs. Cabrera">
-          </div>
           <div class="battle-info">
             <span class="battle-title">#1. Sempiterno vs. Cabrera</span>
-            <div class="battle-meta-footer">
-              <span class="battle-date">28/11/2024*</span>
-              <div class="badge-container">
-                <span class="badge-virtual">Virtual</span>
-                <span class="badge">YouTube</span>
-              </div>
-            </div>
+            <span class="battle-date">28/11/2024*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
           </div>
         </a>
 
-      </div>
-
-      <!-- 2025 -->
-      <h2 class="year-group-title">2025</h2>
-      <div class="battles-grid">
+        <!-- 2025 -->
+        <h2 class="year-group-title">2025</h2>
 
         <!-- #2 -->
         <a href="https://www.youtube.com/watch?v=DCUUfbz8D1Q&t=1s" target="_blank" rel="noopener noreferrer" class="battle-card">
-          <div class="battle-img-container">
-            <img src="https://img.youtube.com/vi/DCUUfbz8D1Q/hqdefault.jpg" alt="#2. Sempiterno vs. Rocket">
-          </div>
           <div class="battle-info">
             <span class="battle-title">#2. Sempiterno vs. Rocket</span>
-            <div class="battle-meta-footer">
-              <span class="battle-date">22/07/2025*</span>
-              <div class="badge-container">
-                <span class="badge-virtual">Virtual</span>
-                <span class="badge">YouTube</span>
-              </div>
-            </div>
+            <span class="battle-date">22/07/2025*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
           </div>
         </a>
 
         <!-- #3 -->
         <a href="https://www.youtube.com/watch?v=YwpdvxE-7J4" target="_blank" rel="noopener noreferrer" class="battle-card">
-          <div class="battle-img-container">
-            <img src="https://img.youtube.com/vi/YwpdvxE-7J4/hqdefault.jpg" alt="#3. Sempiterno vs. Old Hanzo">
-          </div>
           <div class="battle-info">
             <span class="battle-title">#3. Sempiterno vs. Old Hanzo</span>
-            <div class="battle-meta-footer">
-              <span class="battle-date">29/07/2025*</span>
-              <div class="badge-container">
-                <span class="badge-virtual">Virtual</span>
-                <span class="badge">YouTube</span>
-              </div>
-            </div>
+            <span class="battle-date">29/07/2025*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
           </div>
         </a>
 
         <!-- #4 -->
         <a href="https://www.youtube.com/watch?v=IOgZN8tEbDs&t=474s" target="_blank" rel="noopener noreferrer" class="battle-card">
-          <div class="battle-img-container">
-            <img src="https://img.youtube.com/vi/IOgZN8tEbDs/hqdefault.jpg" alt="#4. Sempiterno vs. Temple">
-          </div>
           <div class="battle-info">
             <span class="battle-title">#4. Sempiterno vs. Temple</span>
-            <div class="battle-meta-footer">
-              <span class="battle-date">02/08/2025</span>
-              <span class="badge">YouTube</span>
-            </div>
+            <span class="battle-date">02/08/2025</span>
           </div>
+          <span class="badge">Ver en YouTube</span>
         </a>
 
         <!-- #5 -->
         <a href="https://www.youtube.com/watch?v=0uhPShLy1Wo&t=168s" target="_blank" rel="noopener noreferrer" class="battle-card">
-          <div class="battle-img-container">
-            <img src="https://img.youtube.com/vi/0uhPShLy1Wo/hqdefault.jpg" alt="#5. Sempiterno vs. Espejo">
-          </div>
           <div class="battle-info">
             <span class="battle-title">#5. Sempiterno vs. Espejo</span>
-            <div class="battle-meta-footer">
-              <span class="battle-date">11/10/2025</span>
-              <span class="badge">YouTube</span>
-            </div>
+            <span class="battle-date">11/10/2025</span>
           </div>
+          <span class="badge">Ver en YouTube</span>
         </a>
 
         <!-- #6 -->
         <a href="https://www.youtube.com/watch?v=FtHNDRqL2_M&t=10s" target="_blank" rel="noopener noreferrer" class="battle-card">
-          <div class="battle-img-container">
-            <img src="https://img.youtube.com/vi/FtHNDRqL2_M/hqdefault.jpg" alt="#6. Sempiterno vs. Anubis">
-          </div>
           <div class="battle-info">
             <span class="battle-title">#6. Sempiterno vs. Anubis</span>
-            <div class="battle-meta-footer">
-              <span class="battle-date">13/12/2025</span>
-              <span class="badge">YouTube</span>
-            </div>
+            <span class="battle-date">13/12/2025</span>
           </div>
+          <span class="badge">Ver en YouTube</span>
         </a>
 
-      </div>
-
-      <!-- 2026 -->
-      <h2 class="year-group-title">2026</h2>
-      <div class="battles-grid">
+        <!-- 2026 -->
+        <h2 class="year-group-title">2026</h2>
 
         <!-- #7 -->
         <a href="https://www.youtube.com/watch?v=dNM2ha2QQLA" target="_blank" rel="noopener noreferrer" class="battle-card">
-          <div class="battle-img-container">
-            <img src="https://img.youtube.com/vi/dNM2ha2QQLA/hqdefault.jpg" alt="#7. Sempiterno vs. Ese Sihor One">
-          </div>
           <div class="battle-info">
             <span class="battle-title">#7. Sempiterno vs. Ese Sihor One</span>
-            <div class="battle-meta-footer">
-              <span class="battle-date">01/01/2026*</span>
-              <div class="badge-container">
-                <span class="badge-virtual">Virtual</span>
-                <span class="badge">YouTube</span>
-              </div>
-            </div>
+            <span class="battle-date">01/01/2026*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
           </div>
         </a>
 
         <!-- #8 -->
         <a href="https://www.youtube.com/watch?v=h90UzANSzGQ&t=120s" target="_blank" rel="noopener noreferrer" class="battle-card">
-          <div class="battle-img-container">
-            <img src="https://img.youtube.com/vi/h90UzANSzGQ/hqdefault.jpg" alt="#8. Sempiterno vs. Pablito ABR">
-          </div>
           <div class="battle-info">
             <span class="battle-title">#8. Sempiterno vs. Pablito ABR</span>
-            <div class="battle-meta-footer">
-              <span class="battle-date">07/03/2026</span>
-              <span class="badge">YouTube</span>
-            </div>
+            <span class="battle-date">07/03/2026</span>
           </div>
+          <span class="badge">Ver en YouTube</span>
         </a>
 
         <!-- #9 -->
         <a href="https://www.youtube.com/watch?v=MWtgmYnC3lE&t=79s" target="_blank" rel="noopener noreferrer" class="battle-card">
-          <div class="battle-img-container">
-            <img src="https://img.youtube.com/vi/MWtgmYnC3lE/hqdefault.jpg" alt="#9. Sempiterno vs. Adeuz">
-          </div>
           <div class="battle-info">
             <span class="battle-title">#9. Sempiterno vs. Adeuz</span>
-            <div class="battle-meta-footer">
-              <span class="battle-date">25/04/2026</span>
-              <span class="badge">YouTube</span>
-            </div>
+            <span class="battle-date">25/04/2026</span>
           </div>
+          <span class="badge">Ver en YouTube</span>
         </a>
 
         <!-- #10 -->
         <a href="https://www.youtube.com/watch?v=EnXtCo9L0HE&t=9s" target="_blank" rel="noopener noreferrer" class="battle-card">
-          <div class="battle-img-container">
-            <img src="https://img.youtube.com/vi/EnXtCo9L0HE/hqdefault.jpg" alt="#10. Sempiterno vs. Cielín 911">
-          </div>
           <div class="battle-info">
             <span class="battle-title">#10. Sempiterno vs. Cielín 911</span>
-            <div class="battle-meta-footer">
-              <span class="battle-date">02/06/2026*</span>
-              <div class="badge-container">
-                <span class="badge-virtual">Virtual</span>
-                <span class="badge">YouTube</span>
-              </div>
-            </div>
+            <span class="battle-date">02/06/2026*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
           </div>
         </a>
 
         <!-- #11 -->
         <a href="https://www.youtube.com/watch?v=iHYsVzLHgms&t=333s" target="_blank" rel="noopener noreferrer" class="battle-card">
-          <div class="battle-img-container">
-            <img src="https://img.youtube.com/vi/iHYsVzLHgms/hqdefault.jpg" alt="#11. Sempiterno vs. As One">
-          </div>
           <div class="battle-info">
             <span class="battle-title">#11. Sempiterno vs. As One</span>
-            <div class="battle-meta-footer">
-              <span class="battle-date">06/06/2026</span>
-              <span class="badge">YouTube</span>
-            </div>
+            <span class="battle-date">06/06/2026</span>
           </div>
+          <span class="badge">Ver en YouTube</span>
         </a>
 
         <!-- #12 -->
         <a href="https://www.youtube.com/watch?v=27VUtmowPfM" target="_blank" rel="noopener noreferrer" class="battle-card">
-          <div class="battle-img-container">
-            <img src="https://img.youtube.com/vi/27VUtmowPfM/hqdefault.jpg" alt="#12. Sempiterno vs. Tetra">
-          </div>
           <div class="battle-info">
             <span class="battle-title">#12. Sempiterno vs. Tetra</span>
-            <div class="battle-meta-footer">
-              <span class="battle-date">09/06/2026*</span>
-              <div class="badge-container">
-                <span class="badge-virtual">Virtual</span>
-                <span class="badge">YouTube</span>
-              </div>
-            </div>
+            <span class="battle-date">09/06/2026*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge">Ver en YouTube</span>
           </div>
         </a>
 
         <!-- #13 -->
         <a href="https://www.youtube.com/watch?v=vknrbnsE2wY&t=990s" target="_blank" rel="noopener noreferrer" class="battle-card">
-          <div class="battle-img-container">
-            <img src="https://img.youtube.com/vi/vknrbnsE2wY/hqdefault.jpg" alt="#13. Sempiterno vs. Too Yugan">
-          </div>
           <div class="battle-info">
             <span class="battle-title">#13. Sempiterno vs. Too Yugan</span>
-            <div class="battle-meta-footer">
-              <span class="battle-date">01/08/2026</span>
-              <span class="badge">YouTube</span>
-            </div>
+            <span class="battle-date">01/08/2026</span>
           </div>
+          <span class="badge">Ver en YouTube</span>
         </a>
-
-        <!-- #14 -->
+                <!-- #14 -->
         <a href="https://www.youtube.com/watch?v=fvIzFP4TxWc" target="_blank" rel="noopener noreferrer" class="battle-card">
-          <div class="battle-img-container">
-            <img src="https://img.youtube.com/vi/fvIzFP4TxWc/hqdefault.jpg" alt="#14. Sempiterno vs. Morbus Sonicko">
-          </div>
           <div class="battle-info">
             <span class="battle-title">#14. Sempiterno vs. Morbus Sonicko</span>
-            <div class="battle-meta-footer">
-              <span class="battle-date">10/10/2026</span>
-              <span class="badge">YouTube</span>
-            </div>
+            <span class="battle-date">10/10/2026</span>
           </div>
+          <span class="badge">Ver en YouTube</span>
         </a>
 
       </div>
-
     </section>
 
     <!-- Right Column: Sidebar & Annotations -->
