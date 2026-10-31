@@ -243,14 +243,14 @@
       color: var(--text-muted);
     }
 
-    /* Botón de Votar ubicado exactamente a la altura de la fecha (línea roja solicitada) y centrado */
+    /* Botón de Votar ubicado a la altura de la fecha y centrado */
     .center-action-area {
       display: flex;
       align-items: center;
       justify-content: center;
       position: absolute;
       left: 50%;
-      bottom: 0.8rem; /* Alineado verticalmente con el padding inferior de la tarjeta donde está la fecha */
+      bottom: 0.8rem;
       transform: translateX(-50%);
     }
 
@@ -941,7 +941,7 @@
         <!-- Se generan dinámicamente según los rounds elegidos -->
       </div>
 
-      <!-- Vista de Porcentajes al Enviar Voto -->
+      <!-- Vista de Porcentajes Acumulados -->
       <div class="results-view" id="resultsView">
         <div class="result-bar-wrapper">
           <div class="result-info">
@@ -964,7 +964,7 @@
       </div>
 
       <div class="modal-footer">
-        <button class="btn-cancel" onclick="closeVoteModal()">CANCELAR</button>
+        <button class="btn-cancel" onclick="submitVote()">VOTAR</button>
         <button class="btn-submit" id="submitBtn" onclick="submitVote()">✓ ENVIAR VOTO</button>
       </div>
     </div>
@@ -986,18 +986,10 @@
 
       document.getElementById('modalSubTitle').innerText = title;
 
-      // Cargar datos guardados previamente para ESTA batalla de forma independiente
-      const savedData = localStorage.getItem('vote_' + activeBattleId);
-
-      if (savedData) {
-        const parsed = JSON.parse(savedData);
-        showResultsView(parsed.pct1, parsed.pct2, true);
-      } else {
-        updateRoundsDisplay();
-        document.getElementById('roundsContainer').style.display = 'flex';
-        document.getElementById('resultsView').style.display = 'none';
-        document.getElementById('submitBtn').style.display = 'inline-block';
-      }
+      updateRoundsDisplay();
+      document.getElementById('roundsContainer').style.display = 'flex';
+      document.getElementById('resultsView').style.display = 'none';
+      document.getElementById('submitBtn').style.display = 'inline-block';
 
       document.getElementById('voteModal').classList.add('active');
     }
@@ -1049,25 +1041,38 @@
     }
 
     function submitVote() {
-      let mc1Wins = 0;
+      // Contar cuántos rounds se llevó cada MC en este voto individual
+      let userMc1Wins = 0;
+      let userMc2Wins = 0;
+
       for (let r = 1; r <= totalRounds; r++) {
-        if (selections[r] === 1) mc1Wins++;
+        if (selections[r] === 1) userMc1Wins++;
+        else userMc2Wins++;
       }
 
-      let basePct = Math.round((mc1Wins / totalRounds) * 70) + 15;
-      const pct1 = Math.min(92, Math.max(8, basePct));
-      const pct2 = 100 - pct1;
+      // Recuperar el acumulado histórico de votos de esta batalla específica del localStorage
+      let storageKey = 'votes_accumulated_' + activeBattleId;
+      let accumulated = JSON.parse(localStorage.getItem(storageKey)) || { mc1: 5, mc2: 5 }; // Base inicial de votos para realismo
 
-      // Guardar el porcentaje individual de esta batalla de manera independiente
-      localStorage.setItem('vote_' + activeBattleId, JSON.stringify({ pct1, pct2 }));
+      // Acumular los puntos elegidos por este usuario al total global de la batalla
+      accumulated.mc1 += userMc1Wins;
+      accumulated.mc2 += userMc2Wins;
 
-      showResultsView(pct1, pct2, false);
+      // Guardar el nuevo acumulado
+      localStorage.setItem(storageKey, JSON.stringify(accumulated));
+
+      // Calcular porcentajes reales basados en el total acumulado de votos
+      let totalVotes = accumulated.mc1 + accumulated.mc2;
+      let pct1 = Math.round((accumulated.mc1 / totalVotes) * 100);
+      let pct2 = 100 - pct1;
+
+      showResultsView(pct1, pct2);
     }
 
-    function showResultsView(pct1, pct2, isAlreadyVoted) {
+    function showResultsView(pct1, pct2) {
       document.getElementById('roundsContainer').style.display = 'none';
       document.getElementById('submitBtn').style.display = 'none';
-      document.getElementById('modalSubTitle').innerText = isAlreadyVoted ? "RESULTADOS REGISTRADOS (YA VOTASTE)" : "VOTO REGISTRADO - ESTADÍSTICAS";
+      document.getElementById('modalSubTitle').innerText = "VOTO REGISTRADO - ESTADÍSTICAS GLOBALES";
 
       document.getElementById('resMc1Name').innerText = currentMc1;
       document.getElementById('resMc2Name').innerText = currentMc2;
