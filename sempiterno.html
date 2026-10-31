@@ -483,28 +483,11 @@
       padding-top: 1.2rem;
     }
 
-    .btn-cancel {
-      background: transparent;
-      border: 1px solid var(--border-color);
-      color: var(--text-light);
-      padding: 0.6rem 1.2rem;
-      font-size: 0.8rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .btn-cancel:hover {
-      background: rgba(255, 255, 255, 0.05);
-    }
-
     .btn-submit {
       background: var(--primary-yellow);
       border: 1px solid var(--primary-yellow);
       color: var(--bg-dark);
-      padding: 0.6rem 1.2rem;
+      padding: 0.6rem 1.4rem;
       font-size: 0.8rem;
       font-weight: 800;
       text-transform: uppercase;
@@ -997,7 +980,6 @@
       </div>
 
       <div class="modal-footer" id="modalFooterBtns">
-        <button class="btn-cancel" onclick="submitVote()">VOTAR</button>
         <button class="btn-submit" id="submitBtn" onclick="submitVote()">✓ ENVIAR VOTO</button>
       </div>
     </div>
@@ -1019,10 +1001,11 @@
 
       document.getElementById('modalSubTitle').innerText = title;
 
-      // Verificar si ESTE usuario/navegador ya votó en esta batalla específica
+      // Verificar si el usuario ya votó en esta batalla específica
       const hasVoted = localStorage.getItem('user_has_voted_' + activeBattleId);
 
       if (hasVoted) {
+        // Cargar y refrescar los datos más recientes almacenados
         calculateAndShowResults(true);
       } else {
         updateRoundsDisplay();
@@ -1136,13 +1119,10 @@
           rPct2 = 100 - rPct1;
         }
 
-        // Conteo de rounds ganados según el porcentaje mayoritario en ese round
         if (roundData.mc1 > roundData.mc2) {
           mc1RoundsWon++;
         } else if (roundData.mc2 > roundData.mc1) {
           mc2RoundsWon++;
-        } else if (roundData.mc1 > 0 && roundData.mc1 === roundData.mc2) {
-          // Si hay empate exacto de votos en el round, se puede repartir o ignorar para conteo limpio, pero sumamos a ambos condicionales si es necesario.
         }
 
         roundsResultsHTML += `
@@ -1170,7 +1150,6 @@
         `;
       }
 
-      // Lógica solicitada para el Resultado General (sin mencionar la palabra "empate" en 1-1)
       let generalText = "";
       if (mc1RoundsWon > mc2RoundsWon) {
         generalText = `Resultado general: ${mc1RoundsWon}-${mc2RoundsWon} ${currentMc1}`;
