@@ -526,6 +526,15 @@
       padding: 0.5rem 0;
     }
 
+    .total-votes-info {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--primary-yellow);
+      margin-bottom: 0.2rem;
+      letter-spacing: 0.5px;
+    }
+
     .result-bar-wrapper {
       display: flex;
       flex-direction: column;
@@ -943,6 +952,7 @@
 
       <!-- Vista de Porcentajes Acumulados -->
       <div class="results-view" id="resultsView">
+        <div class="total-votes-info" id="totalVotesDisplay">Total de votos: 0</div>
         <div class="result-bar-wrapper">
           <div class="result-info">
             <span id="resMc1Name">MC 1</span>
@@ -1097,6 +1107,8 @@
       document.getElementById('modalSubTitle').innerText = alreadyVoted 
         ? "RESULTADOS REGISTRADOS (YA HAS VOTADO EN ESTA BATALLA)" 
         : "¡VOTO REGISTRADO CON ÉXITO!";
+
+      document.getElementById('totalVotesDisplay').innerText = "Votos totales emitidos: " + totalVotes;
 
       document.getElementById('resMc1Name').innerText = currentMc1;
       document.getElementById('resMc2Name').innerText = currentMc2;
