@@ -1061,42 +1061,63 @@
     }
 
     function submitVote() {
-      // Contar rounds ganados en esta votación
-      let userMc1Wins = 0;
-      let userMc2Wins = 0;
-
+      // Registrar rounds seleccionados por el usuario
+      let userRoundsData = {};
       for (let r = 1; r <= totalRounds; r++) {
-        if (selections[r] === 1) userMc1Wins++;
-        else userMc2Wins++;
+        userRoundsData[r] = selections[r];
       }
 
-      // Recuperar acumulado histórico de esta batalla (inicia en 0 votos reales)
-      let storageKey = 'votes_accumulated_' + activeBattleId;
-      let accumulated = JSON.parse(localStorage.getItem(storageKey)) || { mc1: 0, mc2: 0 };
+      // Recuperar acumulado histórico de rondas de esta batalla (inicia en blanco)
+      let storageKey = 'rounds_accumulated_' + activeBattleId;
+      let accumulatedRounds = JSON.parse(localStorage.getItem(storageKey)) || {};
 
-      // Sumar los puntos del voto actual
-      accumulated.mc1 += userMc1Wins;
-      accumulated.mc2 += userMc2Wins;
+      // Sumar los votos round por round de forma independiente
+      for (let r = 1; r <= totalRounds; r++) {
+        if (!accumulatedRounds[r]) {
+          accumulatedRounds[r] = { mc1: 0, mc2: 0 };
+        }
+        if (userRoundsData[r] === 1) {
+          accumulatedRounds[r].mc1++;
+        } else {
+          accumulatedRounds[r].mc2++;
+        }
+      }
 
-      // Guardar nuevo acumulado global
-      localStorage.setItem(storageKey, JSON.stringify(accumulated));
+      // Guardar el acumulado de rondas
+      localStorage.setItem(storageKey, JSON.stringify(accumulatedRounds));
 
-      // Bloquear para que este navegador ya no vuelva a votar en esta batalla
+      // Guardar registro de que esta persona ya emitió su único voto global para esta batalla
       localStorage.setItem('user_has_voted_' + activeBattleId, 'true');
+
+      // Incrementar en 1 el contador general de personas que han votado
+      let countKey = 'total_voters_count_' + activeBattleId;
+      let totalVoters = parseInt(localStorage.getItem(countKey) || '0') + 1;
+      localStorage.setItem(countKey, totalVoters);
 
       calculateAndShowResults(false);
     }
 
     function calculateAndShowResults(alreadyVoted) {
-      let storageKey = 'votes_accumulated_' + activeBattleId;
-      let accumulated = JSON.parse(localStorage.getItem(storageKey)) || { mc1: 0, mc2: 0 };
+      let storageKey = 'rounds_accumulated_' + activeBattleId;
+      let accumulatedRounds = JSON.parse(localStorage.getItem(storageKey)) || {};
+      let countKey = 'total_voters_count_' + activeBattleId;
+      let totalVoters = parseInt(localStorage.getItem(countKey) || '0');
 
-      let totalVotes = accumulated.mc1 + accumulated.mc2;
+      // Sumar todos los votos distribuidos en todos los rounds registrados
+      let totalMc1Points = 0;
+      let totalMc2Points = 0;
+
+      for (let r in accumulatedRounds) {
+        totalMc1Points += accumulatedRounds[r].mc1;
+        totalMc2Points += accumulatedRounds[r].mc2;
+      }
+
+      let totalPoints = totalMc1Points + totalMc2Points;
       let pct1 = 0;
       let pct2 = 0;
 
-      if (totalVotes > 0) {
-        pct1 = Math.round((accumulated.mc1 / totalVotes) * 100);
+      if (totalPoints > 0) {
+        pct1 = Math.round((totalMc1Points / totalPoints) * 100);
         pct2 = 100 - pct1;
       }
 
@@ -1108,7 +1129,7 @@
         ? "RESULTADOS REGISTRADOS (YA HAS VOTADO EN ESTA BATALLA)" 
         : "¡VOTO REGISTRADO CON ÉXITO!";
 
-      document.getElementById('totalVotesDisplay').innerText = "Votos totales emitidos: " + totalVotes;
+      document.getElementById('totalVotesDisplay').innerText = "Votos totales emitidos: " + totalVoters;
 
       document.getElementById('resMc1Name').innerText = currentMc1;
       document.getElementById('resMc2Name').innerText = currentMc2;
