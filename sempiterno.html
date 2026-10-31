@@ -384,7 +384,7 @@
       margin-top: 0.2rem;
     }
 
-    /* Selector de Rounds (Limitado estrictamente de 1 a 3 RDS) */
+    /* Selector de Rounds */
     .rds-selector {
       display: flex;
       align-items: center;
@@ -930,7 +930,7 @@
           <p id="modalSubTitle">Puntúa los rounds para registrar tu voto.</p>
         </div>
         <!-- Selector de Rounds (Limitado estrictamente de 1 a 3 RDS) -->
-        <div class="rds-selector">
+        <div class="rds-selector" id="rdsSelectorBox">
           <button class="rds-btn" onclick="changeRounds(-1)">−</button>
           <span class="rds-display" id="rdsCountText">3 RDS</span>
           <button class="rds-btn" onclick="changeRounds(1)">+</button>
@@ -959,135 +959,3 @@
           </div>
           <div class="bar-bg">
             <div class="bar-fill" id="resMc2Bar"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal-footer">
-        <button class="btn-cancel" onclick="submitVote()">VOTAR</button>
-        <button class="btn-submit" id="submitBtn" onclick="submitVote()">✓ ENVIAR VOTO</button>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    let activeBattleId = "";
-    let currentMc1 = "";
-    let currentMc2 = "";
-    let totalRounds = 3;
-    let selections = {};
-
-    function openVoteModal(battleId, title, mc1, mc2) {
-      activeBattleId = battleId;
-      currentMc1 = mc1;
-      currentMc2 = mc2;
-      totalRounds = 3;
-      selections = { 1: 1, 2: 1, 3: 1 };
-
-      document.getElementById('modalSubTitle').innerText = title;
-
-      updateRoundsDisplay();
-      document.getElementById('roundsContainer').style.display = 'flex';
-      document.getElementById('resultsView').style.display = 'none';
-      document.getElementById('submitBtn').style.display = 'inline-block';
-
-      document.getElementById('voteModal').classList.add('active');
-    }
-
-    function changeRounds(delta) {
-      totalRounds += delta;
-      if (totalRounds < 1) totalRounds = 1;
-      if (totalRounds > 3) totalRounds = 3;
-      
-      updateRoundsDisplay();
-    }
-
-    function updateRoundsDisplay() {
-      document.getElementById('rdsCountText').innerText = totalRounds + " RDS";
-      
-      const container = document.getElementById('roundsContainer');
-      container.innerHTML = '';
-
-      for (let r = 1; r <= totalRounds; r++) {
-        if (!selections[r]) selections[r] = 1;
-
-        const row = document.createElement('div');
-        row.className = 'round-row';
-        row.innerHTML = `
-          <span class="round-label">RD ${r}</span>
-          <button class="option-btn ${selections[r] === 1 ? 'selected' : ''}" id="r${r}-mc1" onclick="selectOption(${r}, 1)">${currentMc1}</button>
-          <button class="option-btn ${selections[r] === 2 ? 'selected' : ''}" id="r${r}-mc2" onclick="selectOption(${r}, 2)">${currentMc2}</button>
-        `;
-        container.appendChild(row);
-      }
-    }
-
-    function closeVoteModal() {
-      document.getElementById('voteModal').classList.remove('active');
-    }
-
-    function selectOption(round, option) {
-      selections[round] = option;
-      const btn1 = document.getElementById(`r${round}-mc1`);
-      const btn2 = document.getElementById(`r${round}-mc2`);
-
-      if (option === 1) {
-        btn1.classList.add('selected');
-        btn2.classList.remove('selected');
-      } else {
-        btn2.classList.add('selected');
-        btn1.classList.remove('selected');
-      }
-    }
-
-    function submitVote() {
-      // Contar cuántos rounds se llevó cada MC en este voto individual
-      let userMc1Wins = 0;
-      let userMc2Wins = 0;
-
-      for (let r = 1; r <= totalRounds; r++) {
-        if (selections[r] === 1) userMc1Wins++;
-        else userMc2Wins++;
-      }
-
-      // Recuperar el acumulado histórico de votos de esta batalla específica del localStorage
-      let storageKey = 'votes_accumulated_' + activeBattleId;
-      let accumulated = JSON.parse(localStorage.getItem(storageKey)) || { mc1: 5, mc2: 5 }; // Base inicial de votos para realismo
-
-      // Acumular los puntos elegidos por este usuario al total global de la batalla
-      accumulated.mc1 += userMc1Wins;
-      accumulated.mc2 += userMc2Wins;
-
-      // Guardar el nuevo acumulado
-      localStorage.setItem(storageKey, JSON.stringify(accumulated));
-
-      // Calcular porcentajes reales basados en el total acumulado de votos
-      let totalVotes = accumulated.mc1 + accumulated.mc2;
-      let pct1 = Math.round((accumulated.mc1 / totalVotes) * 100);
-      let pct2 = 100 - pct1;
-
-      showResultsView(pct1, pct2);
-    }
-
-    function showResultsView(pct1, pct2) {
-      document.getElementById('roundsContainer').style.display = 'none';
-      document.getElementById('submitBtn').style.display = 'none';
-      document.getElementById('modalSubTitle').innerText = "VOTO REGISTRADO - ESTADÍSTICAS GLOBALES";
-
-      document.getElementById('resMc1Name').innerText = currentMc1;
-      document.getElementById('resMc2Name').innerText = currentMc2;
-
-      document.getElementById('resMc1Pct').innerText = pct1 + '%';
-      document.getElementById('resMc2Pct').innerText = pct2 + '%';
-
-      document.getElementById('resultsView').style.display = 'flex';
-
-      setTimeout(() => {
-        document.getElementById('resMc1Bar').style.width = pct1 + '%';
-        document.getElementById('resMc2Bar').style.width = pct2 + '%';
-      }, 50);
-    }
-  </script>
-
-</body>
-</html>
