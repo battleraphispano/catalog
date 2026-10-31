@@ -999,21 +999,14 @@
 
       document.getElementById('modalSubTitle').innerText = title;
 
-      // Verificar si ya existe un número de rounds guardado previamente para esta batalla
-      const savedRounds = localStorage.getItem('battle_rounds_count_' + activeBattleId);
-      if (savedRounds) {
-        totalRounds = parseInt(savedRounds);
-      } else {
-        totalRounds = 3; // Valor inicial por defecto si es nueva
-      }
-
-      selections = { 1: 1, 2: 1, 3: 1 };
-
-      const hasVoted = localStorage.getItem('user_has_voted_' + activeBattleId);
+      // Usar prefijo v1_ para reiniciar todas las restricciones y conteos anteriores
+      const hasVoted = localStorage.getItem('v1_user_has_voted_' + activeBattleId);
 
       if (hasVoted === 'true') {
         calculateAndShowResults(true);
       } else {
+        totalRounds = 3; // Por defecto al abrir una nueva votación
+        selections = { 1: 1, 2: 1, 3: 1 };
         updateRoundsDisplay();
         document.getElementById('rdsSelectorBox').style.display = 'flex';
         document.getElementById('roundsContainer').style.display = 'flex';
@@ -1076,11 +1069,11 @@
         userRoundsData[r] = selections[r];
       }
 
-      let storageKey = 'rounds_accumulated_' + activeBattleId;
+      let storageKey = 'v1_rounds_accumulated_' + activeBattleId;
       let accumulatedRounds = JSON.parse(localStorage.getItem(storageKey)) || {};
 
-      // Guardar de manera persistente cuántos rounds se votaron en esta batalla
-      localStorage.setItem('battle_rounds_count_' + activeBattleId, totalRounds);
+      // Guardar de forma estricta cuántos rounds se seleccionaron en esta votación
+      localStorage.setItem('v1_battle_rounds_count_' + activeBattleId, totalRounds);
 
       for (let r = 1; r <= totalRounds; r++) {
         if (!accumulatedRounds[r]) {
@@ -1094,9 +1087,9 @@
       }
 
       localStorage.setItem(storageKey, JSON.stringify(accumulatedRounds));
-      localStorage.setItem('user_has_voted_' + activeBattleId, 'true');
+      localStorage.setItem('v1_user_has_voted_' + activeBattleId, 'true');
 
-      let countKey = 'total_voters_count_' + activeBattleId;
+      let countKey = 'v1_total_voters_count_' + activeBattleId;
       let totalVoters = parseInt(localStorage.getItem(countKey) || '0') + 1;
       localStorage.setItem(countKey, totalVoters);
 
@@ -1104,31 +1097,19 @@
     }
 
     function calculateAndShowResults(alreadyVoted) {
-      let storageKey = 'rounds_accumulated_' + activeBattleId;
-      let countKey = 'total_voters_count_' + activeBattleId;
-      let roundsCountKey = 'battle_rounds_count_' + activeBattleId;
+      let storageKey = 'v1_rounds_accumulated_' + activeBattleId;
+      let countKey = 'v1_total_voters_count_' + activeBattleId;
+      let roundsCountKey = 'v1_battle_rounds_count_' + activeBattleId;
 
       let accumulatedRounds = JSON.parse(localStorage.getItem(storageKey)) || {};
       let totalVoters = parseInt(localStorage.getItem(countKey) || '0');
-      let activeRoundsCount = parseInt(localStorage.getItem(roundsCountKey) || totalRounds || 3);
-
-      if (alreadyVoted && (totalVoters === 0 || Object.keys(accumulatedRounds).length === 0)) {
-        totalVoters = 1;
-        activeRoundsCount = activeRoundsCount > 0 ? activeRoundsCount : totalRounds;
-        localStorage.setItem(countKey, totalVoters);
-        localStorage.setItem(roundsCountKey, activeRoundsCount);
-        
-        for (let r = 1; r <= activeRoundsCount; r++) {
-          accumulatedRounds[r] = { mc1: 1, mc2: 0 };
-        }
-        localStorage.setItem(storageKey, JSON.stringify(accumulatedRounds));
-      }
+      let activeRoundsCount = parseInt(localStorage.getItem(roundsCountKey) || 3);
 
       let mc1RoundsWon = 0;
       let mc2RoundsWon = 0;
       let roundsResultsHTML = '';
 
-      // Mostrar estrictamente la cantidad de rounds guardada (1, 2 o 3)
+      // Mostrar estrictamente la cantidad exacta de rounds con la que se votó (1, 2 o 3)
       for (let r = 1; r <= activeRoundsCount; r++) {
         let roundData = accumulatedRounds[r] || { mc1: 0, mc2: 0 };
         let rTotal = roundData.mc1 + roundData.mc2;
