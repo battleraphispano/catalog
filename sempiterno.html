@@ -959,3 +959,159 @@
           </div>
           <div class="bar-bg">
             <div class="bar-fill" id="resMc2Bar"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer" id="modalFooterBtns">
+        <button class="btn-cancel" onclick="submitVote()">VOTAR</button>
+        <button class="btn-submit" id="submitBtn" onclick="submitVote()">✓ ENVIAR VOTO</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let activeBattleId = "";
+    let currentMc1 = "";
+    let currentMc2 = "";
+    let totalRounds = 3;
+    let selections = {};
+
+    function openVoteModal(battleId, title, mc1, mc2) {
+      activeBattleId = battleId;
+      currentMc1 = mc1;
+      currentMc2 = mc2;
+      totalRounds = 3;
+      selections = { 1: 1, 2: 1, 3: 1 };
+
+      document.getElementById('modalSubTitle').innerText = title;
+
+      // Verificar si ESTE usuario/navegador ya votó en esta batalla específica
+      const hasVoted = localStorage.getItem('user_has_voted_' + activeBattleId);
+
+      if (hasVoted) {
+        // Cargar y mostrar directamente los porcentajes sin permitir volver a votar
+        calculateAndShowResults(true);
+      } else {
+        // Permitir votar por primera vez
+        updateRoundsDisplay();
+        document.getElementById('rdsSelectorBox').style.display = 'flex';
+        document.getElementById('roundsContainer').style.display = 'flex';
+        document.getElementById('modalFooterBtns').style.display = 'flex';
+        document.getElementById('resultsView').style.display = 'none';
+      }
+
+      document.getElementById('voteModal').classList.add('active');
+    }
+
+    function changeRounds(delta) {
+      totalRounds += delta;
+      if (totalRounds < 1) totalRounds = 1;
+      if (totalRounds > 3) totalRounds = 3;
+      
+      updateRoundsDisplay();
+    }
+
+    function updateRoundsDisplay() {
+      document.getElementById('rdsCountText').innerText = totalRounds + " RDS";
+      
+      const container = document.getElementById('roundsContainer');
+      container.innerHTML = '';
+
+      for (let r = 1; r <= totalRounds; r++) {
+        if (!selections[r]) selections[r] = 1;
+
+        const row = document.createElement('div');
+        row.className = 'round-row';
+        row.innerHTML = `
+          <span class="round-label">RD ${r}</span>
+          <button class="option-btn ${selections[r] === 1 ? 'selected' : ''}" id="r${r}-mc1" onclick="selectOption(${r}, 1)">${currentMc1}</button>
+          <button class="option-btn ${selections[r] === 2 ? 'selected' : ''}" id="r${r}-mc2" onclick="selectOption(${r}, 2)">${currentMc2}</button>
+        `;
+        container.appendChild(row);
+      }
+    }
+
+    function closeVoteModal() {
+      document.getElementById('voteModal').classList.remove('active');
+    }
+
+    function selectOption(round, option) {
+      selections[round] = option;
+      const btn1 = document.getElementById(`r${round}-mc1`);
+      const btn2 = document.getElementById(`r${round}-mc2`);
+
+      if (option === 1) {
+        btn1.classList.add('selected');
+        btn2.classList.remove('selected');
+      } else {
+        btn2.classList.add('selected');
+        btn1.classList.remove('selected');
+      }
+    }
+
+    function submitVote() {
+      // Contar rounds ganados en esta votación
+      let userMc1Wins = 0;
+      let userMc2Wins = 0;
+
+      for (let r = 1; r <= totalRounds; r++) {
+        if (selections[r] === 1) userMc1Wins++;
+        else userMc2Wins++;
+      }
+
+      // Recuperar acumulado histórico de esta batalla (inicia en 0 votos reales)
+      let storageKey = 'votes_accumulated_' + activeBattleId;
+      let accumulated = JSON.parse(localStorage.getItem(storageKey)) || { mc1: 0, mc2: 0 };
+
+      // Sumar los puntos del voto actual
+      accumulated.mc1 += userMc1Wins;
+      accumulated.mc2 += userMc2Wins;
+
+      // Guardar nuevo acumulado global
+      localStorage.setItem(storageKey, JSON.stringify(accumulated));
+
+      // Bloquear para que este navegador ya no vuelva a votar en esta batalla
+      localStorage.setItem('user_has_voted_' + activeBattleId, 'true');
+
+      calculateAndShowResults(false);
+    }
+
+    function calculateAndShowResults(alreadyVoted) {
+      let storageKey = 'votes_accumulated_' + activeBattleId;
+      let accumulated = JSON.parse(localStorage.getItem(storageKey)) || { mc1: 0, mc2: 0 };
+
+      let totalVotes = accumulated.mc1 + accumulated.mc2;
+      let pct1 = 0;
+      let pct2 = 0;
+
+      if (totalVotes > 0) {
+        pct1 = Math.round((accumulated.mc1 / totalVotes) * 100);
+        pct2 = 100 - pct1;
+      }
+
+      document.getElementById('rdsSelectorBox').style.display = 'none';
+      document.getElementById('roundsContainer').style.display = 'none';
+      document.getElementById('modalFooterBtns').style.display = 'none';
+
+      document.getElementById('modalSubTitle').innerText = alreadyVoted 
+        ? "RESULTADOS REGISTRADOS (YA HAS VOTADO EN ESTA BATALLA)" 
+        : "¡VOTO REGISTRADO CON ÉXITO!";
+
+      document.getElementById('resMc1Name').innerText = currentMc1;
+      document.getElementById('resMc2Name').innerText = currentMc2;
+
+      document.getElementById('resMc1Pct').innerText = pct1 + '%';
+      document.getElementById('resMc2Pct').innerText = pct2 + '%';
+
+      document.getElementById('resultsView').style.display = 'flex';
+
+      setTimeout(() => {
+        document.getElementById('resMc1Bar').style.width = pct1 + '%';
+        document.getElementById('resMc2Bar').style.width = pct2 + '%';
+      }, 50);
+    }
+  </script>
+
+</body>
+</html>
