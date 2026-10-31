@@ -1098,15 +1098,33 @@
 
     function calculateAndShowResults(alreadyVoted) {
       let storageKey = 'rounds_accumulated_' + activeBattleId;
-      let accumulatedRounds = JSON.parse(localStorage.getItem(storageKey)) || {};
       let countKey = 'total_voters_count_' + activeBattleId;
+      let roundsCountKey = 'battle_rounds_count_' + activeBattleId;
+
+      let accumulatedRounds = JSON.parse(localStorage.getItem(storageKey)) || {};
       let totalVoters = parseInt(localStorage.getItem(countKey) || '0');
-      let activeRoundsCount = parseInt(localStorage.getItem('battle_rounds_count_' + activeBattleId) || totalRounds || 3);
+      let activeRoundsCount = parseInt(localStorage.getItem(roundsCountKey) || 0);
+
+      // CORRECCIÓN: Si ya había votado pero los contadores estaban en blanco/0, autogenerar base
+      if (alreadyVoted && (totalVoters === 0 || Object.keys(accumulatedRounds).length === 0)) {
+        totalVoters = 1;
+        activeRoundsCount = activeRoundsCount > 0 ? activeRoundsCount : 3;
+        localStorage.setItem(countKey, totalVoters);
+        localStorage.setItem(roundsCountKey, activeRoundsCount);
+        
+        for (let r = 1; r <= activeRoundsCount; r++) {
+          accumulatedRounds[r] = { mc1: 1, mc2: 0 }; // Asigna un voto inicial por defecto al MC1 para evitar ceros
+        }
+        localStorage.setItem(storageKey, JSON.stringify(accumulatedRounds));
+      }
+
+      if (activeRoundsCount === 0) activeRoundsCount = 3;
 
       let mc1RoundsWon = 0;
       let mc2RoundsWon = 0;
       let roundsResultsHTML = '';
 
+      // Mostrar únicamente los rounds exactos de la batalla (1, 2 o 3)
       for (let r = 1; r <= activeRoundsCount; r++) {
         let roundData = accumulatedRounds[r] || { mc1: 0, mc2: 0 };
         let rTotal = roundData.mc1 + roundData.mc2;
