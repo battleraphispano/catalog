@@ -238,29 +238,22 @@
       color: var(--primary-yellow);
     }
 
-    /* Fila interna para colocar la fecha y el botón de votar alineados horizontalmente */
-    .battle-meta-row {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
     .battle-date {
       font-size: 0.85rem;
       color: var(--text-muted);
     }
 
-    /* Contenedor central absoluto dentro de la tarjeta para centrar el botón */
+    /* Botón de Votar ubicado exactamente a la altura de la fecha (línea roja solicitada) y centrado */
     .center-action-area {
       display: flex;
       align-items: center;
       justify-content: center;
       position: absolute;
       left: 50%;
+      bottom: 0.8rem; /* Alineado verticalmente con el padding inferior de la tarjeta donde está la fecha */
       transform: translateX(-50%);
     }
 
-    /* Botón de Votar con tamaño de fuente idéntico al badge-virtual (0.45rem) */
     .vote-btn {
       background: rgba(255, 255, 0, 0.05);
       color: var(--primary-yellow);
@@ -651,11 +644,6 @@
         align-items: flex-start;
         gap: 0.5rem;
       }
-      .battle-meta-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.3rem;
-      }
     }
   </style>
 </head>
@@ -722,9 +710,7 @@
         <div class="battle-card">
           <div class="battle-info">
             <a href="https://www.youtube.com/watch?v=X9XwBJh_agI" target="_blank" rel="noopener noreferrer" class="battle-title">#1. Sempiterno vs. Cabrera</a>
-            <div class="battle-meta-row">
-              <span class="battle-date">28/11/2024*</span>
-            </div>
+            <span class="battle-date">28/11/2024*</span>
           </div>
           <div class="center-action-area">
             <button class="vote-btn" onclick="openVoteModal('battle-1', 'Sempiterno vs. Cabrera', 'Sempiterno', 'Cabrera')">Votar</button>
@@ -742,9 +728,7 @@
         <div class="battle-card">
           <div class="battle-info">
             <a href="https://www.youtube.com/watch?v=DCUUfbz8D1Q&t=1s" target="_blank" rel="noopener noreferrer" class="battle-title">#2. Sempiterno vs. Rocket</a>
-            <div class="battle-meta-row">
-              <span class="battle-date">22/07/2025*</span>
-            </div>
+            <span class="battle-date">22/07/2025*</span>
           </div>
           <div class="center-action-area">
             <button class="vote-btn" onclick="openVoteModal('battle-2', 'Sempiterno vs. Rocket', 'Sempiterno', 'Rocket')">Votar</button>
@@ -759,9 +743,7 @@
         <div class="battle-card">
           <div class="battle-info">
             <a href="https://www.youtube.com/watch?v=YwpdvxE-7J4" target="_blank" rel="noopener noreferrer" class="battle-title">#3. Sempiterno vs. Old Hanzo</a>
-            <div class="battle-meta-row">
-              <span class="battle-date">29/07/2025*</span>
-            </div>
+            <span class="battle-date">29/07/2025*</span>
           </div>
           <div class="center-action-area">
             <button class="vote-btn" onclick="openVoteModal('battle-3', 'Sempiterno vs. Old Hanzo', 'Sempiterno', 'Old Hanzo')">Votar</button>
@@ -776,9 +758,7 @@
         <div class="battle-card">
           <div class="battle-info">
             <a href="https://www.youtube.com/watch?v=IOgZN8tEbDs&t=474s" target="_blank" rel="noopener noreferrer" class="battle-title">#4. Sempiterno vs. Temple</a>
-            <div class="battle-meta-row">
-              <span class="battle-date">02/08/2025</span>
-            </div>
+            <span class="battle-date">02/08/2025</span>
           </div>
           <div class="center-action-area">
             <button class="vote-btn" onclick="openVoteModal('battle-4', 'Sempiterno vs. Temple', 'Sempiterno', 'Temple')">Votar</button>
@@ -790,9 +770,7 @@
         <div class="battle-card">
           <div class="battle-info">
             <a href="https://www.youtube.com/watch?v=0uhPShLy1Wo&t=168s" target="_blank" rel="noopener noreferrer" class="battle-title">#5. Sempiterno vs. Espejo</a>
-            <div class="battle-meta-row">
-              <span class="battle-date">11/10/2025</span>
-            </div>
+            <span class="battle-date">11/10/2025</span>
           </div>
           <div class="center-action-area">
             <button class="vote-btn" onclick="openVoteModal('battle-5', 'Sempiterno vs. Espejo', 'Sempiterno', 'Espejo')">Votar</button>
@@ -804,9 +782,7 @@
         <div class="battle-card">
           <div class="battle-info">
             <a href="https://www.youtube.com/watch?v=FtHNDRqL2_M&t=10s" target="_blank" rel="noopener noreferrer" class="battle-title">#6. Sempiterno vs. Anubis</a>
-            <div class="battle-meta-row">
-              <span class="battle-date">13/12/2025</span>
-            </div>
+            <span class="battle-date">13/12/2025</span>
           </div>
           <div class="center-action-area">
             <button class="vote-btn" onclick="openVoteModal('battle-6', 'Sempiterno vs. Anubis', 'Sempiterno', 'Anubis')">Votar</button>
@@ -821,9 +797,7 @@
         <div class="battle-card">
           <div class="battle-info">
             <a href="https://www.youtube.com/watch?v=dNM2ha2QQLA" target="_blank" rel="noopener noreferrer" class="battle-title">#7. Sempiterno vs. Ese Sihor One</a>
-            <div class="battle-meta-row">
-              <span class="battle-date">01/01/2026*</span>
-            </div>
+            <span class="battle-date">01/01/2026*</span>
           </div>
           <div class="center-action-area">
             <button class="vote-btn" onclick="openVoteModal('battle-7', 'Sempiterno vs. Ese Sihor One', 'Sempiterno', 'Ese Sihor One')">Votar</button>
@@ -838,9 +812,7 @@
         <div class="battle-card">
           <div class="battle-info">
             <a href="https://www.youtube.com/watch?v=h90UzANSzGQ&t=120s" target="_blank" rel="noopener noreferrer" class="battle-title">#8. Sempiterno vs. Pablito ABR</a>
-            <div class="battle-meta-row">
-              <span class="battle-date">07/03/2026</span>
-            </div>
+            <span class="battle-date">07/03/2026</span>
           </div>
           <div class="center-action-area">
             <button class="vote-btn" onclick="openVoteModal('battle-8', 'Sempiterno vs. Pablito ABR', 'Sempiterno', 'Pablito ABR')">Votar</button>
@@ -852,9 +824,7 @@
         <div class="battle-card">
           <div class="battle-info">
             <a href="https://www.youtube.com/watch?v=MWtgmYnC3lE&t=79s" target="_blank" rel="noopener noreferrer" class="battle-title">#9. Sempiterno vs. Adeuz</a>
-            <div class="battle-meta-row">
-              <span class="battle-date">25/04/2026</span>
-            </div>
+            <span class="battle-date">25/04/2026</span>
           </div>
           <div class="center-action-area">
             <button class="vote-btn" onclick="openVoteModal('battle-9', 'Sempiterno vs. Adeuz', 'Sempiterno', 'Adeuz')">Votar</button>
@@ -866,9 +836,7 @@
         <div class="battle-card">
           <div class="battle-info">
             <a href="https://www.youtube.com/watch?v=EnXtCo9L0HE&t=9s" target="_blank" rel="noopener noreferrer" class="battle-title">#10. Sempiterno vs. Cielín 911</a>
-            <div class="battle-meta-row">
-              <span class="battle-date">02/06/2026*</span>
-            </div>
+            <span class="battle-date">02/06/2026*</span>
           </div>
           <div class="center-action-area">
             <button class="vote-btn" onclick="openVoteModal('battle-10', 'Sempiterno vs. Cielín 911', 'Sempiterno', 'Cielín 911')">Votar</button>
@@ -883,9 +851,7 @@
         <div class="battle-card">
           <div class="battle-info">
             <a href="https://www.youtube.com/watch?v=iHYsVzLHgms&t=333s" target="_blank" rel="noopener noreferrer" class="battle-title">#11. Sempiterno vs. As One</a>
-            <div class="battle-meta-row">
-              <span class="battle-date">06/06/2026</span>
-            </div>
+            <span class="battle-date">06/06/2026</span>
           </div>
           <div class="center-action-area">
             <button class="vote-btn" onclick="openVoteModal('battle-11', 'Sempiterno vs. As One', 'Sempiterno', 'As One')">Votar</button>
@@ -897,9 +863,7 @@
         <div class="battle-card">
           <div class="battle-info">
             <a href="https://www.youtube.com/watch?v=27VUtmowPfM" target="_blank" rel="noopener noreferrer" class="battle-title">#12. Sempiterno vs. Tetra</a>
-            <div class="battle-meta-row">
-              <span class="battle-date">09/06/2026*</span>
-            </div>
+            <span class="battle-date">09/06/2026*</span>
           </div>
           <div class="center-action-area">
             <button class="vote-btn" onclick="openVoteModal('battle-12', 'Sempiterno vs. Tetra', 'Sempiterno', 'Tetra')">Votar</button>
@@ -914,9 +878,7 @@
         <div class="battle-card">
           <div class="battle-info">
             <a href="https://www.youtube.com/watch?v=vknrbnsE2wY&t=990s" target="_blank" rel="noopener noreferrer" class="battle-title">#13. Sempiterno vs. Too Yugan</a>
-            <div class="battle-meta-row">
-              <span class="battle-date">01/08/2026</span>
-            </div>
+            <span class="battle-date">01/08/2026</span>
           </div>
           <div class="center-action-area">
             <button class="vote-btn" onclick="openVoteModal('battle-13', 'Sempiterno vs. Too Yugan', 'Sempiterno', 'Too Yugan')">Votar</button>
@@ -928,9 +890,7 @@
         <div class="battle-card">
           <div class="battle-info">
             <a href="https://www.youtube.com/watch?v=fvIzFP4TxWc" target="_blank" rel="noopener noreferrer" class="battle-title">#14. Sempiterno vs. Morbus Sonicko</a>
-            <div class="battle-meta-row">
-              <span class="battle-date">10/10/2026</span>
-            </div>
+            <span class="battle-date">10/10/2026</span>
           </div>
           <div class="center-action-area">
             <button class="vote-btn" onclick="openVoteModal('battle-14', 'Sempiterno vs. Morbus Sonicko', 'Sempiterno', 'Morbus Sonicko')">Votar</button>
