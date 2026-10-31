@@ -1,1185 +1,914 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catálogo de batallas de Sempiterno | Rap Battle Database</title>
-  <style>
-    :root {
-      --primary-yellow: #ffff00;
-      --bg-dark: #0a0a0a;
-      --card-dark: #141414;
-      --card-hover: #1e1e1e;
-      --text-light: #ffffff;
-      --text-muted: #a0a0a0;
-      --border-color: #262626;
-      --accent-gray: #333333;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Programme', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
-
-    body {
-      background-color: var(--bg-dark);
-      color: var(--text-light);
-      line-height: 1.6;
-    }
-
-    /* Header / Hero Section */
-    .hero-banner {
-      background: linear-gradient(180deg, #181818 0%, var(--bg-dark) 100%);
-      border-bottom: 2px solid var(--primary-yellow);
-      padding: 3.5rem 1.5rem 2.5rem 1.5rem;
-    }
-
-    .container {
-      max-width: 980px;
-      margin: 0 auto;
-    }
-
-    .header-content {
-      display: flex;
-      gap: 2rem;
-      align-items: center;
-    }
-
-    .cover-art {
-      width: 150px;
-      height: 150px;
-      border-radius: 6px;
-      box-shadow: 0 10px 25px rgba(255, 255, 0, 0.12);
-      flex-shrink: 0;
-      overflow: hidden;
-      border: 1px solid var(--border-color);
-    }
-
-    .cover-art img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .meta-info {
-      flex-grow: 1;
-    }
-
-    .meta-info h1 {
-      font-size: 2.2rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: -0.5px;
-      margin-bottom: 0.8rem;
-      line-height: 1.1;
-    }
-
-    .meta-info h1 span {
-      color: var(--primary-yellow);
-    }
-
-    .stats-bar {
-      display: flex;
-      gap: 1.5rem;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-muted);
-      background: rgba(255, 255, 255, 0.03);
-      padding: 0.6rem 1rem;
-      border-radius: 4px;
-      border: 1px solid var(--border-color);
-      width: fit-content;
-      margin-bottom: 0.6rem;
-    }
-
-    .stats-bar strong {
-      color: var(--text-light);
-    }
-
-    .header-sub-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      width: 100%;
-      gap: 1rem;
-    }
-
-    .origin-location {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .origin-location strong {
-      color: var(--text-light);
-    }
-
-    .battler-quote {
-      font-size: 0.85rem;
-      color: var(--text-light);
-      font-style: italic;
-      font-weight: bold;
-    }
-
-    .instagram-icon-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      color: var(--text-light);
-      text-decoration: none;
-      transition: all 0.2s;
-      flex-shrink: 0;
-    }
-
-    .instagram-icon-btn:hover {
-      background: var(--primary-yellow);
-      color: var(--bg-dark);
-      border-color: var(--primary-yellow);
-    }
-
-    /* Main Layout */
-    .main-layout {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 2.5rem;
-      padding: 2.5rem 1.5rem 4rem 1.5rem;
-    }
-
-    .section-title {
-      font-size: 1.15rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 0.6rem;
-      margin-bottom: 1.5rem;
-      letter-spacing: 1px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .section-title .count {
-      font-size: 0.85rem;
-      color: var(--primary-yellow);
-      background: rgba(255, 255, 0, 0.1);
-      padding: 2px 8px;
-      border-radius: 12px;
-    }
-
-    /* Year Group Title */
-    .year-group-title {
-      color: var(--primary-yellow);
-      font-size: 1.3rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      margin: 1.5rem 0 0.5rem 0;
-    }
-
-    .year-group-title:first-of-type {
-      margin-top: 0;
-    }
-
-    /* Catalog List */
-    .catalog-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
-
-    .battle-card {
-      background-color: var(--card-dark);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      padding: 0.8rem 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: all 0.2s ease;
-      color: inherit;
-      position: relative;
-    }
-
-    .battle-card:hover {
-      border-color: var(--primary-yellow);
-      background-color: var(--card-hover);
-      transform: translateX(4px);
-    }
-
-    .battle-info {
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-    }
-
-    .battle-title {
-      font-weight: 700;
-      font-size: 1rem;
-      color: var(--text-light);
-      display: block;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .battle-title:hover {
-      color: var(--primary-yellow);
-    }
-
-    .battle-date {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    /* Botón de Votar ubicado a la altura de la fecha y centrado */
-    .center-action-area {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      left: 50%;
-      bottom: 0.8rem;
-      transform: translateX(-50%);
-    }
-
-    .vote-btn {
-      background: rgba(255, 255, 0, 0.05);
-      color: var(--primary-yellow);
-      border: 0.5px solid var(--primary-yellow);
-      padding: 0.02rem 0.35rem;
-      font-size: 0.45rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      border-radius: 2px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .vote-btn:hover {
-      background: var(--primary-yellow);
-      color: var(--bg-dark);
-      box-shadow: 0 0 8px rgba(255, 255, 0, 0.4);
-    }
-
-    .badge-container {
-      display: flex;
-      gap: 0.4rem;
-      align-items: center;
-    }
-
-    .badge {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      padding: 0.15rem 0.5rem;
-      border-radius: 4px;
-      background-color: #222;
-      color: var(--text-muted);
-      border: 1px solid var(--border-color);
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .badge:hover {
-      color: var(--text-light);
-      border-color: var(--text-muted);
-    }
-
-    /* Etiqueta "Batalla virtual" */
-    .badge-virtual {
-      font-size: 0.45rem;
-      padding: 0.02rem 0.15rem;
-      border: 0.5px solid var(--primary-yellow);
-      color: var(--primary-yellow);
-      font-weight: 600;
-      border-radius: 2px;
-    }
-
-    /* ESTILOS DEL MODAL DE VOTACIÓN */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(4px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-
-    .modal-overlay.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .modal-card {
-      background-color: var(--card-dark);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      width: 100%;
-      max-width: 520px;
-      padding: 1.8rem;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.8);
-      position: relative;
-    }
-
-    .modal-close-btn {
-      position: absolute;
-      top: 1rem;
-      right: 1.2rem;
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      font-size: 1.4rem;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-
-    .modal-close-btn:hover {
-      color: var(--primary-yellow);
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 1.2rem;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 1rem;
-    }
-
-    .modal-header-text h2 {
-      font-size: 1.2rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-light);
-    }
-
-    .modal-header-text p {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-top: 0.2rem;
-    }
-
-    /* Selector de Rounds */
-    .rds-selector {
-      display: flex;
-      align-items: center;
-      background: #0e0e0e;
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      padding: 0.3rem 0.6rem;
-      gap: 0.8rem;
-    }
-
-    .rds-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      font-size: 1rem;
-      cursor: pointer;
-      font-weight: bold;
-      transition: color 0.2s;
-    }
-
-    .rds-btn:hover {
-      color: var(--primary-yellow);
-    }
-
-    .rds-display {
-      font-size: 0.8rem;
-      font-weight: 800;
-      color: var(--text-light);
-      letter-spacing: 1px;
-    }
-
-    .rounds-container {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-      margin-bottom: 1.5rem;
-      max-height: 260px;
-      overflow-y: auto;
-    }
-
-    .round-row {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--border-color);
-      padding: 0.6rem 0.8rem;
-      border-radius: 6px;
-    }
-
-    .round-label {
-      font-size: 0.75rem;
-      font-weight: 800;
-      color: var(--primary-yellow);
-      border: 1px solid rgba(255, 255, 0, 0.3);
-      padding: 0.3rem 0.6rem;
-      border-radius: 4px;
-      width: 65px;
-      text-align: center;
-      background: rgba(255, 255, 0, 0.05);
-    }
-
-    .option-btn {
-      flex: 1;
-      background: #161616;
-      border: 1px solid var(--border-color);
-      color: var(--text-muted);
-      padding: 0.6rem 0.4rem;
-      font-size: 0.75rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.2s;
-      text-align: center;
-    }
-
-    .option-btn:hover {
-      border-color: var(--text-light);
-      color: var(--text-light);
-    }
-
-    .option-btn.selected {
-      background: var(--primary-yellow);
-      color: var(--bg-dark);
-      border-color: var(--primary-yellow);
-      box-shadow: 0 0 15px rgba(255, 255, 0, 0.4);
-      font-weight: 900;
-    }
-
-    .modal-footer {
-      display: flex;
-      justify-content: flex-end;
-      gap: 0.8rem;
-      border-top: 1px solid var(--border-color);
-      padding-top: 1.2rem;
-    }
-
-    .btn-submit {
-      background: var(--primary-yellow);
-      border: 1px solid var(--primary-yellow);
-      color: var(--bg-dark);
-      padding: 0.6rem 1.4rem;
-      font-size: 0.8rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .btn-submit:hover {
-      box-shadow: 0 0 15px rgba(255, 255, 0, 0.5);
-    }
-
-    /* Vista de Resultados en Porcentaje por Round */
-    .results-view {
-      display: none;
-      flex-direction: column;
-      gap: 1.2rem;
-      margin-bottom: 1.5rem;
-      max-height: 320px;
-      overflow-y: auto;
-      padding-right: 4px;
-    }
-
-    .summary-box {
-      background: rgba(255, 255, 0, 0.05);
-      border: 1px solid var(--primary-yellow);
-      padding: 0.8rem;
-      border-radius: 6px;
-      margin-bottom: 0.5rem;
-    }
-
-    .general-result-title {
-      font-size: 0.9rem;
-      font-weight: 900;
-      color: var(--primary-yellow);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.2rem;
-    }
-
-    .total-votes-info {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      letter-spacing: 0.5px;
-    }
-
-    .round-result-card {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      padding: 0.8rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .round-result-title {
-      font-size: 0.8rem;
-      font-weight: 800;
-      color: var(--primary-yellow);
-      text-transform: uppercase;
-    }
-
-    .result-bar-wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-    }
-
-    .result-info {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.75rem;
-      font-weight: 800;
-      text-transform: uppercase;
-    }
-
-    .bar-bg {
-      background: #1a1a1a;
-      height: 10px;
-      border-radius: 5px;
-      overflow: hidden;
-      border: 1px solid var(--border-color);
-    }
-
-    .bar-fill {
-      background: var(--primary-yellow);
-      height: 100%;
-      width: 0%;
-      transition: width 0.8s cubic-bezier(0.1, 1, 0.1, 1);
-    }
-
-    /* Sidebar posicionado alineado */
-    aside {
-      margin-top: 10rem;
-    }
-
-    /* Navigation Button */
-    .back-nav {
-      margin-top: 1.5rem;
-    }
-
-    .back-btn {
-      display: inline-block;
-      width: 100%;
-      text-align: center;
-      padding: 0.6rem 1rem;
-      background: var(--card-dark);
-      color: var(--text-light);
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.85rem;
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      transition: all 0.2s;
-    }
-
-    .back-btn:hover {
-      background: var(--primary-yellow);
-      color: var(--bg-dark);
-      border-color: var(--primary-yellow);
-    }
-
-    /* Sidebar / Annotations */
-    .annotation-box {
-      background: var(--card-dark);
-      border-left: 4px solid var(--primary-yellow);
-      border-top: 1px solid var(--border-color);
-      border-right: 1px solid var(--border-color);
-      border-bottom: 1px solid var(--border-color);
-      padding: 1.25rem;
-      border-radius: 0 6px 6px 0;
-      font-size: 0.9rem;
-      color: #cccccc;
-      margin-bottom: 1rem;
-    }
-
-    .annotation-box h3 {
-      color: var(--text-light);
-      font-size: 0.95rem;
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .annotation-box p {
-      line-height: 1.5;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .header-content {
-        flex-direction: column;
-        text-align: center;
-      }
-      .main-layout {
-        grid-template-columns: 1fr;
-      }
-      aside {
-        margin-top: 1rem;
-      }
-      .stats-bar {
-        margin: 0 auto;
-      }
-      .origin-location {
-        justify-content: center;
-      }
-      .header-sub-row {
-        flex-direction: column;
-        align-items: center;
-      }
-      .center-action-area {
-        position: static;
-        transform: none;
-        margin-top: 0.3rem;
-      }
-      .battle-card {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Header Banner -->
-  <header class="hero-banner">
-    <div class="container">
-      <div class="header-content">
-        <div class="cover-art">
-          <img src="sempiterno.jpg" alt="Sempiterno">
-        </div>
-        <div class="meta-info">
-          <h1><span>Sempiterno</span></h1>
-          <div class="stats-bar">
-            <span><strong>14</strong> Batallas</span>
-            <span><strong>2024 - 2026</strong> Trayectoria</span>
-          </div>
-          <div class="header-sub-row">
-            <div>
-              <div class="origin-location">
-                <img src="https://flagcdn.com/w20/cl.png" alt="Chile" style="width: 18px; height: auto; border-radius: 2px; display: inline-block; vertical-align: middle;"> <strong>Temuco, Chile</strong>
-              </div>
-              <div class="battler-quote">
-                "Irónico, que los más buscados son los últimos que quieres encontrarte..."
-              </div>
-            </div>
-            <a href="https://www.instagram.com/sempiternalista/" target="_blank" rel="noopener noreferrer" class="instagram-icon-btn" title="Instagram">
-              <svg style="width: 16px; height: 16px;" viewBox="0 0 24 24">
-                <defs>
-                  <radialGradient id="ig-grad" cx="30%" cy="107%" r="120%" fx="30%" fy="107%">
-                    <stop offset="0%" stop-color="#fdf497" />
-                    <stop offset="5%" stop-color="#fdf497" />
-                    <stop offset="45%" stop-color="#fd5949" />
-                    <stop offset="60%" stop-color="#d6249f" />
-                    <stop offset="90%" stop-color="#285AEB" />
-                  </radialGradient>
-                </defs>
-                <path fill="url(#ig-grad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Programme', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* Header / Hero Section */
+.hero-banner {
+  background: linear-gradient(180deg, #181818 0%, var(--bg-dark) 100%);
+  border-bottom: 2px solid var(--primary-yellow);
+  padding: 3.5rem 1.5rem 2.5rem 1.5rem;
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.header-content {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.cover-art {
+  width: 150px;
+  height: 150px;
+  border-radius: 6px;
+  box-shadow: 0 10px 25px rgba(255, 255, 0, 0.12);
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.cover-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.meta-info {
+  flex-grow: 1;
+}
+
+.meta-info h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  margin-bottom: 0.8rem;
+  line-height: 1.1;
+}
+
+.meta-info h1 span {
+  color: var(--primary-yellow);
+}
+
+.stats-bar {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  width: fit-content;
+  margin-bottom: 0.6rem;
+}
+
+.stats-bar strong {
+  color: var(--text-light);
+}
+
+.header-sub-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  gap: 1rem;
+}
+
+.origin-location {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.origin-location strong {
+  color: var(--text-light);
+}
+
+.battler-quote {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  font-style: italic;
+  font-weight: bold;
+}
+
+.instagram-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-light);
+  text-decoration: none;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.instagram-icon-btn:hover {
+  background: var(--primary-yellow);
+  color: var(--bg-dark);
+  border-color: var(--primary-yellow);
+}
+
+/* Main Layout */
+.main-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2.5rem;
+  padding: 2.5rem 1.5rem 4rem 1.5rem;
+}
+
+.section-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.6rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section-title .count {
+  font-size: 0.85rem;
+  color: var(--primary-yellow);
+  background: rgba(255, 255, 0, 0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+/* Year Group Title */
+.year-group-title {
+  color: var(--primary-yellow);
+  font-size: 1.3rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin: 1.5rem 0 0.5rem 0;
+}
+
+.year-group-title:first-of-type {
+  margin-top: 0;
+}
+
+/* Catalog List */
+.catalog-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.battle-card {
+  background-color: var(--card-dark);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+  color: inherit;
+  position: relative;
+}
+
+.battle-card:hover {
+  border-color: var(--primary-yellow);
+  background-color: var(--card-hover);
+  transform: translateX(4px);
+}
+
+.battle-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.battle-title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-light);
+  display: block;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.battle-title:hover {
+  color: var(--primary-yellow);
+}
+
+.battle-date {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Botón de Votar ubicado a la altura de la fecha y centrado */
+.center-action-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 50%;
+  bottom: 0.8rem;
+  transform: translateX(-50%);
+}
+
+.vote-btn {
+  background: rgba(255, 255, 0, 0.05);
+  color: var(--primary-yellow);
+  border: 0.5px solid var(--primary-yellow);
+  padding: 0.02rem 0.35rem;
+  font-size: 0.45rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.vote-btn:hover {
+  background: var(--primary-yellow);
+  color: var(--bg-dark);
+  box-shadow: 0 0 8px rgba(255, 255, 0, 0.4);
+}
+
+.badge-container {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  background-color: #222;
+  color: var(--text-muted);
+  border: 1px solid var(--border-color);
+  text-decoration: none;
+  display: inline-block;
+}
+
+.badge:hover {
+  color: var(--text-light);
+  border-color: var(--text-muted);
+}
+
+/* Etiqueta "Batalla virtual" */
+.badge-virtual {
+  font-size: 0.45rem;
+  padding: 0.02rem 0.15rem;
+  border: 0.5px solid var(--primary-yellow);
+  color: var(--primary-yellow);
+  font-weight: 600;
+  border-radius: 2px;
+}
+
+/* ESTILOS DEL MODAL DE VOTACIÓN */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-card {
+  background-color: var(--card-dark);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 520px;
+  padding: 1.8rem;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+  position: relative;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1.2rem;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.modal-close-btn:hover {
+  color: var(--primary-yellow);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.2rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+}
+
+.modal-header-text h2 {
+  font-size: 1.2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-light);
+}
+
+.modal-header-text p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 0.2rem;
+}
+
+/* Selector de Rounds */
+.rds-selector {
+  display: flex;
+  align-items: center;
+  background: #0e0e0e;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 0.3rem 0.6rem;
+  gap: 0.8rem;
+}
+
+.rds-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+.rds-btn:hover {
+  color: var(--primary-yellow);
+}
+
+.rds-display {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--text-light);
+  letter-spacing: 1px;
+}
+
+.rounds-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.round-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+}
+
+.round-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--primary-yellow);
+  border: 1px solid rgba(255, 255, 0, 0.3);
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  width: 65px;
+  text-align: center;
+  background: rgba(255, 255, 0, 0.05);
+}
+
+.option-btn {
+  flex: 1;
+  background: #161616;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  padding: 0.6rem 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.option-btn:hover {
+  border-color: var(--text-light);
+  color: var(--text-light);
+}
+
+.option-btn.selected {
+  background: var(--primary-yellow);
+  color: var(--bg-dark);
+  border-color: var(--primary-yellow);
+  box-shadow: 0 0 15px rgba(255, 255, 0, 0.4);
+  font-weight: 900;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1.2rem;
+}
+
+.btn-submit {
+  background: var(--primary-yellow);
+  border: 1px solid var(--primary-yellow);
+  color: var(--bg-dark);
+  padding: 0.6rem 1.4rem;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-submit:hover {
+  box-shadow: 0 0 15px rgba(255, 255, 0, 0.5);
+}
+
+/* Vista de Resultados en Porcentaje por Round */
+.results-view {
+  display: none;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
+  max-height: 320px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.summary-box {
+  background: rgba(255, 255, 0, 0.05);
+  border: 1px solid var(--primary-yellow);
+  padding: 0.8rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+
+.general-result-title {
+  font-size: 0.9rem;
+  font-weight: 900;
+  color: var(--primary-yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.2rem;
+}
+
+.total-votes-info {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+.round-result-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.round-result-title {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--primary-yellow);
+  text-transform: uppercase;
+}
+
+.result-bar-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.result-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.bar-bg {
+  background: #1a1a1a;
+  height: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.bar-fill {
+  background: var(--primary-yellow);
+  height: 100%;
+  width: 0%;
+  transition: width 0.8s cubic-bezier(0.1, 1, 0.1, 1);
+}
+
+/* Sidebar posicionado alineado */
+aside {
+  margin-top: 10rem;
+}
+
+/* Navigation Button */
+.back-nav {
+  margin-top: 1.5rem;
+}
+
+.back-btn {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  padding: 0.6rem 1rem;
+  background: var(--card-dark);
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.85rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.back-btn:hover {
+  background: var(--primary-yellow);
+  color: var(--bg-dark);
+  border-color: var(--primary-yellow);
+}
+
+/* Sidebar / Annotations */
+.annotation-box {
+  background: var(--card-dark);
+  border-left: 4px solid var(--primary-yellow);
+  border-top: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1.25rem;
+  border-radius: 0 6px 6px 0;
+  font-size: 0.9rem;
+  color: #cccccc;
+  margin-bottom: 1rem;
+}
+
+.annotation-box h3 {
+  color: var(--text-light);
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.annotation-box p {
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  .main-layout {
+    grid-template-columns: 1fr;
+  }
+  aside {
+    margin-top: 1rem;
+  }
+  .stats-bar {
+    margin: 0 auto;
+  }
+  .origin-location {
+    justify-content: center;
+  }
+  .header-sub-row {
+    flex-direction: column;
+    align-items: center;
+  }
+  .center-action-area {
+    position: static;
+    transform: none;
+    margin-top: 0.3rem;
+  }
+  .battle-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+
+<!-- Left Column: Catalog -->
+<section>
+  <div class="section-title">
+    <span>Historial de enfrentamientos:</span>
+    <span class="count">14 Batallas</span>
+  </div>
+
+  <div class="catalog-list">
+    
+    <!-- 2024 -->
+    <h2 class="year-group-title">2024</h2>
+
+    <!-- #1 -->
+    <div class="battle-card">
+      <div class="battle-info">
+        <a href="https://www.youtube.com/watch?v=X9XwBJh_agI" target="_blank" rel="noopener noreferrer" class="battle-title">#1. Sempiterno vs. Cabrera</a>
+        <span class="battle-date">28/11/2024*</span>
+      </div>
+      <div class="center-action-area">
+        <button class="vote-btn" onclick="openVoteModal('battle-1', 'Sempiterno vs. Cabrera', 'Sempiterno', 'Cabrera')">Votar</button>
+      </div>
+      <div class="badge-container">
+        <span class="badge badge-virtual">Batalla virtual</span>
+        <a href="https://www.youtube.com/watch?v=X9XwBJh_agI" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
       </div>
     </div>
-  </header>
 
-  <!-- Main Section -->
-  <main class="container main-layout">
-    
-    <!-- Left Column: Catalog -->
-    <section>
-      <div class="section-title">
-        <span>Historial de enfrentamientos:</span>
-        <span class="count">14 Batallas</span>
+    <!-- 2025 -->
+    <h2 class="year-group-title">2025</h2>
+
+    <!-- #2 -->
+    <div class="battle-card">
+      <div class="battle-info">
+        <a href="https://www.youtube.com/watch?v=DCUUfbz8D1Q&t=1s" target="_blank" rel="noopener noreferrer" class="battle-title">#2. Sempiterno vs. Rocket</a>
+        <span class="battle-date">22/07/2025*</span>
       </div>
-
-      <div class="catalog-list">
-        
-        <!-- 2024 -->
-        <h2 class="year-group-title">2024</h2>
-
-        <!-- #1 -->
-        <div class="battle-card">
-          <div class="battle-info">
-            <a href="https://www.youtube.com/watch?v=X9XwBJh_agI" target="_blank" rel="noopener noreferrer" class="battle-title">#1. Sempiterno vs. Cabrera</a>
-            <span class="battle-date">28/11/2024*</span>
-          </div>
-          <div class="center-action-area">
-            <button class="vote-btn" onclick="openVoteModal('battle-1', 'Sempiterno vs. Cabrera', 'Sempiterno', 'Cabrera')">Votar</button>
-          </div>
-          <div class="badge-container">
-            <span class="badge badge-virtual">Batalla virtual</span>
-            <a href="https://www.youtube.com/watch?v=X9XwBJh_agI" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
-          </div>
-        </div>
-
-        <!-- 2025 -->
-        <h2 class="year-group-title">2025</h2>
-
-        <!-- #2 -->
-        <div class="battle-card">
-          <div class="battle-info">
-            <a href="https://www.youtube.com/watch?v=DCUUfbz8D1Q&t=1s" target="_blank" rel="noopener noreferrer" class="battle-title">#2. Sempiterno vs. Rocket</a>
-            <span class="battle-date">22/07/2025*</span>
-          </div>
-          <div class="center-action-area">
-            <button class="vote-btn" onclick="openVoteModal('battle-2', 'Sempiterno vs. Rocket', 'Sempiterno', 'Rocket')">Votar</button>
-          </div>
-          <div class="badge-container">
-            <span class="badge badge-virtual">Batalla virtual</span>
-            <a href="https://www.youtube.com/watch?v=DCUUfbz8D1Q&t=1s" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
-          </div>
-        </div>
-
-        <!-- #3 -->
-        <div class="battle-card">
-          <div class="battle-info">
-            <a href="https://www.youtube.com/watch?v=YwpdvxE-7J4" target="_blank" rel="noopener noreferrer" class="battle-title">#3. Sempiterno vs. Old Hanzo</a>
-            <span class="battle-date">29/07/2025*</span>
-          </div>
-          <div class="center-action-area">
-            <button class="vote-btn" onclick="openVoteModal('battle-3', 'Sempiterno vs. Old Hanzo', 'Sempiterno', 'Old Hanzo')">Votar</button>
-          </div>
-          <div class="badge-container">
-            <span class="badge badge-virtual">Batalla virtual</span>
-            <a href="https://www.youtube.com/watch?v=YwpdvxE-7J4" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
-          </div>
-        </div>
-
-        <!-- #4 -->
-        <div class="battle-card">
-          <div class="battle-info">
-            <a href="https://www.youtube.com/watch?v=IOgZN8tEbDs&t=474s" target="_blank" rel="noopener noreferrer" class="battle-title">#4. Sempiterno vs. Temple</a>
-            <span class="battle-date">02/08/2025</span>
-          </div>
-          <div class="center-action-area">
-            <button class="vote-btn" onclick="openVoteModal('battle-4', 'Sempiterno vs. Temple', 'Sempiterno', 'Temple')">Votar</button>
-          </div>
-          <a href="https://www.youtube.com/watch?v=IOgZN8tEbDs&t=474s" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
-        </div>
-
-        <!-- #5 -->
-        <div class="battle-card">
-          <div class="battle-info">
-            <a href="https://www.youtube.com/watch?v=0uhPShLy1Wo&t=168s" target="_blank" rel="noopener noreferrer" class="battle-title">#5. Sempiterno vs. Espejo</a>
-            <span class="battle-date">11/10/2025</span>
-          </div>
-          <div class="center-action-area">
-            <button class="vote-btn" onclick="openVoteModal('battle-5', 'Sempiterno vs. Espejo', 'Sempiterno', 'Espejo')">Votar</button>
-          </div>
-          <a href="https://www.youtube.com/watch?v=0uhPShLy1Wo&t=168s" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
-        </div>
-
-        <!-- #6 -->
-        <div class="battle-card">
-          <div class="battle-info">
-            <a href="https://www.youtube.com/watch?v=FtHNDRqL2_M&t=10s" target="_blank" rel="noopener noreferrer" class="battle-title">#6. Sempiterno vs. Anubis</a>
-            <span class="battle-date">13/12/2025</span>
-          </div>
-          <div class="center-action-area">
-            <button class="vote-btn" onclick="openVoteModal('battle-6', 'Sempiterno vs. Anubis', 'Sempiterno', 'Anubis')">Votar</button>
-          </div>
-          <a href="https://www.youtube.com/watch?v=FtHNDRqL2_M&t=10s" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
-        </div>
-
-        <!-- 2026 -->
-        <h2 class="year-group-title">2026</h2>
-
-        <!-- #7 -->
-        <div class="battle-card">
-          <div class="battle-info">
-            <a href="https://www.youtube.com/watch?v=dNM2ha2QQLA" target="_blank" rel="noopener noreferrer" class="battle-title">#7. Sempiterno vs. Ese Sihor One</a>
-            <span class="battle-date">01/01/2026*</span>
-          </div>
-          <div class="center-action-area">
-            <button class="vote-btn" onclick="openVoteModal('battle-7', 'Sempiterno vs. Ese Sihor One', 'Sempiterno', 'Ese Sihor One')">Votar</button>
-          </div>
-          <div class="badge-container">
-            <span class="badge badge-virtual">Batalla virtual</span>
-            <a href="https://www.youtube.com/watch?v=dNM2ha2QQLA" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
-          </div>
-        </div>
-
-        <!-- #8 -->
-        <div class="battle-card">
-          <div class="battle-info">
-            <a href="https://www.youtube.com/watch?v=h90UzANSzGQ&t=120s" target="_blank" rel="noopener noreferrer" class="battle-title">#8. Sempiterno vs. Pablito ABR</a>
-            <span class="battle-date">07/03/2026</span>
-          </div>
-          <div class="center-action-area">
-            <button class="vote-btn" onclick="openVoteModal('battle-8', 'Sempiterno vs. Pablito ABR', 'Sempiterno', 'Pablito ABR')">Votar</button>
-          </div>
-          <a href="https://www.youtube.com/watch?v=h90UzANSzGQ&t=120s" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
-        </div>
-
-        <!-- #9 -->
-        <div class="battle-card">
-          <div class="battle-info">
-            <a href="https://www.youtube.com/watch?v=MWtgmYnC3lE&t=79s" target="_blank" rel="noopener noreferrer" class="battle-title">#9. Sempiterno vs. Adeuz</a>
-            <span class="battle-date">25/04/2026</span>
-          </div>
-          <div class="center-action-area">
-            <button class="vote-btn" onclick="openVoteModal('battle-9', 'Sempiterno vs. Adeuz', 'Sempiterno', 'Adeuz')">Votar</button>
-          </div>
-          <a href="https://www.youtube.com/watch?v=MWtgmYnC3lE&t=79s" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
-        </div>
-
-        <!-- #10 -->
-        <div class="battle-card">
-          <div class="battle-info">
-            <a href="https://www.youtube.com/watch?v=EnXtCo9L0HE&t=9s" target="_blank" rel="noopener noreferrer" class="battle-title">#10. Sempiterno vs. Cielín 911</a>
-            <span class="battle-date">02/06/2026*</span>
-          </div>
-          <div class="center-action-area">
-            <button class="vote-btn" onclick="openVoteModal('battle-10', 'Sempiterno vs. Cielín 911', 'Sempiterno', 'Cielín 911')">Votar</button>
-          </div>
-          <div class="badge-container">
-            <span class="badge badge-virtual">Batalla virtual</span>
-            <a href="https://www.youtube.com/watch?v=EnXtCo9L0HE&t=9s" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
-          </div>
-        </div>
-
-        <!-- #11 -->
-        <div class="battle-card">
-          <div class="battle-info">
-            <a href="https://www.youtube.com/watch?v=iHYsVzLHgms&t=333s" target="_blank" rel="noopener noreferrer" class="battle-title">#11. Sempiterno vs. As One</a>
-            <span class="battle-date">06/06/2026</span>
-          </div>
-          <div class="center-action-area">
-            <button class="vote-btn" onclick="openVoteModal('battle-11', 'Sempiterno vs. As One', 'Sempiterno', 'As One')">Votar</button>
-          </div>
-          <a href="https://www.youtube.com/watch?v=iHYsVzLHgms&t=333s" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
-        </div>
-
-        <!-- #12 -->
-        <div class="battle-card">
-          <div class="battle-info">
-            <a href="https://www.youtube.com/watch?v=27VUtmowPfM" target="_blank" rel="noopener noreferrer" class="battle-title">#12. Sempiterno vs. Tetra</a>
-            <span class="battle-date">09/06/2026*</span>
-          </div>
-          <div class="center-action-area">
-            <button class="vote-btn" onclick="openVoteModal('battle-12', 'Sempiterno vs. Tetra', 'Sempiterno', 'Tetra')">Votar</button>
-          </div>
-          <div class="badge-container">
-            <span class="badge badge-virtual">Batalla virtual</span>
-            <a href="https://www.youtube.com/watch?v=27VUtmowPfM" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
-          </div>
-        </div>
-
-        <!-- #13 -->
-        <div class="battle-card">
-          <div class="battle-info">
-            <a href="https://www.youtube.com/watch?v=vknrbnsE2wY&t=990s" target="_blank" rel="noopener noreferrer" class="battle-title">#13. Sempiterno vs. Too Yugan</a>
-            <span class="battle-date">01/08/2026</span>
-          </div>
-          <div class="center-action-area">
-            <button class="vote-btn" onclick="openVoteModal('battle-13', 'Sempiterno vs. Too Yugan', 'Sempiterno', 'Too Yugan')">Votar</button>
-          </div>
-          <a href="https://www.youtube.com/watch?v=vknrbnsE2wY&t=990s" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
-        </div>
-
-        <!-- #14 -->
-        <div class="battle-card">
-          <div class="battle-info">
-            <a href="https://www.youtube.com/watch?v=fvIzFP4TxWc" target="_blank" rel="noopener noreferrer" class="battle-title">#14. Sempiterno vs. Morbus Sonicko</a>
-            <span class="battle-date">10/10/2026</span>
-          </div>
-          <div class="center-action-area">
-            <button class="vote-btn" onclick="openVoteModal('battle-14', 'Sempiterno vs. Morbus Sonicko', 'Sempiterno', 'Morbus Sonicko')">Votar</button>
-          </div>
-          <a href="https://www.youtube.com/watch?v=fvIzFP4TxWc" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
-        </div>
-
+      <div class="center-action-area">
+        <button class="vote-btn" onclick="openVoteModal('battle-2', 'Sempiterno vs. Rocket', 'Sempiterno', 'Rocket')">Votar</button>
       </div>
-    </section>
-
-    <!-- Right Column: Sidebar & Annotations -->
-    <aside>
-      <div class="section-title">
-        <span>Anotaciones</span>
+      <div class="badge-container">
+        <span class="badge badge-virtual">Batalla virtual</span>
+        <a href="https://www.youtube.com/watch?v=DCUUfbz8D1Q&t=1s" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
       </div>
+    </div>
 
-      <div class="annotation-box">
-        <h3>Fecha de lanzamiento</h3>
-        <p>El asterisco (<strong>*</strong>) indica enfrentamientos donde no se cuenta con la fecha oficial del evento, por lo que se toma la fecha de publicación en YouTube o Facebook.</p>
+    <!-- #3 -->
+    <div class="battle-card">
+      <div class="battle-info">
+        <a href="https://www.youtube.com/watch?v=YwpdvxE-7J4" target="_blank" rel="noopener noreferrer" class="battle-title">#3. Sempiterno vs. Old Hanzo</a>
+        <span class="battle-date">29/07/2025*</span>
       </div>
-
-      <div class="back-nav">
-        <a href="index.html" class="back-btn">← Volver al índice</a>
+      <div class="center-action-area">
+        <button class="vote-btn" onclick="openVoteModal('battle-3', 'Sempiterno vs. Old Hanzo', 'Sempiterno', 'Old Hanzo')">Votar</button>
       </div>
-    </aside>
-
-  </main>
-
-  <!-- MODAL DE VOTACIÓN -->
-  <div class="modal-overlay" id="voteModal">
-    <div class="modal-card">
-      <button class="modal-close-btn" onclick="closeVoteModal()">&times;</button>
-      
-      <div class="modal-header">
-        <div class="modal-header-text">
-          <h2>VOTAR</h2>
-          <p id="modalSubTitle">Puntúa los rounds para registrar tu voto.</p>
-        </div>
-        <!-- Selector de Rounds (Limitado estrictamente de 1 a 3 RDS) -->
-        <div class="rds-selector" id="rdsSelectorBox">
-          <button class="rds-btn" onclick="changeRounds(-1)">−</button>
-          <span class="rds-display" id="rdsCountText">3 RDS</span>
-          <button class="rds-btn" onclick="changeRounds(1)">+</button>
-        </div>
+      <div class="badge-container">
+        <span class="badge badge-virtual">Batalla virtual</span>
+        <a href="https://www.youtube.com/watch?v=YwpdvxE-7J4" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
       </div>
+    </div>
 
-      <div class="rounds-container" id="roundsContainer">
-        <!-- Se generan dinámicamente según los rounds elegidos -->
+    <!-- #4 -->
+    <div class="battle-card">
+      <div class="battle-info">
+        <a href="https://www.youtube.com/watch?v=IOgZN8tEbDs&t=474s" target="_blank" rel="noopener noreferrer" class="battle-title">#4. Sempiterno vs. Temple</a>
+        <span class="battle-date">02/08/2025</span>
       </div>
+      <div class="center-action-area">
+        <button class="vote-btn" onclick="openVoteModal('battle-4', 'Sempiterno vs. Temple', 'Sempiterno', 'Temple')">Votar</button>
+      </div>
+      <a href="https://www.youtube.com/watch?v=IOgZN8tEbDs&t=474s" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
+    </div>
 
-      <!-- Vista de Resultados Desglosados por Round -->
-      <div class="results-view" id="resultsView">
-        <div class="summary-box">
-          <div class="general-result-title" id="generalResultText">Resultado general: 0-0</div>
-          <div class="total-votes-info" id="totalVotesDisplay">Votos totales emitidos: 0</div>
-        </div>
-        <div id="roundsResultsContainer" style="display: flex; flex-direction: column; gap: 0.8rem;">
-          <!-- Desglose generado dinámicamente -->
-        </div>
+    <!-- #5 -->
+    <div class="battle-card">
+      <div class="battle-info">
+        <a href="https://www.youtube.com/watch?v=0uhPShLy1Wo&t=168s" target="_blank" rel="noopener noreferrer" class="battle-title">#5. Sempiterno vs. Espejo</a>
+        <span class="battle-date">11/10/2025</span>
       </div>
+      <div class="center-action-area">
+        <button class="vote-btn" onclick="openVoteModal('battle-5', 'Sempiterno vs. Espejo', 'Sempiterno', 'Espejo')">Votar</button>
+      </div>
+      <a href="https://www.youtube.com/watch?v=0uhPShLy1Wo&t=168s" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
+    </div>
 
-      <div class="modal-footer" id="modalFooterBtns">
-        <button class="btn-submit" id="submitBtn" onclick="submitVote()">✓ ENVIAR VOTO</button>
+    <!-- #6 -->
+    <div class="battle-card">
+      <div class="battle-info">
+        <a href="https://www.youtube.com/watch?v=FtHNDRqL2_M&t=10s" target="_blank" rel="noopener noreferrer" class="battle-title">#6. Sempiterno vs. Anubis</a>
+        <span class="battle-date">13/12/2025</span>
       </div>
+      <div class="center-action-area">
+        <button class="vote-btn" onclick="openVoteModal('battle-6', 'Sempiterno vs. Anubis', 'Sempiterno', 'Anubis')">Votar</button>
+      </div>
+      <a href="https://www.youtube.com/watch?v=FtHNDRqL2_M&t=10s" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
+    </div>
+
+    <!-- 2026 -->
+    <h2 class="year-group-title">2026</h2>
+
+    <!-- #7 -->
+    <div class="battle-card">
+      <div class="battle-info">
+        <a href="https://www.youtube.com/watch?v=dNM2ha2QQLA" target="_blank" rel="noopener noreferrer" class="battle-title">#7. Sempiterno vs. Ese Sihor One</a>
+        <span class="battle-date">01/01/2026*</span>
+      </div>
+      <div class="center-action-area">
+        <button class="vote-btn" onclick="openVoteModal('battle-7', 'Sempiterno vs. Ese Sihor One', 'Sempiterno', 'Ese Sihor One')">Votar</button>
+      </div>
+      <div class="badge-container">
+        <span class="badge badge-virtual">Batalla virtual</span>
+        <a href="https://www.youtube.com/watch?v=dNM2ha2QQLA" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
+      </div>
+    </div>
+
+    <!-- #8 -->
+    <div class="battle-card">
+      <div class="battle-info">
+        <a href="https://www.youtube.com/watch?v=h90UzANSzGQ&t=120s" target="_blank" rel="noopener noreferrer" class="battle-title">#8. Sempiterno vs. Pablito ABR</a>
+        <span class="battle-date">07/03/2026</span>
+      </div>
+      <div class="center-action-area">
+        <button class="vote-btn" onclick="openVoteModal('battle-8', 'Sempiterno vs. Pablito ABR', 'Sempiterno', 'Pablito ABR')">Votar</button>
+      </div>
+      <a href="https://www.youtube.com/watch?v=h90UzANSzGQ&t=120s" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
+    </div>
+
+    <!-- #9 -->
+    <div class="battle-card">
+      <div class="battle-info">
+        <a href="https://www.youtube.com/watch?v=MWtgmYnC3lE&t=79s" target="_blank" rel="noopener noreferrer" class="battle-title">#9. Sempiterno vs. Adeuz</a>
+        <span class="battle-date">25/04/2026</span>
+      </div>
+      <div class="center-action-area">
+        <button class="vote-btn" onclick="openVoteModal('battle-9', 'Sempiterno vs. Adeuz', 'Sempiterno', 'Adeuz')">Votar</button>
+      </div>
+      <a href="https://www.youtube.com/watch?v=MWtgmYnC3lE&t=79s" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
+    </div>
+
+    <!-- #10 -->
+    <div class="battle-card">
+      <div class="battle-info">
+        <a href="https://www.youtube.com/watch?v=EnXtCo9L0HE&t=9s" target="_blank" rel="noopener noreferrer" class="battle-title">#10. Sempiterno vs. Cielín 911</a>
+        <span class="battle-date">02/06/2026*</span>
+      </div>
+      <div class="center-action-area">
+        <button class="vote-btn" onclick="openVoteModal('battle-10', 'Sempiterno vs. Cielín 911', 'Sempiterno', 'Cielín 911')">Votar</button>
+      </div>
+      <div class="badge-container">
+        <span class="badge badge-virtual">Batalla virtual</span>
+        <a href="https://www.youtube.com/watch?v=EnXtCo9L0HE&t=9s" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
+      </div>
+    </div>
+
+    <!-- #11 -->
+    <div class="battle-card">
+      <div class="battle-info">
+        <a href="https://www.youtube.com/watch?v=iHYsVzLHgms&t=333s" target="_blank" rel="noopener noreferrer" class="battle-title">#11. Sempiterno vs. As One</a>
+        <span class="battle-date">06/06/2026</span>
+      </div>
+      <div class="center-action-area">
+        <button class="vote-btn" onclick="openVoteModal('battle-11', 'Sempiterno vs. As One', 'Sempiterno', 'As One')">Votar</button>
+      </div>
+      <a href="https://www.youtube.com/watch?v=iHYsVzLHgms&t=333s" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
+    </div>
+
+    <!-- #12 -->
+    <div class="battle-card">
+      <div class="battle-info">
+        <a href="https://www.youtube.com/watch?v=27VUtmowPfM" target="_blank" rel="noopener noreferrer" class="battle-title">#12. Sempiterno vs. Tetra</a>
+        <span class="battle-date">09/06/2026*</span>
+      </div>
+      <div class="center-action-area">
+        <button class="vote-btn" onclick="openVoteModal('battle-12', 'Sempiterno vs. Tetra', 'Sempiterno', 'Tetra')">Votar</button>
+      </div>
+      <div class="badge-container">
+        <span class="badge badge-virtual">Batalla virtual</span>
+        <a href="https://www.youtube.com/watch?v=27VUtmowPfM" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
+      </div>
+    </div>
+
+    <!-- #13 -->
+    <div class="battle-card">
+      <div class="battle-info">
+        <a href="https://www.youtube.com/watch?v=vknrbnsE2wY&t=990s" target="_blank" rel="noopener noreferrer" class="battle-title">#13. Sempiterno vs. Too Yugan</a>
+        <span class="battle-date">01/08/2026</span>
+      </div>
+      <div class="center-action-area">
+        <button class="vote-btn" onclick="openVoteModal('battle-13', 'Sempiterno vs. Too Yugan', 'Sempiterno', 'Too Yugan')">Votar</button>
+      </div>
+      <a href="https://www.youtube.com/watch?v=vknrbnsE2wY&t=990s" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
+    </div>
+
+    <!-- #14 -->
+    <div class="battle-card">
+      <div class="battle-info">
+        <a href="https://www.youtube.com/watch?v=fvIzFP4TxWc" target="_blank" rel="noopener noreferrer" class="battle-title">#14. Sempiterno vs. Morbus Sonicko</a>
+        <span class="battle-date">10/10/2026</span>
+      </div>
+      <div class="center-action-area">
+        <button class="vote-btn" onclick="openVoteModal('battle-14', 'Sempiterno vs. Morbus Sonicko', 'Sempiterno', 'Morbus Sonicko')">Votar</button>
+      </div>
+      <a href="https://www.youtube.com/watch?v=fvIzFP4TxWc" target="_blank" rel="noopener noreferrer" class="badge">Ver en YouTube</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- Right Column: Sidebar & Annotations -->
+<aside>
+  <div class="section-title">
+    <span>Anotaciones</span>
+  </div>
+
+  <div class="annotation-box">
+    <h3>Fecha de lanzamiento</h3>
+    <p>El asterisco (<strong>*</strong>) indica enfrentamientos donde no se cuenta con la fecha oficial del evento, por lo que se toma la fecha de publicación en YouTube o Facebook.</p>
+  </div>
+
+  <div class="back-nav">
+    <a href="index.html" class="back-btn">← Volver al índice</a>
+  </div>
+</aside>
+
+
+  <div class="modal-header">
+    <div class="modal-header-text">
+      <h2>VOTAR</h2>
+      <p id="modalSubTitle">Puntúa los rounds para registrar tu voto.</p>
+    </div>
+    <!-- Selector de Rounds (Limitado estrictamente de 1 a 3 RDS) -->
+    <div class="rds-selector" id="rdsSelectorBox">
+      <button class="rds-btn" onclick="changeRounds(-1)">−</button>
+      <span class="rds-display" id="rdsCountText">3 RDS</span>
+      <button class="rds-btn" onclick="changeRounds(1)">+</button>
     </div>
   </div>
 
-  <script>
-    let activeBattleId = "";
-    let currentMc1 = "";
-    let currentMc2 = "";
-    let totalRounds = 3;
-    let selections = {};
+  <div class="rounds-container" id="roundsContainer">
+    <!-- Se generan dinámicamente según los rounds elegidos -->
+  </div>
 
-    function openVoteModal(battleId, title, mc1, mc2) {
-      activeBattleId = battleId;
-      currentMc1 = mc1;
-      currentMc2 = mc2;
-      totalRounds = 3;
-      selections = { 1: 1, 2: 1, 3: 1 };
+  <!-- Vista de Resultados Desglosados por Round -->
+  <div class="results-view" id="resultsView">
+    <div class="summary-box">
+      <div class="general-result-title" id="generalResultText">Resultado general: 0-0</div>
+      <div class="total-votes-info" id="totalVotesDisplay">Votos totales emitidos: 0</div>
+    </div>
+    <div id="roundsResultsContainer" style="display: flex; flex-direction: column; gap: 0.8rem;">
+      <!-- Desglose generado dinámicamente -->
+    </div>
+  </div>
 
-      document.getElementById('modalSubTitle').innerText = title;
-
-      // Verificar si el usuario ya votó en esta batalla específica
-      const hasVoted = localStorage.getItem('user_has_voted_' + activeBattleId);
-
-      if (hasVoted) {
-        // Cargar y refrescar los datos más recientes almacenados
-        calculateAndShowResults(true);
-      } else {
-        updateRoundsDisplay();
-        document.getElementById('rdsSelectorBox').style.display = 'flex';
-        document.getElementById('roundsContainer').style.display = 'flex';
-        document.getElementById('modalFooterBtns').style.display = 'flex';
-        document.getElementById('resultsView').style.display = 'none';
-      }
-
-      document.getElementById('voteModal').classList.add('active');
-    }
-
-    function changeRounds(delta) {
-      totalRounds += delta;
-      if (totalRounds < 1) totalRounds = 1;
-      if (totalRounds > 3) totalRounds = 3;
-      
-      updateRoundsDisplay();
-    }
-
-    function updateRoundsDisplay() {
-      document.getElementById('rdsCountText').innerText = totalRounds + " RDS";
-      
-      const container = document.getElementById('roundsContainer');
-      container.innerHTML = '';
-
-      for (let r = 1; r <= totalRounds; r++) {
-        if (!selections[r]) selections[r] = 1;
-
-        const row = document.createElement('div');
-        row.className = 'round-row';
-        row.innerHTML = `
-          <span class="round-label">RD ${r}</span>
-          <button class="option-btn ${selections[r] === 1 ? 'selected' : ''}" id="r${r}-mc1" onclick="selectOption(${r}, 1)">${currentMc1}</button>
-          <button class="option-btn ${selections[r] === 2 ? 'selected' : ''}" id="r${r}-mc2" onclick="selectOption(${r}, 2)">${currentMc2}</button>
-        `;
-        container.appendChild(row);
-      }
-    }
-
-    function closeVoteModal() {
-      document.getElementById('voteModal').classList.remove('active');
-    }
-
-    function selectOption(round, option) {
-      selections[round] = option;
-      const btn1 = document.getElementById(`r${round}-mc1`);
-      const btn2 = document.getElementById(`r${round}-mc2`);
-
-      if (option === 1) {
-        btn1.classList.add('selected');
-        btn2.classList.remove('selected');
-      } else {
-        btn2.classList.add('selected');
-        btn1.classList.remove('selected');
-      }
-    }
-
-    function submitVote() {
-      let userRoundsData = {};
-      for (let r = 1; r <= totalRounds; r++) {
-        userRoundsData[r] = selections[r];
-      }
-
-      let storageKey = 'rounds_accumulated_' + activeBattleId;
-      let accumulatedRounds = JSON.parse(localStorage.getItem(storageKey)) || {};
-
-      localStorage.setItem('battle_rounds_count_' + activeBattleId, totalRounds);
-
-      for (let r = 1; r <= totalRounds; r++) {
-        if (!accumulatedRounds[r]) {
-          accumulatedRounds[r] = { mc1: 0, mc2: 0 };
-        }
-        if (userRoundsData[r] === 1) {
-          accumulatedRounds[r].mc1++;
-        } else {
-          accumulatedRounds[r].mc2++;
-        }
-      }
-
-      localStorage.setItem(storageKey, JSON.stringify(accumulatedRounds));
-      localStorage.setItem('user_has_voted_' + activeBattleId, 'true');
-
-      let countKey = 'total_voters_count_' + activeBattleId;
-      let totalVoters = parseInt(localStorage.getItem(countKey) || '0') + 1;
-      localStorage.setItem(countKey, totalVoters);
-
-      calculateAndShowResults(false);
-    }
-
-    function calculateAndShowResults(alreadyVoted) {
-      let storageKey = 'rounds_accumulated_' + activeBattleId;
-      let accumulatedRounds = JSON.parse(localStorage.getItem(storageKey)) || {};
-      let countKey = 'total_voters_count_' + activeBattleId;
-      let totalVoters = parseInt(localStorage.getItem(countKey) || '0');
-      let activeRoundsCount = parseInt(localStorage.getItem('battle_rounds_count_' + activeBattleId) || '3');
-
-      let mc1RoundsWon = 0;
-      let mc2RoundsWon = 0;
-
-      let roundsResultsHTML = '';
-
-      for (let r = 1; r <= activeRoundsCount; r++) {
-        let roundData = accumulatedRounds[r] || { mc1: 0, mc2: 0 };
-        let rTotal = roundData.mc1 + roundData.mc2;
-        let rPct1 = 0;
-        let rPct2 = 0;
-
-        if (rTotal > 0) {
-          rPct1 = Math.round((roundData.mc1 / rTotal) * 100);
-          rPct2 = 100 - rPct1;
-        }
-
-        if (roundData.mc1 > roundData.mc2) {
-          mc1RoundsWon++;
-        } else if (roundData.mc2 > roundData.mc1) {
-          mc2RoundsWon++;
-        }
-
-        roundsResultsHTML += `
-          <div class="round-result-card">
-            <span class="round-result-title">Round ${r}</span>
-            <div class="result-bar-wrapper">
-              <div class="result-info">
-                <span>${currentMc1}</span>
-                <span>${rPct1}%</span>
-              </div>
-              <div class="bar-bg">
-                <div class="bar-fill" id="r${r}-bar1" style="width: ${rPct1}%;"></div>
-              </div>
-            </div>
-            <div class="result-bar-wrapper">
-              <div class="result-info">
-                <span>${currentMc2}</span>
-                <span>${rPct2}%</span>
-              </div>
-              <div class="bar-bg">
-                <div class="bar-fill" id="r${r}-bar2" style="width: ${rPct2}%;"></div>
-              </div>
-            </div>
-          </div>
-        `;
-      }
-
-      let generalText = "";
-      if (mc1RoundsWon > mc2RoundsWon) {
-        generalText = `Resultado general: ${mc1RoundsWon}-${mc2RoundsWon} ${currentMc1}`;
-      } else if (mc2RoundsWon > mc1RoundsWon) {
-        generalText = `Resultado general: ${mc2RoundsWon}-${mc1RoundsWon} ${currentMc2}`;
-      } else {
-        if (activeRoundsCount === 2 && mc1RoundsWon === 1 && mc2RoundsWon === 1) {
-          generalText = `Resultado general: 1-1 ${currentMc1} / ${currentMc2}`;
-        } else if (activeRoundsCount === 3 && mc1RoundsWon === 1 && mc2RoundsWon === 1) {
-          generalText = `Resultado general: 1-1 ${currentMc1} / ${currentMc2}`;
-        } else {
-          generalText = `Resultado general: ${mc1RoundsWon}-${mc2RoundsWon} Empate`;
-        }
-      }
-
-      document.getElementById('rdsSelectorBox').style.display = 'none';
-      document.getElementById('roundsContainer').style.display = 'none';
-      document.getElementById('modalFooterBtns').style.display = 'none';
-
-      document.getElementById('modalSubTitle').innerText = alreadyVoted 
-        ? "RESULTADOS REGISTRADOS (YA HAS VOTADO EN ESTA BATALLA)" 
-        : "¡VOTO REGISTRADO CON ÉXITO!";
-
-      document.getElementById('generalResultText').innerText = generalText;
-      document.getElementById('totalVotesDisplay').innerText = "Votos totales emitidos: " + totalVoters;
-
-      document.getElementById('roundsResultsContainer').innerHTML = roundsResultsHTML;
-      document.getElementById('resultsView').style.display = 'flex';
-    }
-  </script>
-
-</body>
-</html>
+  <div class="modal-footer" id="modalFooterBtns">
+    <button class="btn-submit" id="submitBtn" onclick="submitVote()">✓ ENVIAR VOTO</button>
+  </div>
+</div>
