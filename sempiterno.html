@@ -1052,4 +1052,155 @@
       for (let r = 1; r <= totalRounds; r++) {
         if (!selections[r]) selections[r] = 1;
 
-        const
+        const row = document.createElement('div');
+        row.className = 'round-row';
+        row.innerHTML = `
+          <span class="round-label">RD ${r}</span>
+          <button class="option-btn ${selections[r] === 1 ? 'selected' : ''}" id="r${r}-mc1" onclick="selectOption(${r}, 1)">${currentMc1}</button>
+          <button class="option-btn ${selections[r] === 2 ? 'selected' : ''}" id="r${r}-mc2" onclick="selectOption(${r}, 2)">${currentMc2}</button>
+        `;
+        container.appendChild(row);
+      }
+    }
+
+    function closeVoteModal() {
+      document.getElementById('voteModal').classList.remove('active');
+    }
+
+    function selectOption(round, option) {
+      selections[round] = option;
+      const btn1 = document.getElementById(`r${round}-mc1`);
+      const btn2 = document.getElementById(`r${round}-mc2`);
+
+      if (option === 1) {
+        btn1.classList.add('selected');
+        btn2.classList.remove('selected');
+      } else {
+        btn2.classList.add('selected');
+        btn1.classList.remove('selected');
+      }
+    }
+
+    function submitVote() {
+      let userRoundsData = {};
+      for (let r = 1; r <= totalRounds; r++) {
+        userRoundsData[r] = selections[r];
+      }
+
+      let storageKey = 'rounds_accumulated_' + activeBattleId;
+      let accumulatedRounds = JSON.parse(localStorage.getItem(storageKey)) || {};
+
+      localStorage.setItem('battle_rounds_count_' + activeBattleId, totalRounds);
+
+      for (let r = 1; r <= totalRounds; r++) {
+        if (!accumulatedRounds[r]) {
+          accumulatedRounds[r] = { mc1: 0, mc2: 0 };
+        }
+        if (userRoundsData[r] === 1) {
+          accumulatedRounds[r].mc1++;
+        } else {
+          accumulatedRounds[r].mc2++;
+        }
+      }
+
+      localStorage.setItem(storageKey, JSON.stringify(accumulatedRounds));
+      localStorage.setItem('user_has_voted_' + activeBattleId, 'true');
+
+      let countKey = 'total_voters_count_' + activeBattleId;
+      let totalVoters = parseInt(localStorage.getItem(countKey) || '0') + 1;
+      localStorage.setItem(countKey, totalVoters);
+
+      calculateAndShowResults(false);
+    }
+
+    function calculateAndShowResults(alreadyVoted) {
+      let storageKey = 'rounds_accumulated_' + activeBattleId;
+      let accumulatedRounds = JSON.parse(localStorage.getItem(storageKey)) || {};
+      let countKey = 'total_voters_count_' + activeBattleId;
+      let totalVoters = parseInt(localStorage.getItem(countKey) || '0');
+      let activeRoundsCount = parseInt(localStorage.getItem('battle_rounds_count_' + activeBattleId) || '3');
+
+      let mc1RoundsWon = 0;
+      let mc2RoundsWon = 0;
+
+      let roundsResultsHTML = '';
+
+      for (let r = 1; r <= activeRoundsCount; r++) {
+        let roundData = accumulatedRounds[r] || { mc1: 0, mc2: 0 };
+        let rTotal = roundData.mc1 + roundData.mc2;
+        let rPct1 = 0;
+        let rPct2 = 0;
+
+        if (rTotal > 0) {
+          rPct1 = Math.round((roundData.mc1 / rTotal) * 100);
+          rPct2 = 100 - rPct1;
+        }
+
+        // Conteo de rounds ganados según el porcentaje mayoritario en ese round
+        if (roundData.mc1 > roundData.mc2) {
+          mc1RoundsWon++;
+        } else if (roundData.mc2 > roundData.mc1) {
+          mc2RoundsWon++;
+        } else if (roundData.mc1 > 0 && roundData.mc1 === roundData.mc2) {
+          // Si hay empate exacto de votos en el round, se puede repartir o ignorar para conteo limpio, pero sumamos a ambos condicionales si es necesario.
+        }
+
+        roundsResultsHTML += `
+          <div class="round-result-card">
+            <span class="round-result-title">Round ${r}</span>
+            <div class="result-bar-wrapper">
+              <div class="result-info">
+                <span>${currentMc1}</span>
+                <span>${rPct1}%</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill" id="r${r}-bar1" style="width: ${rPct1}%;"></div>
+              </div>
+            </div>
+            <div class="result-bar-wrapper">
+              <div class="result-info">
+                <span>${currentMc2}</span>
+                <span>${rPct2}%</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill" id="r${r}-bar2" style="width: ${rPct2}%;"></div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // Lógica solicitada para el Resultado General (sin mencionar la palabra "empate" en 1-1)
+      let generalText = "";
+      if (mc1RoundsWon > mc2RoundsWon) {
+        generalText = `Resultado general: ${mc1RoundsWon}-${mc2RoundsWon} ${currentMc1}`;
+      } else if (mc2RoundsWon > mc1RoundsWon) {
+        generalText = `Resultado general: ${mc2RoundsWon}-${mc1RoundsWon} ${currentMc2}`;
+      } else {
+        if (activeRoundsCount === 2 && mc1RoundsWon === 1 && mc2RoundsWon === 1) {
+          generalText = `Resultado general: 1-1 ${currentMc1} / ${currentMc2}`;
+        } else if (activeRoundsCount === 3 && mc1RoundsWon === 1 && mc2RoundsWon === 1) {
+          generalText = `Resultado general: 1-1 ${currentMc1} / ${currentMc2}`;
+        } else {
+          generalText = `Resultado general: ${mc1RoundsWon}-${mc2RoundsWon} Empate`;
+        }
+      }
+
+      document.getElementById('rdsSelectorBox').style.display = 'none';
+      document.getElementById('roundsContainer').style.display = 'none';
+      document.getElementById('modalFooterBtns').style.display = 'none';
+
+      document.getElementById('modalSubTitle').innerText = alreadyVoted 
+        ? "RESULTADOS REGISTRADOS (YA HAS VOTADO EN ESTA BATALLA)" 
+        : "¡VOTO REGISTRADO CON ÉXITO!";
+
+      document.getElementById('generalResultText').innerText = generalText;
+      document.getElementById('totalVotesDisplay').innerText = "Votos totales emitidos: " + totalVoters;
+
+      document.getElementById('roundsResultsContainer').innerHTML = roundsResultsHTML;
+      document.getElementById('resultsView').style.display = 'flex';
+    }
+  </script>
+
+</body>
+</html>
