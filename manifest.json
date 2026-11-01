@@ -1,6 +1,6 @@
 {
   "name": "Catálogo de Battle Rap Hispano",
-  "short_name": "BRH Catálogo",
+  "short_name": "BRH",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#0a0a0a",
