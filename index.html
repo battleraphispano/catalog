@@ -267,7 +267,7 @@
       }
     }
 
-    /* ESTILOS ESPECÍFICOS PARA DISPOSITIVOS MÓVILES (Círculos ligeramente más grandes, sin borde y con efecto al presionar) */
+    /* ESTILOS ESPECÍFICOS PARA DISPOSITIVOS MÓVILES (Círculos, efecto y corrección de nombre completo sin cortar inicial) */
     @media (max-width: 768px) {
       .fighters-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -284,7 +284,6 @@
         transition: transform 0.15s ease, opacity 0.15s ease;
       }
 
-      /* Efecto sutil al tocar/seleccionar la tarjeta en móvil */
       .fighter-card:active {
         transform: scale(0.95) !important;
         opacity: 0.85;
@@ -301,7 +300,6 @@
         transition: transform 0.2s ease, box-shadow 0.2s ease;
       }
 
-      /* Efecto sencillo al mantener presionado el contenedor de imagen */
       .fighter-card:active .fighter-img-container {
         transform: scale(1.03);
         box-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
@@ -317,15 +315,17 @@
         background-color: transparent;
         border-top: none;
         padding: 0.35rem 0 0 0;
+        width: 100%;
       }
 
       .fighter-name {
-        font-size: 0.72rem;
+        font-size: 0.68rem;
         font-weight: 700;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 110px;
+        width: 100%;
+        padding: 0 2px;
       }
     }
   </style>
