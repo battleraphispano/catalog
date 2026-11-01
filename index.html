@@ -393,6 +393,28 @@
       }
     }
   </style>
+
+  <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Battle Rap Hispano | Rap Battle Database</title>
+
+  <!-- Enlaces para convertir en PWA (Paso 3) -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ffff00">
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+        .then(() => console.log("Service Worker registrado con éxito"))
+        .catch((error) => console.log("Fallo al registrar el Service Worker", error));
+    }
+  </script>
+
+  <style>
+    /* Aquí continúan todos tus estilos CSS */
+    
 </head>
 <body>
 
