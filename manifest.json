@@ -1,18 +1,19 @@
 {
-  "name": "BRH",
+  "name": "Battle Rap Hispano",
   "short_name": "BRH",
-  "start_url": "index.html",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#0a0a0a",
   "theme_color": "#ffff00",
   "icons": [
     {
-      "src": "battleraphispano.png",
+      "src": "./battleraphispano.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "battleraphispano.png",
+      "src": "./battleraphispano.png",
       "sizes": "512x512",
       "type": "image/png"
     }
