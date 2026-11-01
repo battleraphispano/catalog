@@ -7,14 +7,14 @@
   "theme_color": "#ffff00",
   "icons": [
     {
-      "src": "battleraphispano.jfif",
+      "src": "battleraphispano.png",
       "sizes": "192x192",
-      "type": "image/jpeg"
+      "type": "image/png"
     },
     {
-      "src": "battleraphispano.jfif",
+      "src": "battleraphispano.png",
       "sizes": "512x512",
-      "type": "image/jpeg"
+      "type": "image/png"
     }
   ]
 }
