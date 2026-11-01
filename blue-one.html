@@ -4,6 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Catálogo de batallas de Blue One | Rap Battle Database</title>
+  
+  <!-- Favicon para la pestaña de la PC -->
+  <link rel="icon" type="image/png" href="battleraphispano.png">
+  
+  <!-- Enlaces para la PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ffff00">
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+        .then(() => console.log("Service Worker registrado con éxito"))
+        .catch((error) => console.log("Fallo al registrar el Service Worker", error));
+    }
+  </script>
+
   <style>
     :root {
       --primary-yellow: #ffff00;
@@ -139,16 +154,47 @@
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border-color);
       border-radius: 4px;
-      color: var(--text-light);
       text-decoration: none;
       transition: all 0.2s;
       flex-shrink: 0;
     }
 
     .instagram-icon-btn:hover {
-      background: var(--primary-yellow);
-      color: var(--bg-dark);
+      background: var(--card-hover);
       border-color: var(--primary-yellow);
+    }
+
+    /* Botón flotante móvil con efecto táctil mejorado */
+    .mobile-back-float {
+      display: none;
+      position: fixed;
+      top: 0.9rem;
+      left: 0.9rem;
+      background-color: rgba(18, 18, 18, 0.9);
+      color: var(--primary-yellow);
+      border: 1px solid var(--border-color);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      text-decoration: none;
+      transition: transform 0.15s ease, background-color 0.15s ease, opacity 0.15s ease;
+    }
+
+    .mobile-back-float svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .mobile-back-float:active {
+      transform: scale(0.88);
+      background-color: rgba(255, 255, 0, 0.15);
+      opacity: 0.85;
     }
 
     /* Main Layout */
@@ -348,10 +394,20 @@
         flex-direction: column;
         align-items: center;
       }
+      .mobile-back-float {
+        display: flex;
+      }
     }
   </style>
 </head>
 <body>
+
+  <!-- Botón flotante superior izquierdo para móviles -->
+  <a href="./" class="mobile-back-float" title="Volver al catálogo">
+    <svg viewBox="0 0 24 24">
+      <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+    </svg>
+  </a>
 
   <!-- Header Banner -->
   <header class="hero-banner">
@@ -375,7 +431,8 @@
                 "¿No te das cuenta de la cantidad de huevos de azul?, estamos en tiempos de pascua..."
               </div>
             </div>
-            <a href="https://www.instagram.com/blueone_666/" target="_blank" rel="noopener noreferrer" class="instagram-icon-btn" title="Instagram">
+            <!-- Enlace a Instagram con colores oficiales -->
+            <a href="https://www.instagram.com/blueone_666/" target="_blank" rel="noopener noreferrer" class="instagram-icon-btn" title="Instagram de Blue One">
               <svg style="width: 16px; height: 16px;" viewBox="0 0 24 24">
                 <defs>
                   <radialGradient id="ig-grad" cx="30%" cy="107%" r="120%" fx="30%" fy="107%">
@@ -704,7 +761,7 @@
       </div>
 
       <div class="back-nav">
-        <a href="index.html" class="back-btn">← Volver al índice</a>
+        <a href="./" class="back-btn">Volver al catálogo</a>
       </div>
     </aside>
 
