@@ -29,6 +29,7 @@
       --text-muted: #a0a0a0;
       --border-color: #262626;
       --accent-gray: #333333;
+      --youtube-red: #ff0000;
     }
 
     * {
@@ -255,14 +256,12 @@
       justify-content: space-between;
       align-items: center;
       transition: all 0.2s ease;
-      text-decoration: none;
       color: inherit;
     }
 
     .battle-card:hover {
       border-color: var(--primary-yellow);
       background-color: var(--card-hover);
-      transform: translateX(4px);
     }
 
     .battle-info {
@@ -275,11 +274,6 @@
       font-size: 1rem;
       color: var(--text-light);
       display: block;
-      transition: color 0.2s;
-    }
-
-    .battle-card:hover .battle-title {
-      color: var(--primary-yellow);
     }
 
     .battle-date {
@@ -305,7 +299,32 @@
       border: 1px solid var(--border-color);
     }
 
-    /* Etiqueta "Batalla virtual" (Tamaño original para PC) */
+    /* Etiqueta "Ver en YouTube" destacada con colores de la plataforma y efecto táctil */
+    .badge-youtube {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background-color: var(--youtube-red);
+      color: #ffffff;
+      border: 1px solid #ff3333;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform 0.1s ease, background-color 0.2s ease;
+    }
+
+    .badge-youtube:hover {
+      background-color: #e60000;
+      border-color: #ff4d4d;
+    }
+
+    .badge-youtube:active {
+      transform: scale(0.93);
+    }
+
+    /* Etiqueta "Batalla virtual" */
     .badge-virtual {
       font-size: 0.75rem;
       font-weight: 700;
@@ -422,6 +441,10 @@
         font-size: 0.55rem;
         padding: 0.05rem 0.2rem;
       }
+      .badge-youtube {
+        font-size: 0.55rem;
+        padding: 0.05rem 0.2rem;
+      }
     }
   </style>
 </head>
@@ -493,7 +516,7 @@
         <h2 class="year-group-title">2022</h2>
 
         <!-- #1 -->
-        <a href="#" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#1. Biopsz vs. Psicotic</span>
             <span class="battle-date">13/11/2022</span>
@@ -502,13 +525,13 @@
             <span class="badge badge-virtual">Batalla virtual</span>
             <span class="badge">Sin video</span>
           </div>
-        </a>
+        </div>
 
         <!-- 2023 -->
         <h2 class="year-group-title">2023</h2>
 
         <!-- #2 -->
-        <a href="#" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#2. Biopsz vs. Lil Jaly</span>
             <span class="battle-date">--/04/2023</span>
@@ -517,10 +540,10 @@
             <span class="badge badge-virtual">Batalla virtual</span>
             <span class="badge">Sin video</span>
           </div>
-        </a>
+        </div>
 
         <!-- #3 -->
-        <a href="#" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#3. Biopsz &amp; Lil Jaly vs. Jackeistas &amp; Punch de Rapder</span>
             <span class="battle-date">30/05/2023*</span>
@@ -529,22 +552,22 @@
             <span class="badge badge-virtual">Batalla virtual</span>
             <span class="badge">Sin video</span>
           </div>
-        </a>
+        </div>
 
         <!-- #4 -->
-        <a href="https://www.youtube.com/watch?v=F_3o9zSDOOI&t=1s" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#4. Biopsz vs. Saturno</span>
             <span class="battle-date">04/08/2023*</span>
           </div>
           <div class="badge-container">
             <span class="badge badge-virtual">Batalla virtual</span>
-            <span class="badge">Ver en YouTube</span>
+            <a href="https://www.youtube.com/watch?v=F_3o9zSDOOI&t=1s" target="_blank" rel="noopener noreferrer" class="badge-youtube">Ver en YouTube</a>
           </div>
-        </a>
+        </div>
 
         <!-- #5 -->
-        <a href="#" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#5. Biopsz vs. Javi Argentino</span>
             <span class="battle-date">11/10/2023*</span>
@@ -553,13 +576,13 @@
             <span class="badge badge-virtual">Batalla virtual</span>
             <span class="badge">Sin video</span>
           </div>
-        </a>
+        </div>
 
         <!-- 2024 -->
         <h2 class="year-group-title">2024</h2>
 
         <!-- #6 -->
-        <a href="#" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#6. Biopsz vs. Bohemio que los Rapsodia</span>
             <span class="battle-date">08/02/2024*</span>
@@ -568,76 +591,76 @@
             <span class="badge badge-virtual">Batalla virtual</span>
             <span class="badge">Sin video</span>
           </div>
-        </a>
+        </div>
 
         <!-- #7 -->
-        <a href="https://www.youtube.com/watch?v=XTl4WeUlC-Y" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#7. Biopsz vs. Armagedon</span>
             <span class="battle-date">04/05/2024</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=XTl4WeUlC-Y" target="_blank" rel="noopener noreferrer" class="badge-youtube">Ver en YouTube</a>
+        </div>
 
         <!-- #8 -->
-        <a href="https://www.youtube.com/watch?v=oH13KD_3Xi0&t=850s" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#8. Biopsz vs. Riverdash</span>
             <span class="battle-date">29/06/2024</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=oH13KD_3Xi0&t=850s" target="_blank" rel="noopener noreferrer" class="badge-youtube">Ver en YouTube</a>
+        </div>
 
         <!-- #9 -->
-        <a href="https://www.youtube.com/watch?v=i6scI7O-DNc&t=11s" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#9. Biopsz vs. Esebarber</span>
             <span class="battle-date">22/09/2024</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=i6scI7O-DNc&t=11s" target="_blank" rel="noopener noreferrer" class="badge-youtube">Ver en YouTube</a>
+        </div>
 
         <!-- #10 -->
-        <a href="https://www.youtube.com/watch?v=cCepZ23S3zM" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#10. Biopsz vs. Koler</span>
             <span class="battle-date">07/12/2024</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=cCepZ23S3zM" target="_blank" rel="noopener noreferrer" class="badge-youtube">Ver en YouTube</a>
+        </div>
 
         <!-- 2025 -->
         <h2 class="year-group-title">2025</h2>
 
         <!-- #11 -->
-        <a href="https://www.youtube.com/watch?v=lzoof3-wVUY" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#11. Biopsz vs. NyD</span>
             <span class="battle-date">31/05/2025</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=lzoof3-wVUY" target="_blank" rel="noopener noreferrer" class="badge-youtube">Ver en YouTube</a>
+        </div>
 
         <!-- #12 -->
-        <a href="https://www.youtube.com/watch?v=ySHE1T001Ds&t=570s" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#12. Biopsz vs. Lengua</span>
             <span class="battle-date">09/08/2025</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=ySHE1T001Ds&t=570s" target="_blank" rel="noopener noreferrer" class="badge-youtube">Ver en YouTube</a>
+        </div>
 
         <!-- #13 -->
-        <a href="https://www.youtube.com/watch?v=Q0ptASCargQ" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#13. Biopsz vs. Jaderino</span>
             <span class="battle-date">07/12/2025</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=Q0ptASCargQ" target="_blank" rel="noopener noreferrer" class="badge-youtube">Ver en YouTube</a>
+        </div>
 
         <!-- #14 -->
-        <a href="#" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#14. Biopsz vs. XLMen</span>
             <span class="battle-date">--/--/2025</span>
@@ -646,40 +669,40 @@
             <span class="badge badge-virtual">Batalla virtual</span>
             <span class="badge">Sin video</span>
           </div>
-        </a>
+        </div>
 
         <!-- 2026 -->
         <h2 class="year-group-title">2026</h2>
 
         <!-- #15 -->
-        <a href="https://www.youtube.com/watch?v=IAFXKfqcuPk&t=5s" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#15. Biopsz vs. Dominio</span>
             <span class="battle-date">17/01/2026</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=IAFXKfqcuPk&t=5s" target="_blank" rel="noopener noreferrer" class="badge-youtube">Ver en YouTube</a>
+        </div>
 
         <!-- #16 -->
-        <a href="https://www.youtube.com/watch?v=S7vsCPUqwIY&t=49s" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#16. Biopsz vs. Temple</span>
             <span class="battle-date">15/03/2026*</span>
           </div>
           <div class="badge-container">
             <span class="badge badge-virtual">Batalla virtual</span>
-            <span class="badge">Ver en YouTube</span>
+            <a href="https://www.youtube.com/watch?v=S7vsCPUqwIY&t=49s" target="_blank" rel="noopener noreferrer" class="badge-youtube">Ver en YouTube</a>
           </div>
-        </a>
+        </div>
 
         <!-- #17 -->
-        <a href="https://www.youtube.com/watch?v=5fyWaMa-dYE" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#17. Biopsz vs. Pichi</span>
             <span class="battle-date">26/07/2026</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=5fyWaMa-dYE" target="_blank" rel="noopener noreferrer" class="badge-youtube">Ver en YouTube</a>
+        </div>
 
       </div>
     </section>
