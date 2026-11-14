@@ -6,14 +6,14 @@
   <title>Catálogo de batallas de Big Soul | Rap Battle Database</title>
   
   <!-- Favicon para la pestaña de la PC -->
-  <link rel="icon" type="image/png" href="battleraphispano.png">
+  <link rel="icon" type="image/png" href="../battleraphispano.png">
   
   <!-- Enlaces para la PWA -->
-  <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="../manifest.json">
   <meta name="theme-color" content="#ffff00">
   <script>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js')
+      navigator.serviceWorker.register('../sw.js')
         .then(() => console.log("Service Worker registrado con éxito"))
         .catch((error) => console.log("Fallo al registrar el Service Worker", error));
     }
@@ -255,14 +255,12 @@
       justify-content: space-between;
       align-items: center;
       transition: all 0.2s ease;
-      text-decoration: none;
       color: inherit;
     }
 
     .battle-card:hover {
       border-color: var(--primary-yellow);
       background-color: var(--card-hover);
-      transform: translateX(4px);
     }
 
     .battle-info {
@@ -275,11 +273,6 @@
       font-size: 1rem;
       color: var(--text-light);
       display: block;
-      transition: color 0.2s;
-    }
-
-    .battle-card:hover .battle-title {
-      color: var(--primary-yellow);
     }
 
     .battle-date {
@@ -303,6 +296,46 @@
       background-color: #222;
       color: var(--text-muted);
       border: 1px solid var(--border-color);
+    }
+
+    /* Etiqueta "Ver en YouTube" (PC) */
+    .badge-youtube {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background-color: #222;
+      color: var(--text-light);
+      border: 1px solid var(--border-color);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: transform 0.1s ease, background-color 0.2s ease;
+    }
+
+    .badge-youtube svg {
+      width: 12px;
+      height: 12px;
+      fill: #ff0000;
+      transition: fill 0.2s ease;
+    }
+
+    .badge-youtube:hover {
+      border-color: var(--border-color);
+      background-color: #1a1a1a;
+    }
+
+    .badge-youtube:hover svg {
+      fill: #ff0000;
+    }
+
+    .badge-youtube:active {
+      transform: scale(0.93);
+      border-color: var(--border-color);
+      background-color: #1a1a1a;
     }
 
     /* Etiqueta "Sin video" */
@@ -400,13 +433,60 @@
       .mobile-back-float {
         display: flex;
       }
+      .battle-info {
+        max-width: 58%;
+      }
+      .battle-title {
+        font-size: 0.85rem;
+        line-height: 1.3;
+      }
+      .badge-container {
+        gap: 0.3rem;
+      }
+      .badge {
+        font-size: 0.55rem;
+        padding: 0.05rem 0.2rem;
+      }
+      .badge-youtube {
+        font-size: 0.55rem;
+        padding: 0.05rem 0.2rem;
+      }
+      .badge-youtube svg {
+        width: 10px;
+        height: 10px;
+      }
+      .badge-no-video {
+        font-size: 0.55rem;
+        padding: 0.05rem 0.2rem;
+      }
+      
+      /* Desactiva totalmente cualquier cambio de color o borde en la tarjeta en móvil */
+      .battle-card {
+        border-color: var(--border-color) !important;
+        background-color: var(--card-dark) !important;
+      }
+      .battle-card:hover {
+        border-color: var(--border-color) !important;
+        background-color: var(--card-dark) !important;
+      }
+      .battle-card:active {
+        border-color: var(--border-color) !important;
+        background-color: var(--card-dark) !important;
+      }
+
+      /* Efecto táctil en el botón "Ver en YouTube" para móvil */
+      .badge-youtube:active {
+        transform: scale(0.88);
+        background-color: #0d0d0d;
+        border-color: #333333;
+      }
     }
   </style>
 </head>
 <body>
 
   <!-- Botón flotante superior izquierdo para móviles -->
-  <a href="./" class="mobile-back-float" title="Volver al catálogo">
+  <a href="../" class="mobile-back-float" title="Volver al catálogo">
     <svg viewBox="0 0 24 24">
       <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
     </svg>
@@ -471,322 +551,409 @@
         <h2 class="year-group-title">2014</h2>
 
         <!-- #1 -->
-        <a href="https://www.youtube.com/watch?v=yiTXLZoWRbY" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#1. Big Soul vs. Achu mc</span>
             <span class="battle-date">08/12/2014*</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=yiTXLZoWRbY" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #2 -->
-        <a href="https://www.youtube.com/watch?v=EdVt2-jQfKc&t=602s" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#2. Big Soul vs. Katra</span>
             <span class="battle-date">18/12/2014*</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=EdVt2-jQfKc&t=602s" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- 2015 -->
         <h2 class="year-group-title">2015</h2>
 
         <!-- #3 -->
-        <a href="https://www.youtube.com/watch?v=ZQ29qOPQRGs" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#3. Big Soul vs. Nexo</span>
             <span class="battle-date">23/08/2015</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=ZQ29qOPQRGs" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #4 -->
-        <a href="https://www.youtube.com/watch?v=9GhmXLqR8ZY" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#4. Big Soul vs. Sokone</span>
             <span class="battle-date">12/10/2015*</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=9GhmXLqR8ZY" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- 2016 -->
         <h2 class="year-group-title">2016</h2>
 
         <!-- #5 -->
-        <div class="battle-card" style="cursor: default;">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#5. Big Soul vs. Divine</span>
             <span class="battle-date">--/12/2016</span>
           </div>
-          <span class="badge-no-video">Sin video</span>
+          <span class="badge badge-no-video">Sin Video</span>
         </div>
 
         <!-- 2017 -->
         <h2 class="year-group-title">2017</h2>
 
         <!-- #6 -->
-        <div class="battle-card" style="cursor: default;">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#6. Big Soul vs. Loli One</span>
             <span class="battle-date">07/02/2017*</span>
           </div>
-          <span class="badge-no-video">Sin video</span>
+          <span class="badge badge-no-video">Sin Video</span>
         </div>
 
         <!-- #7 -->
-        <div class="battle-card" style="cursor: default;">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#7. Big Soul vs. As One</span>
             <span class="battle-date">--/--/2017</span>
           </div>
-          <span class="badge-no-video">Sin video</span>
+          <span class="badge badge-no-video">Sin Video</span>
         </div>
 
         <!-- 2018 -->
         <h2 class="year-group-title">2018</h2>
 
         <!-- #8 -->
-        <a href="https://www.youtube.com/watch?v=bBFRBHySwM4" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#8. Big Soul vs. Layann</span>
             <span class="battle-date">09/07/2018</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=bBFRBHySwM4" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #9 -->
-        <a href="https://www.youtube.com/watch?v=c3MtiAdfTEo" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#9. Big Soul vs. Markitos</span>
             <span class="battle-date">17/07/2018*</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=c3MtiAdfTEo" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- 2019 -->
         <h2 class="year-group-title">2019</h2>
 
         <!-- #10 -->
-        <a href="https://www.youtube.com/watch?v=ubCU61SAEfk" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
-            <span class="battle-title">#10. Big Soul vs. Layann (Rematch)</span>
+            <span class="battle-title">#10. Big Soul vs. Layann [rematch]</span>
             <span class="battle-date">24/05/2019</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=ubCU61SAEfk" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- 2022 -->
         <h2 class="year-group-title">2022</h2>
 
         <!-- #11 -->
-        <a href="https://www.youtube.com/watch?v=jtZJh6UlKOM" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
-            <span class="battle-title">#11. Big Soul vs. Katra (Rematch)</span>
+            <span class="battle-title">#11. Big Soul vs. Katra [rematch]</span>
             <span class="battle-date">02/04/2022</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=jtZJh6UlKOM" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #12 -->
-        <a href="https://www.youtube.com/watch?v=7i4gFpjT6xY" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#12. Big Soul vs. Read</span>
             <span class="battle-date">11/09/2022</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=7i4gFpjT6xY" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #13 -->
-        <a href="https://www.youtube.com/watch?v=tdg2tzUGbdg&t=12s" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
-            <span class="battle-title">#13. Big Soul vs. As One (Rematch)</span>
+            <span class="battle-title">#13. Big Soul vs. As One [rematch]</span>
             <span class="battle-date">06/11/2022</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=tdg2tzUGbdg&t=12s" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- 2023 -->
         <h2 class="year-group-title">2023</h2>
 
         <!-- #14 -->
-        <a href="https://www.youtube.com/watch?v=Xhuu12MxC-U" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#14. Big Soul vs. Zaico</span>
             <span class="battle-date">08/01/2023</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=Xhuu12MxC-U" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #15 -->
-        <a href="https://www.youtube.com/watch?v=Z0nuHcQC54M" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#15. Big Soul vs. Arcéniko</span>
             <span class="battle-date">05/02/2023</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=Z0nuHcQC54M" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #16 -->
-        <a href="https://www.youtube.com/watch?v=93pgNbxOGuM" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#16. Big Soul vs. Wasok</span>
             <span class="battle-date">30/04/2023</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=93pgNbxOGuM" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #17 -->
-        <a href="https://www.youtube.com/watch?v=V-fxgrY7SBw" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#17. Big Soul vs. G Sony</span>
             <span class="battle-date">16/07/2023</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=V-fxgrY7SBw" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #18 -->
-        <a href="https://www.youtube.com/watch?v=DeB59O_GPtg" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#18. Big Soul vs. Gustavo Ramos</span>
             <span class="battle-date">06/11/2023</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=DeB59O_GPtg" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #19 -->
-        <a href="https://www.youtube.com/watch?v=dxIbAHwxcW8" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#19. Big Soul vs. Billy Bjorg</span>
             <span class="battle-date">02/12/2023</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=dxIbAHwxcW8" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- 2024 -->
         <h2 class="year-group-title">2024</h2>
 
         <!-- #20 -->
-        <a href="https://www.youtube.com/watch?v=MmG9yeV5xFY" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#20. Big Soul vs. Tompyet</span>
             <span class="battle-date">07/01/2024</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=MmG9yeV5xFY" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #21 -->
-        <a href="https://www.youtube.com/watch?v=1JjWGe34JIA" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
-            <span class="battle-title">#21. Big Soul vs. Markitos (Rematch)</span>
+            <span class="battle-title">#21. Big Soul vs. Markitos [rematch]</span>
             <span class="battle-date">23/03/2024</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=1JjWGe34JIA" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #22 -->
-        <a href="https://www.youtube.com/watch?v=gyP4ImhnlH0&t=66s" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#22. Big Soul &amp; Divine vs. Giro &amp; Cill</span>
             <span class="battle-date">25/05/2024</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=gyP4ImhnlH0&t=66s" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #23 -->
-        <a href="https://www.youtube.com/watch?v=5KTl442lCMc&t=12s" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#23. Big Soul vs. Fresco Feo</span>
             <span class="battle-date">17/08/2024</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=5KTl442lCMc&t=12s" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #24 -->
-        <a href="https://www.youtube.com/watch?v=DY_auizzX_o" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#24. Big Soul vs. Prodemm</span>
             <span class="battle-date">09/11/2024</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=DY_auizzX_o" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- 2025 -->
         <h2 class="year-group-title">2025</h2>
 
         <!-- #25 -->
-        <a href="https://www.youtube.com/watch?v=kinsFXVf0yQ" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
-            <span class="battle-title">#25. Big Soul vs. Arcéniko (Rematch)</span>
+            <span class="battle-title">#25. Big Soul vs. Arcéniko [rematch]</span>
             <span class="battle-date">11/01/2025</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=kinsFXVf0yQ" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #26 -->
-        <a href="https://www.youtube.com/watch?v=vTBsm-_7_Nc&t=10s" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#26. Big Soul vs. Quezada</span>
             <span class="battle-date">03/05/2025</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=vTBsm-_7_Nc&t=10s" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #27 -->
-        <a href="https://www.youtube.com/watch?v=WvY9ByI0sAQ" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#27. Big Soul &amp; Markitos vs. Juán Zárate &amp; Terro</span>
             <span class="battle-date">19/05/2025</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=WvY9ByI0sAQ" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #28 -->
-        <a href="https://www.youtube.com/watch?v=shflzZ8ZR-c&t=153s" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#28. Big Soul &amp; Markitos vs. Jokker &amp; Astropoeta</span>
             <span class="battle-date">30/08/2025</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=shflzZ8ZR-c&t=153s" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #29 -->
-        <a href="https://www.youtube.com/watch?v=SFclMTBGt_c" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#29. Big Soul vs. Eptos Uno</span>
             <span class="battle-date">06/09/2025</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=SFclMTBGt_c" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- 2026 -->
         <h2 class="year-group-title">2026</h2>
 
         <!-- #30 -->
-        <a href="https://www.youtube.com/watch?v=L1zBl7FQADM" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#30. Big Soul vs. Yun</span>
             <span class="battle-date">29/03/2026</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=L1zBl7FQADM" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #31 -->
-        <a href="https://www.youtube.com/watch?v=pZvzh4NedJI" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#31. Big Soul vs. Kooper Kaiser</span>
             <span class="battle-date">17/05/2026</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=pZvzh4NedJI" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #32 -->
-        <a href="https://www.youtube.com/watch?v=rlzd13V91og" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#32. Big Soul vs. Juan Zárate</span>
             <span class="battle-date">26/09/2026</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=rlzd13V91og" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
       </div>
     </section>
@@ -803,7 +970,7 @@
       </div>
 
       <div class="back-nav">
-        <a href="./" class="back-btn">Volver al catálogo</a>
+        <a href="../" class="back-btn">Volver al catálogo</a>
       </div>
     </aside>
 
