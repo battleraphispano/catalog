@@ -298,7 +298,7 @@
       border: 1px solid var(--border-color);
     }
 
-    /* Etiqueta "Ver en YouTube" (Sin contorno rojo en hover/active en PC) */
+    /* Etiqueta "Ver en YouTube" (PC) */
     .badge-youtube {
       font-size: 0.75rem;
       font-weight: 700;
@@ -476,7 +476,7 @@
         height: 10px;
       }
       
-      /* Elimina el cambio de contorno en la tarjeta al presionar en móvil, manteniendo solo el efecto del botón YouTube */
+      /* Elimina el cambio de contorno en la tarjeta al presionar en móvil */
       .battle-card:hover {
         border-color: var(--border-color);
         background-color: var(--card-dark);
@@ -486,10 +486,11 @@
         background-color: var(--card-dark);
       }
 
-      /* Efecto sutil al presionar "Ver en YouTube" en dispositivos móviles */
+      /* Efecto táctil reforzado y más notable al presionar "Ver en YouTube" en dispositivos móviles */
       .badge-youtube:active {
-        transform: scale(0.93);
-        background-color: #141414;
+        transform: scale(0.88);
+        background-color: #0d0d0d;
+        border-color: #333333;
       }
     }
   </style>
