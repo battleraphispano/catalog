@@ -29,7 +29,6 @@
       --text-muted: #a0a0a0;
       --border-color: #262626;
       --accent-gray: #333333;
-      --youtube-red: #ff0000;
     }
 
     * {
@@ -299,7 +298,7 @@
       border: 1px solid var(--border-color);
     }
 
-    /* Etiqueta "Ver en YouTube" (Opción 2) */
+    /* Etiqueta "Ver en YouTube" (Opción A: Icono + Texto elegante) */
     .badge-youtube {
       font-size: 0.75rem;
       font-weight: 700;
@@ -311,13 +310,26 @@
       color: var(--text-light);
       border: 1px solid var(--border-color);
       text-decoration: none;
-      display: inline-block;
-      transition: transform 0.1s ease, border-color 0.2s ease, color 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: transform 0.1s ease, border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .badge-youtube svg {
+      width: 12px;
+      height: 12px;
+      fill: #ff0000;
+      transition: fill 0.2s ease;
     }
 
     .badge-youtube:hover {
       border-color: #ff0000;
-      color: #ff3333;
+      background-color: #1a1a1a;
+    }
+
+    .badge-youtube:hover svg {
+      fill: #ff3333;
     }
 
     .badge-youtube:active {
@@ -445,6 +457,10 @@
         font-size: 0.55rem;
         padding: 0.05rem 0.2rem;
       }
+      .badge-youtube svg {
+        width: 10px;
+        height: 10px;
+      }
     }
   </style>
 </head>
@@ -562,7 +578,10 @@
           </div>
           <div class="badge-container">
             <span class="badge badge-virtual">Batalla virtual</span>
-            <a href="https://www.youtube.com/watch?v=F_3o9zSDOOI&t=1s" target="_blank" rel="noopener noreferrer" class="badge-youtube">Ver en YouTube</a>
+            <a href="https://www.youtube.com/watch?v=F_3o9zSDOOI&t=1s" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+              <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              Ver en YouTube
+            </a>
           </div>
         </div>
 
@@ -599,7 +618,10 @@
             <span class="battle-title">#7. Biopsz vs. Armagedon</span>
             <span class="battle-date">04/05/2024</span>
           </div>
-          <a href="https://www.youtube.com/watch?v=XTl4WeUlC-Y" target="_blank" rel="noopener noreferrer" class="badge-youtube">Ver en YouTube</a>
+          <a href="https://www.youtube.com/watch?v=XTl4WeUlC-Y" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
         </div>
 
         <!-- #8 -->
@@ -608,7 +630,10 @@
             <span class="battle-title">#8. Biopsz vs. Riverdash</span>
             <span class="battle-date">29/06/2024</span>
           </div>
-          <a href="https://www.youtube.com/watch?v=oH13KD_3Xi0&t=850s" target="_blank" rel="noopener noreferrer" class="badge-youtube">Ver en YouTube</a>
+          <a href="https://www.youtube.com/watch?v=oH13KD_3Xi0&t=850s" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
         </div>
 
         <!-- #9 -->
@@ -617,7 +642,10 @@
             <span class="battle-title">#9. Biopsz vs. Esebarber</span>
             <span class="battle-date">22/09/2024</span>
           </div>
-          <a href="https://www.youtube.com/watch?v=i6scI7O-DNc&t=11s" target="_blank" rel="noopener noreferrer" class="badge-youtube">Ver en YouTube</a>
+          <a href="https://www.youtube.com/watch?v=i6scI7O-DNc&t=11s" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
         </div>
 
         <!-- #10 -->
@@ -626,7 +654,10 @@
             <span class="battle-title">#10. Biopsz vs. Koler</span>
             <span class="battle-date">07/12/2024</span>
           </div>
-          <a href="https://www.youtube.com/watch?v=cCepZ23S3zM" target="_blank" rel="noopener noreferrer" class="badge-youtube">Ver en YouTube</a>
+          <a href="https://www.youtube.com/watch?v=cCepZ23S3zM" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
         </div>
 
         <!-- 2025 -->
@@ -638,7 +669,10 @@
             <span class="battle-title">#11. Biopsz vs. NyD</span>
             <span class="battle-date">31/05/2025</span>
           </div>
-          <a href="https://www.youtube.com/watch?v=lzoof3-wVUY" target="_blank" rel="noopener noreferrer" class="badge-youtube">Ver en YouTube</a>
+          <a href="https://www.youtube.com/watch?v=lzoof3-wVUY" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
         </div>
 
         <!-- #12 -->
@@ -647,7 +681,10 @@
             <span class="battle-title">#12. Biopsz vs. Lengua</span>
             <span class="battle-date">09/08/2025</span>
           </div>
-          <a href="https://www.youtube.com/watch?v=ySHE1T001Ds&t=570s" target="_blank" rel="noopener noreferrer" class="badge-youtube">Ver en YouTube</a>
+          <a href="https://www.youtube.com/watch?v=ySHE1T001Ds&t=570s" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
         </div>
 
         <!-- #13 -->
@@ -656,7 +693,10 @@
             <span class="battle-title">#13. Biopsz vs. Jaderino</span>
             <span class="battle-date">07/12/2025</span>
           </div>
-          <a href="https://www.youtube.com/watch?v=Q0ptASCargQ" target="_blank" rel="noopener noreferrer" class="badge-youtube">Ver en YouTube</a>
+          <a href="https://www.youtube.com/watch?v=Q0ptASCargQ" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
         </div>
 
         <!-- #14 -->
@@ -680,7 +720,10 @@
             <span class="battle-title">#15. Biopsz vs. Dominio</span>
             <span class="battle-date">17/01/2026</span>
           </div>
-          <a href="https://www.youtube.com/watch?v=IAFXKfqcuPk&t=5s" target="_blank" rel="noopener noreferrer" class="badge-youtube">Ver en YouTube</a>
+          <a href="https://www.youtube.com/watch?v=IAFXKfqcuPk&t=5s" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
         </div>
 
         <!-- #16 -->
@@ -691,7 +734,10 @@
           </div>
           <div class="badge-container">
             <span class="badge badge-virtual">Batalla virtual</span>
-            <a href="https://www.youtube.com/watch?v=S7vsCPUqwIY&t=49s" target="_blank" rel="noopener noreferrer" class="badge-youtube">Ver en YouTube</a>
+            <a href="https://www.youtube.com/watch?v=S7vsCPUqwIY&t=49s" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+              <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              Ver en YouTube
+            </a>
           </div>
         </div>
 
@@ -701,7 +747,10 @@
             <span class="battle-title">#17. Biopsz vs. Pichi</span>
             <span class="battle-date">26/07/2026</span>
           </div>
-          <a href="https://www.youtube.com/watch?v=5fyWaMa-dYE" target="_blank" rel="noopener noreferrer" class="badge-youtube">Ver en YouTube</a>
+          <a href="https://www.youtube.com/watch?v=5fyWaMa-dYE" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
         </div>
 
       </div>
