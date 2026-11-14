@@ -4,6 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Catálogo de batallas de As One | Rap Battle Database</title>
+  
+  <!-- Favicon para la pestaña de la PC -->
+  <link rel="icon" type="image/png" href="../battleraphispano.png">
+  
+  <!-- Enlaces para la PWA -->
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#ffff00">
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('../sw.js')
+        .then(() => console.log("Service Worker registrado con éxito"))
+        .catch((error) => console.log("Fallo al registrar el Service Worker", error));
+    }
+  </script>
+
   <style>
     :root {
       --primary-yellow: #ffff00;
@@ -64,6 +79,10 @@
       display: block;
     }
 
+    .meta-info {
+      flex-grow: 1;
+    }
+
     .meta-info h1 {
       font-size: 2.2rem;
       font-weight: 800;
@@ -71,6 +90,9 @@
       letter-spacing: -0.5px;
       margin-bottom: 0.8rem;
       line-height: 1.1;
+    }
+
+    .meta-info h1 span {
       color: var(--primary-yellow);
     }
 
@@ -93,6 +115,14 @@
       color: var(--text-light);
     }
 
+    .header-sub-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      width: 100%;
+      gap: 1rem;
+    }
+
     .origin-location {
       font-size: 0.85rem;
       color: var(--text-muted);
@@ -101,10 +131,70 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      margin-bottom: 0.4rem;
     }
 
     .origin-location strong {
       color: var(--text-light);
+    }
+
+    .battler-quote {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      font-style: italic;
+      font-weight: bold;
+    }
+
+    .instagram-icon-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      text-decoration: none;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .instagram-icon-btn:hover {
+      background: var(--card-hover);
+      border-color: var(--primary-yellow);
+    }
+
+    /* Botón flotante móvil con efecto táctil mejorado */
+    .mobile-back-float {
+      display: none;
+      position: fixed;
+      top: 0.9rem;
+      left: 0.9rem;
+      background-color: rgba(18, 18, 18, 0.9);
+      color: var(--primary-yellow);
+      border: 1px solid var(--border-color);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      text-decoration: none;
+      transition: transform 0.15s ease, background-color 0.15s ease, opacity 0.15s ease;
+    }
+
+    .mobile-back-float svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .mobile-back-float:active {
+      transform: scale(0.88);
+      background-color: rgba(255, 255, 0, 0.15);
+      opacity: 0.85;
     }
 
     /* Main Layout */
@@ -165,14 +255,12 @@
       justify-content: space-between;
       align-items: center;
       transition: all 0.2s ease;
-      text-decoration: none;
       color: inherit;
     }
 
     .battle-card:hover {
       border-color: var(--primary-yellow);
       background-color: var(--card-hover);
-      transform: translateX(4px);
     }
 
     .battle-info {
@@ -185,11 +273,6 @@
       font-size: 1rem;
       color: var(--text-light);
       display: block;
-      transition: color 0.2s;
-    }
-
-    .battle-card:hover .battle-title {
-      color: var(--primary-yellow);
     }
 
     .battle-date {
@@ -215,8 +298,8 @@
       border: 1px solid var(--border-color);
     }
 
-    /* Etiqueta "Sin video" */
-    .badge-no-video {
+    /* Etiqueta "Ver en YouTube" (PC) */
+    .badge-youtube {
       font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
@@ -224,21 +307,60 @@
       padding: 0.15rem 0.5rem;
       border-radius: 4px;
       background-color: #222;
-      color: var(--text-muted);
+      color: var(--text-light);
       border: 1px solid var(--border-color);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: transform 0.1s ease, background-color 0.2s ease;
     }
 
-    /* Etiqueta "Batalla virtual" */
+    .badge-youtube svg {
+      width: 12px;
+      height: 12px;
+      fill: #ff0000;
+      transition: fill 0.2s ease;
+    }
+
+    .badge-youtube:hover {
+      border-color: var(--border-color);
+      background-color: #1a1a1a;
+    }
+
+    .badge-youtube:hover svg {
+      fill: #ff0000;
+    }
+
+    .badge-youtube:active {
+      transform: scale(0.93);
+      border-color: var(--border-color);
+      background-color: #1a1a1a;
+    }
+
+    /* Etiqueta "Batalla virtual" (Punto LED) */
     .badge-virtual {
-      font-size: 0.75rem;
+      font-size: 0.47rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      padding: 0.15rem 0.5rem;
-      border-radius: 4px;
-      background-color: rgba(255, 255, 0, 0.1);
-      color: var(--primary-yellow);
-      border: 1px solid var(--primary-yellow);
+      letter-spacing: 0.3px;
+      padding: 0;
+      background: none;
+      border: none;
+      color: var(--text-light);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .badge-virtual::before {
+      content: "";
+      width: 4.2px;
+      height: 4.2px;
+      background-color: var(--primary-yellow);
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 4px var(--primary-yellow);
     }
 
     /* Sidebar posicionado alineado */
@@ -316,10 +438,75 @@
       .origin-location {
         justify-content: center;
       }
+      .header-sub-row {
+        flex-direction: column;
+        align-items: center;
+      }
+      .mobile-back-float {
+        display: flex;
+      }
+      .battle-info {
+        max-width: 58%;
+      }
+      .battle-title {
+        font-size: 0.85rem;
+        line-height: 1.3;
+      }
+      .badge-container {
+        gap: 0.3rem;
+      }
+      .badge-virtual {
+        font-size: 0.5rem;
+        gap: 0.25rem;
+      }
+      .badge-virtual::before {
+        width: 3.8px;
+        height: 3.8px;
+      }
+      .badge {
+        font-size: 0.55rem;
+        padding: 0.05rem 0.2rem;
+      }
+      .badge-youtube {
+        font-size: 0.55rem;
+        padding: 0.05rem 0.2rem;
+      }
+      .badge-youtube svg {
+        width: 10px;
+        height: 10px;
+      }
+      
+      /* Desactiva totalmente cualquier cambio de color o borde en la tarjeta en móvil */
+      .battle-card {
+        border-color: var(--border-color) !important;
+        background-color: var(--card-dark) !important;
+      }
+      .battle-card:hover {
+        border-color: var(--border-color) !important;
+        background-color: var(--card-dark) !important;
+      }
+      .battle-card:active {
+        border-color: var(--border-color) !important;
+        background-color: var(--card-dark) !important;
+      }
+
+      /* Efecto táctil en el botón "Ver en YouTube" para móvil */
+      .badge-youtube:active {
+        transform: scale(0.88);
+        background-color: #0d0d0d;
+        border-color: #333333;
+      }
     }
   </style>
 </head>
 <body>
+
+  <!-- Botón flotante superior izquierdo para móviles -->
+  <a href="../" class="mobile-back-float" title="Volver al catálogo">
+    <svg viewBox="0 0 24 24">
+      <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+    </svg>
+  </a>
 
   <!-- Header Banner -->
   <header class="hero-banner">
@@ -329,13 +516,35 @@
           <img src="as-one.webp" alt="As One">
         </div>
         <div class="meta-info">
-          <h1>As One</h1>
+          <h1><span>As One</span></h1>
           <div class="stats-bar">
             <span><strong>35</strong> Batallas</span>
             <span><strong>2016 - 2026</strong> Trayectoria</span>
           </div>
-          <div class="origin-location">
-            <img src="https://flagcdn.com/w20/ar.png" alt="Argentina" style="width: 18px; height: auto; border-radius: 2px; display: inline-block; vertical-align: middle;"> <strong>Mar del Plata, Argentina</strong>
+          <div class="header-sub-row">
+            <div>
+              <div class="origin-location">
+                <img src="https://flagcdn.com/w20/ar.png" alt="Argentina" style="width: 18px; height: auto; border-radius: 2px; display: inline-block; vertical-align: middle;"> <strong>Mar del Plata, Argentina</strong>
+              </div>
+              <div class="battler-quote">
+                "Solo aquel que es perro sabe lo que es cucha..."
+              </div>
+            </div>
+            <!-- Enlace a Instagram con colores oficiales -->
+            <a href="https://www.instagram.com/this.is.asone/" target="_blank" rel="noopener noreferrer" class="instagram-icon-btn" title="Instagram de As One">
+              <svg style="width: 16px; height: 16px;" viewBox="0 0 24 24">
+                <defs>
+                  <radialGradient id="ig-grad" cx="30%" cy="107%" r="120%" fx="30%" fy="107%">
+                    <stop offset="0%" stop-color="#fdf497" />
+                    <stop offset="5%" stop-color="#fdf497" />
+                    <stop offset="45%" stop-color="#fd5949" />
+                    <stop offset="60%" stop-color="#d6249f" />
+                    <stop offset="90%" stop-color="#285AEB" />
+                  </radialGradient>
+                </defs>
+                <path fill="url(#ig-grad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </a>
           </div>
         </div>
       </div>
@@ -358,25 +567,31 @@
         <h2 class="year-group-title">2016</h2>
 
         <!-- #1 -->
-        <a href="https://www.youtube.com/watch?v=lZZe0P9z6uw" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#1. As One vs. FreeBlack</span>
             <span class="battle-date">30/10/2016*</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=lZZe0P9z6uw" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- 2017 -->
         <h2 class="year-group-title">2017</h2>
 
         <!-- #2 -->
-        <a href="https://www.youtube.com/watch?v=Meotd7HSDZg" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#2. As One vs. SLP</span>
             <span class="battle-date">08/01/2017</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=Meotd7HSDZg" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #3 -->
         <div class="battle-card">
@@ -400,13 +615,16 @@
         <h2 class="year-group-title">2018</h2>
 
         <!-- #5 -->
-        <a href="https://www.youtube.com/watch?v=-HzLVE9qj0E" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#5. As One vs. Zaico</span>
             <span class="battle-date">30/01/2018</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=-HzLVE9qj0E" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #6 -->
         <div class="battle-card">
@@ -457,13 +675,16 @@
         </div>
 
         <!-- #11 -->
-        <a href="https://www.youtube.com/watch?v=HdU0mSBqi1Y" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#11. As One vs. Lion</span>
             <span class="battle-date">04/10/2019</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=HdU0mSBqi1Y" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #12 -->
         <div class="battle-card">
@@ -484,7 +705,7 @@
             <span class="battle-date">12/08/2020*</span>
           </div>
           <div class="badge-container">
-            <span class="badge-virtual">Virtual</span>
+            <span class="badge badge-virtual">Batalla virtual</span>
             <span class="badge badge-no-video">Sin Video</span>
           </div>
         </div>
@@ -520,34 +741,43 @@
         </div>
 
         <!-- #17 -->
-        <a href="https://www.youtube.com/watch?v=vdG7X-s-JmI" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#17. As One vs. Caleb Santos</span>
             <span class="battle-date">28/08/2022</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=vdG7X-s-JmI" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #18 -->
-        <a href="https://www.youtube.com/watch?v=tdg2tzUGbdg" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#18. As One vs. Big Soul [rematch]</span>
             <span class="battle-date">06/11/2022</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=tdg2tzUGbdg" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- 2023 -->
         <h2 class="year-group-title">2023</h2>
 
         <!-- #19 -->
-        <a href="https://www.youtube.com/watch?v=ATow3h73-hY" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#19. As One vs. Mateii</span>
             <span class="battle-date">17/03/2023</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=ATow3h73-hY" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #20 -->
         <div class="battle-card">
@@ -559,34 +789,43 @@
         </div>
 
         <!-- #21 -->
-        <a href="https://www.youtube.com/watch?v=Puj7Ho4MqnU" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#21. As One vs. Divine</span>
             <span class="battle-date">19/08/2023</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=Puj7Ho4MqnU" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #22 -->
-        <a href="https://www.youtube.com/watch?v=j_outjs3-x0" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#22. As One vs. Nata</span>
             <span class="battle-date">10/12/2023</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=j_outjs3-x0" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- 2024 -->
         <h2 class="year-group-title">2024</h2>
 
         <!-- #23 -->
-        <a href="https://www.youtube.com/watch?v=YHFBEAP4yOg" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#23. As One vs. Lauta</span>
             <span class="battle-date">07/04/2024</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=YHFBEAP4yOg" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #24 -->
         <div class="battle-card">
@@ -610,100 +849,130 @@
         <h2 class="year-group-title">2025</h2>
 
         <!-- #26 -->
-        <a href="https://www.youtube.com/watch?v=-8fj6Gc2FTE" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#26. As One vs. Maxxi XL</span>
             <span class="battle-date">25/01/2025</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=-8fj6Gc2FTE" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #27 -->
-        <a href="https://www.youtube.com/watch?v=Jhz_VEGTRjM" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#27. As One vs. JQ Reyes</span>
             <span class="battle-date">09/02/2025</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=Jhz_VEGTRjM" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #28 -->
-        <a href="https://www.youtube.com/watch?v=sUC_UWTDVr8" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#28. As One vs. Hampper</span>
             <span class="battle-date">09/03/2025</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=sUC_UWTDVr8" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #29 -->
-        <a href="https://www.youtube.com/watch?v=uFR8UfKVJsw" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#29. As One vs. JotaD</span>
             <span class="battle-date">27/04/2025</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=uFR8UfKVJsw" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #30 -->
-        <a href="https://www.youtube.com/watch?v=Nj_x0ed7IOk" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#30. As One vs. Darax</span>
             <span class="battle-date">27/07/2025</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=Nj_x0ed7IOk" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #31 -->
-        <a href="https://www.youtube.com/watch?v=m3jz7bqDEg0" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#31. As One vs. Caleb Santos [rematch]</span>
             <span class="battle-date">17/08/2025</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=m3jz7bqDEg0" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- 2026 -->
         <h2 class="year-group-title">2026</h2>
 
         <!-- #32 -->
-        <a href="https://www.youtube.com/watch?v=-J0Xp-S3jE4" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#32. As One vs. Polirritmia</span>
             <span class="battle-date">30/01/2026*</span>
           </div>
           <div class="badge-container">
-            <span class="badge-virtual">Virtual</span>
-            <span class="badge">Ver en YouTube</span>
+            <span class="badge badge-virtual">Batalla virtual</span>
+            <a href="https://www.youtube.com/watch?v=-J0Xp-S3jE4" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+              <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              Ver en YouTube
+            </a>
           </div>
-        </a>
+        </div>
 
         <!-- #33 -->
-        <a href="https://www.youtube.com/watch?v=jIkGBQiu-l8" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
-            <span class="battle-title">#33. As One & Lauta vs. Wasok & Dei G</span>
+            <span class="battle-title">#33. As One &amp; Lauta vs. Wasok &amp; Dei G</span>
             <span class="battle-date">07/03/2026</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=jIkGBQiu-l8" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #34 -->
-        <a href="https://www.youtube.com/watch?v=iHYsVzLHgms" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#34. As One vs. Sempiterno</span>
             <span class="battle-date">06/06/2026</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=iHYsVzLHgms" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #35 -->
-        <a href="https://www.youtube.com/watch?v=Pi86rrh2DGw&t=8s" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#35. As One vs. Toro</span>
             <span class="battle-date">25/07/2026</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=Pi86rrh2DGw&t=8s" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
       </div>
     </section>
@@ -720,7 +989,7 @@
       </div>
 
       <div class="back-nav">
-        <a href="index.html" class="back-btn">← Volver al índice</a>
+        <a href="../" class="back-btn">Volver al catálogo</a>
       </div>
     </aside>
 
