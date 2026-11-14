@@ -338,7 +338,7 @@
       background-color: #1a1a1a;
     }
 
-    /* Etiqueta "Batalla virtual" (Sin recuadro, solo texto con punto LED en PC y móvil) */
+    /* Etiqueta "Batalla virtual" (Sin recuadro, solo texto con punto LED) */
     .badge-virtual {
       font-size: 0.47rem;
       font-weight: 700;
@@ -475,6 +475,17 @@
         width: 10px;
         height: 10px;
       }
+      
+      /* Elimina el cambio de contorno en la tarjeta al presionar en móvil, manteniendo solo el efecto del botón YouTube */
+      .battle-card:hover {
+        border-color: var(--border-color);
+        background-color: var(--card-dark);
+      }
+      .battle-card:active {
+        border-color: var(--border-color);
+        background-color: var(--card-dark);
+      }
+
       /* Efecto sutil al presionar "Ver en YouTube" en dispositivos móviles */
       .badge-youtube:active {
         transform: scale(0.93);
