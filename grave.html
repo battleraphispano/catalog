@@ -255,14 +255,12 @@
       justify-content: space-between;
       align-items: center;
       transition: all 0.2s ease;
-      text-decoration: none;
       color: inherit;
     }
 
     .battle-card:hover {
       border-color: var(--primary-yellow);
       background-color: var(--card-hover);
-      transform: translateX(4px);
     }
 
     .battle-info {
@@ -275,11 +273,6 @@
       font-size: 1rem;
       color: var(--text-light);
       display: block;
-      transition: color 0.2s;
-    }
-
-    .battle-card:hover .battle-title {
-      color: var(--primary-yellow);
     }
 
     .battle-date {
@@ -293,7 +286,8 @@
       align-items: center;
     }
 
-    .badge {
+    /* Etiqueta "Ver en YouTube" (PC) */
+    .badge-youtube {
       font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
@@ -301,8 +295,31 @@
       padding: 0.15rem 0.5rem;
       border-radius: 4px;
       background-color: #222;
-      color: var(--text-muted);
+      color: var(--text-light);
       border: 1px solid var(--border-color);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: transform 0.1s ease, background-color 0.2s ease;
+    }
+
+    .badge-youtube svg {
+      width: 12px;
+      height: 12px;
+      fill: #ff0000;
+      transition: fill 0.2s ease;
+    }
+
+    .badge-youtube:hover {
+      border-color: var(--border-color);
+      background-color: #1a1a1a;
+    }
+
+    .badge-youtube:active {
+      transform: scale(0.93);
+      border-color: var(--border-color);
+      background-color: #1a1a1a;
     }
 
     /* Etiqueta "Sin video" */
@@ -318,7 +335,7 @@
       border: 1px solid var(--border-color);
     }
 
-    /* Sidebar posicionado alineado */
+    /* Sidebar posicionado más abajo */
     aside {
       margin-top: 10rem;
     }
@@ -400,6 +417,38 @@
       .mobile-back-float {
         display: flex;
       }
+      .battle-info {
+        max-width: 58%;
+      }
+      .battle-title {
+        font-size: 0.85rem;
+        line-height: 1.3;
+      }
+      .badge-container {
+        gap: 0.3rem;
+      }
+      .badge-no-video, .badge-youtube {
+        font-size: 0.55rem;
+        padding: 0.05rem 0.2rem;
+      }
+      .badge-youtube svg {
+        width: 10px;
+        height: 10px;
+      }
+      
+      .battle-card {
+        border-color: var(--border-color) !important;
+        background-color: var(--card-dark) !important;
+      }
+      .battle-card:hover {
+        border-color: var(--border-color) !important;
+        background-color: var(--card-dark) !important;
+      }
+      .badge-youtube:active {
+        transform: scale(0.88);
+        background-color: #0d0d0d;
+        border-color: #333333;
+      }
     }
   </style>
 </head>
@@ -471,76 +520,97 @@
         <h2 class="year-group-title">2015</h2>
 
         <!-- #1 -->
-        <a href="https://www.youtube.com/watch?v=ko9ABrszDzg" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#1. Grave vs. Denter</span>
             <span class="battle-date">08/03/2015</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=ko9ABrszDzg" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #2 -->
-        <a href="https://www.youtube.com/watch?v=eBo3FSKGSlI" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#2. Grave vs. Perro Zw</span>
             <span class="battle-date">14/11/2015</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=eBo3FSKGSlI" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- 2016 -->
         <h2 class="year-group-title">2016</h2>
 
         <!-- #3 -->
-        <a href="https://www.youtube.com/watch?v=xdcI5aESAOI&t=494s" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#3. Grave vs. Terro</span>
             <span class="battle-date">06/02/2016</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=xdcI5aESAOI&t=494s" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #4 -->
-        <a href="https://www.youtube.com/watch?v=ZwfgysUuI0Y&t=415s" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#4. Grave vs. Aveldomain</span>
             <span class="battle-date">09/04/2016</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=ZwfgysUuI0Y&t=415s" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #5 -->
-        <a href="https://www.youtube.com/watch?v=p_TEJxih1wU&t=923s" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#5. Grave vs. T Killa</span>
             <span class="battle-date">19/11/2016</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=p_TEJxih1wU&t=923s" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- 2017 -->
         <h2 class="year-group-title">2017</h2>
 
         <!-- #6 -->
-        <a href="https://www.youtube.com/watch?v=ao7Lmasp8PE" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#6. Grave vs. Proof</span>
             <span class="battle-date">15/02/2017</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=ao7Lmasp8PE" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- 2018 -->
         <h2 class="year-group-title">2018</h2>
 
         <!-- #7 -->
-        <a href="https://www.youtube.com/watch?v=_nfx-nPLsqc" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#7. Grave vs. Big Killa</span>
             <span class="battle-date">21/04/2018</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=_nfx-nPLsqc" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #8 -->
         <div class="battle-card">
@@ -548,7 +618,7 @@
             <span class="battle-title">#8. Grave vs. Muelas de Gallo</span>
             <span class="battle-date">24/11/2018</span>
           </div>
-          <span class="badge badge-no-video">Sin video</span>
+          <span class="badge-no-video">Sin video</span>
         </div>
 
       </div>
@@ -566,7 +636,7 @@
       </div>
 
       <div class="back-nav">
-        <a href="./" class="back-btn">Volver al catálogo</a>
+        <a href="./" class="back-btn">&larr; Volver al catálogo</a>
       </div>
     </aside>
 
