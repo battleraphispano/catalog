@@ -286,18 +286,6 @@
       align-items: center;
     }
 
-    .badge {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      padding: 0.15rem 0.5rem;
-      border-radius: 4px;
-      background-color: #222;
-      color: var(--text-muted);
-      border: 1px solid var(--border-color);
-    }
-
     /* Etiqueta "Ver en YouTube" (PC) */
     .badge-youtube {
       font-size: 0.75rem;
@@ -340,14 +328,15 @@
 
     /* Etiqueta "Batalla virtual" */
     .badge-virtual {
-      font-size: 0.6rem;
-      padding: 0.1rem 0.35rem;
-      border: 1px solid var(--primary-yellow);
-      color: var(--primary-yellow);
+      font-size: 0.75rem;
       font-weight: 700;
-      border-radius: 3px;
-      background: rgba(255, 255, 0, 0.05);
       text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background-color: #222;
+      color: var(--primary-yellow);
+      border: 1px solid var(--border-color);
     }
 
     /* Sidebar posicionado alineado */
@@ -433,7 +422,7 @@
         display: flex;
       }
       .battle-info {
-        max-width: 58%;
+        max-width: 52%;
       }
       .battle-title {
         font-size: 0.85rem;
@@ -444,13 +433,9 @@
         flex-wrap: wrap;
         justify-content: flex-end;
       }
-      .badge {
+      .badge-virtual {
         font-size: 0.55rem;
         padding: 0.05rem 0.2rem;
-      }
-      .badge-virtual {
-        font-size: 0.5rem;
-        padding: 0.02rem 0.15rem;
       }
       .badge-youtube {
         font-size: 0.55rem;
@@ -475,7 +460,7 @@
         background-color: var(--card-dark) !important;
       }
 
-      /* Efecto táctil en el botón "Ver en YouTube" para móvil */
+      /* Efecto táctil en los botones para móvil */
       .badge-youtube:active {
         transform: scale(0.88);
         background-color: #0d0d0d;
@@ -807,7 +792,7 @@
             <span class="battle-date">30/07/2020*</span>
           </div>
           <div class="badge-container">
-            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge-virtual">Batalla virtual</span>
             <a href="https://www.youtube.com/watch?v=EWvd7oKucVg" target="_blank" rel="noopener noreferrer" class="badge-youtube">
               <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
               Ver en YouTube
@@ -837,7 +822,7 @@
             <span class="battle-date">20/02/2021*</span>
           </div>
           <div class="badge-container">
-            <span class="badge badge-virtual">Batalla virtual</span>
+            <span class="badge-virtual">Batalla virtual</span>
             <a href="https://www.youtube.com/watch?v=GGh-E9dtMCI&t=7s" target="_blank" rel="noopener noreferrer" class="badge-youtube">
               <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
               Ver en YouTube
