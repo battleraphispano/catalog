@@ -476,17 +476,21 @@
         height: 10px;
       }
       
-      /* Elimina el cambio de contorno en la tarjeta al presionar en móvil */
+      /* Desactiva totalmente cualquier cambio de color o borde en la tarjeta en móvil */
+      .battle-card {
+        border-color: var(--border-color) !important;
+        background-color: var(--card-dark) !important;
+      }
       .battle-card:hover {
-        border-color: var(--border-color);
-        background-color: var(--card-dark);
+        border-color: var(--border-color) !important;
+        background-color: var(--card-dark) !important;
       }
       .battle-card:active {
-        border-color: var(--border-color);
-        background-color: var(--card-dark);
+        border-color: var(--border-color) !important;
+        background-color: var(--card-dark) !important;
       }
 
-      /* Efecto táctil reforzado y más notable al presionar "Ver en YouTube" en dispositivos móviles */
+      /* Efecto táctil en el botón "Ver en YouTube" para móvil */
       .badge-youtube:active {
         transform: scale(0.88);
         background-color: #0d0d0d;
