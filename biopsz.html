@@ -298,7 +298,7 @@
       border: 1px solid var(--border-color);
     }
 
-    /* Etiqueta "Ver en YouTube" (Sin contorno rojo en hover/active) */
+    /* Etiqueta "Ver en YouTube" (Sin contorno rojo en hover/active en PC) */
     .badge-youtube {
       font-size: 0.75rem;
       font-weight: 700;
@@ -338,7 +338,7 @@
       background-color: #1a1a1a;
     }
 
-    /* Etiqueta "Batalla virtual" (Sin recuadro, solo texto con punto LED, aumentada 5% más) */
+    /* Etiqueta "Batalla virtual" (Sin recuadro, solo texto con punto LED en PC y móvil) */
     .badge-virtual {
       font-size: 0.47rem;
       font-weight: 700;
@@ -474,6 +474,11 @@
       .badge-youtube svg {
         width: 10px;
         height: 10px;
+      }
+      /* Efecto sutil al presionar "Ver en YouTube" en dispositivos móviles */
+      .badge-youtube:active {
+        transform: scale(0.93);
+        background-color: #141414;
       }
     }
   </style>
