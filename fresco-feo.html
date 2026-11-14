@@ -338,6 +338,42 @@
       background-color: #1a1a1a;
     }
 
+    /* Etiqueta "Ver en Facebook" (PC) */
+    .badge-facebook {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background-color: #222;
+      color: var(--text-light);
+      border: 1px solid var(--border-color);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: transform 0.1s ease, background-color 0.2s ease;
+    }
+
+    .badge-facebook svg {
+      width: 12px;
+      height: 12px;
+      fill: #1877f2;
+      transition: fill 0.2s ease;
+    }
+
+    .badge-facebook:hover {
+      border-color: var(--border-color);
+      background-color: #1a1a1a;
+    }
+
+    .badge-facebook:active {
+      transform: scale(0.93);
+      border-color: var(--border-color);
+      background-color: #1a1a1a;
+    }
+
     /* Etiqueta "Batalla virtual" (Sin recuadro, solo texto con punto LED) */
     .badge-virtual {
       font-size: 0.47rem;
@@ -467,11 +503,11 @@
         font-size: 0.55rem;
         padding: 0.05rem 0.2rem;
       }
-      .badge-youtube {
+      .badge-youtube, .badge-facebook {
         font-size: 0.55rem;
         padding: 0.05rem 0.2rem;
       }
-      .badge-youtube svg {
+      .badge-youtube svg, .badge-facebook svg {
         width: 10px;
         height: 10px;
       }
@@ -490,8 +526,8 @@
         background-color: var(--card-dark) !important;
       }
 
-      /* Efecto táctil en el botón "Ver en YouTube" para móvil */
-      .badge-youtube:active {
+      /* Efecto táctil en el botón para móvil */
+      .badge-youtube:active, .badge-facebook:active {
         transform: scale(0.88);
         background-color: #0d0d0d;
         border-color: #333333;
@@ -898,7 +934,8 @@
           </div>
           <div class="badge-container">
             <span class="badge badge-virtual">Batalla virtual</span>
-            <a href="https://www.facebook.com/reel/297791596155069" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <a href="https://www.facebook.com/reel/297791596155069" target="_blank" rel="noopener noreferrer" class="badge-facebook">
+              <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
               Ver en Facebook
             </a>
           </div>
@@ -912,7 +949,8 @@
           </div>
           <div class="badge-container">
             <span class="badge badge-virtual">Batalla virtual</span>
-            <a href="https://www.facebook.com/reel/270144665815095" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <a href="https://www.facebook.com/reel/270144665815095" target="_blank" rel="noopener noreferrer" class="badge-facebook">
+              <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
               Ver en Facebook
             </a>
           </div>
@@ -926,7 +964,8 @@
           </div>
           <div class="badge-container">
             <span class="badge badge-virtual">Batalla virtual</span>
-            <a href="https://www.facebook.com/reel/327563093317938" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <a href="https://www.facebook.com/reel/327563093317938" target="_blank" rel="noopener noreferrer" class="badge-facebook">
+              <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
               Ver en Facebook
             </a>
           </div>
