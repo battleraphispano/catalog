@@ -255,14 +255,12 @@
       justify-content: space-between;
       align-items: center;
       transition: all 0.2s ease;
-      text-decoration: none;
       color: inherit;
     }
 
     .battle-card:hover {
       border-color: var(--primary-yellow);
       background-color: var(--card-hover);
-      transform: translateX(4px);
     }
 
     .battle-info {
@@ -275,11 +273,6 @@
       font-size: 1rem;
       color: var(--text-light);
       display: block;
-      transition: color 0.2s;
-    }
-
-    .battle-card:hover .battle-title {
-      color: var(--primary-yellow);
     }
 
     .battle-date {
@@ -287,13 +280,8 @@
       color: var(--text-muted);
     }
 
-    .badge-container {
-      display: flex;
-      gap: 0.4rem;
-      align-items: center;
-    }
-
-    .badge {
+    /* Etiqueta "Ver en YouTube" (PC) */
+    .badge-youtube {
       font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
@@ -301,8 +289,31 @@
       padding: 0.15rem 0.5rem;
       border-radius: 4px;
       background-color: #222;
-      color: var(--text-muted);
+      color: var(--text-light);
       border: 1px solid var(--border-color);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: transform 0.1s ease, background-color 0.2s ease;
+    }
+
+    .badge-youtube svg {
+      width: 12px;
+      height: 12px;
+      fill: #ff0000;
+      transition: fill 0.2s ease;
+    }
+
+    .badge-youtube:hover {
+      border-color: var(--border-color);
+      background-color: #1a1a1a;
+    }
+
+    .badge-youtube:active {
+      transform: scale(0.93);
+      border-color: var(--border-color);
+      background-color: #1a1a1a;
     }
 
     /* Etiqueta "Sin video" */
@@ -316,16 +327,6 @@
       background-color: #222;
       color: var(--text-muted);
       border: 1px solid var(--border-color);
-    }
-
-    /* Etiqueta "Batalla virtual" */
-    .badge-virtual {
-      font-size: 0.45rem;
-      padding: 0.02rem 0.15rem;
-      border: 0.5px solid var(--primary-yellow);
-      color: var(--primary-yellow);
-      font-weight: 600;
-      border-radius: 2px;
     }
 
     /* Sidebar posicionado alineado */
@@ -410,6 +411,35 @@
       .mobile-back-float {
         display: flex;
       }
+      .battle-info {
+        max-width: 58%;
+      }
+      .battle-title {
+        font-size: 0.85rem;
+        line-height: 1.3;
+      }
+      .badge-youtube, .badge-no-video {
+        font-size: 0.55rem;
+        padding: 0.05rem 0.2rem;
+      }
+      .badge-youtube svg {
+        width: 10px;
+        height: 10px;
+      }
+      
+      .battle-card {
+        border-color: var(--border-color) !important;
+        background-color: var(--card-dark) !important;
+      }
+      .battle-card:hover {
+        border-color: var(--border-color) !important;
+        background-color: var(--card-dark) !important;
+      }
+      .badge-youtube:active {
+        transform: scale(0.88);
+        background-color: #0d0d0d;
+        border-color: #333333;
+      }
     }
   </style>
 </head>
@@ -490,91 +520,118 @@
         </div>
 
         <!-- #2 -->
-        <a href="https://www.youtube.com/watch?v=Wx0jqw9wpdA" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#2. Laucha vs. Cenizas</span>
             <span class="battle-date">28/09/2024</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=Wx0jqw9wpdA" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #3 -->
-        <a href="https://www.youtube.com/watch?v=V7cix3F9ZHo" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#3. Laucha vs. Molly</span>
             <span class="battle-date">08/11/2024</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=V7cix3F9ZHo" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- 2025 -->
         <h2 class="year-group-title">2025</h2>
 
         <!-- #4 -->
-        <a href="https://www.youtube.com/watch?v=Kul9JoaiNvU" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#4. Laucha vs. Joa</span>
             <span class="battle-date">05/04/2025</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=Kul9JoaiNvU" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #5 -->
-        <a href="https://www.youtube.com/watch?v=1rgHXkAr9HA" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#5. Laucha vs. Luzkodescarado vs. Attei vs. Herlan</span>
             <span class="battle-date">19/06/2025</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=1rgHXkAr9HA" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #6 -->
-        <a href="https://www.youtube.com/watch?v=uSQ3Mp272yA" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#6. Laucha vs. Burbujitas</span>
             <span class="battle-date">14/08/2025</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=uSQ3Mp272yA" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #7 -->
-        <a href="https://www.youtube.com/watch?v=IYK8i-nCnoM" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#7. Laucha vs. Jubriga</span>
             <span class="battle-date">18/10/2025</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=IYK8i-nCnoM" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- 2026 -->
         <h2 class="year-group-title">2026</h2>
 
         <!-- #8 -->
-        <a href="https://www.youtube.com/watch?v=JqjvXRAQCiI" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#8. Laucha vs. Luciano Soto</span>
             <span class="battle-date">31/01/2026</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=JqjvXRAQCiI" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #9 -->
-        <a href="https://www.youtube.com/watch?v=yNlAQcVVCC8&t=284s" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#9. Laucha vs. Maxim</span>
             <span class="battle-date">01/08/2026</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=yNlAQcVVCC8&t=284s" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #10 -->
-        <a href="https://www.youtube.com/watch?v=8aQlSWnXbLQ" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#10. Laucha vs. Polak</span>
             <span class="battle-date">07/11/2026</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=8aQlSWnXbLQ" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
       </div>
     </section>
