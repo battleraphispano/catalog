@@ -299,7 +299,7 @@
       border: 1px solid var(--border-color);
     }
 
-    /* Etiqueta "Ver en YouTube" */
+    /* Etiqueta "Ver en YouTube" (Opción 2) */
     .badge-youtube {
       font-size: 0.75rem;
       font-weight: 700;
@@ -307,30 +307,30 @@
       letter-spacing: 0.5px;
       padding: 0.15rem 0.5rem;
       border-radius: 4px;
-      background-color: var(--youtube-red);
-      color: #ffffff;
-      border: 1px solid #ff3333;
+      background-color: #222;
+      color: var(--text-light);
+      border: 1px solid var(--border-color);
       text-decoration: none;
       display: inline-block;
-      transition: transform 0.1s ease, background-color 0.2s ease;
+      transition: transform 0.1s ease, border-color 0.2s ease, color 0.2s ease;
     }
 
     .badge-youtube:hover {
-      background-color: #e60000;
-      border-color: #ff4d4d;
+      border-color: #ff0000;
+      color: #ff3333;
     }
 
     .badge-youtube:active {
       transform: scale(0.93);
     }
 
-    /* Etiqueta "Batalla virtual" (Reducida a la mitad en PC) */
+    /* Etiqueta "Batalla virtual" (10% más grande en PC) */
     .badge-virtual {
-      font-size: 0.375rem;
+      font-size: 0.4125rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.3px;
-      padding: 0.07rem 0.25rem;
+      padding: 0.077rem 0.275rem;
       border-radius: 2px;
       background-color: rgba(255, 255, 0, 0.1);
       color: var(--primary-yellow);
