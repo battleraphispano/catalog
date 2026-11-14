@@ -254,14 +254,12 @@
       justify-content: space-between;
       align-items: center;
       transition: all 0.2s ease;
-      text-decoration: none;
       color: inherit;
     }
 
     .battle-card:hover {
       border-color: var(--primary-yellow);
       background-color: var(--card-hover);
-      transform: translateX(4px);
     }
 
     .battle-info {
@@ -274,11 +272,6 @@
       font-size: 1rem;
       color: var(--text-light);
       display: block;
-      transition: color 0.2s;
-    }
-
-    .battle-card:hover .battle-title {
-      color: var(--primary-yellow);
     }
 
     .battle-date {
@@ -292,7 +285,44 @@
       align-items: center;
     }
 
-    .badge {
+    /* Etiqueta "Ver en YouTube" (PC) */
+    .badge-youtube {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background-color: #222;
+      color: var(--text-light);
+      border: 1px solid var(--border-color);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: transform 0.1s ease, background-color 0.2s ease;
+    }
+
+    .badge-youtube svg {
+      width: 12px;
+      height: 12px;
+      fill: #ff0000;
+      transition: fill 0.2s ease;
+    }
+
+    .badge-youtube:hover {
+      border-color: var(--border-color);
+      background-color: #1a1a1a;
+    }
+
+    .badge-youtube:active {
+      transform: scale(0.93);
+      border-color: var(--border-color);
+      background-color: #1a1a1a;
+    }
+
+    /* Etiqueta "Sin video" */
+    .badge-no-video {
       font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
@@ -304,17 +334,32 @@
       border: 1px solid var(--border-color);
     }
 
-    /* Etiqueta "Batalla virtual" */
+    /* Etiqueta "Batalla virtual" (Punto LED) */
     .badge-virtual {
-      font-size: 0.45rem;
-      padding: 0.02rem 0.15rem;
-      border: 0.5px solid var(--primary-yellow);
-      color: var(--primary-yellow);
-      font-weight: 600;
-      border-radius: 2px;
+      font-size: 0.47rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      padding: 0;
+      background: none;
+      border: none;
+      color: var(--text-light);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
     }
 
-    /* Sidebar posicionado alineado */
+    .badge-virtual::before {
+      content: "";
+      width: 4.2px;
+      height: 4.2px;
+      background-color: var(--primary-yellow);
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 4px var(--primary-yellow);
+    }
+
+    /* Sidebar posicionado más abajo */
     aside {
       margin-top: 10rem;
     }
@@ -396,6 +441,46 @@
       .mobile-back-float {
         display: flex;
       }
+      .battle-info {
+        max-width: 58%;
+      }
+      .battle-title {
+        font-size: 0.85rem;
+        line-height: 1.3;
+      }
+      .badge-container {
+        gap: 0.3rem;
+      }
+      .badge-virtual {
+        font-size: 0.5rem;
+        gap: 0.25rem;
+      }
+      .badge-virtual::before {
+        width: 3.8px;
+        height: 3.8px;
+      }
+      .badge-no-video, .badge-youtube {
+        font-size: 0.55rem;
+        padding: 0.05rem 0.2rem;
+      }
+      .badge-youtube svg {
+        width: 10px;
+        height: 10px;
+      }
+      
+      .battle-card {
+        border-color: var(--border-color) !important;
+        background-color: var(--card-dark) !important;
+      }
+      .battle-card:hover {
+        border-color: var(--border-color) !important;
+        background-color: var(--card-dark) !important;
+      }
+      .badge-youtube:active {
+        transform: scale(0.88);
+        background-color: #0d0d0d;
+        border-color: #333333;
+      }
     }
   </style>
 </head>
@@ -472,7 +557,7 @@
             <span class="battle-title">#1. NyD vs. Deniro</span>
             <span class="battle-date">09/07/2022</span>
           </div>
-          <span class="badge">Sin video</span>
+          <span class="badge-no-video">Sin video</span>
         </div>
 
         <!-- #2 -->
@@ -481,7 +566,7 @@
             <span class="battle-title">#2. NyD vs. Antón</span>
             <span class="battle-date">01/10/2022</span>
           </div>
-          <span class="badge">Sin video</span>
+          <span class="badge-no-video">Sin video</span>
         </div>
 
         <!-- 2023 -->
@@ -493,7 +578,7 @@
             <span class="battle-title">#3. NyD vs. Hassan Emecé</span>
             <span class="battle-date">--/01/2023</span>
           </div>
-          <span class="badge">Sin video</span>
+          <span class="badge-no-video">Sin video</span>
         </div>
 
         <!-- #4 -->
@@ -502,170 +587,215 @@
             <span class="battle-title">#4. NyD vs. Hiram ADK</span>
             <span class="battle-date">20/03/2023</span>
           </div>
-          <span class="badge">Sin video</span>
+          <span class="badge-no-video">Sin video</span>
         </div>
 
         <!-- #5 -->
-        <a href="https://www.youtube.com/watch?v=ikPfUs0_XKY&t=702s" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#5. NyD vs. René KDA</span>
             <span class="battle-date">19/08/2023</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=ikPfUs0_XKY&t=702s" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- 2024 -->
         <h2 class="year-group-title">2024</h2>
 
         <!-- #6 -->
-        <a href="https://www.youtube.com/watch?v=OUt1nS3cX38&t=157s" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#6. NyD vs. Carnage NSC</span>
             <span class="battle-date">03/02/2024</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=OUt1nS3cX38&t=157s" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #7 -->
-        <a href="https://www.youtube.com/watch?v=quY78uPsddA&t=333s" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#7. NyD vs. Lengua</span>
             <span class="battle-date">28/11/2024*</span>
           </div>
           <div class="badge-container">
             <span class="badge badge-virtual">Batalla virtual</span>
-            <span class="badge">Ver en YouTube</span>
+            <a href="https://www.youtube.com/watch?v=quY78uPsddA&t=333s" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+              <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              Ver en YouTube
+            </a>
           </div>
-        </a>
+        </div>
 
         <!-- 2025 -->
         <h2 class="year-group-title">2025</h2>
 
         <!-- #8 -->
-        <a href="https://www.youtube.com/watch?v=3vl2u67XibU" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#8. NyD vs. Prro negro</span>
             <span class="battle-date">06/04/2025*</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=3vl2u67XibU" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #9 -->
-        <a href="https://www.youtube.com/watch?v=lzoof3-wVUY" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#9. NyD vs. Biopsz</span>
             <span class="battle-date">31/05/2025</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=lzoof3-wVUY" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #10 -->
-        <a href="https://www.youtube.com/watch?v=OZZEfbJq9Gk" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#10. NyD vs. Pancho León</span>
             <span class="battle-date">12/07/2025</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=OZZEfbJq9Gk" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #11 -->
-        <a href="https://www.youtube.com/watch?v=_zflKxU3D8Y&t=332s" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#11. NyD vs. Su Fire</span>
             <span class="battle-date">02/08/2025</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=_zflKxU3D8Y&t=332s" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #12 -->
-        <a href="https://www.youtube.com/watch?v=0zY9cXhR8WU" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#12. NyD vs. Pensil1</span>
             <span class="battle-date">20/11/2025*</span>
           </div>
           <div class="badge-container">
             <span class="badge badge-virtual">Batalla virtual</span>
-            <span class="badge">Ver en YouTube</span>
+            <a href="https://www.youtube.com/watch?v=0zY9cXhR8WU" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+              <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              Ver en YouTube
+            </a>
           </div>
-        </a>
+        </div>
 
         <!-- 2026 -->
         <h2 class="year-group-title">2026</h2>
 
         <!-- #13 -->
-        <a href="https://www.youtube.com/watch?v=HVFonG-00Vg" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#13. NyD vs. Dein Sane</span>
             <span class="battle-date">17/01/2026</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=HVFonG-00Vg" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #14 -->
-        <a href="https://www.youtube.com/watch?v=QePKFVV6-fw" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#14. NyD vs. Rayar</span>
             <span class="battle-date">07/03/2026</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=QePKFVV6-fw" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #15 -->
-        <a href="https://www.youtube.com/watch?v=YDIGEQkWnj0" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#15. NyD vs. Odalarte</span>
             <span class="battle-date">02/06/2026*</span>
           </div>
           <div class="badge-container">
             <span class="badge badge-virtual">Batalla virtual</span>
-            <span class="badge">Ver en YouTube</span>
+            <a href="https://www.youtube.com/watch?v=YDIGEQkWnj0" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+              <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              Ver en YouTube
+            </a>
           </div>
-        </a>
+        </div>
 
         <!-- #16 -->
-        <a href="https://www.youtube.com/watch?v=kmZjoTO9-lw" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#16. NyD vs. Keyblade</span>
             <span class="battle-date">09/06/2026*</span>
           </div>
           <div class="badge-container">
             <span class="badge badge-virtual">Batalla virtual</span>
-            <span class="badge">Ver en YouTube</span>
+            <a href="https://www.youtube.com/watch?v=kmZjoTO9-lw" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+              <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              Ver en YouTube
+            </a>
           </div>
-        </a>
+        </div>
 
         <!-- #17 -->
-        <a href="https://www.youtube.com/watch?v=FgWNalP_iq0" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#17. NyD vs. Tetra</span>
             <span class="battle-date">16/06/2026*</span>
           </div>
           <div class="badge-container">
             <span class="badge badge-virtual">Batalla virtual</span>
-            <span class="badge">Ver en YouTube</span>
+            <a href="https://www.youtube.com/watch?v=FgWNalP_iq0" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+              <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              Ver en YouTube
+            </a>
           </div>
-        </a>
+        </div>
 
         <!-- #18 -->
-        <a href="https://www.youtube.com/watch?v=xgNU0aFqbV8" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#18. NyD vs. Pablito ABR</span>
             <span class="battle-date">23/06/2026*</span>
           </div>
           <div class="badge-container">
             <span class="badge badge-virtual">Batalla virtual</span>
-            <span class="badge">Ver en YouTube</span>
+            <a href="https://www.youtube.com/watch?v=xgNU0aFqbV8" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+              <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              Ver en YouTube
+            </a>
           </div>
-        </a>
+        </div>
 
         <!-- #19 -->
-        <a href="https://www.youtube.com/watch?v=sxRxoThdTAc&t=1403s" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#19. NyD vs. Hander</span>
             <span class="battle-date">26/09/2026</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=sxRxoThdTAc&t=1403s" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
       </div>
     </section>
@@ -682,7 +812,7 @@
       </div>
 
       <div class="back-nav">
-        <a href="./" class="back-btn">← Volver al catálogo</a>
+        <a href="./" class="back-btn">&larr; Volver al catálogo</a>
       </div>
     </aside>
 
