@@ -145,6 +145,25 @@
       font-weight: bold;
     }
 
+    .instagram-icon-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      text-decoration: none;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .instagram-icon-btn:hover {
+      background: var(--card-hover);
+      border-color: var(--primary-yellow);
+    }
+
     /* Botón flotante móvil con efecto táctil mejorado */
     .mobile-back-float {
       display: none;
@@ -267,8 +286,20 @@
       align-items: center;
     }
 
-    /* Etiqueta de plataforma (PC) */
-    .badge-platform {
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background-color: #222;
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+    }
+
+    /* Etiqueta "Ver en YouTube" (PC) */
+    .badge-youtube {
       font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
@@ -285,21 +316,51 @@
       transition: transform 0.1s ease, background-color 0.2s ease;
     }
 
-    .badge-platform svg {
+    .badge-youtube svg {
       width: 12px;
       height: 12px;
-      fill: currentColor;
+      fill: #ff0000;
+      transition: fill 0.2s ease;
     }
 
-    .badge-platform:hover {
+    .badge-youtube:hover {
       border-color: var(--border-color);
       background-color: #1a1a1a;
     }
 
-    .badge-platform:active {
+    .badge-youtube:hover svg {
+      fill: #ff0000;
+    }
+
+    .badge-youtube:active {
       transform: scale(0.93);
       border-color: var(--border-color);
       background-color: #1a1a1a;
+    }
+
+    /* Etiqueta "Batalla virtual" (Sin recuadro, solo texto con punto LED) */
+    .badge-virtual {
+      font-size: 0.47rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      padding: 0;
+      background: none;
+      border: none;
+      color: var(--text-light);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .badge-virtual::before {
+      content: "";
+      width: 4.2px;
+      height: 4.2px;
+      background-color: var(--primary-yellow);
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 4px var(--primary-yellow);
     }
 
     /* Sidebar posicionado alineado */
@@ -377,6 +438,10 @@
       .origin-location {
         justify-content: center;
       }
+      .header-sub-row {
+        flex-direction: column;
+        align-items: center;
+      }
       .mobile-back-float {
         display: flex;
       }
@@ -390,11 +455,23 @@
       .badge-container {
         gap: 0.3rem;
       }
-      .badge-platform {
+      .badge-virtual {
+        font-size: 0.5rem;
+        gap: 0.25rem;
+      }
+      .badge-virtual::before {
+        width: 3.8px;
+        height: 3.8px;
+      }
+      .badge {
         font-size: 0.55rem;
         padding: 0.05rem 0.2rem;
       }
-      .badge-platform svg {
+      .badge-youtube {
+        font-size: 0.55rem;
+        padding: 0.05rem 0.2rem;
+      }
+      .badge-youtube svg {
         width: 10px;
         height: 10px;
       }
@@ -413,8 +490,8 @@
         background-color: var(--card-dark) !important;
       }
 
-      /* Efecto táctil en el botón para móvil */
-      .badge-platform:active {
+      /* Efecto táctil en el botón "Ver en YouTube" para móvil */
+      .badge-youtube:active {
         transform: scale(0.88);
         background-color: #0d0d0d;
         border-color: #333333;
@@ -480,8 +557,8 @@
             <span class="battle-title">#1. Sawi Elekipo vs. Erick Hervé</span>
             <span class="battle-date">30/06/2024</span>
           </div>
-          <a href="https://www.youtube.com/watch?v=Szu9KWBdI70" target="_blank" rel="noopener noreferrer" class="badge-platform">
-            <svg viewBox="0 0 24 24"><path fill="#ff0000" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          <a href="https://www.youtube.com/watch?v=Szu9KWBdI70" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
             Ver en YouTube
           </a>
         </div>
@@ -495,8 +572,8 @@
             <span class="battle-title">#2. Sawi Elekipo vs. Bha</span>
             <span class="battle-date">06/09/2025</span>
           </div>
-          <a href="https://www.youtube.com/watch?v=3bvrR-8wHOQ&t=64s" target="_blank" rel="noopener noreferrer" class="badge-platform">
-            <svg viewBox="0 0 24 24"><path fill="#ff0000" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          <a href="https://www.youtube.com/watch?v=3bvrR-8wHOQ&t=64s" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
             Ver en YouTube
           </a>
         </div>
@@ -510,8 +587,8 @@
             <span class="battle-title">#3. Sawi Elekipo vs. Emesh</span>
             <span class="battle-date">26/09/2026</span>
           </div>
-          <a href="https://www.youtube.com/watch?v=VY8mtJLx0V8&t=84s" target="_blank" rel="noopener noreferrer" class="badge-platform">
-            <svg viewBox="0 0 24 24"><path fill="#ff0000" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          <a href="https://www.youtube.com/watch?v=VY8mtJLx0V8&t=84s" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
             Ver en YouTube
           </a>
         </div>
