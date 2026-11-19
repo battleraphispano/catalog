@@ -6,14 +6,14 @@
   <title>Catálogo de batallas de Old Hanzo | Rap Battle Database</title>
   
   <!-- Favicon para la pestaña de la PC -->
-  <link rel="icon" type="image/png" href="battleraphispano.png">
+  <link rel="icon" type="image/png" href="../battleraphispano.png">
   
   <!-- Enlaces para la PWA -->
-  <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="../manifest.json">
   <meta name="theme-color" content="#ffff00">
   <script>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js')
+      navigator.serviceWorker.register('../sw.js')
         .then(() => console.log("Service Worker registrado con éxito"))
         .catch((error) => console.log("Fallo al registrar el Service Worker", error));
     }
@@ -255,14 +255,12 @@
       justify-content: space-between;
       align-items: center;
       transition: all 0.2s ease;
-      text-decoration: none;
       color: inherit;
     }
 
     .battle-card:hover {
       border-color: var(--primary-yellow);
       background-color: var(--card-hover);
-      transform: translateX(4px);
     }
 
     .battle-info {
@@ -275,11 +273,6 @@
       font-size: 1rem;
       color: var(--text-light);
       display: block;
-      transition: color 0.2s;
-    }
-
-    .battle-card:hover .battle-title {
-      color: var(--primary-yellow);
     }
 
     .battle-date {
@@ -305,8 +298,8 @@
       border: 1px solid var(--border-color);
     }
 
-    /* Etiqueta "Sin video" */
-    .badge-no-video {
+    /* Etiqueta "Ver en YouTube" (PC) */
+    .badge-youtube {
       font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
@@ -314,18 +307,60 @@
       padding: 0.15rem 0.5rem;
       border-radius: 4px;
       background-color: #222;
-      color: var(--text-muted);
+      color: var(--text-light);
       border: 1px solid var(--border-color);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: transform 0.1s ease, background-color 0.2s ease;
     }
 
-    /* Etiqueta "Batalla virtual" */
+    .badge-youtube svg {
+      width: 12px;
+      height: 12px;
+      fill: #ff0000;
+      transition: fill 0.2s ease;
+    }
+
+    .badge-youtube:hover {
+      border-color: var(--border-color);
+      background-color: #1a1a1a;
+    }
+
+    .badge-youtube:hover svg {
+      fill: #ff0000;
+    }
+
+    .badge-youtube:active {
+      transform: scale(0.93);
+      border-color: var(--border-color);
+      background-color: #1a1a1a;
+    }
+
+    /* Etiqueta "Batalla virtual" (Sin recuadro, solo texto con punto LED) */
     .badge-virtual {
-      font-size: 0.45rem;
-      padding: 0.02rem 0.15rem;
-      border: 0.5px solid var(--primary-yellow);
-      color: var(--primary-yellow);
-      font-weight: 600;
-      border-radius: 2px;
+      font-size: 0.47rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      padding: 0;
+      background: none;
+      border: none;
+      color: var(--text-light);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .badge-virtual::before {
+      content: "";
+      width: 4.2px;
+      height: 4.2px;
+      background-color: var(--primary-yellow);
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 4px var(--primary-yellow);
     }
 
     /* Sidebar posicionado alineado */
@@ -410,13 +445,64 @@
       .mobile-back-float {
         display: flex;
       }
+      .battle-info {
+        max-width: 58%;
+      }
+      .battle-title {
+        font-size: 0.85rem;
+        line-height: 1.3;
+      }
+      .badge-container {
+        gap: 0.3rem;
+      }
+      .badge-virtual {
+        font-size: 0.5rem;
+        gap: 0.25rem;
+      }
+      .badge-virtual::before {
+        width: 3.8px;
+        height: 3.8px;
+      }
+      .badge {
+        font-size: 0.55rem;
+        padding: 0.05rem 0.2rem;
+      }
+      .badge-youtube {
+        font-size: 0.55rem;
+        padding: 0.05rem 0.2rem;
+      }
+      .badge-youtube svg {
+        width: 10px;
+        height: 10px;
+      }
+      
+      /* Desactiva totalmente cualquier cambio de color o borde en la tarjeta en móvil */
+      .battle-card {
+        border-color: var(--border-color) !important;
+        background-color: var(--card-dark) !important;
+      }
+      .battle-card:hover {
+        border-color: var(--border-color) !important;
+        background-color: var(--card-dark) !important;
+      }
+      .battle-card:active {
+        border-color: var(--border-color) !important;
+        background-color: var(--card-dark) !important;
+      }
+
+      /* Efecto táctil en el botón "Ver en YouTube" para móvil */
+      .badge-youtube:active {
+        transform: scale(0.88);
+        background-color: #0d0d0d;
+        border-color: #333333;
+      }
     }
   </style>
 </head>
 <body>
 
   <!-- Botón flotante superior izquierdo para móviles -->
-  <a href="./" class="mobile-back-float" title="Volver al catálogo">
+  <a href="../" class="mobile-back-float" title="Volver al catálogo">
     <svg viewBox="0 0 24 24">
       <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
     </svg>
@@ -481,150 +567,192 @@
         <h2 class="year-group-title">2024</h2>
 
         <!-- #1 -->
-        <a href="https://www.youtube.com/watch?v=w46WO2ZI7oY" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#1. Old Hanzo vs. Dezo</span>
             <span class="battle-date">20/07/2024</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=w46WO2ZI7oY" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #2 -->
-        <a href="https://www.youtube.com/watch?v=YSjCIqv9dw8" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#2. Old Hanzo vs. Zareck</span>
             <span class="battle-date">19/10/2024</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=YSjCIqv9dw8" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- 2025 -->
         <h2 class="year-group-title">2025</h2>
 
         <!-- #3 -->
-        <a href="https://www.youtube.com/watch?v=qIYKHUBXJzU" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#3. Old Hanzo vs. Sweet Shot</span>
             <span class="battle-date">22/02/2025</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=qIYKHUBXJzU" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #4 -->
-        <a href="https://www.youtube.com/watch?v=N84jpahYTKg" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#4. Old Hanzo vs. Lenin</span>
             <span class="battle-date">31/05/2025</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=N84jpahYTKg" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #5 -->
-        <a href="https://www.youtube.com/watch?v=UvInuoxu6wI" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#5. Old Hanzo vs. Jhandy Randy</span>
             <span class="battle-date">31/05/2025</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=UvInuoxu6wI" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #6 -->
-        <a href="https://www.youtube.com/watch?v=XMVLIyrHKPA" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#6. Old Hanzo vs. Labin</span>
             <span class="battle-date">22/07/2025*</span>
           </div>
           <div class="badge-container">
             <span class="badge badge-virtual">Batalla virtual</span>
-            <span class="badge">Ver en YouTube</span>
+            <a href="https://www.youtube.com/watch?v=XMVLIyrHKPA" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+              <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              Ver en YouTube
+            </a>
           </div>
-        </a>
+        </div>
 
         <!-- #7 -->
-        <a href="https://www.youtube.com/watch?v=YwpdvxE-7J4" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#7. Old Hanzo vs. Sempiterno</span>
             <span class="battle-date">29/07/2025*</span>
           </div>
           <div class="badge-container">
             <span class="badge badge-virtual">Batalla virtual</span>
-            <span class="badge">Ver en YouTube</span>
+            <a href="https://www.youtube.com/watch?v=YwpdvxE-7J4" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+              <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              Ver en YouTube
+            </a>
           </div>
-        </a>
+        </div>
 
         <!-- #8 -->
-        <a href="https://www.youtube.com/watch?v=M4lt1yL4FGs" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#8. Old Hanzo vs. Eds One</span>
             <span class="battle-date">05/08/2025*</span>
           </div>
           <div class="badge-container">
             <span class="badge badge-virtual">Batalla virtual</span>
-            <span class="badge">Ver en YouTube</span>
+            <a href="https://www.youtube.com/watch?v=M4lt1yL4FGs" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+              <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              Ver en YouTube
+            </a>
           </div>
-        </a>
+        </div>
 
         <!-- #9 -->
-        <a href="https://www.youtube.com/watch?v=SRGEG_V7oJM" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#9. Old Hanzo vs. Yvan Kai</span>
             <span class="battle-date">20/08/2025*</span>
           </div>
           <div class="badge-container">
             <span class="badge badge-virtual">Batalla virtual</span>
-            <span class="badge">Ver en YouTube</span>
+            <a href="https://www.youtube.com/watch?v=SRGEG_V7oJM" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+              <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              Ver en YouTube
+            </a>
           </div>
-        </a>
+        </div>
 
         <!-- #10 -->
-        <a href="https://www.youtube.com/watch?v=a_4tBWqAUgs" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#10. Old Hanzo vs. J Bestia</span>
             <span class="battle-date">27/09/2025</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=a_4tBWqAUgs" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #11 -->
-        <a href="https://www.youtube.com/watch?v=G897M00E_JE" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#11. Old Hanzo vs. Niutom</span>
             <span class="battle-date">17/11/2025*</span>
           </div>
           <div class="badge-container">
             <span class="badge badge-virtual">Batalla virtual</span>
-            <span class="badge">Ver en YouTube</span>
+            <a href="https://www.youtube.com/watch?v=G897M00E_JE" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+              <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              Ver en YouTube
+            </a>
           </div>
-        </a>
+        </div>
 
         <!-- 2026 -->
         <h2 class="year-group-title">2026</h2>
 
         <!-- #12 -->
-        <a href="https://www.youtube.com/watch?v=UfIejmjLASA" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#12. Old Hanzo vs. Morbus Zonicko</span>
             <span class="battle-date">12/04/2026</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=UfIejmjLASA" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #13 -->
-        <a href="https://www.youtube.com/watch?v=4uMTfDCm6jA" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#13. Old Hanzo &amp; Hades Ice vs. Wilvid &amp; Gafas</span>
             <span class="battle-date">09/05/2026</span>
           </div>
-          <span class="badge">Ver en YouTube</span>
-        </a>
+          <a href="https://www.youtube.com/watch?v=4uMTfDCm6jA" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
 
         <!-- #14 -->
-        <a href="https://www.youtube.com/watch?v=YjxLGt1j_qU" target="_blank" rel="noopener noreferrer" class="battle-card">
+        <div class="battle-card">
           <div class="battle-info">
             <span class="battle-title">#14. Old Hanzo vs. Caleb Santos</span>
             <span class="battle-date">08/11/2026</span>
           </div>
-        <span class="badge">Ver en YouTube</span>
+          <a href="https://www.youtube.com/watch?v=YjxLGt1j_qU" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
         </div>
 
       </div>
@@ -642,7 +770,7 @@
       </div>
 
       <div class="back-nav">
-        <a href="./" class="back-btn">Volver al catálogo</a>
+        <a href="../" class="back-btn">Volver al catálogo</a>
       </div>
     </aside>
 
