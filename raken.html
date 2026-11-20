@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de batallas de Raken | Rap Battle Database</title>
+  
+  <!-- Favicon para la pestaña de la PC -->
+  <link rel="icon" type="image/png" href="../battleraphispano.png">
+  
+  <!-- Enlaces para la PWA -->
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#ffff00">
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('../sw.js')
+        .then(() => console.log("Service Worker registrado con éxito"))
+        .catch((error) => console.log("Fallo al registrar el Service Worker", error));
+    }
+  </script>
+
+  <style>
+    :root {
+      --primary-yellow: #ffff00;
+      --bg-dark: #0a0a0a;
+      --card-dark: #141414;
+      --card-hover: #1e1e1e;
+      --text-light: #ffffff;
+      --text-muted: #a0a0a0;
+      --border-color: #262626;
+      --accent-gray: #333333;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Programme', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* Header / Hero Section */
+    .hero-banner {
+      background: linear-gradient(180deg, #181818 0%, var(--bg-dark) 100%);
+      border-bottom: 2px solid var(--primary-yellow);
+      padding: 3.5rem 1.5rem 2.5rem 1.5rem;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .header-content {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .cover-art {
+      width: 150px;
+      height: 150px;
+      border-radius: 6px;
+      box-shadow: 0 10px 25px rgba(255, 255, 0, 0.12);
+      flex-shrink: 0;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .cover-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .meta-info {
+      flex-grow: 1;
+    }
+
+    .meta-info h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.8rem;
+      line-height: 1.1;
+    }
+
+    .meta-info h1 span {
+      color: var(--primary-yellow);
+    }
+
+    .stats-bar {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.6rem 1rem;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+      width: fit-content;
+      margin-bottom: 0.6rem;
+    }
+
+    .stats-bar strong {
+      color: var(--text-light);
+    }
+
+    .header-sub-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      width: 100%;
+      gap: 1rem;
+    }
+
+    .origin-location {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .origin-location strong {
+      color: var(--text-light);
+    }
+
+    .battler-quote {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      font-style: italic;
+      font-weight: bold;
+    }
+
+    .instagram-icon-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      text-decoration: none;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .instagram-icon-btn:hover {
+      background: var(--card-hover);
+      border-color: var(--primary-yellow);
+    }
+
+    /* Botón flotante móvil con efecto táctil mejorado */
+    .mobile-back-float {
+      display: none;
+      position: fixed;
+      top: 0.9rem;
+      left: 0.9rem;
+      background-color: rgba(18, 18, 18, 0.9);
+      color: var(--primary-yellow);
+      border: 1px solid var(--border-color);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      text-decoration: none;
+      transition: transform 0.15s ease, background-color 0.15s ease, opacity 0.15s ease;
+    }
+
+    .mobile-back-float svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .mobile-back-float:active {
+      transform: scale(0.88);
+      background-color: rgba(255, 255, 0, 0.15);
+      opacity: 0.85;
+    }
+
+    /* Main Layout */
+    .main-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2.5rem;
+      padding: 2.5rem 1.5rem 4rem 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.6rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .section-title .count {
+      font-size: 0.85rem;
+      color: var(--primary-yellow);
+      background: rgba(255, 255, 0, 0.1);
+      padding: 2px 8px;
+      border-radius: 12px;
+    }
+
+    /* Year Group Title */
+    .year-group-title {
+      color: var(--primary-yellow);
+      font-size: 1.3rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin: 1.5rem 0 0.5rem 0;
+    }
+
+    .year-group-title:first-of-type {
+      margin-top: 0;
+    }
+
+    /* Catalog List */
+    .catalog-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .battle-card {
+      background-color: var(--card-dark);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 0.6rem 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s ease;
+      color: inherit;
+    }
+
+    .battle-card:hover {
+      border-color: var(--primary-yellow);
+      background-color: var(--card-hover);
+    }
+
+    .battle-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .battle-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text-light);
+      display: block;
+    }
+
+    .battle-date {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .badge-container {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background-color: #222;
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+    }
+
+    /* Etiqueta "Ver en YouTube" / "Ver en Facebook" (PC) */
+    .badge-youtube,
+    .badge-facebook {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background-color: #222;
+      color: var(--text-light);
+      border: 1px solid var(--border-color);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: transform 0.1s ease, background-color 0.2s ease;
+    }
+
+    .badge-youtube svg {
+      width: 12px;
+      height: 12px;
+      fill: #ff0000;
+      transition: fill 0.2s ease;
+    }
+
+    .badge-facebook svg {
+      width: 12px;
+      height: 12px;
+      fill: #1877f2;
+      transition: fill 0.2s ease;
+    }
+
+    .badge-youtube:hover,
+    .badge-facebook:hover {
+      border-color: var(--border-color);
+      background-color: #1a1a1a;
+    }
+
+    .badge-youtube:active,
+    .badge-facebook:active {
+      transform: scale(0.93);
+      border-color: var(--border-color);
+      background-color: #1a1a1a;
+    }
+
+    /* Etiqueta "Batalla virtual" (Sin recuadro, solo texto con punto LED) */
+    .badge-virtual {
+      font-size: 0.47rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      padding: 0;
+      background: none;
+      border: none;
+      color: var(--text-light);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .badge-virtual::before {
+      content: "";
+      width: 4.2px;
+      height: 4.2px;
+      background-color: var(--primary-yellow);
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 4px var(--primary-yellow);
+    }
+
+    /* Sidebar posicionado alineado */
+    aside {
+      margin-top: 10rem;
+    }
+
+    /* Navigation Button */
+    .back-nav {
+      margin-top: 1.5rem;
+    }
+
+    .back-btn {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      padding: 0.6rem 1rem;
+      background: var(--card-dark);
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .back-btn:hover {
+      background: var(--primary-yellow);
+      color: var(--bg-dark);
+      border-color: var(--primary-yellow);
+    }
+
+    /* Sidebar / Annotations */
+    .annotation-box {
+      background: var(--card-dark);
+      border-left: 4px solid var(--primary-yellow);
+      border-top: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.25rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+      color: #cccccc;
+      margin-bottom: 1rem;
+    }
+
+    .annotation-box h3 {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .annotation-box p {
+      line-height: 1.5;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      .main-layout {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        margin-top: 1rem;
+      }
+      .stats-bar {
+        margin: 0 auto;
+      }
+      .origin-location {
+        justify-content: center;
+      }
+      .header-sub-row {
+        flex-direction: column;
+        align-items: center;
+      }
+      .mobile-back-float {
+        display: flex;
+      }
+      .battle-info {
+        max-width: 58%;
+      }
+      .battle-title {
+        font-size: 0.85rem;
+        line-height: 1.3;
+      }
+      .badge-container {
+        gap: 0.3rem;
+      }
+      .badge-virtual {
+        font-size: 0.5rem;
+        gap: 0.25rem;
+      }
+      .badge-virtual::before {
+        width: 3.8px;
+        height: 3.8px;
+      }
+      .badge {
+        font-size: 0.55rem;
+        padding: 0.05rem 0.2rem;
+      }
+      .badge-youtube,
+      .badge-facebook {
+        font-size: 0.55rem;
+        padding: 0.05rem 0.2rem;
+      }
+      .badge-youtube svg,
+      .badge-facebook svg {
+        width: 10px;
+        height: 10px;
+      }
+      
+      .battle-card {
+        border-color: var(--border-color) !important;
+        background-color: var(--card-dark) !important;
+      }
+      .battle-card:hover {
+        border-color: var(--border-color) !important;
+        background-color: var(--card-dark) !important;
+      }
+      .battle-card:active {
+        border-color: var(--border-color) !important;
+        background-color: var(--card-dark) !important;
+      }
+
+      .badge-youtube:active,
+      .badge-facebook:active {
+        transform: scale(0.88);
+        background-color: #0d0d0d;
+        border-color: #333333;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Botón flotante superior izquierdo para móviles -->
+  <a href="../" class="mobile-back-float" title="Volver al catálogo">
+    <svg viewBox="0 0 24 24">
+      <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+    </svg>
+  </a>
+
+  <!-- Header Banner -->
+  <header class="hero-banner">
+    <div class="container">
+      <div class="header-content">
+        <div class="cover-art">
+          <img src="raken.jpg" alt="Raken">
+        </div>
+        <div class="meta-info">
+          <h1><span>Raken</span></h1>
+          <div class="stats-bar">
+            <span><strong>59</strong> Batallas</span>
+            <span><strong>2014 - 2026</strong> Trayectoria</span>
+          </div>
+          <div class="header-sub-row">
+            <div>
+              <div class="origin-location">
+                <img src="https://flagcdn.com/w20/mx.png" alt="México" style="width: 18px; height: auto; border-radius: 2px; display: inline-block; vertical-align: middle;"> <strong>Irapuato, Guanajuato</strong>
+              </div>
+              <div class="battler-quote">
+                "El verdadero campeón de la mugre…"
+              </div>
+            </div>
+            <!-- Enlace a Instagram con colores oficiales -->
+            <a href="https://www.instagram.com/raken_aka_el_gordo_sucio/" target="_blank" rel="noopener noreferrer" class="instagram-icon-btn" title="Instagram de Raken">
+              <svg style="width: 16px; height: 16px;" viewBox="0 0 24 24">
+                <defs>
+                  <radialGradient id="ig-grad" cx="30%" cy="107%" r="120%" fx="30%" fy="107%">
+                    <stop offset="0%" stop-color="#fdf497" />
+                    <stop offset="5%" stop-color="#fdf497" />
+                    <stop offset="45%" stop-color="#fd5949" />
+                    <stop offset="60%" stop-color="#d6249f" />
+                    <stop offset="90%" stop-color="#285AEB" />
+                  </radialGradient>
+                </defs>
+                <path fill="url(#ig-grad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Section -->
+  <main class="container main-layout">
+    
+    <!-- Left Column: Catalog -->
+    <section>
+      <div class="section-title">
+        <span>Historial de enfrentamientos:</span>
+        <span class="count">59 Batallas</span>
+      </div>
+
+      <div class="catalog-list">
+        
+        <!-- 2014 -->
+        <h2 class="year-group-title">2014</h2>
+
+        <!-- #1 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#1. Raken vs. Droeck</span>
+            <span class="battle-date">-/06/2014</span>
+          </div>
+          <span class="badge">Sin video</span>
+        </div>
+
+        <!-- 2015 -->
+        <h2 class="year-group-title">2015</h2>
+
+        <!-- #2 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#2. Raken vs. Kinne</span>
+            <span class="battle-date">-/09/2015</span>
+          </div>
+          <span class="badge">Sin video</span>
+        </div>
+
+        <!-- #3 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#3. Raken vs. Btho</span>
+            <span class="battle-date">-/09/2015</span>
+          </div>
+          <span class="badge">Sin video</span>
+        </div>
+
+        <!-- #4 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#4. Raken vs. Happs King</span>
+            <span class="battle-date">12/10/2015*</span>
+          </div>
+          <a href="https://youtu.be/ACFqZ91_Sps?si=_FCEb9J8Apt1pEFO" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- #5 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#5. Raken vs. Inestvble</span>
+            <span class="battle-date">-/11/2015</span>
+          </div>
+          <span class="badge">Sin video</span>
+        </div>
+
+        <!-- 2016 -->
+        <h2 class="year-group-title">2016</h2>
+
+        <!-- #6 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#6. Raken vs. Vents</span>
+            <span class="battle-date">-/01/2016</span>
+          </div>
+          <span class="badge">Sin video</span>
+        </div>
+
+        <!-- #7 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#7. Raken vs. Under Clap</span>
+            <span class="battle-date">-/01/2016</span>
+          </div>
+          <span class="badge">Sin video</span>
+        </div>
+
+        <!-- #8 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#8. Raken vs. Adame</span>
+            <span class="battle-date">-/03/2016</span>
+          </div>
+          <span class="badge">Sin video</span>
+        </div>
+
+        <!-- #9 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#9. Raken vs. Cromo aka keter</span>
+            <span class="battle-date">-/07/2016</span>
+          </div>
+          <a href="https://youtu.be/27dngSvz4C0?si=TRxpMFnTQpauHgvx" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- #10 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#10. Raken vs. Lantar</span>
+            <span class="battle-date">-/07/2016</span>
+          </div>
+          <span class="badge">Sin video</span>
+        </div>
+
+        <!-- #11 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#11. Raken vs. Ray</span>
+            <span class="battle-date">-/09/2016</span>
+          </div>
+          <span class="badge">Sin video</span>
+        </div>
+
+        <!-- #12 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#12. Raken vs. MC Star</span>
+            <span class="battle-date">29/10/2016</span>
+          </div>
+          <a href="https://youtu.be/ksA2mPKjPvA?si=yJsw15CQ4O0HedVK" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- #13 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#13. Raken vs. Dreicos & Daeck</span>
+            <span class="battle-date">-/11/2016</span>
+          </div>
+          <span class="badge">Sin video</span>
+        </div>
+
+        <!-- #14 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#14. Raken vs. Alerta Roja</span>
+            <span class="battle-date">23/11/2016*</span>
+          </div>
+          <a href="https://youtu.be/4XJVGQt1jro?si=yfUZ6joy4szU8V-7" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- #15 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#15. Raken vs. Bernal P</span>
+            <span class="battle-date">06/12/2016*</span>
+          </div>
+          <a href="https://youtu.be/08XT07Cykz4?si=lx6vWFdn4OCRqZd0" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- 2017 -->
+        <h2 class="year-group-title">2017</h2>
+
+        <!-- #16 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#16. Raken & Street vs. Ztigma & Potencia</span>
+            <span class="battle-date">14/01/2017*</span>
+          </div>
+          <a href="https://youtu.be/GgJXgDycnVM?si=e7KMHKej8WHixKm-" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- #17 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#17. Raken vs. Cener</span>
+            <span class="battle-date">-/04/2017</span>
+          </div>
+          <span class="badge">Sin video</span>
+        </div>
+
+        <!-- #18 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#18. Raken vs. Ray</span>
+            <span class="battle-date">-/05/2017</span>
+          </div>
+          <span class="badge">Sin video</span>
+        </div>
+
+        <!-- #19 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#19. Raken vs. Cronhik</span>
+            <span class="battle-date">10/06/2017*</span>
+          </div>
+          <a href="https://youtu.be/7tsUY8UzZxM?si=RZBDj12wfr37x0dv" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- #20 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#20. Raken vs. Moner</span>
+            <span class="battle-date">-/07/2017</span>
+          </div>
+          <span class="badge">Sin video</span>
+        </div>
+
+        <!-- #21 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#21. Raken vs. Ynkfn</span>
+            <span class="battle-date">24/07/2017*</span>
+          </div>
+          <a href="https://youtu.be/viQeyuCDGp8?si=341tpjB3P7UN-JDZ" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- #22 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#22. Raken vs. Mozku</span>
+            <span class="battle-date">-/09/2017</span>
+          </div>
+          <span class="badge">Sin video</span>
+        </div>
+
+        <!-- #23 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#23. Raken vs. Lucas Kronico</span>
+            <span class="battle-date">-/10/2017</span>
+          </div>
+          <span class="badge">Sin video</span>
+        </div>
+
+        <!-- 2018 -->
+        <h2 class="year-group-title">2018</h2>
+
+        <!-- #24 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#24. Raken vs. Héroe</span>
+            <span class="battle-date">-/03/2018</span>
+          </div>
+          <span class="badge">Sin video</span>
+        </div>
+
+        <!-- #25 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#25. Raken vs. Búho</span>
+            <span class="battle-date">26/05/2018</span>
+          </div>
+          <a href="https://youtu.be/6Wp3aBhSMps?si=VL6NZfyAFPEVDCBd" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- #26 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#26. Raken vs. Nk23</span>
+            <span class="battle-date">-/08/2018</span>
+          </div>
+          <span class="badge">Sin video</span>
+        </div>
+
+        <!-- #27 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#27. Raken vs. Soket</span>
+            <span class="battle-date">-/10/2018</span>
+          </div>
+          <span class="badge">Sin video</span>
+        </div>
+
+        <!-- #28 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#28. Raken vs. Renoh</span>
+            <span class="battle-date">24/12/2018*</span>
+          </div>
+          <a href="https://youtu.be/L3If_4YfJZ8?si=adDcFjEpWq1u40Nf" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- 2019 -->
+        <h2 class="year-group-title">2019</h2>
+
+        <!-- #29 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#29. Raken vs. Tekno</span>
+            <span class="battle-date">03/03/2019*</span>
+          </div>
+          <a href="https://youtu.be/FliudSzAxCk?si=VwJ8tUWsq5YSGx5O" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- #30 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#30. Raken vs. Morgan Blunts</span>
+            <span class="battle-date">-/04/2019</span>
+          </div>
+          <a href="https://youtu.be/EUTr6TA2kJg?si=DBZg709I40MV2CRG" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- #31 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#31. Raken vs. Uriel Mcfly</span>
+            <span class="battle-date">-/09/2019</span>
+          </div>
+          <span class="badge">Sin video</span>
+        </div>
+
+        <!-- #32 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#32. Raken vs. Malafama</span>
+            <span class="battle-date">19/12/2019*</span>
+          </div>
+          <a href="https://youtu.be/xDSsnfsuBig?si=1S5kUp-NTDx1czTA" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- 2020 -->
+        <h2 class="year-group-title">2020</h2>
+
+        <!-- #33 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#33. Raken vs. Dienk</span>
+            <span class="battle-date">25/04/2020</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge-virtual">Batalla virtual</span>
+            <a href="https://youtu.be/IWWDgO7aHZ4?si=8JJKqzK-_cryZ_jh" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+              <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              Ver en YouTube
+            </a>
+          </div>
+        </div>
+
+        <!-- #34 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#34. Raken vs. Ache aka hitchtter</span>
+            <span class="battle-date">03/05/2020*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge-virtual">Batalla virtual</span>
+            <a href="https://youtu.be/9dpcTbATUOI?si=36jLLaKzZHGBPJBQ" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+              <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              Ver en YouTube
+            </a>
+          </div>
+        </div>
+
+        <!-- #35 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#35. Raken vs. Bulldog</span>
+            <span class="battle-date">11/05/2020*</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge-virtual">Batalla virtual</span>
+            <a href="https://youtu.be/KHegRSB7tkg?si=PfdgL9dEL3fgNNK_" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+              <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              Ver en YouTube
+            </a>
+          </div>
+        </div>
+
+        <!-- 2022 -->
+        <h2 class="year-group-title">2022</h2>
+
+        <!-- #36 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#36. Raken vs. Sick One</span>
+            <span class="battle-date">11/01/2022*</span>
+          </div>
+          <a href="https://youtu.be/uvJWjNvml48?si=N1SvlVdp4AtFkd2t" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- #37 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#37. Raken vs. You Lethram</span>
+            <span class="battle-date">27/02/2022*</span>
+          </div>
+          <a href="https://youtu.be/oQnJwCCkwoc?si=E1-XPixnTKDzsm-v" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- #38 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#38. Raken vs. Clock</span>
+            <span class="battle-date">05/08/2022*</span>
+          </div>
+          <a href="https://youtu.be/hV4QeLywEeI?si=KNUwzOb4KFR-vC4_" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- #39 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#39. Raken vs. Dr. Van</span>
+            <span class="battle-date">-/08/2022</span>
+          </div>
+          <span class="badge">Sin video</span>
+        </div>
+
+        <!-- #40 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#40. Raken vs. Goriloko</span>
+            <span class="battle-date">07/09/2022</span>
+          </div>
+          <div class="badge-container">
+            <span class="badge-virtual">Batalla virtual</span>
+            <a href="https://youtu.be/UAmTGXGHeIY?si=HOZOfaWxNi5pTCTi" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+              <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              Ver en YouTube
+            </a>
+          </div>
+        </div>
+
+        <!-- #41 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#41. Raken vs. Menos Zero</span>
+            <span class="battle-date">-/11/2022</span>
+          </div>
+          <span class="badge">Sin video</span>
+        </div>
+
+        <!-- #42 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#42. Raken vs. Mario Altazor</span>
+            <span class="battle-date">-/12/2022</span>
+          </div>
+          <a href="https://www.facebook.com/share/v/19ieAtwA9v/" target="_blank" rel="noopener noreferrer" class="badge-facebook">
+            <svg viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>
+            Ver en Facebook
+          </a>
+        </div>
+
+        <!-- 2023 -->
+        <h2 class="year-group-title">2023</h2>
+
+        <!-- #43 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#43. Raken vs. Showman</span>
+            <span class="battle-date">19/04/2023*</span>
+          </div>
+          <a href="https://youtu.be/yt3V_k7_wzY?si=WODOsPoD3ZmpwDzm" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- #44 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#44. Raken vs. Stark</span>
+            <span class="battle-date">28/05/2023*</span>
+          </div>
+          <a href="https://youtu.be/S7zTCGAzTZ4?si=hqzrkJu88hKp6FZk" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- #45 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#45. Raken vs. Dr kraken</span>
+            <span class="battle-date">09/08/2023*</span>
+          </div>
+          <a href="https://youtu.be/C4WcY9vbK10?si=IArjl41HtFFRIHeA" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- #46 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#46. Raken vs. Dux Yoki</span>
+            <span class="battle-date">-/09/2023</span>
+          </div>
+          <span class="badge">Sin video</span>
+        </div>
+
+        <!-- 2024 -->
+        <h2 class="year-group-title">2024</h2>
+
+        <!-- #47 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#47. Raken vs. Drops</span>
+            <span class="battle-date">03/03/2024*</span>
+          </div>
+          <a href="https://youtu.be/op7tCuu3OnA?si=7eQ1UOMEwWBJm1qz" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- #48 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#48. Raken vs. Danger Jam</span>
+            <span class="battle-date">07/04/2024*</span>
+          </div>
+          <a href="https://youtu.be/B3-xy-YfkMU?si=gyIwUcrn3SOeUXtK" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- #49 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#49. Raken vs. Limper</span>
+            <span class="battle-date">09/08/2024*</span>
+          </div>
+          <a href="https://youtu.be/5j6hVJ-BRyc?si=KrvmyPDPWvA177tn" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- #50 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#50. Raken vs. Bless Fonk</span>
+            <span class="battle-date">28/09/2024</span>
+          </div>
+          <a href="https://youtu.be/4GFbIirOkQ4?si=42IqezbHM5eTYaol" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- 2025 -->
+        <h2 class="year-group-title">2025</h2>
+
+        <!-- #51 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#51. Raken vs. Delta</span>
+            <span class="battle-date">13/01/2025*</span>
+          </div>
+          <a href="https://youtu.be/ebarLFosEKk?si=28NRNKDswsbQFswJ" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- #52 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#52. Raken vs. AVG</span>
+            <span class="battle-date">24/07/2025*</span>
+          </div>
+          <a href="https://youtu.be/4KcmV6-rQ8c?si=YVUCKE8v2CCrk4Sj" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- #53 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#53. Raken vs. Diablo Lofi</span>
+            <span class="battle-date">20/09/2025</span>
+          </div>
+          <a href="https://youtu.be/veZVYJHeGsg?si=ye4INtCKMN6qKDeI" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- #54 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#54. Raken vs. Maga</span>
+            <span class="battle-date">29/11/2025</span>
+          </div>
+          <a href="https://youtu.be/DkIFo-WvLC4?si=DxrA5D3QoZQ4ptWM" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- #55 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#55. Raken vs. Wendy H</span>
+            <span class="battle-date">13/12/2025</span>
+          </div>
+          <a href="https://youtu.be/ecNFM8KAx2c?si=AcXonj0hC0VWpMaP" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- 2026 -->
+        <h2 class="year-group-title">2026</h2>
+
+        <!-- #56 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#56. Raken vs. Rain (Colombia)</span>
+            <span class="battle-date">Fecha pendiente</span>
+          </div>
+          <a href="https://youtu.be/IR6UhaHucqc?si=RJFG2Cmkhigw8ml8" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- #57 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#57. Raken vs. Joaka</span>
+            <span class="battle-date">Fecha pendiente</span>
+          </div>
+          <a href="https://youtu.be/h4oOCqnjAzc?si=N9VLl0sO-X18ywZ-" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- #58 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#58. Raken vs. Ripper</span>
+            <span class="battle-date">Fecha pendiente</span>
+          </div>
+          <a href="https://youtu.be/DbgTq1UmUB0?si=dsqCXtfLWDoqq0Uq" target="_blank" rel="noopener noreferrer" class="badge-youtube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ver en YouTube
+          </a>
+        </div>
+
+        <!-- #59 -->
+        <div class="battle-card">
+          <div class="battle-info">
+            <span class="battle-title">#59. Raken vs. Ruta</span>
+            <span class="battle-date">Fecha pendiente</span>
+          </div>
+          <span class="badge">Sin video</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Right Column: Sidebar & Annotations -->
+    <aside>
+      <div class="section-title">
+        <span>Anotaciones</span>
+      </div>
+
+      <div class="annotation-box">
+        <h3>Fecha de lanzamiento</h3>
+        <p>El asterisco (<strong>*</strong>) indica enfrentamientos donde no se cuenta con la fecha oficial del evento, por lo que se toma la fecha de publicación en YouTube.</p>
+      </div>
+
+      <div class="back-nav">
+        <a href="../" class="back-btn">Volver al catálogo</a>
+      </div>
+    </aside>
+
+  </main>
+
+</body>
+</html>
