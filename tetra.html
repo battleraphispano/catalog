@@ -6,14 +6,14 @@
   <title>Catálogo de batallas de Tetra | Rap Battle Database</title>
   
   <!-- Favicon para la pestaña de la PC -->
-  <link rel="icon" type="image/png" href="battleraphispano.png">
+  <link rel="icon" type="image/png" href="../battleraphispano.png">
   
   <!-- Enlaces para la PWA -->
-  <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="../manifest.json">
   <meta name="theme-color" content="#ffff00">
   <script>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js')
+      navigator.serviceWorker.register('../sw.js')
         .then(() => console.log("Service Worker registrado con éxito"))
         .catch((error) => console.log("Fallo al registrar el Service Worker", error));
     }
@@ -286,6 +286,18 @@
       align-items: center;
     }
 
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background-color: #222;
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+    }
+
     /* Etiqueta "Ver en YouTube" (PC) */
     .badge-youtube {
       font-size: 0.75rem;
@@ -407,7 +419,7 @@
       border: 1px solid var(--border-color);
     }
 
-    /* Etiqueta "Batalla virtual" (Punto LED) */
+    /* Etiqueta "Batalla virtual" (Sin recuadro, solo texto con punto LED) */
     .badge-virtual {
       font-size: 0.47rem;
       font-weight: 700;
@@ -432,7 +444,7 @@
       box-shadow: 0 0 4px var(--primary-yellow);
     }
 
-    /* Sidebar posicionado más abajo */
+    /* Sidebar posicionado alineado */
     aside {
       margin-top: 10rem;
     }
@@ -532,7 +544,7 @@
         width: 3.8px;
         height: 3.8px;
       }
-      .badge-no-video, .badge-youtube, .badge-instagram, .badge-facebook {
+      .badge, .badge-no-video, .badge-youtube, .badge-instagram, .badge-facebook {
         font-size: 0.55rem;
         padding: 0.05rem 0.2rem;
       }
@@ -541,6 +553,7 @@
         height: 10px;
       }
       
+      /* Desactiva totalmente cualquier cambio de color o borde en la tarjeta en móvil */
       .battle-card {
         border-color: var(--border-color) !important;
         background-color: var(--card-dark) !important;
@@ -549,6 +562,12 @@
         border-color: var(--border-color) !important;
         background-color: var(--card-dark) !important;
       }
+      .battle-card:active {
+        border-color: var(--border-color) !important;
+        background-color: var(--card-dark) !important;
+      }
+
+      /* Efecto táctil en los botones para móvil */
       .badge-youtube:active, .badge-instagram:active, .badge-facebook:active {
         transform: scale(0.88);
         background-color: #0d0d0d;
@@ -560,7 +579,7 @@
 <body>
 
   <!-- Botón flotante superior izquierdo para móviles -->
-  <a href="./" class="mobile-back-float" title="Volver al catálogo">
+  <a href="../" class="mobile-back-float" title="Volver al catálogo">
     <svg viewBox="0 0 24 24">
       <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
     </svg>
@@ -735,7 +754,7 @@
             <span class="battle-title">#8. Tetra vs. Palomortm</span>
             <span class="battle-date">20/07/2024</span>
           </div>
-          <span class="badge-no-video">Sin video</span>
+          <span class="badge">Sin video</span>
         </div>
 
         <!-- #9 -->
@@ -1110,7 +1129,7 @@
       </div>
 
       <div class="back-nav">
-        <a href="./" class="back-btn">&larr; Volver al catálogo</a>
+        <a href="../" class="back-btn">Volver al catálogo</a>
       </div>
     </aside>
 
